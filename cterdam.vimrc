@@ -239,11 +239,14 @@ set noshowmode
 
 " NERDTREE -------------------------------------------------------------------
 
-" <Leader>tt to open (and switch to) NERDTree in working directory
-nnoremap <Leader>tt :NERDTree<CR>
+" u to move up a level
+" C to set root at selected node
 
-" <Leader>tf to open (and switch to) NERDTree finding current file
-nnoremap <Leader>tf :NERDTreeFind<CR>
+" <Leader>t to open (switch to) NERDTree window in working directory
+nnoremap <Leader>t :NERDTreeFocus<CR>
 
 " <Leader>T to close NERDTree
 nnoremap <Leader>T :NERDTreeClose<CR>
+
+" Hide guide text
+let NERDTreeMinimalUI = 1
