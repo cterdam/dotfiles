@@ -1,4 +1,4 @@
-" GENERAL & APPEARANCE -------------------------------------------------------
+" GENERAL --------------------------------------------------------------------
 
 " Do no weird things and welcome to the 21st century
 set nocompatible
@@ -11,6 +11,8 @@ set autoread
 
 " Enable command completion
 set wildmenu
+
+" APPEARANCE -----------------------------------------------------------------
 
 " Always show at least 5 lines above/below cursor when available
 set scrolloff=5
@@ -29,57 +31,6 @@ syntax on
 
 " Supply text color suitable for a dark background
 set background=dark
-
-" UNDO -----------------------------------------------------------------------
-
-" Save undo history
-set undofile
-
-" Remember 100 operations
-set history=100
-
-" Ensure that undodir exists
-if !isdirectory($HOME . "/.vim/undo")
-    call mkdir($HOME . "/.vim/undo", "p")
-endif
-
-" Set undodir
-set undodir=$HOME/.vim/undo//
-
-" BACKUP ---------------------------------------------------------------------
-
-" Make a backup before overwriting a file
-set writebackup
-
-" Do not save that backup file upon successful overwrite
-set nobackup
-
-" Ensure that backupdir exists
-if !isdirectory($HOME . "/.vim/backup")
-    call mkdir($HOME . "/.vim/backup", "p")
-endif
-
-" Set backupdir
-set backupdir=$HOME/.vim/backup//
-
-" SWAP -----------------------------------------------------------------------
-
-" Make a swap file to prepare for a crash
-set swapfile
-
-" Update the swap file every 100 characters
-set updatecount=100
-
-" If for 4000 miliseconds nothing is typed, write the swap file
-set updatetime=4000
-
-" Ensure that swapdir exists
-if !isdirectory($HOME . "/.vim/swap")
-    call mkdir($HOME . "/.vim/swap", "p")
-endif
-
-" Set swapdir (option named dir)
-set dir=$HOME/.vim/swap//
 
 " LINE NUMBER ----------------------------------------------------------------
 
@@ -145,9 +96,60 @@ set hlsearch
 " Ignore case when searching
 set ignorecase
 
+" UNDO -----------------------------------------------------------------------
+
+" Save undo history
+set undofile
+
+" Remember 100 operations
+set history=100
+
+" Ensure that undodir exists
+if !isdirectory($HOME . "/.vim/undo")
+    call mkdir($HOME . "/.vim/undo", "p")
+endif
+
+" Set undodir
+set undodir=$HOME/.vim/undo//
+
+" BACKUP ---------------------------------------------------------------------
+
+" Make a backup before overwriting a file
+set writebackup
+
+" Do not save that backup file upon successful overwrite
+set nobackup
+
+" Ensure that backupdir exists
+if !isdirectory($HOME . "/.vim/backup")
+    call mkdir($HOME . "/.vim/backup", "p")
+endif
+
+" Set backupdir
+set backupdir=$HOME/.vim/backup//
+
+" SWAP -----------------------------------------------------------------------
+
+" Make a swap file to prepare for a crash
+set swapfile
+
+" Update the swap file every 100 characters
+set updatecount=100
+
+" If for 4000 miliseconds nothing is typed, write the swap file
+set updatetime=4000
+
+" Ensure that swapdir exists
+if !isdirectory($HOME . "/.vim/swap")
+    call mkdir($HOME . "/.vim/swap", "p")
+endif
+
+" Set swapdir (option named dir)
+set dir=$HOME/.vim/swap//
+
 " TAB PAGES ------------------------------------------------------------------
 
-" <Leader><n> to switch to tab <n>
+" <Leader><n> to switch to tab n
 map <Leader>1 :tabn 1<CR>
 map <Leader>2 :tabn 2<CR>
 map <Leader>3 :tabn 3<CR>
@@ -159,12 +161,27 @@ map <Leader>8 :tabn 8<CR>
 map <Leader>9 :tabn 9<CR>
 map <Leader>0 :tabn 10<CR>
 
-" <Leader>
-
 " Other mappings for switching tabs
 map <Leader>= :tabn<CR>
 map <Leader>- :tabp<CR>
 map <Leader>e :tabe<CR>
+
+" <Leader>S-<n> to close tab n
+map <Leader>! :tabclose 1<CR>
+map <Leader>@ :tabclose 2<CR>
+map <Leader># :tabclose 3<CR>
+map <Leader>$ :tabclose 4<CR>
+map <Leader>% :tabclose 5<CR>
+map <Leader>^ :tabclose 6<CR>
+map <Leader>& :tabclose 7<CR>
+map <Leader>* :tabclose 8<CR>
+map <Leader>( :tabclose 9<CR>
+map <Leader>) :tabclose 10<CR>
+
+" Other mappings for closing tabs
+map <Leader>_ :tabclose -<CR>
+map <Leader>+ :tabclose +<CR>
+map <Leader>c :tabclose<CR>
 
 " VIM-PLUG -------------------------------------------------------------------
 
