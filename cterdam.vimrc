@@ -3,6 +3,12 @@
 " Do no weird things and welcome to the 21st century
 set nocompatible
 
+" Update working directory to directory containing current file
+set autochdir
+
+" Update file if changed outside Vim
+set autoread
+
 " Enable command completion
 set wildmenu
 
@@ -24,15 +30,23 @@ syntax on
 " Supply text color suitable for a dark background
 set background=dark
 
-" FILE -----------------------------------------------------------------------
+" UNDO -----------------------------------------------------------------------
 
 " Save undo history
-" set undofile
+set undofile
 
 " Remember 100 operations
-" set history=100
+set history=100
 
-" TODO Add support for undo, swap, and backup dir
+" Ensure that undodir exists
+if !isdirectory($HOME . "/.vim/undo")
+    call mkdir($HOME . "/.vim/undo", "p")
+endif
+
+" Set undodir
+set undodir=$HOME/.vim/undo//
+
+" BACKUP ---------------------------------------------------------------------
 
 " Make a backup before overwriting a file
 set writebackup
@@ -40,17 +54,32 @@ set writebackup
 " Do not save that backup file upon successful overwrite
 set nobackup
 
+" Ensure that backupdir exists
+if !isdirectory($HOME . "/.vim/backup")
+    call mkdir($HOME . "/.vim/backup", "p")
+endif
+
+" Set backupdir
+set backupdir=$HOME/.vim/backup//
+
+" SWAP -----------------------------------------------------------------------
+
 " Make a swap file to prepare for a crash
 set swapfile
 
-" Update the swap file every 200 characters
-set updatecount=200
+" Update the swap file every 100 characters
+set updatecount=100
 
-" Update working directory to directory containing current file
-set autochdir
+" If for 4000 miliseconds nothing is typed, write the swap file
+set updatetime=4000
 
-" Update file if changed outside Vim
-set autoread
+" Ensure that swapdir exists
+if !isdirectory($HOME . "/.vim/swap")
+    call mkdir($HOME . "/.vim/swap", "p")
+endif
+
+" Set swapdir (option named dir)
+set dir=$HOME/.vim/swap//
 
 " LINE NUMBER ----------------------------------------------------------------
 
@@ -68,7 +97,7 @@ highlight LineNr ctermfg=grey
 " Keep your line within 80 chars
 set colorcolumn=81
 
-" Break lines longer than 78. This gets automatically set to 78 by vim anyways
+" Break lines longer than 78. Vim forces this to 78 anyways
 set textwidth=78
 
 " Do not horizontally extend a line past screen boundary
@@ -77,12 +106,12 @@ set wrap
 " Do not break words over lines
 set linebreak
 
-" Mark the beginning of a wrapped line
+" Mark the beginning of a continued line
 set showbreak=↳
 
 " INDENT ---------------------------------------------------------------------
 
-" Indent wrapped lines to preserve horizontal blocks
+" Indent continued lines to preserve horizontal blocks
 set breakindent
 
 " Inherit indentation from preceding line
