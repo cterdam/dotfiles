@@ -1,3 +1,5 @@
+" ================================= BUILTIN ==================================
+
 " GENERAL --------------------------------------------------------------------
 
 " Do no weird things and welcome to the 21st century
@@ -11,6 +13,9 @@ set autoread
 
 " Enable command completion
 set wildmenu
+
+" Do not timeout on :mappings or key codes
+set notimeout nottimeout
 
 " APPEARANCE -----------------------------------------------------------------
 
@@ -48,7 +53,7 @@ highlight LineNr ctermfg=grey
 " Keep your line within 80 chars
 set colorcolumn=81
 
-" Break lines longer than 78. Vim forces this to 78 anyways
+" Break lines longer than 78 chars. Vim forces this to 78 anyways
 set textwidth=78
 
 " Do not horizontally extend a line past screen boundary
@@ -82,7 +87,7 @@ set tabstop=4
 " Setting softtabstop=tabstop thus effectively disabling soft tabs
 set softtabstop=4
 
-" >, <, and = all shift/reindent by 4 spaces per level
+" `>`, `<`, and `=` all shift/reindent by 4 spaces per level
 set shiftwidth=4
 
 " SEARCH ---------------------------------------------------------------------
@@ -95,6 +100,20 @@ set hlsearch
 
 " Ignore case when searching
 set ignorecase
+
+" FOLD -----------------------------------------------------------------------
+
+" Fold level is equal to indentation divided by shiftwidth (round down)
+set foldmethod=indent
+
+" Do not ignore lines starting with '#', or any character
+set foldignore=
+
+" Expand all folds by default, can be toggled with `zi`
+set nofoldenable
+
+" Display fold level on the leftmost one column
+set foldcolumn=1
 
 " UNDO -----------------------------------------------------------------------
 
@@ -149,7 +168,7 @@ set dir=$HOME/.vim/swap//
 
 " TAB PAGES ------------------------------------------------------------------
 
-" <Leader><n> to switch to tab n
+" `<Leader><n>` to switch to tab <n>
 map <Leader>1 :tabn 1<CR>
 map <Leader>2 :tabn 2<CR>
 map <Leader>3 :tabn 3<CR>
@@ -166,7 +185,7 @@ map <Leader>= :tabn<CR>
 map <Leader>- :tabp<CR>
 map <Leader>e :tabe<CR>
 
-" <Leader>S-<n> to close tab n
+" `<Leader>S-<n>` to close tab <n>
 map <Leader>! :tabclose 1<CR>
 map <Leader>@ :tabclose 2<CR>
 map <Leader># :tabclose 3<CR>
@@ -182,6 +201,8 @@ map <Leader>) :tabclose 10<CR>
 map <Leader>_ :tabclose -<CR>
 map <Leader>+ :tabclose +<CR>
 map <Leader>c :tabclose<CR>
+
+" ================================= PLUGINS ==================================
 
 " VIM-PLUG -------------------------------------------------------------------
 
@@ -234,18 +255,15 @@ let g:coc_global_extensions = [
 " Successfully display the lightline bar
 set laststatus=2
 
-" Hide that default -- INSERT -- as it is being covered by lightline
+" Hide that default '-- INSERT --' as that info is covered by lightline
 set noshowmode
 
 " NERDTREE -------------------------------------------------------------------
 
-" u to move up a level
-" C to set root at selected node
-
-" <Leader>t to open (switch to) NERDTree window in working directory
+" `<Leader>t` to open (switch to) NERDTree window in working directory
 nnoremap <Leader>t :NERDTreeFocus<CR>
 
-" <Leader>T to close NERDTree
+" `<Leader>T` to close NERDTree
 nnoremap <Leader>T :NERDTreeClose<CR>
 
 " Hide guide text
