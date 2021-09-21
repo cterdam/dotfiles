@@ -115,6 +115,15 @@ set nofoldenable
 " Display fold level on the leftmost one column
 set foldcolumn=1
 
+" `<Space>` to toggle current fold
+nnoremap <Space> za
+
+" Save view when saving
+au BufWinLeave ?* mkview
+
+" Load view when entering
+au BufWinEnter ?* silent loadview
+
 " UNDO -----------------------------------------------------------------------
 
 " Save undo history
@@ -235,7 +244,7 @@ Plug 'preservim/nerdtree'
 " End list of plugins =================
 " According to specs (https://github.com/junegunn/vim-plug) This also
 " automatically executes `filetype plugin indent on` and `syntax enable`.
-" I executed `filetype plugin indent on` and `syntax on` on my own, nonetheless.
+" This script executed these separately on its own, nonetheless.
 call plug#end()
 
 " Need to run :PlugUpdate every once in a while
