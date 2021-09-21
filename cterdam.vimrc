@@ -5,7 +5,7 @@
 " Do no weird things and welcome to the 21st century
 set nocompatible
 
-" Save view when saving
+" Save view when leaving
 au BufWinLeave ?* mkview
 
 " Load view when entering
@@ -115,8 +115,8 @@ set incsearch
 " Highlight search results throughout text
 set hlsearch
 
-" <Leader>h to clear highlight
-map <Leader>h :nohl<CR>
+" <Leader><Space> to clear highlight
+map <Leader><Space> :nohl<CR>
 
 " Ignore case when searching
 set ignorecase
