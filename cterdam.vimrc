@@ -11,9 +11,6 @@ au BufWinLeave ?* mkview
 " Load view when entering
 au BufWinEnter ?* silent loadview
 
-" <Leader><Leader> to refresh all settings
-map <Leader><Leader> :source ~/.vimrc<CR>
-
 " Update working directory to directory containing current file
 set autochdir
 
@@ -54,7 +51,7 @@ set number
 " Display line number as difference from current line
 set relativenumber
 
-" <Leader>n to toggle between number and relativenumber
+" <Leader><Leader> to toggle between number and relativenumber
 function! ToggleNumber()
     if(&relativenumber == 1)
         set norelativenumber
@@ -63,7 +60,7 @@ function! ToggleNumber()
         set relativenumber
     endif
 endfunc
-map <Leader>n :call ToggleNumber()<CR>
+map <Leader><Leader> :call ToggleNumber()<CR>
 
 " Color the line numbers grey
 highlight LineNr ctermfg=grey
