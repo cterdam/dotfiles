@@ -5,6 +5,12 @@
 " Do no weird things and welcome to the 21st century
 set nocompatible
 
+" Save view when saving
+au BufWinLeave ?* mkview
+
+" Load view when entering
+au BufWinEnter ?* silent loadview
+
 " Update working directory to directory containing current file
 set autochdir
 
@@ -44,6 +50,17 @@ set number
 
 " Display line number as difference from current line
 set relativenumber
+
+" <Leader><Leader> to toggle between number and relativenumber
+function! ToggleNumber()
+    if(&relativenumber == 1)
+        set norelativenumber
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+map <Leader><Leader> :call ToggleNumber()<CR>
 
 " Color the line numbers grey
 highlight LineNr ctermfg=grey
@@ -87,7 +104,7 @@ set tabstop=4
 " Setting softtabstop=tabstop thus effectively disabling soft tabs
 set softtabstop=4
 
-" `>`, `<`, and `=` all shift/reindent by 4 spaces per level
+" >, <, and = all shift/reindent by 4 spaces per level
 set shiftwidth=4
 
 " SEARCH ---------------------------------------------------------------------
@@ -115,14 +132,8 @@ set nofoldenable
 " Display fold level on the leftmost one column
 set foldcolumn=1
 
-" `<Space>` to toggle current fold
+" Space to toggle current fold
 nnoremap <Space> za
-
-" Save view when saving
-au BufWinLeave ?* mkview
-
-" Load view when entering
-au BufWinEnter ?* silent loadview
 
 " UNDO -----------------------------------------------------------------------
 
@@ -177,7 +188,7 @@ set dir=$HOME/.vim/swap//
 
 " TAB PAGES ------------------------------------------------------------------
 
-" `<Leader><n>` to switch to tab <n>
+" <Leader><n> to switch to tab <n>
 map <Leader>1 :tabn 1<CR>
 map <Leader>2 :tabn 2<CR>
 map <Leader>3 :tabn 3<CR>
@@ -194,7 +205,7 @@ map <Leader>= :tabn<CR>
 map <Leader>- :tabp<CR>
 map <Leader>e :tabe<CR>
 
-" `<Leader>S-<n>` to close tab <n>
+" <Leader>S-<n> to close tab <n>
 map <Leader>! :tabclose 1<CR>
 map <Leader>@ :tabclose 2<CR>
 map <Leader># :tabclose 3<CR>
