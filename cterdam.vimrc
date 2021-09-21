@@ -11,6 +11,9 @@ au BufWinLeave ?* mkview
 " Load view when entering
 au BufWinEnter ?* silent loadview
 
+" <Leader><Leader> to refresh all settings
+map <Leader><Leader> :source ~/.vimrc<CR>
+
 " Update working directory to directory containing current file
 set autochdir
 
@@ -51,7 +54,7 @@ set number
 " Display line number as difference from current line
 set relativenumber
 
-" <Leader><Leader> to toggle between number and relativenumber
+" <Leader>n to toggle between number and relativenumber
 function! ToggleNumber()
     if(&relativenumber == 1)
         set norelativenumber
@@ -60,7 +63,7 @@ function! ToggleNumber()
         set relativenumber
     endif
 endfunc
-map <Leader><Leader> :call ToggleNumber()<CR>
+map <Leader>n :call ToggleNumber()<CR>
 
 " Color the line numbers grey
 highlight LineNr ctermfg=grey
@@ -115,6 +118,9 @@ set incsearch
 " Highlight search results throughout text
 set hlsearch
 
+" <Leader>h to clear highlight
+map <Leader>h :nohl<CR>
+
 " Ignore case when searching
 set ignorecase
 
@@ -132,7 +138,7 @@ set nofoldenable
 " Display fold level on the leftmost one column
 set foldcolumn=1
 
-" Space to toggle current fold
+" Press space to toggle current fold
 nnoremap <Space> za
 
 " UNDO -----------------------------------------------------------------------
