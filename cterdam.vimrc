@@ -6,10 +6,10 @@
 set nocompatible
 
 " Save view when leaving
-au BufWinLeave ?* mkview
+autocmd BufWinLeave ?* mkview
 
 " Load view when entering
-au BufWinEnter ?* silent loadview
+autocmd BufWinEnter ?* silent loadview
 
 " Update working directory to directory containing current file
 set autochdir
@@ -118,8 +118,8 @@ set hlsearch
 " <Leader><Space> to clear highlight
 map <Leader><Space> :nohl<CR>
 
-" Ignore case when searching
-set ignorecase
+" au is not the same as Au!
+set noignorecase
 
 " FOLD -----------------------------------------------------------------------
 
