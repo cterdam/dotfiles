@@ -135,7 +135,7 @@ set nofoldenable
 " Display fold level on the leftmost one column
 set foldcolumn=1
 
-" Press space to toggle current fold
+" Press <Space> to toggle current fold
 nnoremap <Space> za
 
 " UNDO -----------------------------------------------------------------------
@@ -151,7 +151,7 @@ if !isdirectory($HOME . "/.vim/undo")
     call mkdir($HOME . "/.vim/undo", "p")
 endif
 
-" Set undodir
+" Set undodir and include full pathname for unfo files
 set undodir=$HOME/.vim/undo//
 
 " BACKUP ---------------------------------------------------------------------
@@ -167,7 +167,7 @@ if !isdirectory($HOME . "/.vim/backup")
     call mkdir($HOME . "/.vim/backup", "p")
 endif
 
-" Set backupdir
+" Set backupdir and include full pathname for backup files
 set backupdir=$HOME/.vim/backup//
 
 " SWAP -----------------------------------------------------------------------
@@ -186,7 +186,7 @@ if !isdirectory($HOME . "/.vim/swap")
     call mkdir($HOME . "/.vim/swap", "p")
 endif
 
-" Set swapdir (option named dir)
+" Set swapdir (option named dir) and include full pathname for swap files
 set dir=$HOME/.vim/swap//
 
 " TAB PAGES ------------------------------------------------------------------
@@ -255,6 +255,9 @@ Plug 'itchyny/lightline.vim'
 " NERDTree for file browsing
 Plug 'preservim/nerdtree'
 
+" Gundo for browsing the undo tree
+Plug 'sjl/gundo.vim'
+
 " End list of plugins =================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -283,11 +286,25 @@ set noshowmode
 
 " NERDTREE -------------------------------------------------------------------
 
-" `<Leader>t` to open (switch to) NERDTree window in working directory
+" <Leader>t to open (switch to) NERDTree window in working directory
 nnoremap <Leader>t :NERDTreeFocus<CR>
 
-" `<Leader>T` to close NERDTree
+" <Leader>T to close NERDTree
 nnoremap <Leader>T :NERDTreeClose<CR>
 
 " Hide guide text
 let NERDTreeMinimalUI = 1
+
+" GUNDO ----------------------------------------------------------------------
+
+" <Leader>u to summon the undo tree
+map <Leader>u :GundoToggle<CR>
+
+" Gundo shows on the right
+let g:gundo_right = 1
+
+" Preview only as wide as graph
+let g:gundo_preview_bottom = 0
+
+" Hide guide text
+let g:gundo_help = 0
