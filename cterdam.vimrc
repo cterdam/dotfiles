@@ -240,8 +240,8 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
     \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-" Begin list of plugins ===============
 call plug#begin('~/.vim/plugged')
+" Begin list of plugins ===============
 
 " Vim-plug itself for managing plugins
 Plug 'junegunn/vim-plug'
@@ -256,10 +256,10 @@ Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 
 " End list of plugins =================
+call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
 " automatically executes `filetype plugin indent on` and `syntax enable`.
 " This script executed these separately on its own, nonetheless.
-call plug#end()
 
 " Need to run :PlugUpdate every once in a while
 
