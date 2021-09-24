@@ -292,6 +292,9 @@ nnoremap <Leader>t :NERDTreeFocus<CR>
 " <Leader>T to close NERDTree
 nnoremap <Leader>T :NERDTreeClose<CR>
 
+" Confine to 25 chars wide
+let g:NERDTreeWinSize = 25
+
 " Hide guide text
 let NERDTreeMinimalUI = 1
 
@@ -300,11 +303,17 @@ let NERDTreeMinimalUI = 1
 " <Leader>u to summon the undo tree
 map <Leader>u :GundoToggle<CR>
 
-" Gundo shows on the right
+" Tree pane shows on the right
 let g:gundo_right = 1
 
-" Preview only as wide as graph
-let g:gundo_preview_bottom = 0
+" Confine tree pane to 25 chars wide 
+let g:gundo_width = 25
+
+" Preview pane takes full width
+let g:gundo_preview_bottom = 1
+
+" Limit preview pane to 10 chars high
+let g:gundo_preview_height = 10
 
 " Hide guide text
 let g:gundo_help = 0
