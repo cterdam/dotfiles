@@ -20,7 +20,7 @@ set autoread
 " Enable command completion
 set wildmenu
 
-" Do not timeout on :mappings or key codes
+" Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
 
 " APPEARANCE -----------------------------------------------------------------
