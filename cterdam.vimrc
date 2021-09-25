@@ -206,7 +206,7 @@ map <Leader>0 :tabn 10<CR>
 " Other mappings for switching tabs
 map <Leader>= :tabn<CR>
 map <Leader>- :tabp<CR>
-map <Leader>e :tabe
+map <Leader>e :tabe 
 
 " <Leader>S-<n> to close tab <n>
 map <Leader>! :tabclose 1<CR>
