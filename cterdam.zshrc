@@ -35,7 +35,7 @@ export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 # ----------------------------------------------------------------------------
 
 # Store all rc files in folder RCLOC
-RCLOC="~/cterdam/linuxrc"
+RCLOC="$HOME/cterdam/linuxrc"
 alias allrcs="ls $RCLOC"
 alias zshrc="vim $RCLOC/cterdam.zshrc"
 alias vimrc="vim $RCLOC/cterdam.vimrc"
