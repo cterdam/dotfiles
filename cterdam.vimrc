@@ -129,7 +129,7 @@ set foldmethod=indent
 " Do not ignore lines starting with '#', or any character
 set foldignore=
 
-" Expand all folds by default, can be toggled with `zi`
+" Expand all folds by default, can be toggled with 'zi'
 set nofoldenable
 
 " Display fold level on the leftmost one column
@@ -255,13 +255,13 @@ Plug 'itchyny/lightline.vim'
 " NERDTree for file browsing
 Plug 'preservim/nerdtree'
 
-" Gundo for browsing the undo tree
-Plug 'sjl/gundo.vim'
+" Undotree for browsing the undo tree
+Plug 'mbbill/undotree'
 
 " End list of plugins =================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
-" automatically executes `filetype plugin indent on` and `syntax enable`.
+" automatically executes 'filetype plugin indent on' and 'syntax enable'.
 " This script executed these separately on its own, nonetheless.
 
 " Need to run :PlugUpdate every once in a while
@@ -295,25 +295,35 @@ nnoremap <Leader>T :NERDTreeClose<CR>
 " Confine to 25 chars wide
 let g:NERDTreeWinSize = 25
 
-" Hide guide text
+" Hide guide text but still type '?' for help
 let NERDTreeMinimalUI = 1
 
-" GUNDO ----------------------------------------------------------------------
+" UNDOTREE -------------------------------------------------------------------
 
-" <Leader>u to summon the undo tree
-map <Leader>u :GundoToggle<CR>
+" <Leader>u to toggle the undo tree
+nnoremap <Leader>u :UndotreeToggle<CR>
 
-" Tree pane shows on the right
-let g:gundo_right = 1
+" 1 = side pane on left; 2 = tree on left diff in bottom
+" 3 = side pane on right ; 4 = tree on right diff in bottom
+let g:undotree_WindowLayout = 4
 
-" Confine tree pane to 25 chars wide 
-let g:gundo_width = 25
+" Use s, m, h, d instead of seconds, minutes, hours, days
+let g:undotree_ShortIndicators = 1
 
-" Preview pane takes full width
-let g:gundo_preview_bottom = 1
+" Look at the stars, look how they shine for you
+let g:undotree_TreeNodeShape = '*'
 
-" Limit preview pane to 10 chars high
-let g:gundo_preview_height = 10
+" Hide guide text but still type '?' for help
+let g:undotree_HelpLine = 0
 
-" Hide guide text
-let g:gundo_help = 0
+" Limit tree window to 25 chars wide 
+let g:undotree_SplitWidth = 25
+
+" Limit preview window to 10 chars high
+let g:undotree_DiffpanelHeight = 10
+
+" Auto open diff window
+let g:undotree_DiffAutoOpen = 1
+
+" Focus on tree window when opening
+let g:undotree_SetFocusWhenToggle = 1
