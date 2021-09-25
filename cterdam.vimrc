@@ -310,7 +310,7 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 " 3 = side pane on right ; 4 = tree on right diff in bottom
 let g:undotree_WindowLayout = 4
 
-" Use s, m, h, d instead of seconds, minutes, hours, days
+" Display s, m, h, d instead of seconds, minutes, hours, days
 let g:undotree_ShortIndicators = 1
 
 " Look at the stars, look how they shine for you
