@@ -6,10 +6,10 @@
 set nocompatible
 
 " Save view when leaving
-autocmd BufWinLeave ?* mkview
+autocmd BufWinLeave ?* silent! mkview
 
 " Load view when entering
-autocmd BufWinEnter ?* silent loadview
+autocmd BufWinEnter ?* silent! loadview
 
 " Update working directory to directory containing current file
 set autochdir
