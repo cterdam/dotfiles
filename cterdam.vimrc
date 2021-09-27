@@ -1,6 +1,8 @@
-" ================================= BUILTIN ==================================
+" vim:foldmethod=marker:foldlevel=0
 
-" GENERAL --------------------------------------------------------------------
+" BUILTIN --------------------------------------------------------------------
+
+" GENERAL {{{
 
 " Do no weird things and welcome to the 21st century
 set nocompatible
@@ -23,7 +25,14 @@ set wildmenu
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
 
-" APPEARANCE -----------------------------------------------------------------
+" Enable modeline
+set modeline
+
+" Read modeline on top and bottom 1 line
+set modelines=1
+
+" }}}
+" APPEARANCE {{{
 
 " Always show at least 5 lines above/below cursor when available
 set scrolloff=5
@@ -43,7 +52,8 @@ syntax on
 " Supply text color suitable for a dark background
 set background=dark
 
-" LINE NUMBER ----------------------------------------------------------------
+" }}}
+" LINE NUMBER {{{
 
 " Display line numbers
 set number
@@ -65,7 +75,8 @@ map <Leader><Leader> :call ToggleNumber()<CR>
 " Color the line numbers grey
 highlight LineNr ctermfg=grey
 
-" WIDTH & WRAP ---------------------------------------------------------------
+" }}}
+" WIDTH & WRAP {{{
 
 " Keep your line within 80 chars
 set colorcolumn=81
@@ -82,7 +93,8 @@ set linebreak
 " Mark the beginning of a continued line
 set showbreak=↳
 
-" INDENT ---------------------------------------------------------------------
+" }}}
+" INDENT {{{
 
 " Indent continued lines to preserve horizontal blocks
 set breakindent
@@ -90,10 +102,11 @@ set breakindent
 " Inherit indentation from preceding line
 set autoindent
 
-" Indent based on language of current document
+" Insert indent based on some C syntax
 set smartindent
 
-" TABS & SPACES --------------------------------------------------------------
+" }}}
+" TABS & SPACES {{{
 
 " Store tabs as spaces
 set expandtab
@@ -107,7 +120,8 @@ set softtabstop=4
 " >, <, and = all shift/reindent by 4 spaces per level
 set shiftwidth=4
 
-" SEARCH ---------------------------------------------------------------------
+" }}}
+" SEARCH {{{
 
 " Incrementally show search results while typing the search term
 set incsearch
@@ -121,7 +135,8 @@ map <Leader><Space> :nohl<CR>
 " au is not the same as Au!
 set noignorecase
 
-" FOLD -----------------------------------------------------------------------
+" }}}
+" FOLD {{{
 
 " Fold level is equal to indentation divided by shiftwidth (round down)
 set foldmethod=indent
@@ -138,7 +153,8 @@ set foldcolumn=1
 " Press <Space> to toggle current fold
 nnoremap <Space> za
 
-" UNDO -----------------------------------------------------------------------
+" }}}
+" UNDO {{{
 
 " Save undo history
 set undofile
@@ -154,7 +170,8 @@ endif
 " Set undodir and include full pathname for unfo files
 set undodir=$HOME/.vim/undo//
 
-" BACKUP ---------------------------------------------------------------------
+" }}}
+" BACKUP {{{
 
 " Make a backup before overwriting a file
 set writebackup
@@ -170,7 +187,8 @@ endif
 " Set backupdir and include full pathname for backup files
 set backupdir=$HOME/.vim/backup//
 
-" SWAP -----------------------------------------------------------------------
+" }}}
+" SWAP {{{
 
 " Make a swap file to prepare for a crash
 set swapfile
@@ -189,7 +207,8 @@ endif
 " Set swapdir (option named dir) and include full pathname for swap files
 set dir=$HOME/.vim/swap//
 
-" TAB PAGES ------------------------------------------------------------------
+" }}}
+" TAB PAGES {{{
 
 " <Leader><n> to switch to tab <n>
 map <Leader>1 :tabn 1<CR>
@@ -225,9 +244,11 @@ map <Leader>_ :tabclose -<CR>
 map <Leader>+ :tabclose +<CR>
 map <Leader>c :tabclose<CR>
 
-" ================================= PLUGINS ==================================
+" }}}
 
-" VIM-PLUG -------------------------------------------------------------------
+" PLUGINS --------------------------------------------------------------------
+
+" VIM-PLUG {{{
 
 " Install vim-plug if not found
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -270,7 +291,8 @@ call plug#end()
 " ctrl-p or fzf for finding files
 " ag for grepping code
 
-" COC ------------------------------------------------------------------------
+" }}}
+" COC {{{
 
 " COC will auto install any missing extensions in g:coc_global_extensions
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
@@ -280,7 +302,8 @@ let g:coc_global_extensions = [
     \'coc-json',
     \]
 
-" LIGHTLINE ------------------------------------------------------------------
+" }}}
+" LIGHTLINE {{{
 
 " Successfully display the lightline bar
 set laststatus=2
@@ -288,7 +311,8 @@ set laststatus=2
 " Hide that default '-- INSERT --' as that info is covered by lightline
 set noshowmode
 
-" NERDTREE -------------------------------------------------------------------
+" }}}
+" NERDTREE {{{
 
 " <Leader>tf to open (switch to) NERDTree finding current file
 nnoremap <Leader>tf :NERDTreeFind<CR>
@@ -299,13 +323,14 @@ nnoremap <Leader>tt :NERDTreeFocus<CR>
 " <Leader>T to close NERDTree
 nnoremap <Leader>T :NERDTreeClose<CR>
 
-" Confine to 25 chars wide
+" Confine NERDTree window to 25 chars wide
 let g:NERDTreeWinSize = 25
 
 " Hide guide text but still type '?' for help
 let NERDTreeMinimalUI = 1
 
-" UNDOTREE -------------------------------------------------------------------
+" }}}
+" UNDOTREE {{{
 
 " <Leader>u to toggle the undo tree
 nnoremap <Leader>u :UndotreeToggle<CR>
@@ -334,3 +359,5 @@ let g:undotree_DiffAutoOpen = 1
 
 " Focus on tree window when opening
 let g:undotree_SetFocusWhenToggle = 1
+
+" }}}
