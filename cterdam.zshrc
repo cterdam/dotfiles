@@ -32,11 +32,15 @@ fi
 # Include Clangd in path
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
-# ----------------------------------------------------------------------------
+# LINUXRC --------------------------------------------------------------------
 
-# Store all rc files in folder RCLOC
+# Store all rc files in folder RCLOC.
+# Each of the following files are sourced from the default rc file above.
 RCLOC="$HOME/cterdam/linuxrc"
-alias allrcs="ls $RCLOC"
+
+# ~/.zshrc
 alias zshrc="vim $RCLOC/cterdam.zshrc"
+# ~/.vimrc
 alias vimrc="vim $RCLOC/cterdam.vimrc"
+# ~/.tmux.conf
 alias tmux.conf="vim $RCLOC/cterdam.tmux.conf"
