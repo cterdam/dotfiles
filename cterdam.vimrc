@@ -13,6 +13,12 @@ autocmd BufWinLeave ?* silent! mkview
 " Load view when entering
 autocmd BufWinEnter ?* silent! loadview
 
+" Detect file type; load filetype plugin and indent setting
+filetype plugin indent on
+
+" Activate lexical coloring
+syntax on
+
 " Update working directory to directory containing current file
 set autochdir
 
@@ -42,12 +48,6 @@ set showcmd
 
 " Underscore the current line the cursor is on
 set cursorline
-
-" Detect file type; load filetype plugin and indent setting
-filetype plugin indent on
-
-" Activate lexical coloring
-syntax on
 
 " Supply text color suitable for a dark background
 set background=dark
@@ -144,8 +144,8 @@ set foldmethod=indent
 " Do not ignore lines starting with '#', or any character
 set foldignore=
 
-" Expand all folds by default, can be toggled with 'zi'
-set nofoldenable
+" Enable folds by default, can be toggled with 'zi'
+set foldenable
 
 " Display fold level on the leftmost one column
 set foldcolumn=1
