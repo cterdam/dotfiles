@@ -1,9 +1,25 @@
+# GENERAL --------------------------------------------------------------------
+
+# Print each directory on its own line
+alias showpath="echo $PATH | sed 's/\:/\n/g'"
+
+# Edit anything with vim
+export EDITOR="vim"
+
+# PATH  ----------------------------------------------------------------------
+
+# Append clangd (installed with brew) if not included already
+clangdpath="/opt/homebrew/opt/llvm/bin"
+if [[ :$PATH: != *:$clangdpath:* ]]; then
+    export PATH=$PATH:$clangdpath
+fi
+
 # OHMYZSH --------------------------------------------------------------------
 
 # Path to oh-my-zsh installation
 export ZSH="/Users/sterdam/.oh-my-zsh"
 
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
 ZSH_THEME="candy"
 
 # Disable auto-setting terminal title.
@@ -17,6 +33,7 @@ plugins=(
     git
 )
 
+# Rest of oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 # LINUXRC --------------------------------------------------------------------
@@ -29,27 +46,11 @@ source $ZSH/oh-my-zsh.sh
 RCLOC="$HOME/cterdam/linuxrc"
 
 # ~/.zshrc
-alias zshrc="vim $RCLOC/cterdam.zshrc"
+alias zshrc="$EDITOR $RCLOC/cterdam.zshrc"
 # ~/.vimrc
-alias vimrc="vim $RCLOC/cterdam.vimrc"
+alias vimrc="$EDITOR $RCLOC/cterdam.vimrc"
 # ~/.tmux.conf
-alias tmux.conf="vim $RCLOC/cterdam.tmux.conf"
-
-# PATH  ----------------------------------------------------------------------
-
-# Append clangd (installed with brew) if not included already
-clangdpath="/opt/homebrew/opt/llvm/bin"
-if [[ :$PATH: != *:$clangdpath:* ]]; then
-    export PATH=$PATH:$clangdpath
-fi
-
-# GENERAL --------------------------------------------------------------------
-
-# Show each directory on its own line
-alias showpath="echo $PATH | sed 's/\:/\n/g'"
-
-# Edit anything with vim
-export EDITOR="vim"
+alias tmux.conf="$EDITOR $RCLOC/cterdam.tmux.conf"
 
 # TMUX -----------------------------------------------------------------------
 
