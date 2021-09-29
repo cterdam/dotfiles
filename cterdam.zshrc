@@ -27,10 +27,13 @@ then
     tmux attach -t default || tmux new -s default
 fi
 
-# CLANGD ---------------------------------------------------------------------
+# ENVIRONMENT -------------------------------------------------------------===
 
 # Include Clangd in path
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# Edit with vim
+export EDITOR="vim"
 
 # LINUXRC --------------------------------------------------------------------
 
