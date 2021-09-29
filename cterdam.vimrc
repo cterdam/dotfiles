@@ -288,8 +288,9 @@ call plug#end()
 " Need to run :PlugUpdate every once in a while
 
 " Some things to consider in the future:
-" ctrl-p or fzf for finding files
-" ag for grepping code
+" - kien/ctrlp.vim or junegunn/fzf.vim for finding files
+" - ggreer/the_silver_searcher or mileszs/ack.vim for grepping code
+" - kana/vim-textobj-user for custom text objects
 
 " }}}
 " COC {{{
