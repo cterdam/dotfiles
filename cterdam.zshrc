@@ -6,6 +6,14 @@ alias showpath="echo $PATH | sed 's/\:/\n/g'"
 # Edit anything with vim
 export EDITOR="vim"
 
+# Folder to hold all my terminal material
+export CTERDAMHOME="$HOME/cterdam"
+
+# Create CTERDAMHOME if absent
+if [[ ! -d $CTERDAMHOME ]]; then
+    mkdir -p $CTERDAMHOME
+fi
+
 # PATH  ----------------------------------------------------------------------
 
 # Append clangd (installed with brew) if not included already
@@ -38,12 +46,12 @@ source $ZSH/oh-my-zsh.sh
 
 # LINUXRC --------------------------------------------------------------------
 
-# Store all rc files in folder RCLOC.
-# Each of the following files are sourced from the default rc file above.
-# Some things to consider in the future:
-# - symlinking the original rc files to the cterdam ones instead of sourcing
+# Store all my custom rc files in directory CTERDAMHOME/RCLOC.
+# RCLOC should be named linuxrc as my git repo.
+# These rc file names should all start with "cterdam" as in my git repo.
+RCLOC="$CTERDAMHOME/linuxrc"
 
-RCLOC="$HOME/cterdam/linuxrc"
+# Each of the following files are sourced into from their default location:
 
 # ~/.zshrc
 alias zshrc="$EDITOR $RCLOC/cterdam.zshrc"
@@ -51,6 +59,9 @@ alias zshrc="$EDITOR $RCLOC/cterdam.zshrc"
 alias vimrc="$EDITOR $RCLOC/cterdam.vimrc"
 # ~/.tmux.conf
 alias tmux.conf="$EDITOR $RCLOC/cterdam.tmux.conf"
+
+# Some things to consider in the future:
+# - symlinking the original rc files to the cterdam ones instead of sourcing
 
 # TMUX -----------------------------------------------------------------------
 
