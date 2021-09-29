@@ -27,10 +27,10 @@ then
     tmux attach -t default || tmux new -s default
 fi
 
-# ENVIRONMENT -------------------------------------------------------------===
+# ENVIRONMENT ----------------------------------------------------------------
 
 # Include Clangd in path
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="$PATH:/opt/homebrew/opt/llvm/bin"
 
 # Edit with vim
 export EDITOR="vim"
@@ -39,6 +39,9 @@ export EDITOR="vim"
 
 # Store all rc files in folder RCLOC.
 # Each of the following files are sourced from the default rc file above.
+# Some things to consider in the future:
+# - symlinking the original rc files to the cterdam ones
+
 RCLOC="$HOME/cterdam/linuxrc"
 
 # ~/.zshrc
