@@ -1,18 +1,31 @@
+# All my important variables are named to start with "CTERDAM" and exported
+# TODO: Remove extra variables and just keep CTERDAMHOME
+
 # GENERAL --------------------------------------------------------------------
 
 # Print each directory on its own line
-alias showpath="echo $PATH | sed 's/\:/\n/g'"
+# TODO: Fix this bug where it will not reflect changes in PATH
+alias showpath="echo ${PATH} | sed 's/\:/\n/g'"
 
 # Edit anything with vim
 export EDITOR="vim"
 
-# Folder to hold all my terminal material
+# CTERDAMHOME directory to hold all my terminal material
 export CTERDAMHOME="$HOME/cterdam"
 
-# Create CTERDAMHOME if absent
-if [[ ! -d $CTERDAMHOME ]]; then
-    mkdir -p $CTERDAMHOME
-fi
+# Make sure that CTERDAMHOME exists (if exists, nothing changes)
+mkdir -p $CTERDAMHOME
+
+# Intended directory structure:
+# CTERDAMHOME
+#   - CTERDAMBIN
+#   - CTERDAMRCLOC
+
+# CTERDAMBIN directory to hold all my executables
+export CTERDAMBIN="$CTERDAMHOME/bin"
+
+# Make sure that CTERDAMBIN exists (if exists, nothing changes)
+mkdir -p $CTERDAMBIN
 
 # PATH  ----------------------------------------------------------------------
 
@@ -20,6 +33,12 @@ fi
 clangdpath="/opt/homebrew/opt/llvm/bin"
 if [[ :$PATH: != *:$clangdpath:* ]]; then
     export PATH=$PATH:$clangdpath
+fi
+
+# Prepend CTERDAMBIN (with priority) if not included aleady
+# TODO: This still does not come ahead of other paths
+if [[ :$PATH: != *:$CTERDAMBIN:* ]]; then
+    export PATH=$CTERDAMBIN:$PATH
 fi
 
 # OHMYZSH --------------------------------------------------------------------
@@ -46,19 +65,19 @@ source $ZSH/oh-my-zsh.sh
 
 # LINUXRC --------------------------------------------------------------------
 
-# Store all my custom rc files in directory CTERDAMHOME/RCLOC.
-# RCLOC should be named linuxrc as my git repo.
+# CTERDAMRCLOC to hold all my custom rc files
+# CTERDAMRCLOC should be named linuxrc as my git repo.
 # These rc file names should all start with "cterdam" as in my git repo.
-RCLOC="$CTERDAMHOME/linuxrc"
+export CTERDAMRCLOC="$CTERDAMHOME/linuxrc"
 
 # Each of the following files are sourced into from their default location:
 
 # ~/.zshrc
-alias zshrc="$EDITOR $RCLOC/cterdam.zshrc"
+alias zshrc="$EDITOR $CTERDAMRCLOC/cterdam.zshrc"
 # ~/.vimrc
-alias vimrc="$EDITOR $RCLOC/cterdam.vimrc"
+alias vimrc="$EDITOR $CTERDAMRCLOC/cterdam.vimrc"
 # ~/.tmux.conf
-alias tmux.conf="$EDITOR $RCLOC/cterdam.tmux.conf"
+alias tmux.conf="$EDITOR $CTERDAMRCLOC/cterdam.tmux.conf"
 
 # Some things to consider in the future:
 # - symlinking the original rc files to the cterdam ones instead of sourcing
