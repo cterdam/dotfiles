@@ -19,28 +19,12 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# TMUX -----------------------------------------------------------------------
-
-# Start tmux session "default" if tmux not running
-if [ -z "$TMUX" ]
-then
-    tmux attach -t default || tmux new -s default
-fi
-
-# ENVIRONMENT ----------------------------------------------------------------
-
-# Include Clangd in path
-export PATH="$PATH:/opt/homebrew/opt/llvm/bin"
-
-# Edit with vim
-export EDITOR="vim"
-
 # LINUXRC --------------------------------------------------------------------
 
 # Store all rc files in folder RCLOC.
 # Each of the following files are sourced from the default rc file above.
 # Some things to consider in the future:
-# - symlinking the original rc files to the cterdam ones
+# - symlinking the original rc files to the cterdam ones instead of sourcing
 
 RCLOC="$HOME/cterdam/linuxrc"
 
@@ -50,3 +34,26 @@ alias zshrc="vim $RCLOC/cterdam.zshrc"
 alias vimrc="vim $RCLOC/cterdam.vimrc"
 # ~/.tmux.conf
 alias tmux.conf="vim $RCLOC/cterdam.tmux.conf"
+
+# PATH  ----------------------------------------------------------------------
+
+# Append clangd (installed with brew) if not included already
+clangdpath="/opt/homebrew/opt/llvm/bin"
+if [[ :$PATH: != *:$clangdpath:* ]]; then
+    export PATH=$PATH:$clangdpath
+fi
+
+# GENERAL --------------------------------------------------------------------
+
+# Show each directory on its own line
+alias showpath="echo $PATH | sed 's/\:/\n/g'"
+
+# Edit anything with vim
+export EDITOR="vim"
+
+# TMUX -----------------------------------------------------------------------
+
+# Start tmux session "default" if tmux not running
+if [[ -z "$TMUX" ]]; then
+    tmux attach -t default || tmux new -s default
+fi
