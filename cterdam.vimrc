@@ -141,6 +141,11 @@ set noignorecase
 " }}}
 " SWAPPING {{{
 
+" These are currently buggy:
+" Swapping the leftmost 2 chars to the left can cause the char to disappear.
+" Swapping lines will lose the current column.
+" TODO: Fix these and write them into a Vim plugin
+
 " <Ctrl>h to swap a char to the left
 :nnoremap <silent><C-h> :let save_a=@a<Cr>"axhh"ap:let @a=save_a<Cr>
 
@@ -305,7 +310,7 @@ call plug#end()
 
 " Need to run :PlugUpdate every once in a while
 
-" Some things to consider in the future:
+" TODO: Some things to consider in the future:
 " - kien/ctrlp.vim or junegunn/fzf.vim for finding files
 " - ggreer/the_silver_searcher or mileszs/ack.vim for grepping code
 " - kana/vim-textobj-user for custom text objects
