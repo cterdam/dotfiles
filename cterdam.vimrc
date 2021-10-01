@@ -31,14 +31,14 @@ set wildmenu
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
 
-" Enable modeline
-set modeline
+" <Ctrl>k to swap a line up
+:nnoremap <silent><C-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
 
-" Read modeline on top and bottom 1 line
-set modelines=1
+" <Ctrl>j to swap a line down
+:nnoremap <silent><C-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
 
 " }}}
-" APPEARANCE {{{
+" INTERFACE {{{
 
 " Always show at least 5 lines above/below cursor when available
 set scrolloff=5
@@ -74,6 +74,15 @@ map <Leader><Leader> :call ToggleNumber()<CR>
 
 " Color the line numbers grey
 highlight LineNr ctermfg=grey
+
+" }}}
+" MODELINE {{{
+
+" Enable modeline
+set modeline
+
+" Read modeline on top and bottom 5 lines, as default
+set modelines=5
 
 " }}}
 " WIDTH & WRAP {{{
