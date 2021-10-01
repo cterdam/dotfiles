@@ -70,7 +70,7 @@ source $ZSH/oh-my-zsh.sh
 # These rc file names should all start with "cterdam" as in my git repo.
 export CTERDAMRCLOC="$CTERDAMHOME/linuxrc"
 
-# Each of the following files are sourced into from their default location:
+# Each of the following files are sourced from from their default location:
 
 # ~/.zshrc
 alias zshrc="$EDITOR $CTERDAMRCLOC/cterdam.zshrc"
