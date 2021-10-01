@@ -20,11 +20,15 @@ export CTERDAMHOME="$HOME/cterdam"
 # Make sure that CTERDAMHOME exists (if exists, nothing changes)
 mkdir -p $CTERDAMHOME
 
+# CTERDAMBIN -----------------------------------------------------------------
+
 # CTERDAMBIN directory to hold all my executables
 export CTERDAMBIN="$CTERDAMHOME/bin"
 
 # Make sure that CTERDAMBIN exists (if exists, nothing changes)
 mkdir -p $CTERDAMBIN
+
+# TODO: symlink all vim things in here
 
 # CTERDAMRC ------------------------------------------------------------------
 
@@ -54,17 +58,25 @@ rc () {
 
 # PATH  ----------------------------------------------------------------------
 
+# Function call 'add2path X tail' to append X to PATH,
+# Function call 'add2path Y head' to prepend Y to PATH.
+add2path() {
+    if [[ :$PATH: != *:$1:* ]]; then
+        if [[ $2 == "head" ]]; then
+            export PATH=$1:$PATH
+        else # implies $2 == "tail"
+            export PATH=$PATH:$1
+        fi
+    fi
+}
+
 # Append clangd (installed with brew) if not included already
 clangdpath="/opt/homebrew/opt/llvm/bin"
-if [[ :$PATH: != *:$clangdpath:* ]]; then
-    export PATH=$PATH:$clangdpath
-fi
+add2path $clangdpath tail
 
-# Prepend CTERDAMBIN (with priority) if not included aleady
+# Prepend CTERDAMBIN if not included aleady
 # TODO: This still does not come ahead of other paths
-if [[ :$PATH: != *:$CTERDAMBIN:* ]]; then
-    export PATH=$CTERDAMBIN:$PATH
-fi
+add2path $CTERDAMBIN head
 
 # OHMYZSH --------------------------------------------------------------------
 
