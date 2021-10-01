@@ -31,18 +31,6 @@ set wildmenu
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
 
-" <Ctrl>h to swap a char to the left
-:nnoremap <silent><C-h> :let save_a=@a<Cr>"axhh"ap:let @a=save_a<Cr>
-
-" <Ctrl>j to swap a line down
-:nnoremap <silent><C-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
-
-" <Ctrl>k to swap a line up
-:nnoremap <silent><C-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
-
-" <Ctrl>l to swap a char to the right
-:nnoremap <silent><C-l> :let save_a=@a<Cr>"ax"ap:let @a=save_a<Cr>
-
 " }}}
 " INTERFACE {{{
 
@@ -149,6 +137,21 @@ map <Leader><Space> :nohl<CR>
 
 " au is not the same as Au!
 set noignorecase
+
+" }}}
+" SWAPPING {{{
+
+" <Ctrl>h to swap a char to the left
+:nnoremap <silent><C-h> :let save_a=@a<Cr>"axhh"ap:let @a=save_a<Cr>
+
+" <Ctrl>j to swap a line down
+:nnoremap <silent><C-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
+
+" <Ctrl>k to swap a line up
+:nnoremap <silent><C-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
+
+" <Ctrl>l to swap a char to the right
+:nnoremap <silent><C-l> :let save_a=@a<Cr>"ax"ap:let @a=save_a<Cr>
 
 " }}}
 " FOLD {{{
