@@ -1,12 +1,15 @@
-# GENERAL --------------------------------------------------------------------
+# vim:foldmethod=marker
 
-# Print each directory on its own line
-alias showpath='echo $PATH | sed "s/\:/\n/g"'
+# cterdam.zshrc: cterdam's own zshrc file.
+# See https://github.com/cterdam/linuxrc
+
+# GENERAL {{{
 
 # Edit anything with vim
 export EDITOR="vim"
 
-# CTERDAMHOME ----------------------------------------------------------------
+# }}}
+# CTERDAMHOME {{{
 
 # Intended directory structure:
 # - CTERDAMHOME
@@ -19,7 +22,8 @@ export CTERDAMHOME="$HOME/cterdam"
 # Make sure that CTERDAMHOME exists (if exists, nothing changes)
 mkdir -p $CTERDAMHOME
 
-# CTERDAMBIN -----------------------------------------------------------------
+# }}}
+# CTERDAMBIN {{{
 
 # CTERDAMBIN directory to hold all my executables
 export CTERDAMBIN="$CTERDAMHOME/bin"
@@ -29,7 +33,8 @@ mkdir -p $CTERDAMBIN
 
 # TODO: symlink all vim things in here
 
-# CTERDAMRC ------------------------------------------------------------------
+# }}}
+# CTERDAMRC {{{
 
 # CTERDAMRC directory to hold all my custom rc files
 # CTERDAMRC should be named linuxrc as my git repo.
@@ -55,10 +60,15 @@ rc () {
 # Some things to consider in the future:
 # - symlinking the original rc files to the cterdam ones instead of sourcing
 
-# PATH  ----------------------------------------------------------------------
+# }}}
+# PATH {{{
+
+# Print each PATH directory on its own line
+alias showpath='echo $PATH | sed "s/\:/\n/g"'
 
 # Function call 'add2path X tail' to append X to PATH,
 # Function call 'add2path Y head' to prepend Y to PATH.
+# No change is made if the argument is already in PATH.
 add2path() {
     if [[ :$PATH: != *:$1:* ]]; then
         if [[ $2 == "head" ]]; then
@@ -77,7 +87,8 @@ add2path $clangdpath tail
 # TODO: This still does not come ahead of other paths
 add2path $CTERDAMBIN head
 
-# OHMYZSH --------------------------------------------------------------------
+# }}}
+# OHMYZSH {{{
 
 # Path to oh-my-zsh installation
 export ZSH="/Users/sterdam/.oh-my-zsh"
@@ -99,9 +110,11 @@ plugins=(
 # Rest of oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# TMUX -----------------------------------------------------------------------
+# }}}
+# TMUX {{{
 
 # Start tmux session "default" if tmux not running
 if [[ -z "$TMUX" ]]; then
     tmux attach -t default || tmux new -s default
 fi
+# }}}

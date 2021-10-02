@@ -1,5 +1,8 @@
 " vim:foldmethod=marker
 
+# cterdam.vimrc: cterdam's own vimrc file.
+# See https://github.com/cterdam/linuxrc
+
 " BUILTIN --------------------------------------------------------------------
 
 " GENERAL {{{
