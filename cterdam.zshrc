@@ -1,8 +1,7 @@
 # GENERAL --------------------------------------------------------------------
 
 # Print each directory on its own line
-# TODO: Fix this bug where it will not update after PATH changes
-alias showpath="echo $PATH | sed 's/\:/\n/g'"
+alias showpath='echo $PATH | sed "s/\:/\n/g"'
 
 # Edit anything with vim
 export EDITOR="vim"
