@@ -90,8 +90,7 @@ export CTERDAMBIN="$CTERDAMHOME/bin"
 # Make sure that CTERDAMBIN exists (if exists, nothing changes)
 mkdir -p $CTERDAMBIN
 
-# Symlink all vim binaries from homebrew to CTERDAMBIN
-# If symlink already present in CTERDAMBIN then nothing changes.
+# Symlink all vim binaries from homebrew to CTERDAMBIN, if not already present
 # Reason is homebrew on Mac installs vim with more options than the default vim
 homebrewbinloc="/opt/homebrew/bin"
 for hbvimbin in $homebrewbinloc/*vim*
