@@ -11,12 +11,6 @@ if [[ -z "$TMUX" ]]; then
 fi
 
 # }}}
-# GENERAL {{{
-
-# Edit anything with vim
-export EDITOR="vim"
-
-# }}}
 # OHMYZSH {{{
 
 # Path to oh-my-zsh installation
@@ -40,6 +34,12 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # }}}
+# GENERAL {{{
+
+# Edit anything with vim
+export EDITOR="vim"
+
+# }}}
 # CTERDAMHOME {{{
 
 # Intended directory structure:
@@ -57,12 +57,12 @@ mkdir -p $CTERDAMHOME
 # CTERDAMRC {{{
 
 # CTERDAMRC directory to hold all my custom rc files
-# CTERDAMRC should be named linuxrc as my git repo.
+# CTERDAMRC should be named linuxrc as cloned from my git repo.
 # These rc file names should all start with "cterdam" as in my git repo.
 # The files are all sourced from from their default location.
 export CTERDAMRC="$CTERDAMHOME/linuxrc"
 
-# Function call 'rc vim' to edit the vimrc file, and et cetera.
+# 'rc vim' to edit the vimrc file, and et cetera.
 rc () {
     case $1 in
         "vim")
@@ -83,22 +83,33 @@ rc () {
 # }}}
 # CTERDAMBIN {{{
 
-# CTERDAMBIN directory to hold all my executables
+# CTERDAMBIN directory to hold all my executables.
+# This will be given priority in PATH.
 export CTERDAMBIN="$CTERDAMHOME/bin"
 
 # Make sure that CTERDAMBIN exists (if exists, nothing changes)
 mkdir -p $CTERDAMBIN
 
-# TODO: symlink all vim things in here
+# Symlink all vim binaries from homebrew to CTERDAMBIN
+# If symlink already present in CTERDAMBIN then nothing changes.
+# Reason is homebrew on Mac installs vim with more options than the default vim
+homebrewbinloc="/opt/homebrew/bin"
+for hbvimbin in $homebrewbinloc/*vim*
+do
+    slvimbin="$CTERDAMBIN/$(basename $hbvimbin)" 
+    if [[ ! -f $slvimbin ]]; then
+        ln -s $hbvimbin $slvimbin
+    fi
+done
 
 # }}}
 # PATH {{{
 
-# Print each PATH directory on its own line
+# 'showpath' to print each PATH directory on its own line
 alias showpath='echo $PATH | sed "s/\:/\n/g"'
 
-# Function call 'add2path X tail' to append X to PATH,
-# Function call 'add2path Y head' to prepend Y to PATH.
+# 'add2path X tail' to append X to PATH,
+# 'add2path Y head' to prepend Y to PATH.
 # No change is made if the argument is already in PATH.
 add2path() {
     if [[ :$PATH: != *:$1:* ]]; then
