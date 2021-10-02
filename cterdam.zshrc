@@ -3,35 +3,55 @@
 # cterdam.zshrc: cterdam's own zshrc file.
 # See https://github.com/cterdam/linuxrc
 
+# TMUX {{{
+
+# Start tmux session "default" if tmux not running
+if [[ -z "$TMUX" ]]; then
+    tmux attach -t default || tmux new -s default
+fi
+
+# }}}
 # GENERAL {{{
 
 # Edit anything with vim
 export EDITOR="vim"
 
 # }}}
+# OHMYZSH {{{
+
+# Path to oh-my-zsh installation
+export ZSH="/Users/sterdam/.oh-my-zsh"
+
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
+ZSH_THEME="candy"
+
+# Disable auto-setting terminal title.
+DISABLE_AUTO_TITLE="true"
+
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+    git
+)
+
+# Rest of oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# }}}
 # CTERDAMHOME {{{
 
 # Intended directory structure:
 # - CTERDAMHOME
-#   - CTERDAMBIN
 #   - CTERDAMRC
+#   - CTERDAMBIN
 
 # CTERDAMHOME directory to hold all my terminal material
 export CTERDAMHOME="$HOME/cterdam"
 
 # Make sure that CTERDAMHOME exists (if exists, nothing changes)
 mkdir -p $CTERDAMHOME
-
-# }}}
-# CTERDAMBIN {{{
-
-# CTERDAMBIN directory to hold all my executables
-export CTERDAMBIN="$CTERDAMHOME/bin"
-
-# Make sure that CTERDAMBIN exists (if exists, nothing changes)
-mkdir -p $CTERDAMBIN
-
-# TODO: symlink all vim things in here
 
 # }}}
 # CTERDAMRC {{{
@@ -61,6 +81,17 @@ rc () {
 # - symlinking the original rc files to the cterdam ones instead of sourcing
 
 # }}}
+# CTERDAMBIN {{{
+
+# CTERDAMBIN directory to hold all my executables
+export CTERDAMBIN="$CTERDAMHOME/bin"
+
+# Make sure that CTERDAMBIN exists (if exists, nothing changes)
+mkdir -p $CTERDAMBIN
+
+# TODO: symlink all vim things in here
+
+# }}}
 # PATH {{{
 
 # Print each PATH directory on its own line
@@ -84,37 +115,6 @@ clangdpath="/opt/homebrew/opt/llvm/bin"
 add2path $clangdpath tail
 
 # Prepend CTERDAMBIN if not included aleady
-# TODO: This still does not come ahead of other paths
 add2path $CTERDAMBIN head
 
-# }}}
-# OHMYZSH {{{
-
-# Path to oh-my-zsh installation
-export ZSH="/Users/sterdam/.oh-my-zsh"
-
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
-ZSH_THEME="candy"
-
-# Disable auto-setting terminal title.
-DISABLE_AUTO_TITLE="true"
-
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-)
-
-# Rest of oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-
-# }}}
-# TMUX {{{
-
-# Start tmux session "default" if tmux not running
-if [[ -z "$TMUX" ]]; then
-    tmux attach -t default || tmux new -s default
-fi
 # }}}
