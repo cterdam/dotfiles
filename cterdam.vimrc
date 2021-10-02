@@ -22,6 +22,9 @@ filetype plugin indent on
 " Activate lexical coloring
 syntax on
 
+" More powerful backspace
+set backspace=indent,eol,start
+
 " Update working directory to directory containing current file
 set autochdir
 
@@ -290,20 +293,23 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin('~/.vim/plugged')
 " Begin list of plugins ===============
 
-" Vim-plug itself for managing plugins
+" vim-plug itself for managing plugins
 Plug 'junegunn/vim-plug'
 
 " COC for Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Lightline for status line
+" lightline for status line
 Plug 'itchyny/lightline.vim'
 
 " NERDTree for file browsing
 Plug 'preservim/nerdtree'
 
-" Undotree for browsing the undo tree
+" undotree for browsing the undo tree
 Plug 'mbbill/undotree'
+
+" indentLine for displaying indent lines
+Plug 'Yggdroot/indentLine'
 
 " End list of plugins =================
 call plug#end()
@@ -387,5 +393,27 @@ let g:undotree_DiffAutoOpen = 1
 
 " Focus on tree window when opening
 let g:undotree_SetFocusWhenToggle = 1
+
+" }}}
+" INDENTLINE {{{
+
+" Use default grey for indent lines
+let g:indentLine_setColors = 1
+
+" If file encoding is not UTF-8, can change this to | instead
+let g:indentLine_char = '¦'
+
+" indentLine will override 'concealcursor' with this value
+let g:indentLine_concealcursor = 'inc'
+
+" indentLine will override 'conceallevel' with this value
+" indentLine will not function if conceallevel is not set to 1 or 2
+let g:indentLine_conceallevel = 2
+
+" Enable indentLine
+let g:indentLine_enabled = 1
+
+" <Leader>| to toggle displaying of indent lines
+map <Leader>\| :IndentLinesToggle<CR>
 
 " }}}
