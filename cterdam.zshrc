@@ -59,26 +59,37 @@ mkdir -p $CTERDAMHOME
 # }}}
 # CTERDAMRC {{{
 
-# CTERDAMRC directory to hold all my custom rc files
+# CTERDAMRC directory to hold all cterdam's custom rc files
 # CTERDAMRC should be named linuxrc as cloned from my git repo.
-# These rc file names should all start with "cterdam" as in my git repo.
-# The files are all sourced from from their default location.
 export CTERDAMRC="$CTERDAMHOME/linuxrc"
 
-# 'rc vim' to edit the vimrc file, and et cetera.
+# These rc file names should all start with "cterdam" as in my git repo.
+# The files are all sourced from from their default location.
+
+# cterdam's vimrc file
+export CTERDAMVIMRC="$CTERDAMRC/cterdam.vimrc"
+# cterdam's zshrc file
+export CTERDAMZSHRC="$CTERDAMRC/cterdam.zshrc"
+# cterdam's tmux.conf file
+export CTERDAMTMUXCONF="$CTERDAMRC/cterdam.tmux.conf"
+
+# 'rc vim' to edit cterdam's vimrc file, and et cetera.
 rc () {
     case $1 in
         "vim")
             # Default file at ~/.vim/vimrc
-            $EDITOR $CTERDAMRC/cterdam.vimrc
+            $EDITOR $CTERDAMVIMRC
             ;;
         "zsh")
             # Default file at ~/.zshrc
-            $EDITOR $CTERDAMRC/cterdam.zshrc
+            $EDITOR $CTERDAMZSHRC
             ;;
         "tmux")
             # Default file at ~/.tmux.conf
-            $EDITOR $CTERDAMRC/cterdam.tmux.conf
+            $EDITOR $CTERDAMTMUXCONF
+            ;;
+        "" )
+            cd $CTERDAMRC
             ;;
     esac
 }
