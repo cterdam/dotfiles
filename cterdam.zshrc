@@ -22,6 +22,9 @@ ZSH_THEME="candy"
 # Disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
 
+# Use case-sensitive completion.
+CASE_SENSITIVE="true"
+
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -66,12 +69,15 @@ export CTERDAMRC="$CTERDAMHOME/linuxrc"
 rc () {
     case $1 in
         "vim")
+            # Default file at ~/.vim/vimrc
             $EDITOR $CTERDAMRC/cterdam.vimrc
             ;;
         "zsh")
+            # Default file at ~/.zshrc
             $EDITOR $CTERDAMRC/cterdam.zshrc
             ;;
         "tmux")
+            # Default file at ~/.tmux.conf
             $EDITOR $CTERDAMRC/cterdam.tmux.conf
             ;;
     esac
