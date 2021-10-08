@@ -42,6 +42,9 @@ source $ZSH/oh-my-zsh.sh
 # Edit anything with vim
 export EDITOR="vim"
 
+# Source zshrc
+alias so='source ~/.zshrc'
+
 # }}}
 # CTERDAMHOME {{{
 
@@ -73,7 +76,7 @@ export CTERDAMZSHRC="$CTERDAMRC/cterdam.zshrc"
 # cterdam's tmux.conf file
 export CTERDAMTMUXCONF="$CTERDAMRC/cterdam.tmux.conf"
 
-# 'rc vim' to edit cterdam's vimrc file, and et cetera.
+# Edit dotfiles with vim
 rc () {
     case $1 in
         "vim")
@@ -121,18 +124,22 @@ done
 # }}}
 # PATH {{{
 
-# 'showpath' to print each PATH directory on its own line
+# Print each PATH directory on its own line (assumes no ':' in directory names)
 alias showpath='echo $PATH | sed "s/\:/\n/g"'
 
-# 'add2path X tail' to append X to PATH,
-# 'add2path Y head' to prepend Y to PATH.
-# No change is made if the argument is already in PATH.
+# Delete something from PATH (BUGGY)
+deletefrompath() {
+    echo $PATH | sed "s/(:|^)K(:|$)//g"
+    path="$path:|($1)"
+}
+
+# Add something to PATH, head or tail
 add2path() {
     if [[ :$PATH: != *:$1:* ]]; then
         if [[ $2 == "head" ]]; then
-            export PATH=$1:$PATH
-        else # implies $2 == "tail"
-            export PATH=$PATH:$1
+            export PATH="$1:$PATH"
+        else # default on tail
+            export PATH="$PATH:$1"
         fi
     fi
 }
