@@ -125,16 +125,15 @@ done
 # PATH {{{
 
 # Print each PATH directory on its own line (assumes no ':' in directory names)
-alias showpath='echo $PATH | sed "s/\:/\n/g"'
+alias showpath='echo $PATH | tr ":" "\n"'
 
 # Delete something from PATH (BUGGY)
-deletefrompath() {
-    echo $PATH | sed "s/(:|^)K(:|$)//g"
-    path="$path:|($1)"
+delpath() {
+    echo $PATH | sed "s/(\:|^)K(\:|$)//g"
 }
 
-# Add something to PATH, head or tail
-add2path() {
+# Add something to PATH, head or tail, if not already included
+addpath() {
     if [[ :$PATH: != *:$1:* ]]; then
         if [[ $2 == "head" ]]; then
             export PATH="$1:$PATH"
@@ -146,9 +145,9 @@ add2path() {
 
 # Append clangd (installed with brew) if not included already
 clangdpath="/opt/homebrew/opt/llvm/bin"
-add2path $clangdpath tail
+addpath $clangdpath tail
 
 # Prepend CTERDAMBIN if not included aleady
-add2path $CTERDAMBIN head
+addpath $CTERDAMBIN head
 
 # }}}
