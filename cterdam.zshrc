@@ -37,15 +37,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # }}}
-# GENERAL {{{
-
-# Edit anything with vim
-export EDITOR="vim"
-
-# Source zshrc
-alias so='source ~/.zshrc'
-
-# }}}
 # CTERDAMHOME {{{
 
 # Intended directory structure:
@@ -149,5 +140,17 @@ addpath $clangdpath tail
 
 # Prepend CTERDAMBIN if not included aleady
 addpath $CTERDAMBIN head
+
+# }}}
+# GENERAL {{{
+
+# Edit anything with vim
+export EDITOR="vim"
+
+# Conveniently source zshrc
+alias so='source ~/.zshrc'
+
+# Play youtube music
+alias pipecat='rlwrap python3 $CTERDAMHOME/PipeCat/main.py'
 
 # }}}
