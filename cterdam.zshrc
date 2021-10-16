@@ -55,7 +55,7 @@ mkdir -p $CTERDAMHOME
 
 # CTERDAMRC directory to hold all cterdam's custom rc files
 # CTERDAMRC should be named linuxrc as cloned from my git repo.
-export CTERDAMRC="$CTERDAMHOME/linuxrc"
+export CTERDAMRC="$CTERDAMHOME/dotfiles"
 
 # These rc file names should all start with "cterdam" as in my git repo.
 # The files are all sourced from from their default location.
