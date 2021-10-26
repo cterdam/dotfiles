@@ -118,14 +118,23 @@ done
 # Print each PATH directory on its own line (assumes no ':' in directory names)
 alias showpath='echo $PATH | tr ":" "\n"'
 
-# Delete something from PATH (BUGGY)
+# Delete from PATH (BUGGY)
 delpath() {
     echo $PATH | sed "s/(\:|^)K(\:|$)//g"
 }
 
+# Returns true iff argument in PATH
+inpath() {
+    if [[ :$PATH: == *:$1:* ]]; then
+        true
+    else
+        false
+    fi
+}
+
 # Add something to PATH, head or tail, if not already included
 addpath() {
-    if [[ :$PATH: != *:$1:* ]]; then
+    if ! inpath $1; then
         if [[ $2 == "head" ]]; then
             export PATH="$1:$PATH"
         else # default on tail
@@ -152,5 +161,8 @@ alias so='source ~/.zshrc'
 
 # Play youtube music
 alias pipecat='rlwrap python3 $CTERDAMHOME/PipeCat/main.py'
+
+# Show Chinese characters
+alias tree='tree -N'
 
 # }}}
