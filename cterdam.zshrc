@@ -119,11 +119,6 @@ done
 # Print each PATH directory on its own line (assumes no ':' in directory names)
 alias showpath='echo $PATH | tr ":" "\n"'
 
-# Delete from PATH (BUGGY)
-delpath() {
-    echo $PATH | sed "s/(\:|^)K(\:|$)//g"
-}
-
 # Returns true iff argument in PATH
 inpath() {
     # Altrenative one-line implementation
