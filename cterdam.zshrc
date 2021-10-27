@@ -125,6 +125,8 @@ delpath() {
 
 # Returns true iff argument in PATH
 inpath() {
+    # Altrenative one-line implementation
+    # [[ :$PATH: == *:$1:* ]]
     if [[ :$PATH: == *:$1:* ]]; then
         true
     else
