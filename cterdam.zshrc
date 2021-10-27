@@ -59,6 +59,7 @@ export CTERDAMRC="$CTERDAMHOME/dotfiles"
 
 # These rc file names should all start with "cterdam" as in my git repo.
 # The files are all sourced from from their default location.
+# This directory should be git cloned, not made.
 
 # cterdam's vimrc file
 export CTERDAMVIMRC="$CTERDAMRC/cterdam.vimrc"
@@ -166,5 +167,8 @@ alias pipecat='rlwrap python3 $CTERDAMHOME/PipeCat/main.py'
 
 # Show Chinese characters
 alias tree='tree -N'
+
+# Do actual work here
+cd $CTERDAMHOME
 
 # }}}
