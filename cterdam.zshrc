@@ -19,10 +19,10 @@ export ZSH="/Users/sterdam/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
 ZSH_THEME="candy"
 
-# Disable auto-setting terminal title.
+# Disable auto-setting terminal title
 DISABLE_AUTO_TITLE="true"
 
-# Use case-sensitive completion.
+# Use case-sensitive completion
 CASE_SENSITIVE="true"
 
 # Standard plugins can be found in $ZSH/plugins/
@@ -116,7 +116,8 @@ done
 # }}}
 # PATH {{{
 
-# Print each PATH directory on its own line (assumes no ':' in directory names)
+# Prints each PATH directory on its own line
+# (assumes no ':' in directory names)
 alias showpath='echo $PATH | tr ":" "\n"'
 
 # Returns true iff argument in PATH
@@ -130,7 +131,7 @@ inpath() {
     fi
 }
 
-# Add something to PATH, head or tail, if not already included
+# Adds something to PATH, head or tail, if not already included
 addpath() {
     if ! inpath $1; then
         if [[ $2 == "head" ]]; then
