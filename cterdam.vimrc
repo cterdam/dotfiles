@@ -311,6 +311,9 @@ Plug 'mbbill/undotree'
 " indentLine for displaying indent lines
 Plug 'Yggdroot/indentLine'
 
+" vim-surround for manipulating brackets and tags
+Plug 'tpope/vim-surround'
+
 " End list of plugins =================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
