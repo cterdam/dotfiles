@@ -354,8 +354,8 @@ set noshowmode
 " <Leader>tf to open (switch to) NERDTree finding current file
 nnoremap <Leader>tf :NERDTreeFind<CR>
 
-" <Leader>tt to recover and switch to an existing NERDTree window
-nnoremap <Leader>tt :NERDTreeFocus<CR>
+" <Leader>tr to recover and switch to an existing NERDTree window
+nnoremap <Leader>tr :NERDTreeFocus<CR>
 
 " <Leader>T to close NERDTree
 nnoremap <Leader>T :NERDTreeClose<CR>
