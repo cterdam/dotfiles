@@ -299,7 +299,7 @@ Plug 'junegunn/vim-plug'
 " COC for Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" lightline for status line
+" lightline for statusline and tabline
 Plug 'itchyny/lightline.vim'
 
 " NERDTree for file browsing
@@ -342,11 +342,18 @@ let g:coc_global_extensions = [
 " }}}
 " LIGHTLINE {{{
 
-" Successfully display the lightline bar
+" Successfully display the statusline
 set laststatus=2
 
 " Hide that default '-- INSERT --' as that info is covered by lightline
 set noshowmode
+
+" Hide the useless close button on the right end of tabline
+let g:lightline= {
+    \ 'tabline': {
+        \ 'left': [ [ 'tabs' ] ],
+        \ 'right': [] }
+\ }
 
 " }}}
 " NERDTREE {{{
