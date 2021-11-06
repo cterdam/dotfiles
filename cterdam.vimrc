@@ -348,8 +348,18 @@ set laststatus=2
 " Hide that default '-- INSERT --' as that info is covered by lightline
 set noshowmode
 
-" Hide the useless close button on the right end of tabline
+" Define fields of the statusline and tabline. See :help lightline
 let g:lightline= {
+    \ 'active': {
+        \ 'left': [ [ 'mode', 'paste' ],
+        \           [ 'readonly', 'filename', 'modified' ] ],
+        \ 'right': [ [ 'lineinfo', 'charvaluehex' ],
+        \            [ 'percent' ],
+        \            [ 'fileformat', 'fileencoding', 'filetype' ] ] },
+    \ 'inactive':{
+        \ 'left': [ [ 'filename' ] ],
+        \ 'right': [ [ 'lineinfo' ],
+        \            [ 'percent' ] ] },
     \ 'tabline': {
         \ 'left': [ [ 'tabs' ] ],
         \ 'right': [] }
