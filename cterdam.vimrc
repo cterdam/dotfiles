@@ -325,7 +325,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin('~/.vim/plugged')
-" Begin list of plugins ===============
+" Begin list of plugins ======================================================
 
 " vim-plug itself for managing plugins
 Plug 'junegunn/vim-plug'
@@ -345,6 +345,9 @@ Plug 'mbbill/undotree'
 " indentLine for displaying indent lines
 Plug 'Yggdroot/indentLine'
 
+" vim-commentary for manipulating comments
+Plug 'tpope/vim-commentary'
+
 " vim-surround for manipulating brackets, quotes, and tags
 Plug 'tpope/vim-surround'
 
@@ -354,13 +357,10 @@ Plug 'voldikss/vim-floaterm'
 " vim-fugitive for git commands
 Plug 'tpope/vim-fugitive'
 
-" vim-commentary for manipulating comments
-Plug 'tpope/vim-commentary'
-
 " vim-gitgutter for viewing git status per line
 Plug 'airblade/vim-gitgutter'
 
-" End list of plugins =================
+" End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
 " automatically executes 'filetype plugin indent on' and 'syntax enable'.
