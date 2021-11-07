@@ -312,7 +312,7 @@ Plug 'mbbill/undotree'
 " indentLine for displaying indent lines
 Plug 'Yggdroot/indentLine'
 
-" vim-surround for manipulating brackets and tags
+" vim-surround for manipulating brackets, quotes, and tags
 Plug 'tpope/vim-surround'
 
 " vim-floaterm for floating terminals
@@ -323,6 +323,9 @@ Plug 'tpope/vim-fugitive'
 
 " vim-commentary for manipulating comments
 Plug 'tpope/vim-commentary'
+
+" vim-gitgutter for viewing git status per line
+Plug 'airblade/vim-gitgutter'
 
 " End list of plugins =================
 call plug#end()
