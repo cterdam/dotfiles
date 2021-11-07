@@ -314,6 +314,9 @@ Plug 'Yggdroot/indentLine'
 " vim-surround for manipulating brackets and tags
 Plug 'tpope/vim-surround'
 
+" vim-floaterm for floating terminals
+Plug 'voldikss/vim-floaterm'
+
 " End list of plugins =================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -329,7 +332,7 @@ call plug#end()
 " - tpope/vim-obsession for saving/loading vim sessions
 
 " }}}
-" COC {{{
+" COC (CONQUERER OF COMPLETION) {{{
 
 " COC will auto install any missing extensions in g:coc_global_extensions
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
@@ -435,5 +438,20 @@ let g:indentLine_enabled = 1
 
 " <Leader>| to toggle displaying of indent lines
 map <Leader>\| :IndentLinesToggle<CR>
+
+" }}}
+" VIM-FLOATERM {{{
+
+" <F12> to toggle the floaterm
+let g:floaterm_keymap_toggle = '<F12>'
+
+" No title
+let g:floaterm_title = ''
+
+" Float in the center
+let g:floaterm_position = 'center'
+
+" Always close floaterm upon job exit
+let g:floaterm_autoclose = 2
 
 " }}}
