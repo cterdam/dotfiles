@@ -249,6 +249,8 @@ set dir=$HOME/.vim/swap//
 " }}}
 " LOCATION LIST {{{
 
+" TODO add support for the quickfix list in the same fashion
+
 " <Leader>\<n> to switch to the nth location in the list
 map <Leader>\1 :ll 1<CR>
 map <Leader>\2 :ll 2<CR>
