@@ -25,7 +25,7 @@ syntax on
 " More powerful backspace
 set backspace=indent,eol,start
 
-" Update working directory to directory containing current file
+" Update working directory to that containing current file
 set autochdir
 
 " Update file if changed outside Vim
@@ -64,7 +64,7 @@ set number
 " Display line number as difference from current line
 set relativenumber
 
-" <Leader><Leader> to toggle between number and relativenumber
+" g<Leader> to toggle between number and relativenumber
 function! ToggleNumber()
     if(&relativenumber == 1)
         set norelativenumber
@@ -73,7 +73,7 @@ function! ToggleNumber()
         set relativenumber
     endif
 endfunc
-map <Leader><Leader> :call ToggleNumber()<CR>
+map g<Leader> :call ToggleNumber()<CR>
 
 " Color the line numbers dark
 highlight LineNr ctermfg=darkgrey
@@ -247,6 +247,28 @@ endif
 set dir=$HOME/.vim/swap//
 
 " }}}
+" LOCATION LIST {{{
+
+" <Leader>\<n> to switch to the nth location in the list
+map <Leader>\1 :ll 1<CR>
+map <Leader>\2 :ll 2<CR>
+map <Leader>\3 :ll 3<CR>
+map <Leader>\4 :ll 4<CR>
+map <Leader>\5 :ll 5<CR>
+map <Leader>\6 :ll 6<CR>
+map <Leader>\7 :ll 7<CR>
+map <Leader>\8 :ll 8<CR>
+map <Leader>\9 :ll 9<CR>
+map <Leader>\0 :ll 10<CR>
+
+" Other mappings for navigating the location list
+map <Leader>[ :lprev<CR>
+map <Leader>] :lnext<CR>
+map <Leader>{ :lfirst<CR>
+map <Leader>} :llast<CR>
+map <Leader>\| :lclose<CR>
+
+" }}}
 " TAB PAGES {{{
 
 " <Leader><n> to switch to tab <n>
@@ -281,7 +303,7 @@ map <Leader>) :tabclose 10<CR>
 " Other mappings for closing tabs
 map <Leader>_ :tabclose -<CR>
 map <Leader>+ :tabclose +<CR>
-map <Leader>c :tabclose<CR>
+map <Leader><Backspace> :tabclose<CR>
 
 " }}}
 
@@ -429,8 +451,8 @@ let g:indentLine_conceallevel = 2
 " Enable indentLine
 let g:indentLine_enabled = 1
 
-" <Leader>| to toggle displaying of indent lines
-map <Leader>\| :IndentLinesToggle<CR>
+" g| to toggle displaying of indent lines
+map g\| :IndentLinesToggle<CR>
 
 " }}}
 " VIM-FLOATERM {{{
