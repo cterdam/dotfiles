@@ -320,6 +320,9 @@ Plug 'voldikss/vim-floaterm'
 " vim-fugitive for git commands
 Plug 'tpope/vim-fugitive'
 
+" vim-commentary for manipulating comments
+Plug 'tpope/vim-commentary'
+
 " End list of plugins =================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
