@@ -441,12 +441,27 @@ let g:floaterm_autoclose = 2
 " }}}
 " VIM-GITGUTTER {{{
 
-" Function to format current file git info
+" Use location list and not quickfix for git hunks
+let g:gitgutter_use_location_list = 1
+
+" <Leader>c to toggle hunks list (location list)
+function! ToggleHunks()
+    if get(getloclist(0, {'winid':0}), 'winid', 0)
+        :lclose
+    else
+        :GitGutterQuickFix
+        :lopen
+    endif
+endfunction
+map <Leader>c :call ToggleHunks()<CR>
+
+" Function to format current file git info, relies on vim-fugitive
+" For use in lightline
 function! GitStatus()
-    let [a,m,r] = GitGutterGetHunkSummary()
-    if a+m+r == 0
+    if FugitiveHead() == ''
         return ''
     else
+        let [a,m,r] = GitGutterGetHunkSummary()
         return printf('+%d ~%d -%d', a, m, r)
     endif
 endfunction
@@ -464,7 +479,8 @@ set noshowmode
 " Specifically, this
 "   Hides the useless 'close' button on right end of tabline
 "   Displays hex value of current char on right end of statusline
-"   Displays current git branch on statusline thanks to vim-fugitive plugin
+"   Displays current git branch on statusline with vim-fugitive
+"   Displays git change info on statusline with vim-gitgutter and vim-fugitive
 let g:lightline= {
     \ 'active': {
         \ 'left': [ [ 'mode', 'paste' ],
