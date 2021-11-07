@@ -444,7 +444,11 @@ let g:floaterm_autoclose = 2
 " Function to format current file git info
 function! GitStatus()
     let [a,m,r] = GitGutterGetHunkSummary()
+    if a+m+r == 0
+        return ''
+    else
         return printf('+%d ~%d -%d', a, m, r)
+    endif
 endfunction
 
 " }}}
