@@ -353,39 +353,6 @@ let g:coc_global_extensions = [
     \]
 
 " }}}
-" LIGHTLINE {{{
-
-" Successfully display the statusline
-set laststatus=2
-
-" Hide that default '-- INSERT --' as that info is covered by lightline
-set noshowmode
-
-" Define fields of the statusline and tabline. See :help lightline
-" Specifically, this
-"   Hides the useless 'close' button on right end of tabline
-"   Displays hex value of current char on right end of statusline
-"   Displays current git branch on statusline thanks to vim-fugitive plugin
-let g:lightline= {
-    \ 'active': {
-        \ 'left': [ [ 'mode', 'paste' ],
-        \           [ 'readonly', 'filename', 'modified', 'gitbranch' ] ],
-        \ 'right': [ [ 'lineinfo', 'charvaluehex' ],
-        \            [ 'percent' ],
-        \            [ 'fileformat', 'fileencoding', 'filetype' ] ] },
-    \ 'inactive':{
-        \ 'left': [ [ 'absolutepath' ],
-        \           [ 'gitbranch' ] ],
-        \ 'right': [ [ 'lineinfo' ],
-        \            [ 'percent' ] ] },
-    \ 'tabline': {
-        \ 'left': [ [ 'tabs' ] ],
-        \ 'right': [] },
-    \ 'component_function': {
-        \ 'gitbranch': 'FugitiveHead' }
-\ }
-
-" }}}
 " NERDTREE {{{
 
 " <Leader>tf to open (switch to) NERDTree finding current file
@@ -470,5 +437,49 @@ let g:floaterm_position = 'center'
 
 " Always close floaterm upon job exit
 let g:floaterm_autoclose = 2
+
+" }}}
+" VIM-GITGUTTER {{{
+
+" Function to format current file git info
+function! GitStatus()
+    let [a,m,r] = GitGutterGetHunkSummary()
+        return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
+" }}}
+" LIGHTLINE {{{
+
+" Successfully display the statusline
+set laststatus=2
+
+" Hide that default '-- INSERT --' as that info is covered by lightline
+set noshowmode
+
+" Define fields of the statusline and tabline. See :help lightline
+" Specifically, this
+"   Hides the useless 'close' button on right end of tabline
+"   Displays hex value of current char on right end of statusline
+"   Displays current git branch on statusline thanks to vim-fugitive plugin
+let g:lightline= {
+    \ 'active': {
+        \ 'left': [ [ 'mode', 'paste' ],
+        \           [ 'readonly', 'filename', 'modified'],
+        \           [ 'gitbranch', 'gitstatus' ] ],
+        \ 'right': [ [ 'lineinfo', 'charvaluehex' ],
+        \            [ 'percent' ],
+        \            [ 'fileformat', 'fileencoding', 'filetype' ] ] },
+    \ 'inactive':{
+        \ 'left': [ [ 'absolutepath' ],
+        \           [ 'gitbranch' ] ],
+        \ 'right': [ [ 'lineinfo' ],
+        \            [ 'percent' ] ] },
+    \ 'tabline': {
+        \ 'left': [ [ 'tabs' ] ],
+        \ 'right': [] },
+    \ 'component_function': {
+        \ 'gitbranch': 'FugitiveHead',
+        \ 'gitstatus': 'GitStatus'}
+\ }
 
 " }}}
