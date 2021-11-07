@@ -317,6 +317,9 @@ Plug 'tpope/vim-surround'
 " vim-floaterm for floating terminals
 Plug 'voldikss/vim-floaterm'
 
+" vim-fugitive for git commands
+Plug 'tpope/vim-fugitive'
+
 " End list of plugins =================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -352,10 +355,14 @@ set laststatus=2
 set noshowmode
 
 " Define fields of the statusline and tabline. See :help lightline
+" Specifically, this
+"   Hides the useless 'close' button on right end of tabline
+"   Displays hex value of current char on right end of statusline
+"   Displays current git branch on statusline thanks to vim-fugitive plugin
 let g:lightline= {
     \ 'active': {
         \ 'left': [ [ 'mode', 'paste' ],
-        \           [ 'readonly', 'filename', 'modified' ] ],
+        \           [ 'readonly', 'filename', 'modified', 'gitbranch' ] ],
         \ 'right': [ [ 'lineinfo', 'charvaluehex' ],
         \            [ 'percent' ],
         \            [ 'fileformat', 'fileencoding', 'filetype' ] ] },
@@ -365,7 +372,9 @@ let g:lightline= {
         \            [ 'percent' ] ] },
     \ 'tabline': {
         \ 'left': [ [ 'tabs' ] ],
-        \ 'right': [] }
+        \ 'right': [] },
+    \ 'component_function': {
+        \ 'gitbranch': 'FugitiveHead' }
 \ }
 
 " }}}
