@@ -52,6 +52,9 @@ set cursorline
 " Supply text color suitable for a dark background
 set background=dark
 
+" Make sign column dark grey for use by vim-gitgutter
+highlight SignColumn ctermbg=darkgrey
+
 " }}}
 " LINE NUMBER {{{
 
@@ -181,6 +184,12 @@ set foldcolumn=1
 
 " Press <Space> to toggle current fold
 nnoremap <Space> za
+
+" Supply color for the fold column
+highlight FoldColumn ctermbg=lightgrey ctermfg=black
+
+" Supply color for the folded lines
+highlight Folded ctermbg=lightgrey ctermfg=black
 
 " }}}
 " UNDO {{{
