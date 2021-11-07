@@ -429,7 +429,7 @@ map <Leader>\| :IndentLinesToggle<CR>
 " <F12> to toggle the floaterm
 let g:floaterm_keymap_toggle = '<F12>'
 
-" No title
+" No title for floaterm
 let g:floaterm_title = ''
 
 " Float in the center
@@ -441,11 +441,14 @@ let g:floaterm_autoclose = 2
 " }}}
 " VIM-GITGUTTER {{{
 
-" Use location list and not quickfix for git hunks
-let g:gitgutter_use_location_list = 1
-
 " Turn on hunk highlighting on default
 autocmd VimEnter * GitGutterLineHighlightsEnable
+
+" <Leader>l to toggle hunk highlighting
+map <Leader>l :GitGutterLineHighlightsToggle<CR>
+
+" Use location list and not quickfix for hunks
+let g:gitgutter_use_location_list = 1
 
 " <Leader>c to toggle change list (view/hide hunks)
 function! ToggleHunks()
@@ -457,9 +460,6 @@ function! ToggleHunks()
     endif
 endfunction
 map <Leader>c :call ToggleHunks()<CR>
-
-" <Leader>l to toggle hunk highlighting
-map <Leader>l :GitGutterLineHighlightsToggle<CR>
 
 " Function to format current file git info, relies on vim-fugitive
 " For use in lightline
