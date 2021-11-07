@@ -52,8 +52,8 @@ set cursorline
 " Supply text color suitable for a dark background
 set background=dark
 
-" Make sign column dark grey for use by vim-gitgutter
-highlight SignColumn ctermbg=darkgrey
+" Make sign column black for use by vim-gitgutter
+highlight SignColumn ctermbg=black ctermfg=yellow
 
 " }}}
 " LINE NUMBER {{{
@@ -75,8 +75,8 @@ function! ToggleNumber()
 endfunc
 map <Leader><Leader> :call ToggleNumber()<CR>
 
-" Color the line numbers grey
-highlight LineNr ctermfg=grey
+" Color the line numbers dark
+highlight LineNr ctermfg=darkgrey
 
 " }}}
 " MODELINE {{{
@@ -186,10 +186,10 @@ set foldcolumn=1
 nnoremap <Space> za
 
 " Supply color for the fold column
-highlight FoldColumn ctermbg=lightgrey ctermfg=black
+highlight FoldColumn ctermbg=darkgrey ctermfg=white
 
 " Supply color for the folded lines
-highlight Folded ctermbg=lightgrey ctermfg=black
+highlight Folded ctermbg=darkgrey ctermfg=white
 
 " }}}
 " UNDO {{{
@@ -449,6 +449,12 @@ let g:floaterm_autoclose = 2
 
 " }}}
 " VIM-GITGUTTER {{{
+
+" Supply colors for GitGutter signs.
+" These don't get used, but removing them seem to spawn another set of colors.
+highlight GitGutterAdd    ctermbg=black ctermfg=green ctermfg=2
+highlight GitGutterChange ctermbg=black ctermfg=yellow ctermfg=3
+highlight GitGutterDelete ctermbg=black ctermfg=red ctermfg=1
 
 " Turn on hunk highlighting on default
 autocmd VimEnter * GitGutterLineHighlightsEnable
