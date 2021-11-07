@@ -71,7 +71,7 @@ export CTERDAMTMUXCONF="$CTERDAMRC/cterdam.tmux.conf"
 # Edit dotfiles with vim
 rc () {
     case $1 in
-        "vim")
+        "vim" | "vi")
             # Default file at ~/.vim/vimrc
             $EDITOR $CTERDAMVIMRC
             ;;
