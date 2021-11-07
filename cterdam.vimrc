@@ -367,7 +367,8 @@ let g:lightline= {
         \            [ 'percent' ],
         \            [ 'fileformat', 'fileencoding', 'filetype' ] ] },
     \ 'inactive':{
-        \ 'left': [ [ 'filename' ] ],
+        \ 'left': [ [ 'absolutepath' ],
+        \           [ 'gitbranch' ] ],
         \ 'right': [ [ 'lineinfo' ],
         \            [ 'percent' ] ] },
     \ 'tabline': {
