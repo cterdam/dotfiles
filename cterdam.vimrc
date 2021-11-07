@@ -444,7 +444,10 @@ let g:floaterm_autoclose = 2
 " Use location list and not quickfix for git hunks
 let g:gitgutter_use_location_list = 1
 
-" <Leader>c to toggle hunks list (location list)
+" Turn on hunk highlighting on default
+autocmd VimEnter * GitGutterLineHighlightsEnable
+
+" <Leader>c to toggle change list (view/hide hunks)
 function! ToggleHunks()
     if get(getloclist(0, {'winid':0}), 'winid', 0)
         :lclose
@@ -454,6 +457,9 @@ function! ToggleHunks()
     endif
 endfunction
 map <Leader>c :call ToggleHunks()<CR>
+
+" <Leader>l to toggle hunk highlighting
+map <Leader>l :GitGutterLineHighlightsToggle<CR>
 
 " Function to format current file git info, relies on vim-fugitive
 " For use in lightline
