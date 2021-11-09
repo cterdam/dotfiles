@@ -64,7 +64,7 @@ set number
 " Display line number as difference from current line
 set relativenumber
 
-" g<Leader> to toggle between number and relativenumber
+" <Leader><Return> to toggle between number and relativenumber
 function! ToggleNumber()
     if(&relativenumber == 1)
         set norelativenumber
@@ -73,7 +73,7 @@ function! ToggleNumber()
         set relativenumber
     endif
 endfunc
-map g<Leader> :call ToggleNumber()<CR>
+map <Leader><Return> :call ToggleNumber()<CR>
 
 " Color the line numbers dark
 highlight LineNr ctermfg=darkgrey
@@ -141,8 +141,8 @@ set incsearch
 " Highlight search results throughout text
 set hlsearch
 
-" <Leader><Space> to clear highlight
-map <Leader><Space> :nohl<CR>
+" <Leader>/ to clear highlight
+map <Leader>/ :nohl<CR>
 
 " au is not the same as Au!
 set noignorecase
@@ -192,7 +192,7 @@ highlight FoldColumn ctermbg=darkgrey ctermfg=white
 highlight Folded ctermbg=darkgrey ctermfg=white
 
 " }}}
-" UNDO {{{
+" UNDO FILE {{{
 
 " Save undo history
 set undofile
@@ -209,7 +209,7 @@ endif
 set undodir=$HOME/.vim/undo//
 
 " }}}
-" BACKUP {{{
+" BACKUP FILE {{{
 
 " Make a backup before overwriting a file
 set writebackup
@@ -226,7 +226,7 @@ endif
 set backupdir=$HOME/.vim/backup//
 
 " }}}
-" SWAP {{{
+" SWAP FILE {{{
 
 " Make a swap file to prepare for a crash
 set swapfile
@@ -249,26 +249,48 @@ set dir=$HOME/.vim/swap//
 " }}}
 " LOCATION LIST {{{
 
-" TODO add support for the quickfix list in the same fashion
-
-" <Leader>\<n> to switch to the nth location in the list
-map <Leader>\1 :ll 1<CR>
-map <Leader>\2 :ll 2<CR>
-map <Leader>\3 :ll 3<CR>
-map <Leader>\4 :ll 4<CR>
-map <Leader>\5 :ll 5<CR>
-map <Leader>\6 :ll 6<CR>
-map <Leader>\7 :ll 7<CR>
-map <Leader>\8 :ll 8<CR>
-map <Leader>\9 :ll 9<CR>
-map <Leader>\0 :ll 10<CR>
+" <Leader>l<n> to switch to the nth location in the list
+map <Leader>l1 :ll 1<CR>
+map <Leader>l2 :ll 2<CR>
+map <Leader>l3 :ll 3<CR>
+map <Leader>l4 :ll 4<CR>
+map <Leader>l5 :ll 5<CR>
+map <Leader>l6 :ll 6<CR>
+map <Leader>l7 :ll 7<CR>
+map <Leader>l8 :ll 8<CR>
+map <Leader>l9 :ll 9<CR>
+map <Leader>l0 :ll 10<CR>
 
 " Other mappings for navigating the location list
-map <Leader>[ :lprev<CR>
-map <Leader>] :lnext<CR>
-map <Leader>{ :lfirst<CR>
-map <Leader>} :llast<CR>
-map <Leader>\| :lclose<CR>
+map [l :lprev<CR>
+map ]l :lnext<CR>
+map [L :lfirst<CR>
+map ]L :llast<CR>
+map <Leader>ll :lopen<CR>
+map <Leader>L :lclose<CR>
+
+" }}}
+" QUICKFIX LIST {{{
+
+" <Leader>q<n> to switch to the nth location in the list
+map <Leader>q1 :cc 1<CR>
+map <Leader>q2 :cc 2<CR>
+map <Leader>q3 :cc 3<CR>
+map <Leader>q4 :cc 4<CR>
+map <Leader>q5 :cc 5<CR>
+map <Leader>q6 :cc 6<CR>
+map <Leader>q7 :cc 7<CR>
+map <Leader>q8 :cc 8<CR>
+map <Leader>q9 :cc 9<CR>
+map <Leader>q0 :cc 10<CR>
+
+" Other mappings for navigating the location list
+map [q :cprev<CR>
+map ]q :cnext<CR>
+map [Q :cfirst<CR>
+map ]Q :clast<CR>
+map <Leader>qq :copen<CR>
+map <Leader>Q :cclose<CR>
 
 " }}}
 " TAB PAGES {{{
@@ -286,9 +308,9 @@ map <Leader>9 :tabn 9<CR>
 map <Leader>0 :tabn 10<CR>
 
 " Other mappings for switching tabs
-map <Leader>= :tabn<CR>
-map <Leader>- :tabp<CR>
-map <Leader>e :tabe 
+map <Leader>[ :tabp<CR>
+map <Leader>] :tabn<CR>
+map <Leader>\ :tabe 
 
 " <Leader>S-<n> to close tab <n>
 map <Leader>! :tabclose 1<CR>
@@ -303,9 +325,9 @@ map <Leader>( :tabclose 9<CR>
 map <Leader>) :tabclose 10<CR>
 
 " Other mappings for closing tabs
-map <Leader>_ :tabclose -<CR>
-map <Leader>+ :tabclose +<CR>
-map <Leader><Backspace> :tabclose<CR>
+map <Leader>{ :tabclose -<CR>
+map <Leader>} :tabclose +<CR>
+map <Leader>\| :tabclose<CR>
 
 " }}}
 
@@ -453,8 +475,8 @@ let g:indentLine_conceallevel = 2
 " Enable indentLine
 let g:indentLine_enabled = 1
 
-" g| to toggle displaying of indent lines
-map g\| :IndentLinesToggle<CR>
+" <Leader><Tab> to toggle displaying of indent lines
+map <Leader><Tab> :IndentLinesToggle<CR>
 
 " }}}
 " VIM-FLOATERM {{{
@@ -475,16 +497,16 @@ let g:floaterm_autoclose = 2
 " VIM-GITGUTTER {{{
 
 " Supply colors for GitGutter signs.
-" These don't get used, but removing them seem to spawn another set of colors.
+" These don't seem to get used, but removing them spawns another set of colors.
 highlight GitGutterAdd    ctermbg=black ctermfg=green ctermfg=2
 highlight GitGutterChange ctermbg=black ctermfg=yellow ctermfg=3
 highlight GitGutterDelete ctermbg=black ctermfg=red ctermfg=1
 
-" Turn on hunk highlighting on default
-autocmd VimEnter * GitGutterLineHighlightsEnable
+" Turn off hunk highlighting on default
+autocmd VimEnter * GitGutterLineHighlightsDisable
 
-" <Leader>l to toggle hunk highlighting
-map <Leader>l :GitGutterLineHighlightsToggle<CR>
+" <Leader>i to toggle hunk line highlighting
+map <Leader>i :GitGutterLineHighlightsToggle<CR>
 
 " Use location list and not quickfix for hunks
 let g:gitgutter_use_location_list = 1
@@ -500,8 +522,8 @@ function! ToggleHunks()
 endfunction
 map <Leader>c :call ToggleHunks()<CR>
 
-" Function to format current file git info, relies on vim-fugitive
-" For use in lightline
+" Function to format current file git info for use in lightline
+" This requires vim-fugitive
 function! GitStatus()
     if FugitiveHead() == ''
         return ''
