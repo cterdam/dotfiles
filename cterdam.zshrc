@@ -83,11 +83,14 @@ rc () {
             # Default file at ~/.tmux.conf
             $EDITOR $CTERDAMTMUXCONF
             ;;
-        '' )
+        -h)
+            echo "Available configs: vi(m), zsh, tmux"
+            ;;
+        '')
             echo "Entering $CTERDAMRC"
             cd $CTERDAMRC
             ;;
-        * )
+        *)
             echo "No config for $1!"
             ;;
     esac
