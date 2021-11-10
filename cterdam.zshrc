@@ -71,20 +71,24 @@ export CTERDAMTMUXCONF="$CTERDAMRC/cterdam.tmux.conf"
 # Edit dotfiles with vim
 rc () {
     case $1 in
-        "vim" | "vi")
+        vim | vi)
             # Default file at ~/.vim/vimrc
             $EDITOR $CTERDAMVIMRC
             ;;
-        "zsh")
+        zsh)
             # Default file at ~/.zshrc
             $EDITOR $CTERDAMZSHRC
             ;;
-        "tmux")
+        tmux)
             # Default file at ~/.tmux.conf
             $EDITOR $CTERDAMTMUXCONF
             ;;
-        "" )
+        '' )
+            echo "Entering $CTERDAMRC"
             cd $CTERDAMRC
+            ;;
+        * )
+            echo "No config for $1!"
             ;;
     esac
 }
