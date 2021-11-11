@@ -148,6 +148,20 @@ map <Leader>/ :nohl<CR>
 set noignorecase
 
 " }}}
+" DIFF {{{
+
+" <Leader>w to view diff between current buffer and disk save
+function! s:DiffWithSaved()
+    let filetype=&ft
+    diffthis
+    vnew | r # | normal! 1Gdd
+    diffthis
+    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+map <Leader>w :DiffSaved<CR>
+
+" }}}
 " SWAPPING {{{
 
 " These are currently buggy:
