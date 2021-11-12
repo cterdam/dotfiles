@@ -150,7 +150,7 @@ set noignorecase
 " }}}
 " DIFF {{{
 
-" <Leader>w to view diff between current buffer and disk save
+" Function to summon a diff window between current file and its disk save
 function! s:DiffWithSaved()
     let filetype=&ft
     diffthis
@@ -158,7 +158,10 @@ function! s:DiffWithSaved()
     diffthis
     exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
+
+" Alias this function to a command
 com! DiffSaved call s:DiffWithSaved()
+
 map <Leader>w :DiffSaved<CR>
 
 " }}}
@@ -309,6 +312,8 @@ map <Leader>Q :cclose<CR>
 " }}}
 " TAB PAGES {{{
 
+" NAVIGATING =================================================================
+
 " <Leader><n> to switch to tab <n>
 map <Leader>1 :tabn 1<CR>
 map <Leader>2 :tabn 2<CR>
@@ -321,27 +326,68 @@ map <Leader>8 :tabn 8<CR>
 map <Leader>9 :tabn 9<CR>
 map <Leader>0 :tabn 10<CR>
 
-" Other mappings for switching tabs
-map <Leader>[ :tabp<CR>
-map <Leader>] :tabn<CR>
-map <Leader>\ :tabe 
+" Other mappings for navigating tabs
+map <Leader><Leader> :tabedit<Space>
+map [<Leader> :tabp<CR>
+map ]<Leader> :tabn<CR>
+map [\| :tabfirst<CR>
+map ]\| :tablast<CR>
 
-" <Leader>S-<n> to close tab <n>
-map <Leader>! :tabclose 1<CR>
-map <Leader>@ :tabclose 2<CR>
-map <Leader># :tabclose 3<CR>
-map <Leader>$ :tabclose 4<CR>
-map <Leader>% :tabclose 5<CR>
-map <Leader>^ :tabclose 6<CR>
-map <Leader>& :tabclose 7<CR>
-map <Leader>* :tabclose 8<CR>
-map <Leader>( :tabclose 9<CR>
-map <Leader>) :tabclose 10<CR>
+" MOVING =====================================================================
 
-" Other mappings for closing tabs
-map <Leader>{ :tabclose -<CR>
-map <Leader>} :tabclose +<CR>
-map <Leader>\| :tabclose<CR>
+" <Leader><S-<n>> to move current tab after <n>
+map <Leader>) :tabmove 0<CR>
+map <Leader>! :tabmove 1<CR>
+map <Leader>@ :tabmove 2<CR>
+map <Leader># :tabmove 3<CR>
+map <Leader>$ :tabmove 4<CR>
+map <Leader>% :tabmove 5<CR>
+map <Leader>^ :tabmove 6<CR>
+map <Leader>& :tabmove 7<CR>
+map <Leader>* :tabmove 8<CR>
+map <Leader>( :tabmove 9<CR>
+
+" Other mappings for moving tabs
+map <Leader>{ :tabmove -<CR>
+map <Leader>} :tabmove +<CR>
+map \|{ :tabmove 0<CR>
+map \|} :tabmove $<CR>
+
+" CLOSING ====================================================================
+
+" <Leader><Backspace><n> to close tab <n> with confirmation
+map <Leader><Backspace>1 :tabclose 1<CR>
+map <Leader><Backspace>2 :tabclose 2<CR>
+map <Leader><Backspace>3 :tabclose 3<CR>
+map <Leader><Backspace>4 :tabclose 4<CR>
+map <Leader><Backspace>5 :tabclose 5<CR>
+map <Leader><Backspace>6 :tabclose 6<CR>
+map <Leader><Backspace>7 :tabclose 7<CR>
+map <Leader><Backspace>8 :tabclose 8<CR>
+map <Leader><Backspace>9 :tabclose 9<CR>
+map <Leader><Backspace>0 :tabclose 10<CR>
+
+" Other mappings for closing tabs with confirmation
+map <Leader><Backspace>[ :tabclose -<CR>
+map <Leader><Backspace>] :tabclose +<CR>
+map <Leader><Backspace><Leader> :tabclose<CR>
+
+" <Leader><Backspace><S-<n>> to close tab <n> discarding unsaved changes
+map <Leader><Backspace>! :tabclose! 1<CR>
+map <Leader><Backspace>@ :tabclose! 2<CR>
+map <Leader><Backspace># :tabclose! 3<CR>
+map <Leader><Backspace>$ :tabclose! 4<CR>
+map <Leader><Backspace>% :tabclose! 5<CR>
+map <Leader><Backspace>^ :tabclose! 6<CR>
+map <Leader><Backspace>& :tabclose! 7<CR>
+map <Leader><Backspace>* :tabclose! 8<CR>
+map <Leader><Backspace>( :tabclose! 9<CR>
+map <Leader><Backspace>) :tabclose! 10<CR>
+
+" Other mappings for closing tabs discarding unsaved changes
+map <Leader><Backspace>{ :tabclose! -<CR>
+map <Leader><Backspace>} :tabclose! +<CR>
+map <Leader><Backspace>\| :tabclose!<CR>
 
 " }}}
 
@@ -557,11 +603,6 @@ set laststatus=2
 set noshowmode
 
 " Define fields of the statusline and tabline. See :help lightline
-" Specifically, this
-"   Hides the useless 'close' button on right end of tabline
-"   Displays hex value of current char on right end of statusline
-"   Displays current git branch on statusline with vim-fugitive
-"   Displays git change info on statusline with vim-gitgutter and vim-fugitive
 let g:lightline= {
     \ 'active': {
         \ 'left': [ [ 'mode', 'paste' ],
@@ -571,8 +612,7 @@ let g:lightline= {
         \            [ 'percent' ],
         \            [ 'fileformat', 'fileencoding', 'filetype' ] ] },
     \ 'inactive':{
-        \ 'left': [ [ 'absolutepath' ],
-        \           [ 'gitbranch' ] ],
+        \ 'left': [ [ 'readonly', 'absolutepath', 'modified' ] ],
         \ 'right': [ [ 'lineinfo' ],
         \            [ 'percent' ] ] },
     \ 'tabline': {
