@@ -328,8 +328,8 @@ map <Leader>0 :tabn 10<CR>
 
 " Other mappings for navigating tabs
 map <Leader><Leader> :tabedit<Space>
-map [<Leader> :tabp<CR>
-map ]<Leader> :tabn<CR>
+map [<Leader> :tabprevious<CR>
+map ]<Leader> :tabnext<CR>
 map [\| :tabfirst<CR>
 map ]\| :tablast<CR>
 
