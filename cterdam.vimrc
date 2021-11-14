@@ -103,19 +103,7 @@ set linebreak
 set showbreak=↳
 
 " }}}
-" INDENT {{{
-
-" Indent continued lines to preserve horizontal blocks
-set breakindent
-
-" Inherit indentation from preceding line
-set autoindent
-
-" Insert indent based on some C syntax
-set smartindent
-
-" }}}
-" TABS & SPACES {{{
+" INDENT & TABS  {{{
 
 " Store tabs as spaces
 set expandtab
@@ -128,6 +116,15 @@ set softtabstop=4
 
 " >, <, and = all shift/reindent by 4 spaces per level
 set shiftwidth=4
+
+" Indent continued lines to preserve horizontal blocks
+set breakindent
+
+" Inherit indentation from preceding line
+set autoindent
+
+" Insert indent based on some C syntax
+set smartindent
 
 " }}}
 " SEARCH {{{
