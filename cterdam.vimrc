@@ -451,7 +451,9 @@ call plug#end()
 " - tpope/vim-obsession for saving/loading vim sessions
 
 " }}}
-" COC (CONQUERER OF COMPLETION) {{{
+" COC {{{
+
+" CONQUERER OF COMPLETION
 
 " COC will auto install any missing extensions in g:coc_global_extensions
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
