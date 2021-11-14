@@ -22,6 +22,12 @@ filetype plugin indent on
 " Activate lexical coloring
 syntax on
 
+" Enable modeline
+set modeline
+
+" Read modeline on top and bottom 5 lines, as default
+set modelines=5
+
 " More powerful backspace
 set backspace=indent,eol,start
 
@@ -77,15 +83,6 @@ map <Leader><Return> :call ToggleNumber()<CR>
 
 " Color the line numbers dark
 highlight LineNr ctermfg=darkgrey
-
-" }}}
-" MODELINE {{{
-
-" Enable modeline
-set modeline
-
-" Read modeline on top and bottom 5 lines, as default
-set modelines=5
 
 " }}}
 " WIDTH & WRAP {{{
