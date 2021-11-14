@@ -40,6 +40,9 @@ set autoread
 " Enable command completion
 set wildmenu
 
+" Secure the default \ as mapleader
+let mapleader = '\'
+
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
 
