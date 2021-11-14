@@ -72,7 +72,7 @@ function! ToggleNumber()
     else
         set relativenumber
     endif
-endfunc
+endfunction
 map <Leader><Return> :call ToggleNumber()<CR>
 
 " Color the line numbers dark
@@ -582,17 +582,6 @@ function! ToggleHunks()
 endfunction
 map <Leader>c :call ToggleHunks()<CR>
 
-" Function to format current file git info for use in lightline
-" This requires vim-fugitive
-function! GitStatus()
-    if FugitiveHead() == ''
-        return ''
-    else
-        let [a,m,r] = GitGutterGetHunkSummary()
-        return printf('+%d ~%d -%d', a, m, r)
-    endif
-endfunction
-
 " }}}
 " LIGHTLINE {{{
 
@@ -622,5 +611,16 @@ let g:lightline= {
         \ 'gitbranch': 'FugitiveHead',
         \ 'gitstatus': 'GitStatus'}
 \ }
+
+" Function to format current file git info
+" This requires vim-gitgutter and vim-fugitive
+function! GitStatus()
+    if FugitiveHead() == ''
+        return ''
+    else
+        let [a,m,r] = GitGutterGetHunkSummary()
+        return printf('+%d ~%d -%d', a, m, r)
+    endif
+endfunction
 
 " }}}
