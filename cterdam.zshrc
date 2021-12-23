@@ -120,6 +120,12 @@ do
     fi
 done
 
+# Symlink rime-install to CTERDAMBIN, if not already present
+plumloc="$CTERDAMHOME/plum"
+if [[ ! -f $CTERDAMBIN/rime-install ]]; then
+    ln -s $plumloc/rime-install $CTERDAMBIN/rime-install
+fi
+
 # }}}
 # PATH {{{
 
