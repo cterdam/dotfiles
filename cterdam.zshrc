@@ -61,12 +61,35 @@ export CTERDAMRC="$CTERDAMHOME/dotfiles"
 # The files are all mirrored to their default location.
 # This directory should be git cloned.
 
+# VIM ========================================================================
 # cterdam's vimrc file
 export CTERDAMVIMRC="$CTERDAMRC/cterdam.vimrc"
+# Location for vimrc
+export VIMRCLOC="$HOME/.vim/vimrc"
+# Symlink, if not already present
+if [[ ! -f $VIMRCLOC ]]; then
+    ln -s $CTERDAMVIMRC $VIMRCLOC
+fi
+# ZSH ========================================================================
 # cterdam's zshrc file
 export CTERDAMZSHRC="$CTERDAMRC/cterdam.zshrc"
+# Location for zshrc
+export ZSHRCLOC="$HOME/.zshrc"
+# Symlink, if not already present
+# Actually this doesn't work, symlinking has to be done manually.
+# If there is no zshrc in the appointed location, how can we execute any script?
+if [[ ! -f $ZSHRCLOC ]]; then
+    ln -s $CTERDAMZSHRC $ZSHRCLOC
+fi
+# TMUX =======================================================================
 # cterdam's tmux.conf file
 export CTERDAMTMUXCONF="$CTERDAMRC/cterdam.tmux.conf"
+# Location for tmux.conf
+export TMUXCONFLOC="$HOME/.tmux.conf"
+# Symlink, if not already present
+if [[ ! -f $TMUXCONFLOC ]]; then
+    ln -s $CTERDAMTMUXCONF $TMUXCONFLOC
+fi
 
 # Edit dotfiles with vim
 rc () {
