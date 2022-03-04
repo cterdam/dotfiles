@@ -1,0 +1,9 @@
+patch:
+  us_keyboard_layout: true
+  style/color_scheme: purity_of_essence
+  style/inline_preedit: true
+  style/horizontal: false
+  style/font_point: 18
+  style/font_face: 明兰
+  style/label_font_point: 18
+  style/corner_radius: 2

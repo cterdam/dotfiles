@@ -1,0 +1,6 @@
+patch:
+  translator/enable_completion: false
+  schema/name: "五笔八六"
+  speller/max_code_length: 4
+  switches:
+

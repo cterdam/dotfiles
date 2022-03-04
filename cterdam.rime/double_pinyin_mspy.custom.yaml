@@ -1,0 +1,8 @@
+patch:
+  translator/enable_completion: false
+  schema/name: 微軟雙拼
+  switches:
+    - name: simplification
+      reset: 0
+      states: [ 漢字, 汉字 ]
+

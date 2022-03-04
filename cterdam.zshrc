@@ -58,38 +58,69 @@ mkdir -p $CTERDAMHOME
 export CTERDAMRC="$CTERDAMHOME/dotfiles"
 
 # These rc file names should all start with "cterdam" as in my git repo.
-# The files are all mirrored to their default location.
+# The files are all symlinked to their default location.
 # This directory should be git cloned.
 
 # VIM ========================================================================
+
 # cterdam's vimrc file
 export CTERDAMVIMRC="$CTERDAMRC/cterdam.vimrc"
+
 # Location for vimrc
 export VIMRCLOC="$HOME/.vim/vimrc"
+
 # Symlink, if not already present
 if [[ ! -f $VIMRCLOC ]]; then
     ln -s $CTERDAMVIMRC $VIMRCLOC
 fi
+
 # ZSH ========================================================================
+
 # cterdam's zshrc file
 export CTERDAMZSHRC="$CTERDAMRC/cterdam.zshrc"
+
 # Location for zshrc
 export ZSHRCLOC="$HOME/.zshrc"
+
 # Symlink, if not already present
 # Actually this doesn't work, symlinking has to be done manually.
 # If there is no zshrc in the appointed location, how can we execute any script?
 if [[ ! -f $ZSHRCLOC ]]; then
     ln -s $CTERDAMZSHRC $ZSHRCLOC
 fi
+
 # TMUX =======================================================================
+
 # cterdam's tmux.conf file
 export CTERDAMTMUXCONF="$CTERDAMRC/cterdam.tmux.conf"
+
 # Location for tmux.conf
 export TMUXCONFLOC="$HOME/.tmux.conf"
+
 # Symlink, if not already present
 if [[ ! -f $TMUXCONFLOC ]]; then
     ln -s $CTERDAMTMUXCONF $TMUXCONFLOC
 fi
+
+# RIME =======================================================================
+
+# CTERDAMRIMERC directory for all Rime dotfiles
+export CTERDAMRIMERC="$CTERDAMRC/cterdam.rime"
+
+# Make sure that CTERDAMRIMERC exists (if exists, nothing changes)
+mkdir -p $CTERDAMRIMERC
+
+# Symlink all my rime rc files into the correct location for Rime
+rimeloc="$HOME/Library/Rime"
+for cterdamrimercfile in $CTERDAMRIMERC/*
+do
+    rimercfile="$rimeloc/$(basename $cterdamrimercfile)"
+    if [[ ! -f $rimercfile ]]; then
+        ln -s $cterdamrimercfile $rimercfile
+    fi
+done
+
+# ============================================================================
 
 # Edit dotfiles with vim
 rc () {
@@ -106,8 +137,12 @@ rc () {
             # Default file at ~/.tmux.conf
             $EDITOR $CTERDAMTMUXCONF
             ;;
+        rime)
+            # Default folder at ~/Library/Rime
+            cd $CTERDAMRIMERC
+            ;;
         -h)
-            echo "Available configs: vi(m), zsh, tmux"
+            echo "Available configs: vi(m), zsh, tmux, rime"
             ;;
         '')
             echo "Entering $CTERDAMRC"
@@ -118,9 +153,6 @@ rc () {
             ;;
     esac
 }
-
-# Some things to consider in the future:
-# - symlinking the original rc files to the cterdam ones instead of sourcing
 
 # }}}
 # CTERDAMBIN {{{

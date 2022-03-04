@@ -1,0 +1,12 @@
+patch:
+  schema_list:
+    - schema: wubi86
+    - schema: jyut6ping3 
+    - schema: double_pinyin_mspy
+
+  switcher: 
+    caption: 〔方案選單〕
+    hotkeys:
+      - Control+Shift+space
+  menu:
+    page_size: 9
