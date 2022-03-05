@@ -464,6 +464,7 @@ let g:coc_global_extensions = [
     \'coc-calc',
     \'coc-clangd',
     \'coc-json',
+    \'coc-pyright',
     \]
 
 " }}}
