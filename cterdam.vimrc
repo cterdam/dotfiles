@@ -158,7 +158,6 @@ endfunction
 
 " Alias this function to a command
 com! DiffSaved call s:DiffWithSaved()
-
 map <Leader>w :DiffSaved<CR>
 
 " }}}
@@ -409,7 +408,7 @@ call plug#begin('~/.vim/plugged')
 " vim-plug itself for managing plugins
 Plug 'junegunn/vim-plug'
 
-" COC for Completion
+" COC for completion and diagnostics
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " lightline for statusline and tabline
@@ -470,11 +469,8 @@ let g:coc_global_extensions = [
 " }}}
 " NERDTREE {{{
 
-" <Leader>tf to open (switch to) NERDTree finding current file
-nnoremap <Leader>tf :NERDTreeFind<CR>
-
-" <Leader>tr to recover and switch to an existing NERDTree window
-nnoremap <Leader>tr :NERDTreeFocus<CR>
+" <Leader>t to recover and switch to an existing NERDTree window
+nnoremap <Leader>t :NERDTreeFocus<CR>
 
 " <Leader>T to close NERDTree
 nnoremap <Leader>T :NERDTreeClose<CR>
@@ -484,6 +480,32 @@ let g:NERDTreeWinSize = 25
 
 " Hide guide text but still type '?' for help
 let NERDTreeMinimalUI = 1
+
+" Function to switch to existing tree or find current file in new tree window
+" Currently, no binding for this function: NERDTreeFocus is already good enough
+function! SummonNERDTree()
+    if IsNERDTreeOpen()
+        NERDTreeFocus
+    else
+        NERDTreeFind
+    endif
+endfunction
+
+" Function to check if NERDTree is open
+function! IsNERDTreeOpen()        
+    return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Function to call NERDTreeFind iff NERDTree is active, current window contains
+" a modifiable file, and we're not in vimdiff
+" Currently not used either. To highlight currently open buffer in NERDTree,
+" use `autocmd BufEnter * call SyncTree()`
+function! SyncTree()
+    if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+        NERDTreeFind
+        wincmd p
+    endif
+endfunction
 
 " }}}
 " UNDOTREE {{{
