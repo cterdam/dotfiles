@@ -156,39 +156,6 @@ map <Leader>/ :nohl<CR>
 set ignorecase
 
 " }}}
-" DIFFSAVE {{{
-
-" Function to summon a diff window between current file and its disk save
-function! DiffWithSaved()
-    let filetype=&ft
-    diffthis
-    vnew | r # | normal! 1Gdd
-    diffthis
-    exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-    return win_getid()
-endfunction
-
-" Function to toggle between opening and closing diffsave window
-function! ToggleDiff()
-    
-    " If there is a diffsave window open in this tab, close and reset diffwinid
-    if exists('t:diffwinid')
-        call win_execute(t:diffwinid, 'close')
-        unlet t:diffwinid
-
-    " If no such window in this tab, open one and set diffwinid
-    " `!&diff` used to be included in the conditional, but for some reason it
-    " won't allow some files (e.g. in other tabpages) to toggle diskdiff
-    elseif &modifiable && strlen(expand('%')) > 0
-        let t:diffwinid = DiffWithSaved()
-    endif
-
-endfunction
-
-" <Leader>w to toggle diff against disk save
-map <Leader>w :call ToggleDiff()<CR>
-
-" }}}
 " SWAPPING {{{
 
 " These are currently buggy:
@@ -470,6 +437,9 @@ Plug 'tpope/vim-fugitive'
 
 " vim-gitgutter for viewing git status per line
 Plug 'airblade/vim-gitgutter'
+
+" vim-diffsave for viewing file diff against disk save"
+Plug 'cterdam/vim-diffsave'
 
 " End list of plugins ========================================================
 call plug#end()
@@ -757,5 +727,11 @@ function! StatusDiagnostic() abort
 
     return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
 endfunction
+
+" }}}
+" VIM-DIFFSAVE {{{
+
+" <Leader>w to toggle the diffsave window
+map <Leader>w <Plug>ToggleDiffSave<CR>
 
 " }}}
