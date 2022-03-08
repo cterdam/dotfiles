@@ -441,6 +441,9 @@ Plug 'airblade/vim-gitgutter'
 " vim-diffsave for viewing file diff against disk save"
 Plug 'cterdam/vim-diffsave'
 
+" gruvbox for colorscheme
+Plug 'morhetz/gruvbox'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -733,5 +736,23 @@ endfunction
 
 " <Leader>w to toggle the diffsave window
 map <Leader>w <Plug>ToggleDiffSave<CR>
+
+" }}}
+" GRUVBOX {{{
+
+" Activate the gruvbox colorscheme
+autocmd vimenter * ++nested colorscheme gruvbox
+
+" The gruvbox wiki recommends the following settings to get single cursor
+" color while searching, so it's easier to locate the cursor. However, no
+" difference was observed.
+
+" nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
+" nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
+" nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
+
+" nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
+" nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
+" nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
 " }}}
