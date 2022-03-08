@@ -1,7 +1,7 @@
 # vim:foldmethod=marker
 
 # cterdam.zshrc: cterdam's own zshrc file.
-# See https://github.com/cterdam/linuxrc
+# See https://github.com/cterdam/dotfiles
 
 # TMUX {{{
 

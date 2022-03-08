@@ -1,7 +1,7 @@
 " vim:foldmethod=marker
 
 " cterdam.vimrc: cterdam's own vimrc file.
-" See https://github.com/cterdam/linuxrc
+" See https://github.com/cterdam/dotfiles
 
 " BUILTIN --------------------------------------------------------------------
 
@@ -41,10 +41,21 @@ set autoread
 set wildmenu
 
 " Secure the default \ as mapleader
-let mapleader = '\'
+let mapleader='\'
+
+" Toggle in and out of paste mode
+set pastetoggle=<Leader>p
 
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
+
+" COC TextEdit might fail if hidden is not set.
+" See COC README sample config.
+set hidden
+
+" COC uses some unicode characters in the file autoload/float.vim
+" See COC README sample config.
+set encoding=utf-8
 
 " }}}
 " INTERFACE {{{
@@ -225,9 +236,13 @@ set undodir=$HOME/.vim/undo//
 " BACKUP FILE {{{
 
 " Make a backup before overwriting a file
-set writebackup
+" Turned off because some COC servers have issues with backup files.
+" See COC README sample config.
+set nowritebackup
 
 " Do not save that backup file upon successful overwrite
+" Kept off because some COC servers have issues with backup files.
+" See COC README sample config.
 set nobackup
 
 " Ensure that backupdir exists
@@ -444,7 +459,8 @@ call plug#end()
 " automatically executes 'filetype plugin indent on' and 'syntax enable'.
 " This script executed these separately on its own, nonetheless.
 
-" Need to run :PlugUpdate every once in a while
+" Run :PlugUpdate every once in a while to update plugins
+" To uninstall, remove from this list, then run :PlugClean
 
 " TODO: Some things to consider in the future:
 " - kien/ctrlp.vim or junegunn/fzf.vim for finding files
@@ -457,14 +473,69 @@ call plug#end()
 
 " CONQUERER OF COMPLETION
 
-" COC will auto install any missing extensions in g:coc_global_extensions
+" Extensions =================================================================
+
+" COC will auto install any missing extensions in this list.
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+" Use :CocUpdate or :CocUpdateSync to update COC extensions
+" To uninstall, remove from this list, then run :CocUninstall coc-css
 let g:coc_global_extensions = [
     \'coc-calc',
     \'coc-clangd',
     \'coc-json',
     \'coc-pyright',
     \]
+
+" coc-clangd requires a working copy of clangd in PATH.
+
+" If coc-pyright doesn't work, try this:
+" autocmd FileType python let b:coc_root_patterns = ['.venv']
+
+" ============================================================================
+
+" The following config are partially adapted from COC's sample config README:
+
+" Completion =================================================================
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" It's unclear which description block this function belongs to.
+" It seems to have no effect.
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Diagnostics ================================================================
+
+" Remember to put this line in :CocConfig to view current line's error, no
+" matter where the cursor is on the same line:
+" \"diagnostic.checkCurrentLine": true
+
+" Use <Leader>g to get all diagnostics of current buffer in location list
+map <Leader>g :CocDiagnostics<CR>
+
+" Use `[g` and `]g` to navigate diagnostics
+" Alternatively it's also fine to use location list navigation keys directly
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " }}}
 " NERDTREE {{{
@@ -613,15 +684,17 @@ set laststatus=2
 " Hide that default '-- INSERT --' as that info is covered by lightline
 set noshowmode
 
-" Define fields of the statusline and tabline. See :help lightline
+" Define fields of the statusline and tabline.
+" For more available fields, See :help lightline,
+" and more specifically :help g:lightline.component
 let g:lightline= {
     \ 'active': {
         \ 'left': [ [ 'mode', 'paste' ],
         \           [ 'readonly', 'filename', 'modified'],
         \           [ 'gitbranch', 'gitstatus' ] ],
-        \ 'right': [ [ 'lineinfo', 'charvaluehex' ],
-        \            [ 'percent' ],
-        \            [ 'fileformat', 'fileencoding', 'filetype' ] ] },
+        \ 'right': [ [ 'percent', 'lineinfo'],
+        \            [ 'filetype' ],
+        \            [ 'statusdiagnostic' ] ] },
     \ 'inactive':{
         \ 'left': [ [ 'readonly', 'absolutepath', 'modified' ] ],
         \ 'right': [ [ 'lineinfo' ],
@@ -631,7 +704,8 @@ let g:lightline= {
         \ 'right': [] },
     \ 'component_function': {
         \ 'gitbranch': 'FugitiveHead',
-        \ 'gitstatus': 'GitStatus'}
+        \ 'gitstatus': 'GitStatus',
+        \ 'statusdiagnostic': 'StatusDiagnostic'}
 \ }
 
 " Function to format current file git info
@@ -643,6 +717,27 @@ function! GitStatus()
         let [a,m,r] = GitGutterGetHunkSummary()
         return printf('+%d ~%d -%d', a, m, r)
     endif
+endfunction
+
+" Function to get formatted status diagnostic from COC
+function! StatusDiagnostic() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    let msgs = []
+    
+    " Display the number of errors even if it's 0
+    call add(msgs, '!' . info['error'])
+    " if get(info, 'error', 0)
+    "     call add(msgs, '!' . info['error'])
+    " endif
+    
+    " Display the number of warnings even if it's 0
+    call add(msgs, '?' . info['warning'])
+    " if get(info, 'warning', 0)
+    "     call add(msgs, '?' . info['warning'])
+    " endif
+
+    return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
 endfunction
 
 " }}}
