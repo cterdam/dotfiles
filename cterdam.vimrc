@@ -444,6 +444,9 @@ Plug 'cterdam/vim-diffsave'
 " gruvbox for colorscheme
 Plug 'morhetz/gruvbox'
 
+" goyo for focused writing
+Plug 'junegunn/goyo.vim'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -458,6 +461,7 @@ call plug#end()
 " - ggreer/the_silver_searcher or mileszs/ack.vim for grepping code
 " - kana/vim-textobj-user for custom text objects
 " - tpope/vim-obsession for saving/loading vim sessions
+" - godlygeek/tabular for lining up text
 
 " }}}
 " COC {{{
@@ -754,5 +758,46 @@ autocmd vimenter * ++nested colorscheme gruvbox
 " nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
 " nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
 " nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
+
+" }}}
+" GOYO {{{
+
+" <Leader>o to toggle goyo
+map <Leader>o :Goyo<CR>
+
+" Set goyo width
+let g:goyo_width = 80
+
+" Set goyo height
+let g:goyo_height = 45
+
+" No line numbers in goyo
+let g:goyo_linenr = 0
+
+" This function will be executed when entering goyo
+function! s:goyo_enter()
+    set showmode
+    let b:quitting = 0
+    let b:quitting_bang = 0
+    autocmd QuitPre <buffer> let b:quitting = 1
+    cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+endfunction
+
+" This function will be executed when leaving goyo
+function! s:goyo_leave()
+    set noshowmode
+    " Quit Vim if this is the only remaining buffer
+    if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+        if b:quitting_bang
+            qa!
+        else
+            qa
+        endif
+    endif
+endfunction
+
+" Bind enter and leave functions to goyo command
+autocmd! User GoyoEnter call <SID>goyo_enter()
+autocmd! User GoyoLeave call <SID>goyo_leave()
 
 " }}}
