@@ -152,8 +152,8 @@ set hlsearch
 " <Leader>/ to clear highlight
 map <Leader>/ :nohl<CR>
 
-" au is not the same as Au!
-set noignorecase
+" To be or not to be is the question...
+set ignorecase
 
 " }}}
 " DIFF {{{
@@ -178,6 +178,7 @@ map <Leader>w :DiffSaved<CR>
 " Swapping the leftmost 2 chars to the left can cause the char to disappear.
 " Swapping lines will lose the current column.
 " TODO: Fix these and write them into a Vim plugin
+" TODO: swap words and not chars
 
 " <Ctrl>h to swap a char to the left
 :nnoremap <silent><C-h> :let save_a=@a<Cr>"axhh"ap:let @a=save_a<Cr>
