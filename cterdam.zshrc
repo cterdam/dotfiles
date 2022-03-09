@@ -211,6 +211,7 @@ addpath() {
 }
 
 # Append clangd (installed with brew) if not included already
+# This is for coc-clangd which provides C family language linting.
 clangdpath="/opt/homebrew/opt/llvm/bin"
 addpath $clangdpath tail
 
