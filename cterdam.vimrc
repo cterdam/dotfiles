@@ -409,6 +409,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-plug'
 
 " COC for completion and diagnostics
+" Requires Node.js
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " lightline for statusline and tabline
@@ -448,6 +449,7 @@ Plug 'morhetz/gruvbox'
 Plug 'junegunn/goyo.vim'
 
 " markdown-preview for previewing markdown
+" Requires Node.js and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " End list of plugins ========================================================
