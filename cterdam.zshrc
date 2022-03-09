@@ -175,12 +175,6 @@ do
     fi
 done
 
-# Symlink rime-install to CTERDAMBIN, if not already present
-plumloc="$CTERDAMHOME/plum"
-if [[ ! -f $CTERDAMBIN/rime-install ]]; then
-    ln -s $plumloc/rime-install $CTERDAMBIN/rime-install
-fi
-
 # }}}
 # PATH {{{
 
@@ -226,9 +220,6 @@ export EDITOR="vim"
 
 # Conveniently source zshrc
 alias so='source ~/.zshrc'
-
-# Play youtube music
-alias pipecat='rlwrap python3 $CTERDAMHOME/PipeCat/main.py'
 
 # Show Chinese characters
 alias tree='tree -N'
