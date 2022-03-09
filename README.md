@@ -12,7 +12,7 @@ Github style. This would be a submodule.
 [1]:
 https://github.com/sindresorhus/github-markdown-css
 
-If a submodule folder appears empty after cloning, run this to download all
+If submodule folders appear empty after cloning, run this to download all
 submodules (and their submodules, if any):
 
 ```zsh
@@ -28,7 +28,7 @@ git submodule update --recursive --remote
 ```
 
 Or, if cloning this parent repo for the first time, run this to ensure you
-download everything, including any submodules:
+download everything:
 
 ```zsh
 git clone --recursive <project url>
