@@ -4,10 +4,10 @@
 
 ## Submodules
 
-This repo uses the git feature called submodules. This means you can embed other
-git repoes inside this one. For example, I use
+This repo uses the git feature called submodules. This means you can embed
+other git repoes inside this one. For example, I use
 [sindresorhus/github-markdown-css][1] to enable previewing markdown in the
-Github style. This would be a submodule.
+Github style. This is incorporated as a submodule.
 
 [1]:
 https://github.com/sindresorhus/github-markdown-css
@@ -19,9 +19,9 @@ submodules (and their submodules, if any):
 git submodule update --init --recursive
 ```
 
-Note that updating the parent repo will not automatically update submodules. To
-update submodules, since git 1.8.2 the option `--remote` was added to support
-updating to latest tips of remote branches:
+Note that updating the parent repo will not automatically update submodules.
+To update submodules, since git 1.8.2 the option `--remote` was added to
+support updating to latest tips of remote branches:
 
 ```zsh
 git submodule update --recursive --remote
