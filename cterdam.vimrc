@@ -1,6 +1,6 @@
 " vim:foldmethod=marker
 
-" cterdam.vimrc: cterdam's own vimrc file.
+" cterdam.vimrc: cterdam's personal vimrc file.
 " See https://github.com/cterdam/dotfiles
 
 " BUILTIN --------------------------------------------------------------------
