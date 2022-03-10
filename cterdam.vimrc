@@ -17,7 +17,9 @@ autocmd BufWinLeave ?* silent! mkview
 autocmd BufWinEnter ?* silent! loadview
 
 " Detect file type; load filetype plugin and indent setting
-filetype plugin indent on
+filetype on
+filetype plugin on
+filetype indent on
 
 " Activate lexical coloring
 syntax on
