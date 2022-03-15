@@ -9,6 +9,8 @@
   ![text](imgs/terminal_setup_text.png | width=550)
   ![window](imgs/terminal_setup_window.png | width=550)
 
+<img src="imgs/terminal_setup_text.png" alt="text" width="550"/>
+
 - In the Mac terminal, type `git` to trigger downloading developer tools.
 
 ## Submodules
