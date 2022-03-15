@@ -2,6 +2,15 @@
 
 `cterdam`'s personal computing environment setup for Unix-like (Mac) systems.
 
+## Installing
+
+- First setup the terminal.
+
+  ![text](imgs/terminal_setup_text.png =550x)
+  ![window](imgs/terminal_setup_window.png =550x)
+
+- In the Mac terminal, type `git` to trigger downloading developer tools.
+
 ## Submodules
 
 This repo uses the git feature called submodules. This means you can embed
