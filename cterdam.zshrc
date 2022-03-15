@@ -32,7 +32,14 @@ CASE_SENSITIVE="true"
 plugins=(
     git
     web-search
+    copyfile
+    macos
 )
+
+# git: autocompletions with git commands
+# web-search `google milan` to google search milan
+# copyfile: copy the contents of a file to the system clipboard
+# macos: some mac os aliases
 
 # Rest of oh-my-zsh
 source $ZSH/oh-my-zsh.sh
