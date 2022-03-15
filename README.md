@@ -6,10 +6,9 @@
 
 - First setup the terminal.
 
-  ![text](imgs/terminal_setup_text.png | width=550)
-  ![window](imgs/terminal_setup_window.png | width=550)
 <p align="center">
   <img src="imgs/terminal_setup_text.png" alt="text" width="550"/>
+  <img src="imgs/terminal_setup_window.png" alt="window" width="550"/>
 </p>
 
 - In the Mac terminal, type `git` to trigger downloading developer tools.
