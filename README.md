@@ -23,16 +23,23 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Upon finishing installation, the script will print a 'Next steps' section
     which mentions two commands to run in order to add homebrew to PATH. Run
     them.
-- Now install vim with `brew install vim`
-  - MacOS comes with a builtin distribution of vim, but it lacks many key
-    features such as `conceal`, `lua`, `perl`, and `python3`.
-  - Upon finishing installing the brew version, run `which vim` to confirm that
-    it's still the system vim (and not the brew vim) which gets evoked. This is
-    because brew-installed apps are not given priority in PATH. Don't worry
-    about it; the zsh scripts to be installed later will fix it.
+- Now install vim with `brew install vim`.
+  - MacOS already comes with a builtin distribution of vim, but the default
+	version lacks many key features such as `conceal`, `lua`, `perl`, and
+	`python3`. The version of vim on homebrew includes these features.
+  - Upon finishing installing the brew version, run `which vim` and you might
+    see that it's still the system vim (and not the brew vim) which gets
+	evoked. This is because brew-installed apps are not given priority in PATH.
+	Don't worry about it; the zsh scripts to be installed later will fix this.
+- Install tmux with `brew install tmux`.
+  - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
+	installing actual plugins for now: the tmux script will take care of it.
 
 [GHSSH]:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+[TPM]:
+https://github.com/tmux-plugins/tpm
 
 ## Submodules
 
