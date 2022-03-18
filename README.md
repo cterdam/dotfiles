@@ -7,21 +7,20 @@
 - First setup the terminal.
 
 <p align="center">
-  <img src="imgs/terminal_setup_text.png" alt="text" width="550"/>
-  <img src="imgs/terminal_setup_window.png" alt="window" width="550"/>
+  <img src="imgs/terminal_setup_text.png" alt="text" width="400"/>
+  <img src="imgs/terminal_setup_window.png" alt="window" width="400"/>
 </p>
 
 - In the Mac terminal, type `git` to trigger downloading developer tools.
 - Now that git is installed, log in to Github and follow its [tutorial][GHSSH]
   to set up a new SSH key.
-- Install homebrew.
+- Install [homebrew](https://brew.sh/).
   - Upon finishing installation, the script will print a 'Next steps' section
     which mentions two commands to run in order to add homebrew to PATH. Run
     them.
 
 [GHSSH]:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
-
 
 ## Submodules
 
