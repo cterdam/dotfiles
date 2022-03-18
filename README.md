@@ -1,6 +1,6 @@
 # dotfiles
 
-`cterdam`'s personal computing environment setup for Unix-like (Mac) systems.
+cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Installing on a new Mac
 
@@ -17,11 +17,19 @@
   cd cterdam
   git clone --recursive git@github.com:cterdam/dotfiles.git
   ```
-- Once the repo is downloaded, set up terminal appearance with `hbpro.terminal`.
+- Once the repo is downloaded, set up terminal appearance by importing
+  `hbpro.terminal` to terminal profiles.
 - Install [homebrew](https://brew.sh/).
   - Upon finishing installation, the script will print a 'Next steps' section
     which mentions two commands to run in order to add homebrew to PATH. Run
     them.
+- Now install vim with `brew install vim`
+  - MacOS comes with a builtin distribution of vim, but it lacks many key
+    features such as `conceal`, `lua`, `perl`, and `python3`.
+  - Upon finishing installing the brew version, run `which vim` to confirm that
+    it's still the system vim (and not the brew vim) which gets evoked. This is
+    because brew-installed apps are not given priority in PATH. Don't worry
+    about it; the zsh scripts to be installed later will fix it.
 
 [GHSSH]:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
