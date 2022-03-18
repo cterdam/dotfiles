@@ -2,18 +2,22 @@
 
 `cterdam`'s personal computing environment setup for Unix-like (Mac) systems.
 
-## Installing
-
-- First setup the terminal.
-
-<p align="center">
-  <img src="imgs/terminal_setup_text.png" alt="text" width="400"/>
-  <img src="imgs/terminal_setup_window.png" alt="window" width="400"/>
-</p>
+## Installing on a new Mac
 
 - In the Mac terminal, type `git` to trigger downloading developer tools.
 - Now that git is installed, log in to Github and follow its [tutorial][GHSSH]
   to set up a new SSH key.
+- Now make development directory:
+  ```zsh
+  cd
+  mkdir cterdam
+  ```
+- Inside `cterdam`, clone this repo over SSH:
+  ```zsh
+  cd cterdam
+  git clone --recursive git@github.com:cterdam/dotfiles.git
+  ```
+- Once the repo is downloaded, set up terminal appearance with `hbpro.terminal`.
 - Install [homebrew](https://brew.sh/).
   - Upon finishing installation, the script will print a 'Next steps' section
     which mentions two commands to run in order to add homebrew to PATH. Run
