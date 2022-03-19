@@ -34,6 +34,9 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install tmux with `brew install tmux`.
   - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
 	installing actual plugins for now: the tmux script will take care of it.
+- Install [Oh My Zsh](https://ohmyz.sh/).
+  - There should be no `zshrc` yet, but the installation script will create one
+    in the home directory.
 
 [GHSSH]:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
