@@ -70,7 +70,6 @@ plugins=(
     copyfile
     macos
 )
-
 # git: autocompletions with git commands
 # web-search `google milan` to google search milan
 # copyfile: copy the contents of a file to the system clipboard

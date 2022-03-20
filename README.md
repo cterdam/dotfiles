@@ -35,8 +35,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
 	installing actual plugins for now: the tmux script will take care of it.
 - Install [Oh My Zsh](https://ohmyz.sh/).
-  - There should be no `zshrc` yet, but the installation script will create one
-    in the home directory.
+  - There should be no `zshrc` in the new system yet, but the OMZ installation
+	script will create one in the home directory. Read it through, but
+	everything there should already be incorporated into `cterdam.zshrc` which
+	will be installed later. So just delete it.
+- Install [Rime](https://rime.im/).
 
 [GHSSH]:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
