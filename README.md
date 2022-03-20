@@ -31,6 +31,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     see that it's still the system vim (and not the brew vim) which gets
 	evoked. This is because brew-installed apps are not given priority in PATH.
 	Don't worry about it; `cterdam.zshrc` will fix this.
+  - Install [Node.js](NODE). COC and other vim extensions run on Node.
+  - Install [yarn](YARN) for vim plugins. After you install Node you should be
+	able to install
+	yarn with `npm`:
+    ```zsh
+    sudo npm install --global yarn
+    ```
 - Install tmux with `brew install tmux`.
   - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
 	installing actual plugins for now: `cterdam.tmux.conf` will take care of it.
@@ -52,6 +59,10 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 	cd plum
 	bash rime-install :all
 	```
+- Now link `cterdam.zshrc` to the real `zshrc` location to activate the scripts:
+  ```zsh
+  ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
+  ```
 
 
 [GHSSH]:
@@ -62,6 +73,12 @@ https://github.com/tmux-plugins/tpm
 
 [PLUM]:
 https://github.com/rime/plum
+
+[NODE]:
+https://nodejs.org/en/
+
+[YARN]:
+https://classic.yarnpkg.com/en/
 
 ## Submodules
 
