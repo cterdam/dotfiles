@@ -40,12 +40,28 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 	everything there should already be incorporated into `cterdam.zshrc` which
 	will be installed later. So just delete it.
 - Install [Rime](https://rime.im/).
+- To use the Rime input method you should also install its [`plum`](PLUM)
+  package manager.
+  - First download it
+    ```zsh
+    cd ~/cterdam
+    git clone git@github.com:rime/plum.git
+    ```
+  - Then use it to download all Rime packages
+    ```zsh
+	cd plum
+	bash rime-install :all
+	```
+
 
 [GHSSH]:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
 [TPM]:
 https://github.com/tmux-plugins/tpm
+
+[PLUM]:
+https://github.com/rime/plum
 
 ## Submodules
 
