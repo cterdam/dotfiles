@@ -59,11 +59,18 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 	cd plum
 	bash rime-install :all
 	```
-- Now link `cterdam.zshrc` to the real `zshrc` location to activate the scripts:
-  ```zsh
-  ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
-  ```
-
+- Now activate the install scripts:
+  - Link `cterdam.zshrc` to the real `zshrc` location:
+    ```zsh
+    ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
+    ```
+  - Restart shell, then restart again. Now type `Prefix + I` to install tmux
+	plugins.
+	- `Prefix` is the tmux prefix, by default `Ctrl+b`. `I` is the capital
+	  letter, so `Shift + i`.
+  - Now start vim and it will auto install all plugins, including COC plugins.
+  - Deploy Rime engine.
+- Everything is done!
 
 [GHSSH]:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
