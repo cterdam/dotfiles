@@ -30,10 +30,10 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Upon finishing installing the brew version, run `which vim` and you might
     see that it's still the system vim (and not the brew vim) which gets
 	evoked. This is because brew-installed apps are not given priority in PATH.
-	Don't worry about it; the zsh scripts to be installed later will fix this.
+	Don't worry about it; `cterdam.zshrc` will fix this.
 - Install tmux with `brew install tmux`.
   - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
-	installing actual plugins for now: the tmux script will take care of it.
+	installing actual plugins for now: `cterdam.tmux.conf` will take care of it.
 - Install [Oh My Zsh](https://ohmyz.sh/).
   - There should be no `zshrc` in the new system yet, but the OMZ installation
 	script will create one in the home directory. Read it through, but
