@@ -509,6 +509,7 @@ let g:coc_global_extensions = [
 
 " coc-clangd --------------------------
 " Requires Node.js and a working copy of clangd in PATH.
+" If clangd is not found in PATH, run :CocCommand clangd.install
 " Commands:
 " clangd.switchSourceHeader
 " clangd.symbolInfo
