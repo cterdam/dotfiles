@@ -4,9 +4,15 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Installing on a new Mac
 
+### Set up dependencies
+
 - In the Mac terminal, type `git` to trigger downloading developer tools.
-- Now that git is installed, log in to Github and follow its [tutorial][GHSSH]
-  to set up a new SSH key.
+  - Once git is installed, run these:
+    ```zsh
+    git config --global user.name "cterdam"
+    git config --global user.email "<llz.joshlee@gmail.com>"
+    ```
+- Log in to Github and follow its [tutorial][GHSSH] to set up a new SSH key.
 - Now make development directory:
   ```zsh
   cd
@@ -19,6 +25,9 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   ```
 - Once the repo is downloaded, set up terminal appearance by importing
   `hbpro.terminal` to terminal profiles.
+
+### Install packages
+
 - Install [homebrew](https://brew.sh/).
   - Upon finishing installation, the script will print a 'Next steps' section
     which mentions two commands to run in order to add homebrew to PATH. Run
@@ -59,7 +68,10 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 	cd plum
 	bash rime-install :all
 	```
-- Now activate the install scripts:
+
+### Activate shell scripts
+
+- Now activate the shell scripts:
   - Link `cterdam.zshrc` to the real `zshrc` location:
     ```zsh
     ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
@@ -68,7 +80,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 	plugins.
 	- `Prefix` is the tmux prefix, by default `Ctrl+b`. `I` is the capital
 	  letter, so `Shift + i`.
-  - Now start vim and it will auto install all plugins, including COC plugins.
+  - Start vim and it will auto install all plugins, including COC plugins.
   - Deploy Rime engine.
 - Everything is done!
 
