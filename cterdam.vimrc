@@ -454,6 +454,9 @@ Plug 'junegunn/goyo.vim'
 " Requires Node.js and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
+" vim-cursorword for viewing the current word underlined
+Plug 'itchyny/vim-cursorword'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
