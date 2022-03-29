@@ -45,8 +45,8 @@ set wildmenu
 " Secure the default \ as mapleader
 let mapleader='\'
 
-" <Leader>p to toggle in and out of paste mode
-set pastetoggle=<Leader>p
+" Ctrl+p to toggle in and out of paste mode
+set pastetoggle=<C-P>
 
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
