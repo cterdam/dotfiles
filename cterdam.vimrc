@@ -151,11 +151,14 @@ set incsearch
 " Highlight search results throughout text
 set hlsearch
 
+" To be or not to be is the question...
+set ignorecase
+
 " <Leader>/ to clear highlight
 map <Leader>/ :nohl<CR>
 
-" To be or not to be is the question...
-set ignorecase
+" show search index
+set shortmess-=S
 
 " }}}
 " SWAPPING {{{
