@@ -47,6 +47,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     ```zsh
     sudo npm install --global yarn
     ```
+  - Install [Golang](GOLANG). vim-hexokinase and other useful things run on
+    it.
 - Install tmux with `brew install tmux`.
   - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
 	installing actual plugins for now: `cterdam.tmux.conf` will take care of it.
@@ -97,6 +99,9 @@ https://github.com/rime/plum
 https://nodejs.org/en/
 
 [YARN]:
+https://classic.yarnpkg.com/en/
+
+[GOLANG]:
 https://classic.yarnpkg.com/en/
 
 ## Submodules
