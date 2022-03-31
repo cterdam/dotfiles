@@ -77,6 +77,14 @@ set background=dark
 " Make sign column black for use by vim-gitgutter
 highlight SignColumn ctermbg=black ctermfg=yellow
 
+" vim-hexokinase needs this to display text code colors
+set termguicolors
+
+" Set Vim-specific sequences for RGB colors,
+" so color scheme can be displayed even with termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 " }}}
 " LINE NUMBER {{{
 
@@ -157,7 +165,7 @@ set ignorecase
 " <Leader>/ to clear highlight
 map <Leader>/ :nohl<CR>
 
-" show search index
+" Show search index
 set shortmess-=S
 
 " }}}
@@ -460,6 +468,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " vim-cursorword for viewing the current word underlined
 Plug 'itchyny/vim-cursorword'
 
+" vim-hexokinase for previewing colors
+" Requires golang
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -628,6 +640,7 @@ endfunction
 
 " Function to call NERDTreeFind iff NERDTree is active, current window contains
 " a modifiable file, and we're not in vimdiff
+" This syncs NERDTree with current window.
 " Currently not used either. To highlight currently open buffer in NERDTree,
 " use `autocmd BufEnter * call SyncTree()`
 function! SyncTree()
@@ -967,5 +980,26 @@ let g:mkdp_filetypes = ['markdown']
 
 " <Leader>m to toggle preview window
 map <Leader>m <Plug>MarkdownPreviewToggle
+
+" }}}
+" VIM-HEXOKINASE {{{
+
+" For all possible highlighters, :help hexokinase.txt
+let g:Hexokinase_highlighters = [ 'backgroundfull' ]
+
+" Patterns to match for colors
+" Can be a comma separated string or a list of strings
+let g:Hexokinase_optInPatterns = [
+\     'full_hex',
+\     'triple_hex',
+\     'rgb',
+\     'rgba',
+\     'hsl',
+\     'hsla',
+\     'colour_names'
+\ ]
+
+" <Leader>k to toggle colorizing
+map <Leader>k :HexokinaseToggle<CR>
 
 " }}}
