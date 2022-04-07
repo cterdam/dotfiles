@@ -511,7 +511,7 @@ let g:coc_global_extensions = [
     \]
 
 " Documentation for individual extensions.
-" For these extension commands, run :CocCommand python.runLinting
+" run individual extension commands like this :CocCommand python.runLinting
 
 " coc-calc ----------------------------
 " Commands:
@@ -554,7 +554,7 @@ let g:coc_global_extensions = [
 " coc-pyright -------------------------
 " If this doesn't work, try putting this in vimrc:
 " autocmd FileType python let b:coc_root_patterns = ['.venv']
-" Coomands:
+" Commands:
 " python.runLinting
 " python.sortImports
 " pyright.version
