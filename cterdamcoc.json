@@ -1,3 +1,10 @@
 {
-    "diagnostic.checkCurrentLine": true
+	"diagnostic.checkCurrentLine": true,
+	"coc.preferences.formatOnSaveFiletypes": [
+		"python",
+		"json"
+	],
+	"python.formatting.provider": "autopep8",
+	"_comment": "For autopep8Path, run `which autopep8` on new machines",
+	"python.formatting.autopep8Path": "/usr/local/bin/autopep8"
 }
