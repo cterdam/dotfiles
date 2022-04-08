@@ -632,7 +632,7 @@ command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeI
 " COC will auto install any missing extensions in this list.
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " Use :CocUpdate or :CocUpdateSync to update COC extensions
-" To uninstall, remove from this list, then run :CocUninstall coc-css
+" To uninstall, remove from this list, then run like :CocUninstall coc-css
 let g:coc_global_extensions = [
     \'coc-calc',
     \'coc-clangd',
@@ -643,8 +643,9 @@ let g:coc_global_extensions = [
 
 " Documentation for individual extensions.
 " run individual extension commands like this :CocCommand python.runLinting
+" Config options are set in :CocConfig
 
-" coc-calc ----------------------------
+" coc-calc -------------------------------------------------------------------
 " Commands:
 " calc.appendWithCursor
 " calc.append
@@ -656,7 +657,7 @@ let g:coc_global_extensions = [
 " calc.highlight
 " calc.replaceOriginalExpression
 
-" coc-clangd --------------------------
+" coc-clangd -----------------------------------------------------------------
 " Requires Node.js and a working copy of clangd in PATH.
 " If clangd is not found in PATH, run :CocCommand clangd.install
 " Commands:
@@ -667,11 +668,17 @@ let g:coc_global_extensions = [
 " clangd.install
 " clangd.update
 
-" coc-json ----------------------------
+" coc-json -------------------------------------------------------------------
 " Commands:
 " json.retryResolveSchema
+" Configs:
+" json.enable
+" json.trace.server
+" json.execArgv
+" json.format.enable
+" json.schemas
 
-" coc-markdownlint --------------------
+" coc-markdownlint -----------------------------------------------------------
 " Provides COC CodeActions triggered by
 " <Plug>(coc-codeaction) and <Plug>(coc-codeaction-line)
 " Commands:
@@ -682,7 +689,7 @@ let g:coc_global_extensions = [
 " markdownlint.onSave
 " markdownlint.config
 
-" coc-pyright -------------------------
+" coc-pyright ----------------------------------------------------------------
 " If this doesn't work, try putting this in vimrc:
 " autocmd FileType python let b:coc_root_patterns = ['.venv']
 " Commands:
