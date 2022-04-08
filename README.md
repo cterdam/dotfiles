@@ -48,8 +48,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     Don't worry about it; `cterdam.zshrc` will fix this.
   - Install [Node.js](NODE). COC and other vim extensions run on Node.
   - Install [yarn](YARN) for vim plugins. After you install Node you should be
-    able to install
-    yarn with `npm`:
+    able to install yarn with `npm`:
 
     ```zsh
     sudo npm install --global yarn
@@ -57,6 +56,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Install [Golang](GOLANG). vim-hexokinase and other useful things run on
     it.
+  - Install [autopep8](PEP8) with `sudo pip3 install --upgrade autopep8`. The
+    COC module needs it for python formatting.
 - Install tmux with `brew install tmux`.
   - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
     installing actual plugins for now: `cterdam.tmux.conf` will take care of it.
@@ -116,6 +117,9 @@ https://classic.yarnpkg.com/en/
 
 [GOLANG]:
 https://classic.yarnpkg.com/en/
+
+[PEP8]:
+https://pypi.org/project/autopep8/
 
 ## Submodules
 
