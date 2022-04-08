@@ -51,13 +51,8 @@ set pastetoggle=<C-P>
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
 
-" COC TextEdit might fail if hidden is not set.
-" See COC README sample config.
-set hidden
-
-" COC uses some unicode characters in the file autoload/float.vim
-" See COC README sample config.
-set encoding=utf-8
+" <Leader><Space> to reset conceal
+map <Leader><Space> :set conceallevel=0<CR>
 
 " }}}
 " INTERFACE {{{
@@ -178,16 +173,16 @@ set shortmess-=S
 " TODO: swap words and not chars
 
 " <Ctrl>h to swap a char to the left
-:nnoremap <silent><C-h> :let save_a=@a<Cr>"axhh"ap:let @a=save_a<Cr>
+" :nnoremap <silent><C-h> :let save_a=@a<Cr>"axhh"ap:let @a=save_a<Cr>
 
 " <Ctrl>j to swap a line down
-:nnoremap <silent><C-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
+" :nnoremap <silent><C-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
 
 " <Ctrl>k to swap a line up
-:nnoremap <silent><C-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
+" :nnoremap <silent><C-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
 
 " <Ctrl>l to swap a char to the right
-:nnoremap <silent><C-l> :let save_a=@a<Cr>"ax"ap:let @a=save_a<Cr>
+" :nnoremap <silent><C-l> :let save_a=@a<Cr>"ax"ap:let @a=save_a<Cr>
 
 " }}}
 " FOLD {{{
@@ -493,8 +488,144 @@ call plug#end()
 " COC {{{
 
 " CONQUERER OF COMPLETION
+" Requires Node.js
 
-" Requires Node.js.
+" The following config are partially adapted from COC's sample config README:
+
+" Completion =================================================================
+
+" COC TextEdit might fail if hidden is not set
+set hidden
+
+" COC uses some unicode characters in the file autoload/float.vim
+set encoding=utf-8
+
+" Don't pass messages to |ins-completion-menu|
+set shortmess+=c
+
+" <Tab> to trigger completion.
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" It's unclear which description block this function belongs to.
+" It seems to have no effect.
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" <C-space> to trigger completion
+if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" <CR> to auto-select the first completion item and format on enter
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Diagnostics ================================================================
+
+" <Leader>g to list all diagnostics of current buffer in location list
+map <Leader>g :CocDiagnostics<CR>
+" <Leader><S-g> to list all diagnostics for fuzzy searching
+map <Leader><S-g> :<C-u>CocList diagnostics<cr>
+
+" <Leader>o to list outline of current document
+map <Leader>o :CocOutline<CR>
+" <Leader><S-o> to list outline of current document for fuzzy searching
+map <Leader><S-o> :CocList outline<CR>
+" <Leader><C-o> to search symbols in current workspace
+map <Leader><C-o> :CocList -I symbols<CR>
+
+" `[g` and `]g` to navigate diagnostics
+" Alternatively it's also fine to use location list navigation keys directly
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" `Ctrl+k` to show documentation in preview window
+nnoremap <silent> <C-k> :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+" This seems to have no effect.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap <C-f> and <C-b> to scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f>
+			  \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b>
+			  \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f>
+			  \ coc#float#has_scroll() ?
+			  \ "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b>
+			  \ coc#float#has_scroll() ?
+			  \ "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f>
+			  \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b>
+			  \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Edit =======================================================================
+
+" <Leader>rn to rename current symbol
+nmap <leader>rn <Plug>(coc-rename)
+
+" <Leader>f to format selected code
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" <Leader>a to apply codeAction to selected region
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Use `f` for function and `c` for class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" <C-s> to expand selections ranges
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" `:Format` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" `:Fold` command to fold current buffer
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" `:OR` command to organize imports of the current buffer
+command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " Extensions =================================================================
 
@@ -563,50 +694,6 @@ let g:coc_global_extensions = [
 " pyright.createtypestub
 
 " ============================================================================
-
-" The following config are partially adapted from COC's sample config README:
-
-" Completion =================================================================
-
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" It's unclear which description block this function belongs to.
-" It seems to have no effect.
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-else
-    inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Diagnostics ================================================================
-
-" Remember to put this line in :CocConfig to view current line's error, no
-" matter where the cursor is on the same line:
-" \"diagnostic.checkCurrentLine": true
-
-" Use <Leader>g to get all diagnostics of current buffer in location list
-map <Leader>g :CocDiagnostics<CR>
-
-" Use `[g` and `]g` to navigate diagnostics
-" Alternatively it's also fine to use location list navigation keys directly
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " }}}
 " NERDTREE {{{
@@ -839,8 +926,8 @@ autocmd vimenter * ++nested colorscheme gruvbox
 " }}}
 " GOYO {{{
 
-" <Leader>o to toggle goyo
-map <Leader>o :Goyo<CR>
+" <Leader>y to toggle goyo
+map <Leader>y :Goyo<CR>
 
 " Set goyo width
 let g:goyo_width = 80
