@@ -182,6 +182,10 @@ rc () {
             # Default file at ~/.vim/vimrc
             $EDITOR $CTERDAMVIMRC
             ;;
+        coc)
+            # Default file at ~/.vim/coc-settings.json
+            $EDITOR $CTERDAMCOCSETTINGS
+            ;;
         zsh)
             # Default file at ~/.zshrc
             $EDITOR $CTERDAMZSHRC
