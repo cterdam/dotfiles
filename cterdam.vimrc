@@ -627,7 +627,8 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " `:OR` command to organize imports of the current buffer
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
-" Extensions =================================================================
+" }}}
+" COC EXTENSIONS {{{
 
 " COC will auto install any missing extensions in this list.
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
