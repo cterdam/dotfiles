@@ -116,6 +116,17 @@ if [[ ! -f $VIMRCLOC ]]; then
     ln -s $CTERDAMVIMRC $VIMRCLOC
 fi
 
+# coc settings json file
+export CTERDAMCOCSETTINGS="$CTERDAMRC/cterdamcoc.json"
+
+# Location for coc settings
+export COCSETTINGSLOC="$HOME/.vim/coc-settings.json"
+
+# Symlink, if not already present
+if [[ ! -f $COCSETTINGSLOC ]]; then
+    ln -s $CTERDAMCOCSETTINGS $COCSETTINGSLOC
+fi
+
 # ZSH ========================================================================
 
 # cterdam's zshrc file
