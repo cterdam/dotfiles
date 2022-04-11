@@ -156,50 +156,13 @@ mkdir -p $CTERDAMBIN
 # Symlink all vim binaries from homebrew to CTERDAMBIN, if not already present
 # Reason is homebrew on Mac installs vim with more options than the default vim
 homebrewbinloc="/opt/homebrew/bin"
-for hbvimbin in $homebrewbinloc/*vim*
+for hbvimbin in $homebrewbinloc/(*vim*|vi)
 do
     slvimbin="$CTERDAMBIN/$(basename $hbvimbin)" 
     if [[ ! -f $slvimbin ]]; then
         ln -s $hbvimbin $slvimbin
     fi
 done
-
-# }}}
-# PATH {{{
-
-# Prints each PATH directory on its own line
-# (assumes no ':' in directory names)
-alias showpath='echo $PATH | tr ":" "\n"'
-
-# Returns true iff argument in PATH
-inpath() {
-    # Altrenative one-line implementation
-    # [[ :$PATH: == *:$1:* ]]
-    if [[ :$PATH: == *:$1:* ]]; then
-        true
-    else
-        false
-    fi
-}
-
-# Adds something to PATH, head or tail, if not already included
-addpath() {
-    if ! inpath $1; then
-        if [[ $2 == "head" ]]; then
-            export PATH="$1:$PATH"
-        else # default on tail
-            export PATH="$PATH:$1"
-        fi
-    fi
-}
-
-# Append clangd (installed with brew) if not included already
-# This is for coc-clangd which provides C family language linting.
-clangdpath="/opt/homebrew/opt/llvm/bin"
-addpath $clangdpath tail
-
-# Prepend CTERDAMBIN if not included aleady
-addpath $CTERDAMBIN head
 
 # }}}
 # GENERAL {{{
@@ -301,5 +264,39 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# }}}
+# PATH {{{
+
+# This section stays at the bottom of zshrc to have final control over PATH
+
+# Prints each PATH directory on its own line
+# (assumes no ':' in directory names)
+alias showpath='echo $PATH | tr ":" "\n"'
+
+# Returns true iff argument in PATH
+inpath() {
+    # Altrenative one-line implementation
+    # [[ :$PATH: == *:$1:* ]]
+    if [[ :$PATH: == *:$1:* ]]; then
+        true
+    else
+        false
+    fi
+}
+
+# Adds something to PATH, head or tail, if not already included
+addpath() {
+    if ! inpath $1; then
+        if [[ $2 == "head" ]]; then
+            export PATH="$1:$PATH"
+        else # default on tail
+            export PATH="$PATH:$1"
+        fi
+    fi
+}
+
+# Prepend CTERDAMBIN if not included aleady
+addpath $CTERDAMBIN head
 
 # }}}
