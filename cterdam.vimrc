@@ -483,6 +483,7 @@ call plug#end()
 " - tpope/vim-obsession for saving/loading vim sessions
 " - godlygeek/tabular for lining up text
 " - chrisbra/csv.vim for treating csv files
+" - kyazdani42/nvim-tree.lua for a better file tree
 
 " }}}
 " COC {{{
