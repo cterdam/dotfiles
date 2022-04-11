@@ -7,6 +7,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 ### Set up dependencies
 
 - In the Mac terminal, type `git` to trigger downloading developer tools.
+
   - Once git is installed, run these:
 
     ```zsh
@@ -14,7 +15,9 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     git config --global user.email "<llz.joshlee@gmail.com>"
     ```
 
-- Log in to Github and follow its [tutorial][GHSSH] to set up a new SSH key.
+- Log in to [Github](https://github.com/) and follow its [tutorial][GHSSH] to
+  set up a new SSH key.
+
 - Now make development directory:
 
   ```zsh
@@ -34,58 +37,82 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ### Install packages
 
+- Install [Oh My Zsh](https://ohmyz.sh/).
+
+- Install [Anaconda](https://www.anaconda.com/).
+
+  - This should also install Jupyter, among other packages. For a list of all
+    packages installed with Anaconda, see [here][CONDAPKGLIST].
+
 - Install [homebrew](https://brew.sh/).
   - Upon finishing installation, the script will print a 'Next steps' section
     which mentions two commands to run in order to add homebrew to PATH. Run
     them.
-- Now install vim with `brew install vim`.
+
+- Now install [vim](https://www.vim.org/) with `brew install vim`.
+
   - MacOS already comes with a builtin distribution of vim, but the default
     version lacks many key features such as `conceal`, `lua`, `perl`, and
     `python3`. The version of vim on homebrew includes these features.
+
   - Upon finishing installing the brew version, run `which vim` and you might
     see that it's still the system vim (and not the brew vim) which gets
     evoked. This is because brew-installed apps are not given priority in PATH.
     Don't worry about it; `cterdam.zshrc` will fix this.
-  - Install [Node.js](NODE). COC and other vim extensions run on Node.
-  - Install [yarn](YARN) for vim plugins. After you install Node you should be
-    able to install yarn with `npm`:
+
+  - Install [Node.js](https://nodejs.org/en/). COC and other vim extensions
+    run on Node.
+
+  - Install [yarn](https://classic.yarnpkg.com/en/) for vim plugins such as
+    markdown-preview. After you install Node you should be able to install yarn
+    with `npm`:
 
     ```zsh
     sudo npm install --global yarn
     ```
 
-  - Install [Golang](GOLANG). vim-hexokinase and other useful things run on
-    it.
-  - Install [autopep8](PEP8) with `sudo pip3 install --upgrade autopep8`. The
-    COC module needs it for python formatting.
-- Install tmux with `brew install tmux`.
+  - Install [Golang](https://go.dev/). vim-hexokinase and other useful things
+    run on it.
+
+- Install [tmux](https://github.com/tmux/tmux) with `brew install tmux`.
+
   - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
     installing actual plugins for now: `cterdam.tmux.conf` will take care of it.
-- Install [Oh My Zsh](https://ohmyz.sh/).
-  - There should be no `zshrc` in the new system yet, but the OMZ installation
-    script will create one in the home directory. Read it through, but
-    everything there should already be incorporated into `cterdam.zshrc` which
-    will be installed later. So just delete it.
+
 - Install [Rime](https://rime.im/).
-- To use the Rime input method you should also install its [`plum`](PLUM)
-  package manager.
-  - First download it
+
+  - To use the Rime input method you should also install its [`plum`](PLUM)
+    package manager. First download it:
 
     ```zsh
     cd ~/cterdam
     git clone git@github.com:rime/plum.git
     ```
 
-  - Then use it to download all Rime packages
+  - Then use it to download all Rime packages:
 
     ```zsh
     cd plum
     bash rime-install :all
     ```
 
+- Install [MaxTeX](https://tug.org/mactex/), the recommended LaTeX distribution
+  for macOS.
+
 ### Activate shell scripts
 
+- We have not dealt with `zshrc` in the new system yet, but the Anaconda and Oh
+  My Zsh installation scripts should have created one in the home directory.
+  Read it through, but everything there should already be incorporated into
+  `cterdam.zshrc` which will be installed later. So just delete it so we can use
+  our own shell script:
+
+  ```zsh
+  rm $HOME/.zshrc
+  ```
+
 - Now activate the shell scripts:
+
   - Link `cterdam.zshrc` to the real `zshrc` location:
 
     ```zsh
@@ -94,32 +121,27 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Restart shell, then restart again. Now type `Prefix + I` to install tmux
     plugins.
+
     - `Prefix` is the tmux prefix, by default `Ctrl+b`. `I` is the capital
       letter, so `Shift + i`.
+
   - Start vim and it will auto install all plugins, including COC plugins.
+
   - Deploy Rime engine.
+
 - Everything is done!
 
 [GHSSH]:
 https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+[CONDAPKGLIST]:
+https://docs.anaconda.com/anaconda/packages/pkg-docs/
 
 [TPM]:
 https://github.com/tmux-plugins/tpm
 
 [PLUM]:
 https://github.com/rime/plum
-
-[NODE]:
-https://nodejs.org/en/
-
-[YARN]:
-https://classic.yarnpkg.com/en/
-
-[GOLANG]:
-https://classic.yarnpkg.com/en/
-
-[PEP8]:
-https://pypi.org/project/autopep8/
 
 ## Submodules
 
