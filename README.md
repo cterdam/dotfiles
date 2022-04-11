@@ -1,3 +1,5 @@
+<!-- Only use `code` style for commands, hotkeys, and filenames. -->
+
 # dotfiles
 
 cterdam's personal computing environment setup for Unix-like (Mac) systems.
@@ -52,8 +54,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Now install [vim](https://www.vim.org/) with `brew install vim`.
 
   - MacOS already comes with a builtin distribution of vim, but the default
-    version lacks many key features such as `conceal`, `lua`, `perl`, and
-    `python3`. The version of vim on homebrew includes these features.
+    version lacks many key features such as conceal, lua, perl, and
+    python3. The version of vim on homebrew includes these features.
 
   - Upon finishing installing the brew version, run `which vim` and you might
     see that it's still the system vim (and not the brew vim) which gets
@@ -65,7 +67,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Install [yarn](https://classic.yarnpkg.com/en/) for vim plugins such as
     markdown-preview. After you install Node you should be able to install yarn
-    with `npm`:
+    with npm:
 
     ```zsh
     sudo npm install --global yarn
@@ -81,7 +83,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Rime](https://rime.im/).
 
-  - To use the Rime input method you should also install its [`plum`](PLUM)
+  - To use the Rime input method you should also install its [plum](PLUM)
     package manager. First download it:
 
     ```zsh
@@ -96,7 +98,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     bash rime-install :all
     ```
 
-- Install [MaxTeX](https://tug.org/mactex/), the recommended LaTeX distribution
+- Install [MacTeX](https://tug.org/mactex/), the recommended LaTeX distribution
   for macOS.
 
 ### Activate shell scripts
