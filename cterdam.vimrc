@@ -164,27 +164,6 @@ map <Leader>/ :nohl<CR>
 set shortmess-=S
 
 " }}}
-" SWAPPING {{{
-
-" These are currently buggy:
-" Swapping the leftmost 2 chars to the left can cause the char to disappear.
-" Swapping lines will lose the current column.
-" TODO: Fix these and write them into a Vim plugin
-" TODO: swap words and not chars
-
-" <Ctrl>h to swap a char to the left
-" :nnoremap <silent><C-h> :let save_a=@a<Cr>"axhh"ap:let @a=save_a<Cr>
-
-" <Ctrl>j to swap a line down
-" :nnoremap <silent><C-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
-
-" <Ctrl>k to swap a line up
-" :nnoremap <silent><C-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
-
-" <Ctrl>l to swap a char to the right
-" :nnoremap <silent><C-l> :let save_a=@a<Cr>"ax"ap:let @a=save_a<Cr>
-
-" }}}
 " FOLD {{{
 
 " Fold level is equal to indentation divided by shiftwidth (round down)
@@ -491,6 +470,23 @@ call plug#end()
 " CONQUERER OF COMPLETION
 " Requires Node.js
 
+" Extensions =================================================================
+
+" COC will auto install any missing extensions in this list.
+" See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+" Use :CocUpdate or :CocUpdateSync to update COC extensions
+" To uninstall, remove from this list, then run like :CocUninstall coc-css
+let g:coc_global_extensions = [
+    \'coc-calc',
+    \'coc-clangd',
+    \'coc-json',
+    \'coc-markdownlint',
+    \'coc-pyright',
+    \]
+
+" run individual extension commands like this :CocCommand python.runLinting
+" Extension config options are set in :CocConfig
+
 " The following config are partially adapted from COC's sample config README:
 
 " Completion =================================================================
@@ -627,82 +623,6 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " `:OR` command to organize imports of the current buffer
 command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-" }}}
-" COC EXTENSIONS {{{
-
-" COC will auto install any missing extensions in this list.
-" See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-" Use :CocUpdate or :CocUpdateSync to update COC extensions
-" To uninstall, remove from this list, then run like :CocUninstall coc-css
-let g:coc_global_extensions = [
-    \'coc-calc',
-    \'coc-clangd',
-    \'coc-json',
-    \'coc-markdownlint',
-    \'coc-pyright',
-    \]
-
-" Documentation for individual extensions.
-" run individual extension commands like this :CocCommand python.runLinting
-" Config options are set in :CocConfig
-
-" coc-calc -------------------------------------------------------------------
-" Commands:
-" calc.appendWithCursor
-" calc.append
-" calc.replaceWithCursor
-" calc.replace
-" calc.calculate
-" Configs:
-" calc.priority
-" calc.highlight
-" calc.replaceOriginalExpression
-
-" coc-clangd -----------------------------------------------------------------
-" Requires Node.js and a working copy of clangd in PATH.
-" If clangd is not found in PATH, run :CocCommand clangd.install
-" Commands:
-" clangd.switchSourceHeader
-" clangd.symbolInfo
-" clangd.memoryUsage
-" clangd.ast
-" clangd.install
-" clangd.update
-
-" coc-json -------------------------------------------------------------------
-" Commands:
-" json.retryResolveSchema
-" Configs:
-" json.enable
-" json.trace.server
-" json.execArgv
-" json.format.enable
-" json.schemas
-
-" coc-markdownlint -----------------------------------------------------------
-" Provides COC CodeActions triggered by
-" <Plug>(coc-codeaction) and <Plug>(coc-codeaction-line)
-" Commands:
-" markdownlint.fixAll
-" Configs:
-" markdownlint.onOpen
-" markdownlint.onChange
-" markdownlint.onSave
-" markdownlint.config
-
-" coc-pyright ----------------------------------------------------------------
-" If this doesn't work, try putting this in vimrc:
-" autocmd FileType python let b:coc_root_patterns = ['.venv']
-" Commands:
-" python.runLinting
-" python.sortImports
-" pyright.version
-" pyright.organizeimports
-" pyright.restartserver
-" pyright.createtypestub
-
-" ============================================================================
 
 " }}}
 " NERDTREE {{{
