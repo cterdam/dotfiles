@@ -482,6 +482,8 @@ let g:coc_global_extensions = [
     \'coc-json',
     \'coc-markdownlint',
     \'coc-pyright',
+	\'coc-sh',
+	\'coc-vimlsp'
     \]
 
 " run individual extension commands like this :CocCommand python.runLinting
