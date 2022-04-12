@@ -107,6 +107,12 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install [MacTeX](https://tug.org/mactex/), the recommended $\LaTeX$
   distribution for macOS.
 
+  - If `latexindent` does not work, install the following packages:
+
+    ```zsh
+    sudo cpan install YAML::Tiny File::HomeDir Unicode::GCString
+    ```
+
 ### Activate shell scripts
 
 - We have not dealt with `zshrc` in the new system yet, but the Anaconda and Oh
