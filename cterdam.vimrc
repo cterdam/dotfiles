@@ -472,6 +472,7 @@ call plug#end()
 
 " Extensions =================================================================
 
+" List:
 " COC will auto install any missing extensions in this list.
 " See https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " Use :CocUpdate or :CocUpdateSync to update COC extensions
@@ -485,12 +486,29 @@ let g:coc_global_extensions = [
 	\'coc-sh',
 	\'coc-vimlsp'
     \]
-
 " run individual extension commands like this :CocCommand python.runLinting
 " Extension config options are set in :CocConfig
 
-" The following config are partially adapted from COC's sample config README:
+" Individual WhatIs:
+" coc-calc: mathematical expression calculation autocompletion.
+" coc-clangd: C-language family extension.
+" 	Requires Node.js and clangd in PATH.
+" coc-json: json file extension.
+" coc-markdownlint: markdown file extension.
+" coc-pyright: pyright extension for python.
+" coc-sh: SH language extension.
+" 	Requires bash-language-server.
+" coc-vimlsp: vimscript language extension.
 
+" Settings:
+" Most config options for coc extensions should be set in :CocConfig
+" coc-vimlsp:
+let g:markdown_fenced_languages = [
+	\ 'vim',
+	\ 'help'
+    \]
+
+" The following config are partially adapted from COC's sample config README:
 " Completion =================================================================
 
 " COC TextEdit might fail if hidden is not set

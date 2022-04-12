@@ -62,19 +62,25 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     evoked. This is because brew-installed apps are not given priority in PATH.
     Don't worry about it; `cterdam.zshrc` will fix this.
 
-  - Install [Node.js](https://nodejs.org/en/). COC and other vim extensions
-    run on Node.
+  - Install [Node.js](https://nodejs.org/en/) for [COC][COC],
+    [COC-clangd][COCCLANGD], and [markdown-preview][MDPV].
 
-  - Install [yarn](https://classic.yarnpkg.com/en/) for vim plugins such as
-    markdown-preview. After you install Node you should be able to install yarn
-    with npm:
+  - Install [yarn](https://classic.yarnpkg.com/en/) for
+    [markdown-preview][MDPV], and possibly some COC extensions. After you
+    install Node you should be able to install yarn with npm:
 
     ```zsh
     sudo npm install --global yarn
     ```
 
-  - Install [Golang](https://go.dev/). vim-hexokinase and other useful things
-    run on it.
+  - Install [Bash Language Server][BASHLS] for [COC-sh][COCSH]. Install with
+    npm:
+
+    ```zsh
+    sudo npm i -g bash-language-server
+    ```
+
+  - Install [Golang](https://go.dev/) for [vim-hexokinase][HEXO].
 
 - Install [tmux](https://github.com/tmux/tmux) with `brew install tmux`.
 
@@ -98,8 +104,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     bash rime-install :all
     ```
 
-- Install [MacTeX](https://tug.org/mactex/), the recommended LaTeX distribution
-  for macOS.
+- Install [MacTeX](https://tug.org/mactex/), the recommended $\LaTeX$
+  distribution for macOS.
 
 ### Activate shell scripts
 
@@ -139,11 +145,29 @@ https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generati
 [CONDAPKGLIST]:
 https://docs.anaconda.com/anaconda/packages/pkg-docs/
 
+[COC]:
+https://github.com/neoclide/coc.nvim
+
+[COCCLANGD]:
+https://github.com/clangd/coc-clangd
+
+[MDPV]:
+https://github.com/iamcco/markdown-preview.nvim
+
+[BASHLS]:
+https://github.com/bash-lsp/bash-language-server
+
+[COCSH]:
+https://github.com/josa42/coc-sh
+
 [TPM]:
 https://github.com/tmux-plugins/tpm
 
 [PLUM]:
 https://github.com/rime/plum
+
+[HEXO]:
+https://github.com/RRethy/vim-hexokinase
 
 ## Submodules
 
