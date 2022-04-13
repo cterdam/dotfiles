@@ -45,8 +45,8 @@ set wildmenu
 " Secure the default \ as mapleader
 let mapleader='\'
 
-" Ctrl+p to toggle in and out of paste mode
-set pastetoggle=<C-P>
+" Ctrl+q to toggle in and out of paste mode
+set pastetoggle=<C-q>
 
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
@@ -620,7 +620,7 @@ xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Use `f` for function and `c` for class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+" Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
