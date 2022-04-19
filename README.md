@@ -43,10 +43,10 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Anaconda](https://www.anaconda.com/).
 
-  - This should also install Jupyter, among other packages. For a list of all
-    packages installed with Anaconda, see [here][CONDAPKGLIST].
+  - This should also install Jupyter, among [other packages][CONDAPKGLIST].
 
 - Install [homebrew](https://brew.sh/).
+
   - Upon finishing installation, the script will print a 'Next steps' section
     which mentions two commands to run in order to add homebrew to PATH. Run
     them.
@@ -62,35 +62,32 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     evoked. This is because brew-installed apps are not given priority in PATH.
     Don't worry about it; `cterdam.zshrc` will fix this.
 
-  - Install [Node.js](https://nodejs.org/en/) for [COC][COC],
-    [COC-clangd][COCCLANGD], and [markdown-preview][MDPV].
+  - Install [Node.js](https://nodejs.org/en/).
 
-  - Install [yarn](https://classic.yarnpkg.com/en/) for
-    [markdown-preview][MDPV], and possibly some COC extensions. After you
-    install Node you should be able to install yarn with npm:
+    - This is for [COC][COC], [COC-clangd][COCCLANGD], and
+      [markdown-preview][MDPV].
 
-    ```zsh
-    sudo npm install --global yarn
-    ```
+  - Install [yarn](https://classic.yarnpkg.com/en/) with `sudo npm install
+    --global yarn`.
 
-  - Install [Bash Language Server][BASHLS] for [COC-sh][COCSH]. Install with
-    npm:
+    - This is for [markdown-preview][MDPV], and possibly some COC extensions.
 
-    ```zsh
-    sudo npm i -g bash-language-server
-    ```
+  - Install [Bash Language Server][BASHLS] with `sudo npm i -g
+    bash-language-server`.
+
+    - This is for [COC-sh][COCSH].
 
   - Install [Golang](https://go.dev/) for [vim-hexokinase][HEXO].
 
 - Install [tmux](https://github.com/tmux/tmux) with `brew install tmux`.
 
-  - When it's done, install [Tmux Plugin Manager](TPM). Don't worry about
+  - When it's done, install [Tmux Plugin Manager][TPM]. Don't worry about
     installing actual plugins for now: `cterdam.tmux.conf` will take care of it.
 
 - Install [Rime](https://rime.im/).
 
-  - To use the Rime input method you should also install its [plum](PLUM)
-    package manager. First download it:
+  - After installing Rime, install its [plum][PLUM] package manager. First
+    download it:
 
     ```zsh
     cd ~/cterdam
@@ -104,10 +101,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     bash rime-install :all
     ```
 
-- Install [MacTeX](https://tug.org/mactex/), the recommended $\LaTeX$
+- Install [MacTeX](https://tug.org/mactex/), the recommended LaTeX
   distribution for macOS.
 
-  - If `latexindent` does not work, install the following packages:
+  - Test `latexmk` and `latexindent`. If `latexindent` does not work, install
+    the following packages:
 
     ```zsh
     sudo cpan install YAML::Tiny File::HomeDir Unicode::GCString
@@ -139,7 +137,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     - `Prefix` is the tmux prefix, by default `Ctrl+b`. `I` is the capital
       letter, so `Shift + i`.
 
-  - Start vim and it will auto install all plugins, including COC plugins.
+  - We are about to start vim. But, to prevent COC from throwing permission
+    errors, first reset permissions for the `$HOME/.config` folder:
+
+    ```zsh
+    sudo chown -R $(whoami) $HOME/.config
+    ```
+
+  - Now run `vim` and it will auto install all plugins, including COC plugins.
 
   - Deploy Rime engine.
 
