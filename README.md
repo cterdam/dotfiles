@@ -84,6 +84,12 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - When it's done, install [Tmux Plugin Manager][TPM]. Don't worry about
     installing actual plugins for now: `cterdam.tmux.conf` will take care of it.
 
+- Install other UNIX tools:
+
+  ```zsh
+  brew install bat git-delta less tree 
+  ```
+
 - Install [Rime](https://rime.im/).
 
   - After installing Rime, install its [plum][PLUM] package manager. First

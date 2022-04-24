@@ -490,7 +490,7 @@ let g:coc_global_extensions = [
 " Extension config options are set in :CocConfig
 
 " Individual WhatIs:
-" coc-calc: mathematical expression calculation autocompletion.
+" coc-calc: autocomplete mathematical expression calculations. 
 " coc-clangd: C-language family extension.
 " 	Requires Node.js and clangd in PATH.
 " coc-json: json file extension.

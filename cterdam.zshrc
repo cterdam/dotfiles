@@ -170,14 +170,33 @@ done
 # Edit anything with vim
 export EDITOR="vim"
 
-# Conveniently source zshrc
-alias so='source ~/.zshrc'
-
 # Show Chinese characters
 alias tree='tree -N'
 
 # Do actual work here
 cd $CTERDAMHOME
+
+# Function to view git diff with bat
+batdiff() {
+    command git diff --name-only --diff-filter=d $@ | xargs bat --diff
+}
+
+# Uncomment this function to use bat for git diff command
+# git() {
+#     if [ "$1" = "diff" ]; then
+# 		# Eat the 'diff'
+# 		shift
+# 		batdiff $@
+#     else
+#         command git "$@"
+#     fi
+# }
+
+# Use bat to view man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Use gruvbox theme for bat
+export BAT_THEME="gruvbox-dark"
 
 # }}}
 # OHMYZSH {{{
