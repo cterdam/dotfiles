@@ -19,7 +19,7 @@ fi
 #   - CTERDAMBIN
 
 # CTERDAMHOME directory to hold all my terminal material
-export CTERDAMHOME="$HOME/cterdam"
+CTERDAMHOME="$HOME/cterdam"
 
 # Make sure that CTERDAMHOME exists (if exists, nothing changes)
 mkdir -p $CTERDAMHOME
@@ -29,7 +29,7 @@ mkdir -p $CTERDAMHOME
 
 # CTERDAMRC directory to hold all cterdam's custom rc files
 # CTERDAMRC should be named dotfiles as cloned from my git repo.
-export CTERDAMRC="$CTERDAMHOME/dotfiles"
+CTERDAMRC="$CTERDAMHOME/dotfiles"
 
 # These rc file names should all start with "cterdam" as in my git repo.
 # The files are all symlinked to their default location.
@@ -38,66 +38,78 @@ export CTERDAMRC="$CTERDAMHOME/dotfiles"
 # VIM ========================================================================
 
 # cterdam's vimrc file
-export CTERDAMVIMRC="$CTERDAMRC/cterdam.vimrc"
+cterdamvimrc="$CTERDAMRC/cterdam.vimrc"
 
 # Location for vimrc
-export VIMRCLOC="$HOME/.vim/vimrc"
+vimrcloc="$HOME/.vim/vimrc"
 
 # Symlink, if not already present
-if [[ ! -f $VIMRCLOC ]]; then
-    ln -s $CTERDAMVIMRC $VIMRCLOC
+if [[ ! -f $vimrcloc ]]; then
+    ln -s $cterdamvimrc $vimrcloc
 fi
 
 # coc settings json file
-export CTERDAMCOCSETTINGS="$CTERDAMRC/cterdamcoc.json"
+cterdamcocsettings="$CTERDAMRC/cterdamcoc.json"
 
 # Location for coc settings
-export COCSETTINGSLOC="$HOME/.vim/coc-settings.json"
+cocsettingsloc="$HOME/.vim/coc-settings.json"
 
 # Symlink, if not already present
-if [[ ! -f $COCSETTINGSLOC ]]; then
-    ln -s $CTERDAMCOCSETTINGS $COCSETTINGSLOC
+if [[ ! -f $cocsettingsloc ]]; then
+    ln -s $cterdamcocsettings $cocsettingsloc
+fi
+
+# GIT ========================================================================
+
+# cterdam's gitconfig file
+cterdamgitconfig="$CTERDAMRC/cterdam.gitconfig"
+
+# Location for zshrc
+gitconfigloc="$HOME/.gitconfig"
+
+# Symlink, if not already present
+if [[ ! -f $gitconfigloc ]]; then
+    ln -s $cterdamgitconfig $gitconfigloc
 fi
 
 # ZSH ========================================================================
 
 # cterdam's zshrc file
-export CTERDAMZSHRC="$CTERDAMRC/cterdam.zshrc"
+cterdamzshrc="$CTERDAMRC/cterdam.zshrc"
 
 # Location for zshrc
-export ZSHRCLOC="$HOME/.zshrc"
+zshrcloc="$HOME/.zshrc"
 
 # Symlink, if not already present
 # Actually this doesn't work, symlinking has to be done manually.
 # If there is no zshrc in the appointed location, how can we execute any script?
-if [[ ! -f $ZSHRCLOC ]]; then
-    ln -s $CTERDAMZSHRC $ZSHRCLOC
+if [[ ! -f $zshrcloc ]]; then
+    ln -s $cterdamzshrc $zshrcloc
 fi
 
 # TMUX =======================================================================
 
 # cterdam's tmux.conf file
-export CTERDAMTMUXCONF="$CTERDAMRC/cterdam.tmux.conf"
+cterdamtmuxconf="$CTERDAMRC/cterdam.tmux.conf"
 
 # Location for tmux.conf
-export TMUXCONFLOC="$HOME/.tmux.conf"
+tmuxconfloc="$HOME/.tmux.conf"
 
 # Symlink, if not already present
-if [[ ! -f $TMUXCONFLOC ]]; then
-    ln -s $CTERDAMTMUXCONF $TMUXCONFLOC
+if [[ ! -f $tmuxconfloc ]]; then
+    ln -s $cterdamtmuxconf $tmuxconfloc
 fi
 
 # RIME =======================================================================
 
-# CTERDAMRIMERC directory for all Rime dotfiles
-export CTERDAMRIMERC="$CTERDAMRC/cterdam.rime"
+# cterdamrimerc directory for all Rime dotfiles
+cterdamrimerc="$CTERDAMRC/cterdam.rime"
 
-# Make sure that CTERDAMRIMERC exists (if exists, nothing changes)
-mkdir -p $CTERDAMRIMERC
-
-# Symlink all my rime rc files into the correct location for Rime
+# Location for Rime config folder
 rimeloc="$HOME/Library/Rime"
-for cterdamrimercfile in $CTERDAMRIMERC/*
+
+# Symlink all rime rc files into the correct location for Rime
+for cterdamrimercfile in $cterdamrimerc/*
 do
     rimercfile="$rimeloc/$(basename $cterdamrimercfile)"
     if [[ ! -f $rimercfile ]]; then
@@ -111,27 +123,26 @@ done
 rc () {
     case $1 in
         vim | vi)
-            # Default file at ~/.vim/vimrc
-            $EDITOR $CTERDAMVIMRC
+            $EDITOR $cterdamvimrc
             ;;
         coc)
-            # Default file at ~/.vim/coc-settings.json
-            $EDITOR $CTERDAMCOCSETTINGS
+            $EDITOR $cterdamcocsettings
+            ;;
+        git)
+            $EDITOR $cterdamgitconfig
             ;;
         zsh)
-            # Default file at ~/.zshrc
-            $EDITOR $CTERDAMZSHRC
+            $EDITOR $cterdamzshrc
             ;;
         tmux)
-            # Default file at ~/.tmux.conf
-            $EDITOR $CTERDAMTMUXCONF
+            $EDITOR $cterdamtmuxconf
             ;;
         rime)
-            # Default folder at ~/Library/Rime
-            cd $CTERDAMRIMERC
+            echo "Entering $cterdamrimerc"
+            cd $cterdamrimerc
             ;;
         -h)
-            echo "Available configs: vi(m), zsh, tmux, rime"
+            echo "Available configs: vi(m), coc, git, zsh, tmux, rime"
             ;;
         '')
             echo "Entering $CTERDAMRC"
@@ -148,7 +159,7 @@ rc () {
 
 # CTERDAMBIN directory to hold all my executables.
 # This will be given priority in PATH.
-export CTERDAMBIN="$CTERDAMHOME/bin"
+CTERDAMBIN="$CTERDAMHOME/bin"
 
 # Make sure that CTERDAMBIN exists (if exists, nothing changes)
 mkdir -p $CTERDAMBIN
@@ -184,9 +195,9 @@ batdiff() {
 # Uncomment this function to use bat for git diff command
 # git() {
 #     if [ "$1" = "diff" ]; then
-# 		# Eat the 'diff'
-# 		shift
-# 		batdiff $@
+#       # Eat the 'diff'
+#       shift
+#       batdiff $@
 #     else
 #         command git "$@"
 #     fi

@@ -10,13 +10,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - In the Mac terminal, type `git` to trigger downloading developer tools.
 
-  - Once git is installed, run these:
-
-    ```zsh
-    git config --global user.name "cterdam"
-    git config --global user.email "<llz.joshlee@gmail.com>"
-    ```
-
 - Log in to [Github](https://github.com/) and follow its [tutorial][GHSSH] to
   set up a new SSH key.
 

@@ -584,8 +584,8 @@ function! s:show_documentation()
 endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-" This seems to have no effect.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" This seems to have no effect, and interferes with cursorline. So not using it.
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap <C-f> and <C-b> to scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
