@@ -102,18 +102,18 @@ fi
 
 # RIME =======================================================================
 
-# cterdamrimerc directory for all Rime dotfiles
-cterdamrimerc="$CTERDAMRC/cterdam.rime"
+# cterdamrime directory for all Rime dotfiles
+cterdamrime="$CTERDAMRC/cterdam.rime"
 
 # Location for Rime config folder
 rimeloc="$HOME/Library/Rime"
 
-# Symlink all rime rc files into the correct location for Rime
-for cterdamrimercfile in $cterdamrimerc/*
+# Symlink all rime files into the correct location for Rime
+for cterdamrimefile in $cterdamrime/*
 do
-    rimercfile="$rimeloc/$(basename $cterdamrimercfile)"
-    if [[ ! -f $rimercfile ]]; then
-        ln -s $cterdamrimercfile $rimercfile
+    rimefileloc="$rimeloc/$(basename $cterdamrimefile)"
+    if [[ ! -f $rimefileloc ]]; then
+        ln -s $cterdamrimefile $rimefileloc
     fi
 done
 
@@ -138,8 +138,8 @@ rc () {
             $EDITOR $cterdamtmuxconf
             ;;
         rime)
-            echo "Entering $cterdamrimerc"
-            cd $cterdamrimerc
+            echo "Entering $cterdamrime"
+            cd $cterdamrime
             ;;
         -h)
             echo "Available configs: vi(m), coc, git, zsh, tmux, rime"
@@ -167,11 +167,11 @@ mkdir -p $CTERDAMBIN
 # Symlink all vim binaries from homebrew to CTERDAMBIN, if not already present
 # Reason is homebrew on Mac installs vim with more options than the default vim
 homebrewbinloc="/opt/homebrew/bin"
-for hbvimbin in $homebrewbinloc/(*vim*|vi)
+for homebrewvimbin in $homebrewbinloc/(*vim*|vi)
 do
-    slvimbin="$CTERDAMBIN/$(basename $hbvimbin)" 
-    if [[ ! -f $slvimbin ]]; then
-        ln -s $hbvimbin $slvimbin
+    cterdamvimbin="$CTERDAMBIN/$(basename $homebrewvimbin)" 
+    if [[ ! -f $cterdamvimbin ]]; then
+        ln -s $homebrewvimbin $cterdamvimbin
     fi
 done
 
