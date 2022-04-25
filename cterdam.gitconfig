@@ -1,5 +1,5 @@
 [user]
-	name = cterdam
+    name = cterdam
     email = <llz.joshlee@gmail.com>
 
 [core]
@@ -9,10 +9,10 @@
     diffFilter = delta --color-only
 
 [delta]
-	navigate = true  # use n and N to move between diff sections
-	line-numbers = true
-	side-by-side = true
-	hyperlinks = true
+    navigate = true  # use n and N to move between diff sections
+    line-numbers = true
+    side-by-side = true
+    hyperlinks = true
 
 [merge]
     conflictstyle = diff3
