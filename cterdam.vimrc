@@ -483,8 +483,8 @@ let g:coc_global_extensions = [
     \'coc-json',
     \'coc-markdownlint',
     \'coc-pyright',
-	\'coc-sh',
-	\'coc-vimlsp'
+    \'coc-sh',
+    \'coc-vimlsp'
     \]
 " run individual extension commands like this :CocCommand python.runLinting
 " Extension config options are set in :CocConfig
@@ -492,20 +492,20 @@ let g:coc_global_extensions = [
 " Individual WhatIs:
 " coc-calc: autocomplete mathematical expression calculations. 
 " coc-clangd: C-language family extension.
-" 	Requires Node.js and clangd in PATH.
+"   Requires Node.js and clangd in PATH.
 " coc-json: json file extension.
 " coc-markdownlint: markdown file extension.
 " coc-pyright: pyright extension for python.
 " coc-sh: SH language extension.
-" 	Requires bash-language-server.
+"   Requires bash-language-server.
 " coc-vimlsp: vimscript language extension.
 
 " Settings:
 " Most config options for coc extensions should be set in :CocConfig
 " coc-vimlsp:
 let g:markdown_fenced_languages = [
-	\ 'vim',
-	\ 'help'
+    \ 'vim',
+    \ 'help'
     \]
 
 " The following config are partially adapted from COC's sample config README:
@@ -534,12 +534,12 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" <C-space> to trigger completion
-if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-else
-    inoremap <silent><expr> <c-@> coc#refresh()
-endif
+" Uncomment this block to use <C-space> to trigger completion
+" if has('nvim')
+"     inoremap <silent><expr> <c-space> coc#refresh()
+" else
+"     inoremap <silent><expr> <c-@> coc#refresh()
+" endif
 
 " <CR> to auto-select the first completion item and format on enter
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
@@ -590,19 +590,19 @@ endfunction
 " Remap <C-f> and <C-b> to scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f>
-			  \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+              \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   nnoremap <silent><nowait><expr> <C-b>
-			  \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+              \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
   inoremap <silent><nowait><expr> <C-f>
-			  \ coc#float#has_scroll() ?
-			  \ "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+              \ coc#float#has_scroll() ?
+              \ "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
   inoremap <silent><nowait><expr> <C-b>
-			  \ coc#float#has_scroll() ?
-			  \ "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+              \ coc#float#has_scroll() ?
+              \ "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
   vnoremap <silent><nowait><expr> <C-f>
-			  \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+              \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b>
-			  \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+              \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Edit =======================================================================
@@ -642,7 +642,8 @@ command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " `:OR` command to organize imports of the current buffer
-command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR :call 
+    \ CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " }}}
 " NERDTREE {{{
