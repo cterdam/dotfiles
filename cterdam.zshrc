@@ -19,7 +19,7 @@ fi
 #   - CTERDAMBIN
 
 # CTERDAMHOME directory to hold all my terminal material
-CTERDAMHOME="$HOME/cterdam"
+export CTERDAMHOME="$HOME/cterdam"
 
 # Make sure that CTERDAMHOME exists (if exists, nothing changes)
 mkdir -p $CTERDAMHOME
@@ -29,7 +29,7 @@ mkdir -p $CTERDAMHOME
 
 # CTERDAMRC directory to hold all cterdam's custom rc files
 # CTERDAMRC should be named dotfiles as cloned from my git repo.
-CTERDAMRC="$CTERDAMHOME/dotfiles"
+export CTERDAMRC="$CTERDAMHOME/dotfiles"
 
 # These rc file names should all start with "cterdam" as in my git repo.
 # The files are all symlinked to their default location.
@@ -159,7 +159,7 @@ rc () {
 
 # CTERDAMBIN directory to hold all my executables.
 # This will be given priority in PATH.
-CTERDAMBIN="$CTERDAMHOME/bin"
+export CTERDAMBIN="$CTERDAMHOME/bin"
 
 # Make sure that CTERDAMBIN exists (if exists, nothing changes)
 mkdir -p $CTERDAMBIN
