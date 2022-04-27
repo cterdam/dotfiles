@@ -73,6 +73,7 @@ set background=dark
 highlight SignColumn ctermbg=black ctermfg=yellow
 
 " vim-hexokinase needs this to display text code colors
+" This also makes vim appear weird outside tmux, but why use vim without tmux?
 set termguicolors
 
 " Set Vim-specific sequences for RGB colors,
