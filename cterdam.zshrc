@@ -297,15 +297,12 @@ inpath() {
 
 # Adds something to PATH, head or tail
 addpath() {
-    if [[ $1 == "-h" || $2 == "" ]]; then
-        echo "Usage: addpath TARGET [head|tail]"
-        return
-    fi
-
     if [[ $2 == "head" ]]; then
         export PATH="$1:$PATH"
     elif [[ $2 == "tail" ]]; then
         export PATH="$PATH:$1"
+    elif [[ $2 == "" ]]; then
+        echo "Usage: addpath TARGET [head|tail]"
     else
         echo "Unknown option: $2"
     fi
@@ -313,15 +310,13 @@ addpath() {
 
 # Deletes something from PATH, if present
 delpath() {
-    if [[ $1 == "-h" || $2 == "" ]]; then
-        echo "Usage: delpath TARGET [first|all]"
-        return
-    fi
-
     if [[ $2 == "first" ]]; then
         findstr="s%:$1%%"
     elif [[ $2 == "all" ]]; then
         findstr="s%:$1%%g"
+    elif [[ $2 == "" ]]; then
+        echo "Usage: delpath TARGET [first|all]"
+        return
     else
         echo "Unknown option: $2"
         return
