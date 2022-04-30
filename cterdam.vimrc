@@ -51,8 +51,8 @@ set pastetoggle=<C-q>
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
 
-" <Leader><Space> to reset conceal
-map <Leader><Space> :set conceallevel=0<CR>
+" <Leader>| to reset conceal
+map <Leader>\| :set conceallevel=0<CR>
 
 " }}}
 " INTERFACE {{{
@@ -447,6 +447,9 @@ Plug 'itchyny/vim-cursorword'
 " Requires golang
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
+" vim-better-whitespace for highlighting and removing trailing whitespaces
+Plug 'ntpeters/vim-better-whitespace'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -491,7 +494,7 @@ let g:coc_global_extensions = [
 " Extension config options are set in :CocConfig
 
 " Individual WhatIs:
-" coc-calc: autocomplete mathematical expression calculations. 
+" coc-calc: autocomplete mathematical expression calculations.
 " coc-clangd: C-language family extension.
 "   Requires Node.js and clangd in PATH.
 " coc-json: json file extension.
@@ -632,7 +635,7 @@ command! -nargs=0 Format :call CocActionAsync('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " `:OR` command to organize imports of the current buffer
-command! -nargs=0 OR :call 
+command! -nargs=0 OR :call
     \ CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " }}}
@@ -669,7 +672,7 @@ let g:undotree_TreeNodeShape = '*'
 " Hide guide text but still type '?' for help
 let g:undotree_HelpLine = 0
 
-" Limit tree window to 25 chars wide 
+" Limit tree window to 25 chars wide
 let g:undotree_SplitWidth = 25
 
 " Limit preview window to 10 chars high
@@ -796,10 +799,10 @@ function! StatusDiagnostic() abort
     let info = get(b:, 'coc_diagnostic_info', {})
     if empty(info) | return '' | endif
     let msgs = []
-    
+
     " Display the number of errors even if it's 0
     call add(msgs, '!' . info['error'])
-    
+
     " Display the number of warnings even if it's 0
     call add(msgs, '?' . info['warning'])
 
@@ -817,18 +820,6 @@ map <Leader>w <Plug>ToggleDiffSave<CR>
 
 " Activate the gruvbox colorscheme
 autocmd vimenter * ++nested colorscheme gruvbox
-
-" The gruvbox wiki recommends the following settings to get single cursor
-" color while searching, so it's easier to locate the cursor. However, no
-" difference was observed.
-
-" nnoremap <silent> [oh :call gruvbox#hls_show()<CR>
-" nnoremap <silent> ]oh :call gruvbox#hls_hide()<CR>
-" nnoremap <silent> coh :call gruvbox#hls_toggle()<CR>
-
-" nnoremap * :let @/ = ""<CR>:call gruvbox#hls_show()<CR>*
-" nnoremap / :let @/ = ""<CR>:call gruvbox#hls_show()<CR>/
-" nnoremap ? :let @/ = ""<CR>:call gruvbox#hls_show()<CR>?
 
 " }}}
 " GOYO {{{
@@ -879,7 +870,7 @@ let g:mkdp_echo_preview_url = 1
 
 " use a custom markdown style must be absolute path
 " This file enables previewing Github-flavored Markdown
-let g:mkdp_markdown_css = expand("$CTERDAMRC") . 
+let g:mkdp_markdown_css = expand("$CTERDAMRC") .
             \"/github-markdown-css/github-markdown.css"
 
 " <Leader>m to toggle preview window
@@ -905,5 +896,43 @@ let g:Hexokinase_optInPatterns = [
 
 " <Leader>k to toggle colorizing
 map <Leader>k :HexokinaseToggle<CR>
+
+" }}}
+" VIM-BETTER-WHITESPACE {{{
+
+" Use red color to highlight trailing whitespace
+let g:better_whitespace_ctermcolor='red'
+let g:better_whitespace_guicolor=g:better_whitespace_ctermcolor
+
+" Highlight trailing whitespace
+let g:better_whitespace_enabled=1
+
+" Do not strip trailing whitespace on save
+let g:strip_whitespace_on_save=0
+
+" <Leader>Space to toggle highlighting trailing whitespace
+map <Leader><Space> :ToggleWhitespace<CR>
+
+" <C-Space> to strip trailing whitespace on the entire file, or with a range.
+map <C-@> :StripWhitespace<CR>
+
+" Disable the built-in operator mapping to clean whitespace
+let g:better_whitespace_operator=''
+
+" Do not strip empty lines at the end of the file when stripping whitespace
+let g:strip_whitelines_at_eof=0
+
+" Highlight space characters that appear before or in-between tabs
+let g:show_spaces_that_precede_tabs=1
+
+" Do not ignore lines that contain only whitespace
+let g:better_whitespace_skip_empty_lines=0
+
+" Navigate to the previous or next trailing whitespace
+nnoremap [<Space> :PrevTrailingWhitespace<CR>
+nnoremap ]<Space> :NextTrailingWhitespace<CR>
+
+" Won't hurt to give more info
+let g:better_whitespace_verbosity=1
 
 " }}}
