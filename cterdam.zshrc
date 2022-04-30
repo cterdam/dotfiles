@@ -278,6 +278,12 @@ unset __conda_setup
 # (assumes no ':' in directory names)
 alias showpath='echo $PATH | tr ":" "\n"'
 
+# Prints the number of directories currently in PATH
+pathcount() {
+    count=$(showpath | wc -l)
+    echo $count
+}
+
 # Returns true iff argument in PATH
 inpath() {
     # Alternative one-line implementation
