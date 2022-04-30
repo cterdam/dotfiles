@@ -453,6 +453,9 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " vim-better-whitespace for highlighting and removing trailing whitespaces
 Plug 'ntpeters/vim-better-whitespace'
 
+" rainbow to colorize different levels of parentheses
+Plug 'luochen1990/rainbow'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -603,8 +606,8 @@ endif
 
 " Edit =======================================================================
 
-" <Leader>rn to rename current symbol
-nmap <leader>rn <Plug>(coc-rename)
+" <Leader>2 to rename current symbol
+nmap <leader>2 <Plug>(coc-rename)
 
 " <Leader>f to format selected code
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -931,5 +934,26 @@ nnoremap ]<Space> :NextTrailingWhitespace<CR>
 
 " Won't hurt to give more info
 let g:better_whitespace_verbosity=1
+
+" }}}
+" RAINBOW {{{
+
+" Disable colorizing parens by default
+let g:rainbow_active = 0
+
+" <Leader>r to toggle rainbow coloring
+map <Leader>r :RainbowToggle<CR>
+
+" Supply color hierarchy for raindow
+let g:rainbow_conf = {
+\	'guifgs': ['red', 'orange', 'yellow', 'green', 'lightblue', 'blue',
+        \'purple'],
+\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\	'guis': [''],
+\	'cterms': [''],
+\	'operators': '_,_',
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold',
+        \'start=/{/ end=/}/ fold']
+\}
 
 " }}}
