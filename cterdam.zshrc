@@ -169,7 +169,7 @@ mkdir -p $CTERDAMBIN
 homebrewbinloc="/opt/homebrew/bin"
 for homebrewvimbin in $homebrewbinloc/(*vim*|vi)
 do
-    cterdamvimbin="$CTERDAMBIN/$(basename $homebrewvimbin)" 
+    cterdamvimbin="$CTERDAMBIN/$(basename $homebrewvimbin)"
     if [[ ! -f $cterdamvimbin ]]; then
         ln -s $homebrewvimbin $cterdamvimbin
     fi
@@ -315,23 +315,43 @@ inpath() {
     fi
 }
 
-# Adds something to PATH, head or tail, if not already included
+# Adds something to PATH, head or tail
 addpath() {
-    if ! inpath $1; then
-        if [[ $2 == "head" ]]; then
-            export PATH="$1:$PATH"
-        else # default on tail
-            export PATH="$PATH:$1"
-        fi
+    if [[ $1 == "-h" || $2 == "" ]]; then
+        echo "Usage: addpath TARGET [head|tail]"
+        return
+    fi
+
+    if [[ $2 == "head" ]]; then
+        export PATH="$1:$PATH"
+    elif [[ $2 == "tail" ]]; then
+        export PATH="$PATH:$1"
+    else
+        echo "Unknown option: $2"
     fi
 }
 
 # Deletes something from PATH, if present
 delpath() {
-    export PATH=$(echo :$PATH | sed "s%:$1%%g" | sed "s%^:%%g")
+    if [[ $1 == "-h" || $2 == "" ]]; then
+        echo "Usage: delpath TARGET [first|all]"
+        return
+    fi
+
+    if [[ $2 == "first" ]]; then
+        findstr="s%:$1%%"
+    elif [[ $2 == "all" ]]; then
+        findstr="s%:$1%%g"
+    else
+        echo "Unknown option: $2"
+        return
+    fi
+
+    export PATH=$(echo :$PATH | sed $findstr | sed "s%^:%%g")
 }
 
 # Prepend CTERDAMBIN if not included aleady
-addpath $CTERDAMBIN head
-
+if ! inpath $CTERDAMBIN; then
+    addpath $CTERDAMBIN head
+fi
 # }}}
