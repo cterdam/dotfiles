@@ -306,7 +306,7 @@ alias showpath='echo $PATH | tr ":" "\n"'
 
 # Returns true iff argument in PATH
 inpath() {
-    # Altrenative one-line implementation
+    # Alternative one-line implementation
     # [[ :$PATH: == *:$1:* ]]
     if [[ :$PATH: == *:$1:* ]]; then
         true
@@ -324,6 +324,11 @@ addpath() {
             export PATH="$PATH:$1"
         fi
     fi
+}
+
+# Deletes something from PATH, if present
+delpath() {
+    export PATH=$(echo :$PATH | sed "s%:$1%%g" | sed "s%^:%%g")
 }
 
 # Prepend CTERDAMBIN if not included aleady
