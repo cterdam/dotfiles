@@ -57,6 +57,9 @@ map <Leader>\| :set conceallevel=0<CR>
 " }}}
 " INTERFACE {{{
 
+" Activate the gruvbox colorscheme
+autocmd vimenter * ++nested colorscheme gruvbox
+
 " Always show at least 5 lines above/below cursor when available
 set scrolloff=5
 
@@ -814,12 +817,6 @@ endfunction
 
 " <Leader>w to toggle the diffsave window
 map <Leader>w <Plug>ToggleDiffSave<CR>
-
-" }}}
-" GRUVBOX {{{
-
-" Activate the gruvbox colorscheme
-autocmd vimenter * ++nested colorscheme gruvbox
 
 " }}}
 " GOYO {{{
