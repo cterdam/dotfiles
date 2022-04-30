@@ -192,17 +192,6 @@ batdiff() {
     command git diff --name-only --diff-filter=d $@ | xargs bat --diff
 }
 
-# Uncomment this function to use bat for git diff command
-# git() {
-#     if [ "$1" = "diff" ]; then
-#       # Eat the 'diff'
-#       shift
-#       batdiff $@
-#     else
-#         command git "$@"
-#     fi
-# }
-
 # Use bat to view man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
@@ -218,48 +207,33 @@ export ZSH="/Users/sterdam/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
 ZSH_THEME="candy"
 
-# Use case-sensitive completion
-CASE_SENSITIVE="true"
+# Use case-insensitive completion
+CASE_SENSITIVE="false"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Use hyphen-insensitive completion. Treat _ and - interchangeably.
+HYPHEN_INSENSITIVE="true"
 
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+# Just remind me to update when it's time
+zstyle ':omz:update' mode reminder
 
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+# Trigger auto-update every 13 days
+zstyle ':omz:update' frequency 13
 
 # Disable auto-setting terminal title
 DISABLE_AUTO_TITLE="true"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# Enable command auto-correction.
+ENABLE_CORRECTION="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
+# Display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# Mark untracked files under VCS as dirty,
+# at the expense of repo status check speed.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+# Manage the command execution time stamp shown in the history command output.
+HIST_STAMPS="yyyy-mm-dd"
 
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
