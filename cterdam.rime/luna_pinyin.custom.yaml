@@ -1,0 +1,6 @@
+patch:
+  schema/name: 明月拼音
+  switches:
+    - name: simplification
+      states: [ 漢字, 汉字 ]
+      reset: 0
