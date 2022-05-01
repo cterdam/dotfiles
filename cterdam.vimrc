@@ -57,9 +57,6 @@ map <Leader>\| :set conceallevel=0<CR>
 " }}}
 " INTERFACE {{{
 
-" Activate the gruvbox colorscheme
-autocmd vimenter * ++nested colorscheme gruvbox
-
 " Always show at least 5 lines above/below cursor when available
 set scrolloff=5
 
@@ -433,8 +430,10 @@ Plug 'airblade/vim-gitgutter'
 " vim-diffsave for viewing file diff against disk save"
 Plug 'cterdam/vim-diffsave'
 
-" gruvbox for colorscheme
+" gruvbox, monokai, and dracula colorschemes
 Plug 'morhetz/gruvbox'
+Plug 'sickill/vim-monokai'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " goyo for focused writing
 Plug 'junegunn/goyo.vim'
@@ -820,6 +819,51 @@ endfunction
 
 " <Leader>w to toggle the diffsave window
 map <Leader>w <Plug>ToggleDiffSave<CR>
+
+" }}}
+" GRUVBOX {{{
+
+" Enable bold text
+let g:gruvbox_bold=1
+
+" Enable italics text
+let g:gruvbox_italic=1
+
+" Italicize comments
+let g:gruvbox_italicize_comments=1
+
+" Italicize strings
+let g:gruvbox_italicize_strings=1
+
+" Enable underlined text
+let g:gruvbox_underline=1
+
+" Enable undercurled text
+let g:gruvbox_undercurl=1
+
+" Use 256-color palette (as opposed to 16)
+let g:gruvbox_termcolors=256
+
+" Set contrast for dark mode. Possible values: 'soft', 'medium', 'hard'
+let g:gruvbox_contrast_dark='hard'
+
+" Set contrast for dark mode. Possible values: 'soft', 'medium', 'hard'
+let g:gruvbox_contrast_light='hard'
+
+" Color the color column red. Also possible for number colomn and sign column
+let g:gruvbox_color_column='red'
+
+" Do not invert background color of selected text
+let g:gruvbox_invert_selection=0
+
+" Do not invert signs in the sign column
+let g:gruvbox_invert_signs=0
+
+" Do not extrahighlight string background
+let g:gruvbox_improved_strings=0
+
+" Activate the gruvbox colorscheme
+autocmd vimenter * ++nested colorscheme gruvbox
 
 " }}}
 " GOYO {{{
