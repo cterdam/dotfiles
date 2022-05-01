@@ -2,10 +2,6 @@ patch:
   translator/enable_completion: false
   switches:
     - options: [ simplification, noop ]
-      states: [ 大陆简化汉字, 傳統漢字 ]
-      # 修改下行，改變預設用字 [0, 1, 2, 3 --> 對應上表]
-      # Edit the following line to change the default character style
-      #    [0 = Mainland Simplified Chinese; 1 = Hong Kong TC; 2 = Taiwan TC; 3 = OpenCC Traditional Chinese]
-      # Or remove to remember user setting
+      states: [ 汉字, 漢字 ]
+      # Default on simplified
       reset: 0
-

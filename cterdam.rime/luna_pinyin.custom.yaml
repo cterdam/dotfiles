@@ -3,4 +3,5 @@ patch:
   switches:
     - name: simplification
       states: [ 漢字, 汉字 ]
-      reset: 0
+      # Default on simplified
+      reset: 1
