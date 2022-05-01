@@ -938,6 +938,9 @@ let g:Hexokinase_optInPatterns = [
 \     'colour_names'
 \ ]
 
+" Disable colorizing by default
+autocmd vimenter * :HexokinaseToggle
+
 " <Leader>k to toggle colorizing
 map <Leader>k :HexokinaseToggle<CR>
 
