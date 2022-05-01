@@ -1,7 +1,7 @@
 patch:
   translator/enable_completion: false
   switches:
-    - options: [ simplification, noop ]
-      states: [ 汉字, 漢字 ]
+    - options: [ noop, simplification ]
+      states: [ 漢字, 汉字 ]
       # Default on simplified
-      reset: 0
+      reset: 1
