@@ -1,5 +1,4 @@
 patch:
-  translator/enable_completion: false
   switches:
     - options: [ noop, simplification ]
       states: [ 漢字, 汉字 ]
