@@ -130,14 +130,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
     ```
 
-  - Restart shell, then restart again. Now type `Prefix + I` to install tmux
-    plugins.
+  - Restart shell, then restart again. Now type `Prefix` `Shift + I` to
+    install tmux plugins.
 
-    - `Prefix` is the tmux prefix, by default `Ctrl+b`. `I` is the capital
-      letter, so `Shift + i`.
+    - `Prefix` is the tmux prefix, by default `Ctrl+b`.
 
-  - We are about to start vim. But, to prevent COC from throwing permission
-    errors, first reset permissions for the `$HOME/.config` folder:
+  - To prevent COC from throwing permission errors in vim, first reset
+    permissions for the `$HOME/.config` folder:
 
     ```zsh
     sudo chown -R $(whoami) $HOME/.config
@@ -181,13 +180,29 @@ https://github.com/RRethy/vim-hexokinase
 
 ### Macvim
 
-To open any file with vim, install [MacVim][MACVIM].
+To conveniently open files with vim from Finder, install [MacVim][MACVIM].
 
 Open MacVim Preferences, and set "After last window closes" to "Quit
 MacVim".
 
-Then for any filetype to open with Vim, just select a file, press Command + i,
-change the default open-with app to MacVim, and click on "Change All...".
+#### Register filetypes to open with MacVim
+
+In Finder, navigate to `$CTERDAMRC/fts/dummy`. Select all files, and press
+`Command + Option + I`. Select MacVim in the "Open with" menu, and click on
+"Change All...".
+
+#### Adding new filetypes
+
+Append the new filetype extension name, without the dot, as a new line into
+`$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
+
+Then, while in `$CTERDAMRC/fts`, run this to repopulate the `dummy` folder:
+
+```zsh
+mkdir -p dummy; while read -r line ; do mkfile 1b dummy/dummy.${line} ; done < ftlist
+```
+
+Then, follow instructions in the last section to register the new filetypes.
 
 [MACVIM]:
 https://macvim-dev.github.io/macvim/

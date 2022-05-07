@@ -141,6 +141,9 @@ rc () {
             echo "Entering $cterdamrime"
             cd $cterdamrime
             ;;
+        readme)
+            $EDITOR $CTERDAMRC/README.md
+            ;;
         -h)
             echo "Available configs: vi(m), coc, git, zsh, tmux, rime"
             ;;
