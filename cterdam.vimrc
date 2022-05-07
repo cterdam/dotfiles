@@ -55,6 +55,18 @@ set notimeout nottimeout
 map <Leader>\| :set conceallevel=0<CR>
 
 " }}}
+" GUI"{{{
+
+" Set gui font to be displayed in MacVim
+set guifont=Monaco:h20
+
+" gui displays block cursor in all modes
+set guicursor=n-v-c-i:block-Cursor
+
+" Disable gui cursor blinking
+set guicursor+=a:blinkon0
+
+"}}}
 " INTERFACE {{{
 
 " Always show at least 5 lines above/below cursor when available
