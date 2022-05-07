@@ -80,7 +80,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install other UNIX tools:
 
   ```zsh
-  brew install bat git-delta less tree 
+  brew install bat git-delta less tree
   ```
 
 - Install [Rime](https://rime.im/).
@@ -178,6 +178,19 @@ https://github.com/rime/plum
 
 [HEXO]:
 https://github.com/RRethy/vim-hexokinase
+
+### Macvim
+
+To open any file with vim, install [MacVim][MACVIM].
+
+Open MacVim Preferences, and set "After last window closes" to "Quit
+MacVim".
+
+Then for any filetype to open with Vim, just select a file, press Command + i,
+change the default open-with app to MacVim, and click on "Change All...".
+
+[MACVIM]:
+https://macvim-dev.github.io/macvim/
 
 ## Submodules
 
