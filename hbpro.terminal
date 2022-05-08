@@ -102,6 +102,8 @@
 	AKkArACwALIAtAC2AL8AxADKANIA1ADWANgA2hJ6En8SihKTEqASoxKwErkSvhLGAAAA
 	AAAAAgEAAAAAAAAAKgAAAAAAAAAAAAAAAAAAEsk=
 	</data>
+	<key>CommandString</key>
+	<string></string>
 	<key>CursorBlink</key>
 	<false/>
 	<key>DisableANSIColor</key>
@@ -119,6 +121,8 @@
 	<true/>
 	<key>ProfileCurrentVersion</key>
 	<real>2.0699999999999998</real>
+	<key>RunCommandAsShell</key>
+	<true/>
 	<key>SelectionColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMS
@@ -127,6 +131,38 @@
 	bmFtZVgkY2xhc3Nlc1dOU0NvbG9yohYYWE5TT2JqZWN0CBEaJCkyN0lMUVNXXWRqd36J
 	i42SnaausQAAAAAAAAEBAAAAAAAAABkAAAAAAAAAAAAAAAAAAAC6
 	</data>
+	<key>ShowActiveProcessArgumentsInTabTitle</key>
+	<false/>
+	<key>ShowActiveProcessArgumentsInTitle</key>
+	<false/>
+	<key>ShowActiveProcessInTabTitle</key>
+	<false/>
+	<key>ShowActiveProcessInTitle</key>
+	<false/>
+	<key>ShowActivityIndicatorInTab</key>
+	<false/>
+	<key>ShowCommandKeyInTitle</key>
+	<false/>
+	<key>ShowDimensionsInTitle</key>
+	<false/>
+	<key>ShowRepresentedURLInTabTitle</key>
+	<false/>
+	<key>ShowRepresentedURLInTitle</key>
+	<false/>
+	<key>ShowRepresentedURLPathInTabTitle</key>
+	<false/>
+	<key>ShowRepresentedURLPathInTitle</key>
+	<false/>
+	<key>ShowShellCommandInTitle</key>
+	<false/>
+	<key>ShowTTYNameInTabTitle</key>
+	<false/>
+	<key>ShowTTYNameInTitle</key>
+	<false/>
+	<key>ShowTerminalInDockIcon</key>
+	<true/>
+	<key>ShowWindowSettingsNameInTitle</key>
+	<false/>
 	<key>StrictVTKeypad</key>
 	<false/>
 	<key>TextBoldColor</key>
@@ -149,10 +185,16 @@
 	<true/>
 	<key>UseBrightBold</key>
 	<true/>
+	<key>VisualBell</key>
+	<false/>
+	<key>VisualBellOnlyWhenMuted</key>
+	<false/>
 	<key>columnCount</key>
 	<integer>86</integer>
 	<key>name</key>
 	<string>hbpro</string>
+	<key>shellExitAction</key>
+	<integer>0</integer>
 	<key>type</key>
 	<string>Window Settings</string>
 	<key>useOptionAsMetaKey</key>

@@ -145,7 +145,7 @@ rc () {
             $EDITOR $CTERDAMRC/README.md
             ;;
         -h)
-            echo "Available configs: vi(m), coc, git, zsh, tmux, rime"
+            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme"
             ;;
         '')
             echo "Entering $CTERDAMRC"
@@ -180,6 +180,9 @@ done
 
 # }}}
 # GENERAL {{{
+
+# wait 10 ms for key sequences to solve Vim Esc delay
+export KEYTIMEOUT=1
 
 # Edit anything with vim
 export EDITOR="vim"
