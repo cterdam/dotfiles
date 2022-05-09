@@ -180,6 +180,8 @@ https://github.com/RRethy/vim-hexokinase
 
 ### Macvim
 
+Finish with the above instructions first.
+
 To conveniently open files with vim from Finder, install [MacVim][MACVIM].
 
 Open MacVim Preferences, and set "After last window closes" to "Quit
@@ -187,20 +189,30 @@ MacVim".
 
 #### Register filetypes to open with MacVim
 
-In Finder, navigate to `$CTERDAMRC/fts/dummy`. Select all files, and press
-`Command + Option + I`. Select MacVim in the "Open with" menu, and click on
-"Change All...".
+Open this location in Finder:
+
+```zsh
+cd $CTERDAMRC/fts/dummy
+open .
+```
+
+Select all files, and press `Command + Option + I`. Select MacVim in the "Open
+with" menu, and click on "Change All...".
 
 #### Adding new filetypes
 
 Append the new filetype extension name, without the dot, as a new line into
 `$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
 
-Then, while in `$CTERDAMRC/fts`, run this to repopulate the `dummy` folder:
+- After inserting, sort all lines in the file. This can be done either in vim
+  by `:1,%sort`, or in the shell with `sort -o $CTERDAMRC/fts/ftlist{,}`.
 
-```zsh
-mkdir -p dummy; while read -r line ; do mkfile 1b dummy/dummy.${line} ; done < ftlist
-```
+Then repopulate the `dummy` folder with command `repopft`. It may simply
+create the needed new file(s), or print out other diagnostic messages. Follow
+them to fix the `dummy` folder and the `ftlist` file.
+
+- If things are complicated, just remove the `dummy` directory altogether, and
+  run `repopft` again.
 
 Then, follow instructions in the last section to register the new filetypes.
 

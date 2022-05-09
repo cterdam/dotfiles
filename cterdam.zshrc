@@ -157,6 +157,75 @@ rc () {
     esac
 }
 
+# Repopulate/diagnose the directory collecting all listed filetypes
+repopft() {
+
+    # fts: The directory that contains:
+    # - ftlist: a file listing all filetype extensions
+    # - dummy: a subdir hosting a dummy file for each extension
+    ftdir=$CTERDAMRC/fts
+
+    # Make sure this dir exists
+    mkdir -p $ftdir/dummy
+
+    # ====== CHECK ONE ======
+
+    # Reset Error flag
+    fterr=0
+
+    # For each extension in ftlist, find corresponding file in dummy
+    while read -r line ; do
+        # Number of files with the given extension
+        count=$( (ls -1 $ftdir/dummy/*.${line}) 2>/dev/null |wc -l| stripspace)
+
+        # No file found, create one
+        if [[ $count -eq 0 ]] ; then
+            touch $ftdir/dummy/dummy.$line
+            echo "Created dummy.$line"
+            fterr=1
+
+        # More than one file found, report and do nothing
+        elif [[ $count -ge 2 ]] ; then
+            echo "Found duplicate files for extension $line"
+            fterr=1
+        fi
+    done < $ftdir/ftlist
+
+    # Report if no error is found
+    if [[ $fterr -ne 1 ]] ; then
+        echo "Each listed extension corresponds to exactly one dummy file."
+    fi
+
+    # ====== CHECK TWO ======
+
+    # Reset error flag
+    fterr=0
+
+    for dummyfile in $ftdir/dummy/* ; do
+        # Get extension of this file
+        thisext=$(extname $dummyfile)
+        # Number of exact one-line occurrences of this extension in list
+        count=$(grep -o "^"$thisext"$" $ftdir/ftlist | wc -l)
+
+        # No entry found for this file, report and do nothing
+        if [[ count -eq 0 ]] ; then
+            echo "No list entry found for filetype $thisext"
+            fterr=1
+
+        # Duplicate entries found, report and do nothing
+        elif [[ count -ge 2 ]] ; then
+            echo "Duplicate list entries found for filetype $thisext"
+            fterr=1
+        fi
+    done
+
+    # Report if no error is found
+    if [[ $fterr -ne 1 ]] ; then
+        echo "Each dummy file corresponds to exactly one list entry."
+    fi
+
+}
+
 # }}}
 # CTERDAMBIN {{{
 
@@ -203,6 +272,32 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Use gruvbox theme for bat
 export BAT_THEME="gruvbox-dark"
+
+# }}}
+# UTILS {{{
+
+# Strip string of starting and ending space characters
+# Supports piping
+stripspace() {
+    if [[ "$#" -ne 0 ]]; then
+        echo $@ | stripspace
+    else
+        sed "s/^ *//g" | sed "s/ *$//g"
+    fi
+}
+
+# Get the extension name of a file
+# Supports piping
+extname() {
+    if [[ "$#" -eq 0 ]]; then
+        local in
+        read in
+        $fileandextname=$in
+    else
+        fileandextname=$1
+    fi
+    echo "${fileandextname##*.}"
+}
 
 # }}}
 # OHMYZSH {{{
