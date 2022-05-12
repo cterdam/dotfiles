@@ -618,7 +618,7 @@ endif
 " Edit =======================================================================
 
 " <Leader>2 to rename current symbol
-nmap <leader>2 <Plug>(coc-rename)
+nmap <leader>r <Plug>(coc-rename)
 
 " <Leader>f to format selected code
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -1000,8 +1000,8 @@ let g:better_whitespace_verbosity=1
 " Disable colorizing parens by default
 let g:rainbow_active = 0
 
-" <Leader>r to toggle rainbow coloring
-map <Leader>r :RainbowToggle<CR>
+" <Leader>n to toggle rainbow coloring
+map <Leader>n :RainbowToggle<CR>
 
 " Supply color hierarchy for raindow
 let g:rainbow_conf = {
