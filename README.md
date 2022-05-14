@@ -221,13 +221,7 @@ https://macvim-dev.github.io/macvim/
 
 ## Submodules
 
-This repo uses the git feature called submodules. This means you can embed
-other git repoes inside this one. For example, I use
-[sindresorhus/github-markdown-css][GHCSS] to enable previewing markdown in the
-Github style. This is incorporated as a submodule.
-
-[GHCSS]:
-https://github.com/sindresorhus/github-markdown-css
+This repo makes use of git submodules for github-markdown-css and profile.
 
 If submodule folders appear empty after cloning, run this to download all
 submodules (and their submodules, if any):
