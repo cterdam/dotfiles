@@ -180,9 +180,8 @@ https://github.com/RRethy/vim-hexokinase
 
 ### Macvim
 
-Finish with the above instructions first.
-
-To conveniently open files with vim from Finder, install [MacVim][MACVIM].
+To conveniently open files with vim from Finder, after finishing the above
+instructions, install [MacVim][MACVIM].
 
 Open MacVim Preferences, and set "After last window closes" to "Quit
 MacVim".
@@ -219,9 +218,23 @@ Then, follow instructions in the last section to register the new filetypes.
 [MACVIM]:
 https://macvim-dev.github.io/macvim/
 
+## Profile
+
+Files related to personal information are stored in another private repo
+[`cterdam/profile`](https://github.com/cterdam/profile). To make it more
+accessible, after finishing with the above instructions, clone that repo into
+the `utility` directory:
+
+```
+cd $CTERDAMRC/utility
+git clone git@github.com:cterdam/profile.git
+```
+
+And drag the `utility` folder to the macOS Dock.
+
 ## Submodules
 
-This repo makes use of git submodules for github-markdown-css and profile.
+`github-markdown-css` is incorporated as a git submodule.
 
 If submodule folders appear empty after cloning, run this to download all
 submodules (and their submodules, if any):
