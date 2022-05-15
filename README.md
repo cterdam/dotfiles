@@ -6,18 +6,23 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Installing on a new Mac
 
-### Basic dependencies
+### 1. Basic dependencies
 
 - Download the [IBM Plex](https://www.ibm.com/plex/) font.
 
-  - Follow the link to the Github releases page. Download the OpenType font.
+  - Follow the link to the Github releases page. Download the OpenType font
+    from the latest release.
 
-  - To install, drag all subfolders of the `OpenType` folder to Font Book.
+  - To install, after decompressing, drag all subfolders of the `OpenType`
+    folder to Font Book.
 
 - In the Mac terminal, type `git` to trigger downloading developer tools.
 
 - Log in to [Github](https://github.com/) and follow its [tutorial][GHSSH] to
   set up a new SSH key.
+
+  [GHSSH]:
+  https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
 - Now make development directory:
 
@@ -36,13 +41,26 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Once the repo is downloaded, set up terminal appearance by importing
   `hbpro.terminal` to terminal profiles.
 
-### Install packages
+### 2. Programming Languages
 
-- Install [Oh My Zsh](https://ohmyz.sh/).
+- clang for C-family languages should come installed with the system.
 
 - Install [Anaconda](https://www.anaconda.com/).
 
-  - This should also install Jupyter, among [other packages][CONDAPKGLIST].
+  - This should also install Python3, Jupyter, among
+    [other packages](https://docs.anaconda.com/anaconda/packages/pkg-docs/).
+
+- Install [Java](https://www.oracle.com/java/technologies/downloads/).
+
+  - At time of writing, Java 17 is the latest LTS version.
+
+- Install [Golang](https://go.dev/).
+
+- Install [Node.js](https://nodejs.org/en/).
+
+### 3. Development Environment
+
+- Install [Oh My Zsh](https://ohmyz.sh/).
 
 - Install [homebrew](https://brew.sh/).
 
@@ -61,27 +79,29 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     evoked. This is because brew-installed apps are not given priority in PATH.
     Don't worry about it; `cterdam.zshrc` will fix this.
 
-  - Install [Node.js](https://nodejs.org/en/).
-
-    - This is for [COC][COC], [COC-clangd][COCCLANGD], and
-      [markdown-preview][MDPV].
-
   - Install [yarn](https://classic.yarnpkg.com/en/) with `sudo npm install
     --global yarn`.
 
     - This is for [markdown-preview][MDPV], and possibly some COC extensions.
 
+    [MDPV]: https://github.com/iamcco/markdown-preview.nvim
+
   - Install [Bash Language Server][BASHLS] with `sudo npm i -g
     bash-language-server`.
 
-    - This is for [COC-sh][COCSH].
+    [BASHLS]: https://github.com/bash-lsp/bash-language-server
 
-  - Install [Golang](https://go.dev/) for [vim-hexokinase][HEXO].
+    - This is for [COC-sh](https://github.com/josa42/coc-sh).
 
 - Install [tmux](https://github.com/tmux/tmux) with `brew install tmux`.
 
   - When it's done, install [Tmux Plugin Manager][TPM]. Don't worry about
-    installing actual plugins for now: `cterdam.tmux.conf` will take care of it.
+    installing actual plugins for now: `cterdam.tmux.conf` will take care of
+    it.
+
+    [TPM]: https://github.com/tmux-plugins/tpm
+
+### 4. Other Packages
 
 - Install other UNIX tools:
 
@@ -91,8 +111,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Rime](https://rime.im/).
 
-  - After installing Rime, install its [plum][PLUM] package manager. First
-    download it:
+  - After installing Rime, install its [plum](https://github.com/rime/plum)
+    package manager. First download it:
 
     ```zsh
     cd ~/cterdam
@@ -116,7 +136,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     sudo cpan install YAML::Tiny File::HomeDir Unicode::GCString
     ```
 
-### Activate shell scripts
+### 5. Activate shell scripts
 
 - We have not dealt with `zshrc` in the new system yet, but the Anaconda and Oh
   My Zsh installation scripts should have created one in the home directory.
@@ -152,91 +172,57 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Deploy Rime engine.
 
-- Everything is done!
+### 6. Macvim
 
-[GHSSH]:
-https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+- To conveniently open files with vim from Finder, after finishing the above
+  instructions, install [MacVim](https://macvim-dev.github.io/macvim/).
 
-[CONDAPKGLIST]:
-https://docs.anaconda.com/anaconda/packages/pkg-docs/
-
-[COC]:
-https://github.com/neoclide/coc.nvim
-
-[COCCLANGD]:
-https://github.com/clangd/coc-clangd
-
-[MDPV]:
-https://github.com/iamcco/markdown-preview.nvim
-
-[BASHLS]:
-https://github.com/bash-lsp/bash-language-server
-
-[COCSH]:
-https://github.com/josa42/coc-sh
-
-[TPM]:
-https://github.com/tmux-plugins/tpm
-
-[PLUM]:
-https://github.com/rime/plum
-
-[HEXO]:
-https://github.com/RRethy/vim-hexokinase
-
-### Macvim
-
-To conveniently open files with vim from Finder, after finishing the above
-instructions, install [MacVim][MACVIM].
-
-Open MacVim Preferences, and set "After last window closes" to "Quit
-MacVim".
+- Open MacVim Preferences, and set "After last window closes" to "Quit
+  MacVim".
 
 #### Register filetypes to open with MacVim
 
-Open this location in Finder:
+- Open this location in Finder:
 
-```zsh
-cd $CTERDAMRC/fts/dummy
-open .
-```
+  ```zsh
+  cd $CTERDAMRC/fts/dummy
+  open .
+  ```
 
-Select all files, and press `Command + Option + I`. Select MacVim in the "Open
-with" menu, and click on "Change All...".
+- Select all files, and press `Command + Option + I`. Select MacVim in the
+  "Open with" menu, and click on "Change All...".
 
 #### Adding new filetypes
 
-Append the new filetype extension name, without the dot, as a new line into
-`$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
+- Append the new filetype extension name, without the dot, as a new line into
+  `$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
 
-- After inserting, sort all lines in the file. This can be done either in vim
-  by `:1,%sort`, or in the shell with `sort -o $CTERDAMRC/fts/ftlist{,}`.
+  - After inserting, sort all lines in the file. This can be done either in
+    vim by `:1,%sort`, or in the shell with `sort -o
+    $CTERDAMRC/fts/ftlist{,}`.
 
-Then repopulate the `dummy` folder with command `repopft`. It may simply
-create the needed new file(s), or print out other diagnostic messages. Follow
-them to fix the `dummy` folder and the `ftlist` file.
+- Then repopulate the `dummy` folder with command `repopft`. It may simply
+  create the needed new file(s), or print out other diagnostic messages.
+  Follow them to fix the `dummy` folder and the `ftlist` file.
 
-- If things are complicated, just remove the `dummy` directory altogether, and
-  run `repopft` again.
+  - If things are complicated, just remove the `dummy` directory altogether,
+    and run `repopft` again.
 
-Then, follow instructions in the last section to register the new filetypes.
+- Then, follow instructions in the last section to register the new filetypes.
 
-[MACVIM]:
-https://macvim-dev.github.io/macvim/
+### 7. Profile
 
-## Profile
+- Files related to personal information are stored in another private repo
+  [`cterdam/profile`](https://github.com/cterdam/profile). To make it more
+  accessible, after finishing with the above instructions, clone that repo
+  into the `utility` directory:
 
-Files related to personal information are stored in another private repo
-[`cterdam/profile`](https://github.com/cterdam/profile). To make it more
-accessible, after finishing with the above instructions, clone that repo into
-the `utility` directory:
+  ```
+  cd $CTERDAMRC/utility
+  git clone git@github.com:cterdam/profile.git
+  ```
 
-```
-cd $CTERDAMRC/utility
-git clone git@github.com:cterdam/profile.git
-```
-
-And drag the `utility` folder to the macOS Dock.
+- And drag the `utility` folder to the macOS Dock.
 
 ## Submodules
 
