@@ -51,8 +51,11 @@ set pastetoggle=<C-q>
 " Do not timeout on ':'mappings or key codes
 set notimeout nottimeout
 
-" <Leader>| to reset conceal
-map <Leader>\| :set conceallevel=0<CR>
+" Use <C-n> to move to the next non-empty line
+nnoremap <C-n> :<C-u>call search('^.\+')<CR>
+
+" Use <C-p> to move to the previous non-empty line
+nnoremap <C-p> :<C-u>call search('^.\+', 'b')<CR>
 
 " }}}
 " GUI"{{{
