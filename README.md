@@ -6,7 +6,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Installing on a new Mac
 
-### Set up dependencies
+### Basic dependencies
+
+- Download the [IBM Plex](https://www.ibm.com/plex/) font.
+
+  - Follow the link to the Github releases page. Download the OpenType font.
+
+  - To install, drag all subfolders of the `OpenType` folder to Font Book.
 
 - In the Mac terminal, type `git` to trigger downloading developer tools.
 
