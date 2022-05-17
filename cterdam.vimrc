@@ -61,7 +61,7 @@ nnoremap <C-p> :<C-u>call search('^.\+', 'b')<CR>
 " GUI"{{{
 
 " Set gui font to be displayed in MacVim
-set guifont=Monaco:h20
+set guifont=IBM\ Plex\ Mono:h20
 
 " gui displays block cursor in all modes
 set guicursor=n-v-c-i:block-Cursor
