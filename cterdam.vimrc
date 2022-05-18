@@ -96,6 +96,16 @@ set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+" <Leader>v to toggle viewing invisible characters.
+function! ToggleList()
+    if(&list == 1)
+        set nolist
+    else
+        set list
+    endif
+endfunction
+map <Leader>v :call ToggleList()<CR>
+
 " }}}
 " LINE NUMBER {{{
 
