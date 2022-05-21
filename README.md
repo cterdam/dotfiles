@@ -183,6 +183,17 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Now run `vim` and it will auto install all plugins, including COC plugins.
 
+    - Currently, C# diagnostics and completion in Vim is supported by
+      [omnisharp-vim][ONSV], and not part of COC. Check if COC has an active
+      [extension][COCEX] for C#. If yes, switch away from omnisharp-vim. If
+      no, the existing script integrates omnisharp-vim well already. Just open
+      any `.cs` file and follow the instruction and type `Y` to download the
+      language server.
+
+      [ONSV]: https://github.com/OmniSharp/omnisharp-vim
+      [COCEX]: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+
+
   - Deploy Rime engine.
 
 ### 6. Macvim

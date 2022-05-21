@@ -480,6 +480,10 @@ Plug 'ntpeters/vim-better-whitespace'
 " rainbow to colorize different levels of parentheses
 Plug 'luochen1990/rainbow'
 
+" omnisharp-vim to provide completion and diagnostics for C#
+" So far, the only IDE plugin outside of COC
+Plug 'OmniSharp/omnisharp-vim'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -548,7 +552,7 @@ let g:markdown_fenced_languages = [
     \ 'help'
     \]
 
-" The following config are partially adapted from COC's sample config README:
+" The following config are adapted from COC's official sample vimrc:
 " Completion =================================================================
 
 " COC TextEdit might fail if hidden is not set
@@ -636,12 +640,12 @@ endif
 
 " Edit =======================================================================
 
-" <Leader>2 to rename current symbol
+" <Leader>r to rename current symbol
 nmap <leader>r <Plug>(coc-rename)
 
-" <Leader>f to format selected code
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" <Leader>= to format selected code
+xmap <leader>=  <Plug>(coc-format-selected)
+nmap <leader>=  <Plug>(coc-format-selected)
 
 " <Leader>a to apply codeAction to selected region
 " Example: `<leader>aap` for current paragraph
@@ -1033,5 +1037,75 @@ let g:rainbow_conf = {
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold',
         \'start=/{/ end=/}/ fold']
 \}
+
+" }}}
+" OMNISHARP-VIM {{{
+
+" The following config are adapted from omnisharp-vim's official sample vimrc:
+" ============================================================================
+
+augroup omnisharp_commands
+  autocmd!
+
+" Diagnostics ================================================================
+
+  " `go` to generate symbol outline
+  autocmd FileType cs nmap <silent> <buffer>
+    \ go :<Plug>(omnisharp_find_symbol)
+
+  " <Leader>g to populate the quickfix window with code errors/warnings
+  autocmd FileType cs nmap <silent> <buffer>
+    \ <Leader>g <Plug>(omnisharp_global_code_check)
+
+  " <C-k> to preview definition in pop-up
+  autocmd FileType cs nmap <silent> <buffer>
+    \ <C-k> <Plug>(omnisharp_preview_definition)
+
+  " <C-i> to preview implementation in pop-up
+  autocmd FileType cs nmap <silent> <buffer>
+    \ <C-i> <Plug>(omnisharp_preview_implementations)
+
+  " GoTo code navigation
+  autocmd FileType cs nmap <silent> <buffer>
+	\ gd <Plug>(omnisharp_go_to_definition)
+  autocmd FileType cs nmap <silent> <buffer>
+    \ gy <Plug>(omnisharp_type_lookup)
+  autocmd FileType cs nmap <silent> <buffer>
+    \ gi <Plug>(omnisharp_find_implementations)
+  autocmd FileType cs nmap <silent> <buffer>
+    \ gr <plug>(omnisharp_find_usages)
+  autocmd FileType cs nmap <silent> <buffer>
+    \ gm <Plug>(omnisharp_documentation)
+
+  " Edit =======================================================================
+
+  " [[ and ]] to navigate up and down by method/property/field
+  autocmd FileType cs nmap <silent> <buffer>
+    \ [[ <Plug>(omnisharp_navigate_up)
+  autocmd FileType cs nmap <silent> <buffer>
+    \ ]] <Plug>(omnisharp_navigate_down)
+
+  " <Leader>a for contextual code actions
+  " uses fzf, vim-clap, CtrlP or unite.vim selector " when available
+  autocmd FileType cs nmap <silent> <buffer>
+    \ <Leader>a <Plug>(omnisharp_code_actions)
+  autocmd FileType cs xmap <silent> <buffer>
+    \ <Leader>a <Plug>(omnisharp_code_actions)
+
+  " <Leader>. to repeat the last code action performed (doesn't use a selector)
+  autocmd FileType cs nmap <silent> <buffer>
+    \ <Leader>. <Plug>(omnisharp_code_action_repeat)
+  autocmd FileType cs xmap <silent> <buffer>
+    \ <Leader>. <Plug>(omnisharp_code_action_repeat)
+
+  " <Leader>= to format code
+  autocmd FileType cs nmap <silent> <buffer>
+    \ <Leader>= <Plug>(omnisharp_code_format)
+
+  " <Leader>r to rename symbol
+  autocmd FileType cs nmap <silent> <buffer>
+    \ <Leader>r <Plug>(omnisharp_rename)
+
+augroup END
 
 " }}}
