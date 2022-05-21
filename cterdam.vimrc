@@ -647,10 +647,16 @@ nmap <leader>r <Plug>(coc-rename)
 xmap <leader>=  <Plug>(coc-format-selected)
 nmap <leader>=  <Plug>(coc-format-selected)
 
+" <Leader>f to apply AutoFix to problem on the current line.
+nmap <leader>f  <Plug>(coc-fix-current)
+
 " <Leader>a to apply codeAction to selected region
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" <Leader><C-a> to apply Code Lens action on the current line.
+nmap <leader><C-a>  <Plug>(coc-codelens-action)
 
 " Use `f` for function and `c` for class text objects
 " Requires 'textDocument.documentSymbol' support from the language server.
