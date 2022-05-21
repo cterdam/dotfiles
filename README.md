@@ -56,6 +56,19 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Golang](https://go.dev/).
 
+- Install tools for C#:
+
+  - Install Microsoft's [.NET][.NET] SDK.
+
+    [.NET]: https://dotnet.microsoft.com/en-us/download/dotnet
+
+    - This installs command `dotnet` to build and run C# apps.
+
+  - Install [Mono](https://www.mono-project.com/).
+
+    - This installs commands `csc` and `mcs` to compile single C# files, as
+      well as `mono` to run the compiled executable.
+
 - Install [Node.js](https://nodejs.org/en/).
 
 ### 3. Development Environment
@@ -84,7 +97,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     - This is for [markdown-preview][MDPV], and possibly some COC extensions.
 
-    [MDPV]: https://github.com/iamcco/markdown-preview.nvim
+      [MDPV]: https://github.com/iamcco/markdown-preview.nvim
 
   - Install [Bash Language Server][BASHLS] with `sudo npm i -g
     bash-language-server`.

@@ -4,23 +4,6 @@
         "python",
         "json"
     ],
-    "languageserver": {
-        "bash": {
-            "command": "bash-language-server",
-            "args": [
-                "start"
-            ],
-            "filetypes": [
-                "sh",
-                "bash",
-                "zsh",
-                "conf"
-            ],
-            "ignoredRootPaths": [
-                "~"
-            ]
-        }
-    },
     "python.formatting.provider": "autopep8",
     "python.formatting.autopep8Path": "/Users/sterdam/opt/anaconda3/bin/autopep8",
     "python.formatting.blackPath": "/Users/sterdam/opt/anaconda3/bin/black",

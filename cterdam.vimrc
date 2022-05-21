@@ -536,7 +536,13 @@ let g:coc_global_extensions = [
 
 " Settings:
 " Most config options for coc extensions should be set in :CocConfig
+
+" coc-sh:
+" Automatically recognize these files as sh
+autocmd BufNewFile,BufRead *.zshrc,*.zsh,*.sh set filetype=sh
+
 " coc-vimlsp:
+" Apply highlight in these filetypes
 let g:markdown_fenced_languages = [
     \ 'vim',
     \ 'help'
