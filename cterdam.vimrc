@@ -1057,7 +1057,7 @@ augroup omnisharp_commands
 
   " `go` to generate symbol outline
   autocmd FileType cs nmap <silent> <buffer>
-    \ go :<Plug>(omnisharp_find_symbol)
+    \ <Leader>o <Plug>(omnisharp_find_symbol)
 
   " <Leader>g to populate the quickfix window with code errors/warnings
   autocmd FileType cs nmap <silent> <buffer>
