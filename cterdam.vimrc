@@ -501,6 +501,7 @@ call plug#end()
 " - godlygeek/tabular for lining up text
 " - chrisbra/csv.vim for treating csv files
 " - kyazdani42/nvim-tree.lua for a better file tree
+" - xiyaowong/coc-symbol-line for viewing current symbol name
 
 " }}}
 " COC {{{
