@@ -522,7 +522,8 @@ let g:coc_global_extensions = [
     \'coc-markdownlint',
     \'coc-pyright',
     \'coc-sh',
-    \'coc-vimlsp'
+    \'coc-vimlsp',
+    \'coc-yank'
     \]
 " run individual extension commands like this :CocCommand python.runLinting
 " Extension config options are set in :CocConfig
@@ -537,6 +538,7 @@ let g:coc_global_extensions = [
 " coc-sh: SH language extension.
 "   Requires bash-language-server.
 " coc-vimlsp: vimscript language extension.
+" coc-yank: yank completion, plus persistent yank list across vim instances
 
 " Settings:
 " Most config options for coc extensions should be set in :CocConfig
@@ -551,6 +553,10 @@ let g:markdown_fenced_languages = [
     \ 'vim',
     \ 'help'
     \]
+
+" coc-yank:
+" <Leader>y to view yank list
+nnoremap <silent> <Leader>y :<C-u>CocList -A --normal yank<cr>
 
 " The following config are adapted from COC's official sample vimrc:
 " Completion =================================================================
@@ -909,8 +915,8 @@ autocmd vimenter * ++nested colorscheme gruvbox
 " }}}
 " GOYO {{{
 
-" <Leader>y to toggle goyo
-map <Leader>y :Goyo<CR>
+" <Leader>e to toggle goyo
+map <Leader>e :Goyo<CR>
 
 " Set goyo width
 let g:goyo_width = 80
