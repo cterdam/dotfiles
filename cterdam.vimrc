@@ -10,12 +10,6 @@
 " Do no weird things and welcome to the 21st century
 set nocompatible
 
-" Save view when leaving
-autocmd BufWinLeave ?* silent! mkview
-
-" Load view when entering
-autocmd BufWinEnter ?* silent! loadview
-
 " Detect file type; load filetype plugin and indent setting
 filetype on
 filetype plugin on
@@ -55,7 +49,7 @@ nnoremap <C-n> :<C-u>call search('^.\+')<CR>
 nnoremap <C-p> :<C-u>call search('^.\+', 'b')<CR>
 
 " }}}
-" INTERFACE {{{
+" APPEARANCE {{{
 
 " Activate lexical coloring
 syntax on
@@ -113,7 +107,7 @@ endfunction
 map <Leader>c :call ToggleConceal()<CR>
 
 " }}}
-" GUI"{{{
+" GUI {{{
 
 " Set gui font to be displayed in MacVim
 set guifont=IBM\ Plex\ Mono:h20
@@ -123,6 +117,44 @@ set guicursor=n-v-c-i:block-Cursor
 
 " Disable gui cursor blinking
 set guicursor+=a:blinkon0
+
+"}}}
+" VIEWS {{{
+
+augroup keepview
+	" Save view when leaving
+	autocmd BufWinLeave ?* mkview
+	" Load view when entering
+	autocmd BufWinEnter ?* silent loadview
+augroup END
+
+" # Function to delete views for current file created by 'mkview'
+function! DeleteCurrView()
+    let path = fnamemodify(bufname('%'),':p')
+    " vim's odd =~ escaping for /
+    let path = substitute(path, '=', '==', 'g')
+    if empty($HOME)
+    else
+        let path = substitute(path, '^'.$HOME, '\~', '')
+    endif
+    let path = substitute(path, '/', '=+', 'g') . '='
+    " view directory
+    let path = &viewdir.'/'.path
+
+	" Delete if found, report if not found
+	if !empty(glob(path))
+		call delete(path)
+		echo "Deleted: ".path
+	else
+		echo "Not found: ".path
+	endif
+
+	" Turn off keepview for this session
+	autocmd! keepview
+endfunction
+
+" # Command Delview to delete view for current file
+command Delview call DeleteCurrView()
 
 "}}}
 " LINE NUMBER {{{
