@@ -21,9 +21,6 @@ filetype on
 filetype plugin on
 filetype indent on
 
-" Activate lexical coloring
-syntax on
-
 " Enable modeline
 set modeline
 
@@ -58,19 +55,10 @@ nnoremap <C-n> :<C-u>call search('^.\+')<CR>
 nnoremap <C-p> :<C-u>call search('^.\+', 'b')<CR>
 
 " }}}
-" GUI"{{{
-
-" Set gui font to be displayed in MacVim
-set guifont=IBM\ Plex\ Mono:h20
-
-" gui displays block cursor in all modes
-set guicursor=n-v-c-i:block-Cursor
-
-" Disable gui cursor blinking
-set guicursor+=a:blinkon0
-
-"}}}
 " INTERFACE {{{
+
+" Activate lexical coloring
+syntax on
 
 " Always show at least 5 lines above/below cursor when available
 set scrolloff=5
@@ -106,7 +94,37 @@ function! ToggleList()
 endfunction
 map <Leader>v :call ToggleList()<CR>
 
+" <Leader>c to toggle conceal value
+function! ToggleConceal()
+	if exists("w:concealStash")
+        " Swap current and stash values
+        let w:concealCurrent = &conceallevel
+        let &conceallevel = w:concealStash
+        let w:concealStash = w:concealCurrent
+        unlet w:concealCurrent
+        echo printf("conceallevel set to %d from %d", &conceallevel,
+                    \w:concealStash)
+	else
+        " Stash 0 and try again
+        let w:concealStash = 0
+        call ToggleConceal()
+	endif
+endfunction
+map <Leader>c :call ToggleConceal()<CR>
+
 " }}}
+" GUI"{{{
+
+" Set gui font to be displayed in MacVim
+set guifont=IBM\ Plex\ Mono:h20
+
+" gui displays block cursor in all modes
+set guicursor=n-v-c-i:block-Cursor
+
+" Disable gui cursor blinking
+set guicursor+=a:blinkon0
+
+"}}}
 " LINE NUMBER {{{
 
 " Display line numbers
