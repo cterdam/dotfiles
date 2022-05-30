@@ -785,13 +785,41 @@ highlight GitGutterDelete ctermbg=black ctermfg=red ctermfg=1
 " Turn off hunk highlighting on default
 autocmd VimEnter * GitGutterLineHighlightsDisable
 
-" <Leader>i to toggle hunk line highlighting
-map <Leader>i :GitGutterLineHighlightsToggle<CR>
+" Do not automatically create any key mappings
+let g:gitgutter_map_keys = 0
+
+" Use ]h and [h to navigate to the next/previous hunk
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+
+" Use `h` as a motion object for hunk
+omap ih <Plug>(GitGutterTextObjectInnerPending)
+omap ah <Plug>(GitGutterTextObjectOuterPending)
+xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+
+" <Leader>hh to toggle hunk highlighting
+map <Leader>hh :GitGutterLineHighlightsToggle<CR>
+
+" <Leader>hs to stage hunk
+nmap <Leader>hs <Plug>(GitGutterStageHunk)
+
+" <Leader>hu to undo hunk
+nmap <Leader>hu <Plug>(GitGutterUndoHunk)
+
+" <Leader>hp to preview hunk
+nmap <Leader>hp <Plug>(GitGutterPreviewHunk)
+
+" <Leader>hd to open a diff window of the current buffer relative to origin
+map <Leader>hd :GitGutterDiffOrig<CR>
+
+" <Leader>hz to toggle folding of all unchanged lines
+map <Leader>hz :GitGutterFold<CR>
 
 " Use location list and not quickfix for hunks
 let g:gitgutter_use_location_list = 1
 
-" <Leader>c to toggle change list (view/hide hunks)
+" <Leader>H to toggle change list (view/hide hunks)
 function! ToggleHunks()
     if get(getloclist(0, {'winid':0}), 'winid', 0)
         :lclose
@@ -800,7 +828,7 @@ function! ToggleHunks()
         :lopen
     endif
 endfunction
-map <Leader>c :call ToggleHunks()<CR>
+map <Leader>H :call ToggleHunks()<CR>
 
 " }}}
 " LIGHTLINE {{{
