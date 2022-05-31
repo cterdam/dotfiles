@@ -39,8 +39,18 @@ let mapleader='\'
 " Ctrl+q to toggle in and out of paste mode
 set pastetoggle=<C-q>
 
-" Do not timeout on ':'mappings or key codes
-set notimeout nottimeout
+" Do not timeout on mappings
+set notimeout
+
+" Timeout immediately on keyboard codes
+" Arrow keys and function keys actually start with an <Esc> sequence. Type
+" <C-v> + key to find out what the key actually inputs. This setting makes
+" sure an <Esc> input will not be interpreted as part of a larger sequence.
+" `noesckeys` has a similar effect but disables arrow and function keys
+" algotether while in Insert Mode. The current setting enables these keys
+" because they are delivered together, not separated by timeout.
+set ttimeout
+set ttimeoutlen=0
 
 " Use <C-n> to move to the next non-empty line
 nnoremap <C-n> :<C-u>call search('^.\+')<CR>

@@ -250,9 +250,6 @@ done
 # }}}
 # GENERAL {{{
 
-# wait 10 ms for key sequences to solve Vim Esc delay
-export KEYTIMEOUT=1
-
 # Edit anything with vim
 export EDITOR="vim"
 
