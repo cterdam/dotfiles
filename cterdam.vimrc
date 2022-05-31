@@ -534,6 +534,9 @@ Plug 'luochen1990/rainbow'
 " So far, the only IDE plugin outside of COC
 Plug 'OmniSharp/omnisharp-vim'
 
+" vim-signature for displaying markers in the sign column
+Plug 'kshenoy/vim-signature'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
