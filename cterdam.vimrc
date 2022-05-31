@@ -127,10 +127,11 @@ set guicursor+=a:blinkon0
 
 " Automatically reuse views from last session
 augroup keepview
+    autocmd!
 	" Save view when leaving
-	autocmd BufWinLeave ?* mkview
+	autocmd BufWinLeave ?* silent! mkview
 	" Load view when entering
-	autocmd BufWinEnter ?* silent loadview
+	autocmd BufWinEnter ?* silent! loadview
 augroup END
 
 " Function to delete views for current file created by 'mkview'
