@@ -42,21 +42,15 @@ set pastetoggle=<C-q>
 " Do not timeout on mappings
 set notimeout
 
-" Timeout immediately on keyboard codes
-" Arrow keys and function keys actually start with an <Esc> sequence. Type
-" <C-v> + key to find out what the key actually inputs. This setting makes
-" sure an <Esc> input will not be interpreted as part of a larger sequence.
-" `noesckeys` has a similar effect but disables arrow and function keys
-" algotether while in Insert Mode. The current setting enables these keys
-" because they are delivered together, not separated by timeout.
+" Timeout immediately on key encodings
+" Arrow key, function key, and Meta- combo key encodings actually start with an
+" <Esc> sequence. Type <C-v> + key to find out the key encoding. This setting
+" makes sure an <Esc> input will not be interpreted as part of a larger
+" sequence and escapes Insert Mode instantly. `noesckeys` has a similar effect,
+" but disables arrow and function keys while in Insert Mode. The current
+" setting enables these keys, but still disables Meta mappings in Insert Mode!
 set ttimeout
 set ttimeoutlen=0
-
-" Use <C-n> to move to the next non-empty line
-nnoremap <C-n> :<C-u>call search('^.\+')<CR>
-
-" Use <C-p> to move to the previous non-empty line
-nnoremap <C-p> :<C-u>call search('^.\+', 'b')<CR>
 
 " }}}
 " APPEARANCE {{{
@@ -131,6 +125,7 @@ set guicursor+=a:blinkon0
 "}}}
 " VIEWS {{{
 
+" Automatically reuse views from last session
 augroup keepview
 	" Save view when leaving
 	autocmd BufWinLeave ?* mkview
@@ -138,7 +133,7 @@ augroup keepview
 	autocmd BufWinEnter ?* silent loadview
 augroup END
 
-" # Function to delete views for current file created by 'mkview'
+" Function to delete views for current file created by 'mkview'
 function! DeleteCurrView()
     let path = fnamemodify(bufname('%'),':p')
     " vim's odd =~ escaping for /
@@ -459,6 +454,33 @@ map <Leader><Backspace>} :tabclose! +<CR>
 map <Leader><Backspace>\| :tabclose!<CR>
 
 " }}}
+" NORMAL MODE EDITING {{{
+
+" <C-n> to move to the next non-empty line
+nnoremap <C-n> :<C-u>call search('^.\+')<CR>
+
+" <C-p> to move to the previous non-empty line
+nnoremap <C-p> :<C-u>call search('^.\+', 'b')<CR>
+
+" <M-o> to insert a blank line below
+nnoremap o ok
+
+" <M-O> to insert a blank line above
+nnoremap O Oj
+
+" <M-d> to delete a line below
+nnoremap d jddk
+
+" <M-D> to delete a line above
+nnoremap D kdd
+
+" <M-j> to swap current line with line below
+nnoremap j ddp
+
+" <M-k> to swap current line with line above
+nnoremap k ddkkp
+
+" }}}
 
 " PLUGINS --------------------------------------------------------------------
 
@@ -546,6 +568,9 @@ Plug 'OmniSharp/omnisharp-vim'
 
 " vim-signature for displaying markers in the sign column
 Plug 'kshenoy/vim-signature'
+
+" vim-speeddating to increment/decrement dates and other number formats
+Plug 'tpope/vim-speeddating'
 
 " End list of plugins ========================================================
 call plug#end()
