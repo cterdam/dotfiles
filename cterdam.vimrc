@@ -573,6 +573,12 @@ Plug 'kshenoy/vim-signature'
 " vim-speeddating to increment/decrement dates and other number formats
 Plug 'tpope/vim-speeddating'
 
+" vim-magnum for big integer library, required by vim-radical
+Plug 'glts/vim-magnum'
+
+" vim-radical for converting integer between bases
+Plug 'glts/vim-radical'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
