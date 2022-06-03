@@ -579,6 +579,30 @@ Plug 'glts/vim-magnum'
 " vim-radical for converting integer between bases
 Plug 'glts/vim-radical'
 
+" vim-textobj-user to use other text objects plugins
+Plug 'kana/vim-textobj-user'
+
+" vim-textobj-between to select region between two of the same char
+Plug 'thinca/vim-textobj-between'
+
+" vim-textobj-blanklines to select blocks of empty lines
+Plug 'deathlyfrantic/vim-textobj-blanklines'
+
+" vim-textobj-comment to select comment blocks
+Plug 'glts/vim-textobj-comment'
+
+" vim-textobj-entire to select the entire file
+Plug 'kana/vim-textobj-entire'
+
+" vim-textobj-fold to select folds
+Plug 'somini/vim-textobj-fold'
+
+" vim-textobj-indent to select blocks of similarly indented lines
+Plug 'kana/vim-textobj-indent'
+
+" vim-textobj-indblock to select blocks of indent whitespace
+Plug 'glts/vim-textobj-indblock'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
