@@ -504,38 +504,38 @@ call plug#begin('~/.vim/plugged')
 " vim-plug itself for managing plugins
 Plug 'junegunn/vim-plug'
 
-" COC for completion and diagnostics
+" Completion and diagnostics for various languages
 " Requires Node.js
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" lightline for statusline and tabline
+" Display statusline and tabline
 Plug 'itchyny/lightline.vim'
 
-" NERDTree for file browsing
+" Browse the file tree, open with `<Leader>t` and close with `<Leader>T`
 Plug 'preservim/nerdtree'
 
-" undotree for browsing the undo tree
+" Browse the undo tree, toggle with `<Leader>u`
 Plug 'mbbill/undotree'
 
-" indentLine for displaying indent lines
+" Display indent lines, toggle with `<Leader><Tab>`
 Plug 'Yggdroot/indentLine'
 
-" vim-commentary for manipulating comments
+" Toggle comments with `gc` with motions
 Plug 'tpope/vim-commentary'
 
-" vim-surround for manipulating brackets, quotes, and tags
+" Manipulat brackets and quotes
 Plug 'tpope/vim-surround'
 
-" vim-floaterm for floating terminals
+" Floating terminals, toggle with `<F12>`
 Plug 'voldikss/vim-floaterm'
 
-" vim-fugitive for git commands
+" Integrate git commands `:Git add`
 Plug 'tpope/vim-fugitive'
 
-" vim-gitgutter for viewing git status per line
+" View git status per line; highlight, preview, stage, and undo hunks
 Plug 'airblade/vim-gitgutter'
 
-" vim-diffsave for viewing file diff against disk save"
+" View file diff against disk save, toggle with `<Leader>w`
 Plug 'cterdam/vim-diffsave'
 
 " gruvbox, monokai, and dracula colorschemes
@@ -543,65 +543,93 @@ Plug 'morhetz/gruvbox'
 Plug 'sickill/vim-monokai'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
-" goyo for focused writing
+" Focused writing, toggle with `<Leader>e`
 Plug 'junegunn/goyo.vim'
 
-" markdown-preview for previewing markdown
+" Preview markdown, toggle with `<Leader>p`
 " Requires Node.js and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
-" vim-cursorword for viewing the current word underlined
+" View the current word underlined
 Plug 'itchyny/vim-cursorword'
 
-" vim-hexokinase for previewing colors
+" Preview color codes, toggle with `<Leader>k`
 " Requires golang
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
-" vim-better-whitespace for highlighting and removing trailing whitespaces
+" Highlighting trailing whitespaces, remove with <C-<Space>>
 Plug 'ntpeters/vim-better-whitespace'
 
-" rainbow to colorize different levels of parentheses
+" Colorize different levels of parentheses, toggle with `<Leader>n`
 Plug 'luochen1990/rainbow'
 
-" omnisharp-vim to provide completion and diagnostics for C#
+" Provide completion and diagnostics for C#
 " So far, the only IDE plugin outside of COC
 Plug 'OmniSharp/omnisharp-vim'
 
-" vim-signature for displaying markers in the sign column
+" Display markers in the sign column
 Plug 'kshenoy/vim-signature'
 
-" vim-speeddating to increment/decrement dates and other number formats
+" Increment/decrement dates and other number formats like numbers
 Plug 'tpope/vim-speeddating'
 
-" vim-magnum for big integer library, required by vim-radical
+" Big integer library, required by vim-radical
 Plug 'glts/vim-magnum'
 
-" vim-radical for converting integer between bases
+" Convert integer between bases with `cr[b/o/d/x]`, view all bases with `gA`
+" Requires 'glts/vim-magnum'
 Plug 'glts/vim-radical'
 
-" vim-textobj-user to use other text objects plugins
+" Create custom text objects, required by other text objects plugins
 Plug 'kana/vim-textobj-user'
 
-" vim-textobj-between to select region between two of the same char
+" Select region between two of the same char {c} with `[a/i]f{c}`
+" Requires 'kana/vim-textobj-user'
 Plug 'thinca/vim-textobj-between'
 
-" vim-textobj-blanklines to select blocks of empty lines
+" Select blocks of empty lines with `[a/i]<Space>`
+" Requires 'kana/vim-textobj-user'
 Plug 'deathlyfrantic/vim-textobj-blanklines'
 
-" vim-textobj-comment to select comment blocks
+" Select comment blocks with `aC`
+" Requires 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-comment'
 
-" vim-textobj-entire to select the entire file
+" Select the entire buffer with `[a/i]e`
+" Requires 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 
-" vim-textobj-fold to select folds
+" Select folds with `[a/i]z`
+" Requires 'kana/vim-textobj-user'
 Plug 'somini/vim-textobj-fold'
 
-" vim-textobj-indent to select blocks of similarly indented lines
+" Select blocks of similarly indented lines with `[a/i]i`
+" Requires 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-indent'
 
-" vim-textobj-indblock to select blocks of indent whitespace
+" Select blocks of indent whitespace with `[a/i]o`
+" Requires 'kana/vim-textobj-user'
 Plug 'glts/vim-textobj-indblock'
+
+" Select function call parameters with `[a/i],`
+" Requires 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
+
+" Select last pasted text with `[a/i]q`
+" Requires 'kana/vim-textobj-user'
+Plug 'saaguero/vim-textobj-pastedtext'
+
+" Select continuous spaces with `[a/i]S`
+" Requires 'kana/vim-textobj-user'
+Plug 'saihoooooooo/vim-textobj-space'
+
+" Select web links with `[a/i]u`, open with `go`
+" Requires 'kana/vim-textobj-user'
+Plug 'jceb/vim-textobj-uri'
+
+" Select variable segments as defined by camelCase or snake_case with `[a/i]v`
+" Requires 'kana/vim-textobj-user'
+Plug 'Julian/vim-textobj-variable-segment'
 
 " End list of plugins ========================================================
 call plug#end()
@@ -1111,8 +1139,8 @@ let g:mkdp_echo_preview_url = 1
 let g:mkdp_markdown_css = expand("$CTERDAMRC") .
             \"/github-markdown-css/github-markdown.css"
 
-" <Leader>m to toggle preview window
-map <Leader>m <Plug>MarkdownPreviewToggle
+" <Leader>p to toggle preview window
+map <Leader>p <Plug>MarkdownPreviewToggle
 
 " }}}
 " VIM-HEXOKINASE {{{
@@ -1266,5 +1294,11 @@ augroup omnisharp_commands
     \ <Leader>r <Plug>(omnisharp_rename)
 
 augroup END
+
+" }}}
+" VIM-TEXTOBJ-PASTEDTEXT {{{
+
+" use `q` to select pasted text
+let g:pastedtext_select_key = 'q'
 
 " }}}
