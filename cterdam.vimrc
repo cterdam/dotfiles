@@ -631,6 +631,9 @@ Plug 'jceb/vim-textobj-uri'
 " Requires 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
 
+" `:SoftPencil` to mock MS Word line breaks, turn off with `:NoPencil`
+Plug 'preservim/vim-pencil'
+
 " End list of plugins ========================================================
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
