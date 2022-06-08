@@ -123,7 +123,7 @@ set guicursor=n-v-c-i:block-Cursor
 set guicursor+=a:blinkon0
 
 "}}}
-" VIEWS {{{
+" VIEW {{{
 
 " Automatically reuse views from last session
 augroup keepview
@@ -508,6 +508,61 @@ call plug#begin('~/.vim/plugged')
 " vim-plug itself for managing plugins
 Plug 'junegunn/vim-plug'
 
+" TEXT OBJECTS {{{
+
+" Create custom text objects, required by other text objects plugins
+Plug 'kana/vim-textobj-user'
+
+" Select region between two of the same char {c} with `[a/i]f{c}`
+" Requires 'kana/vim-textobj-user'
+Plug 'thinca/vim-textobj-between'
+
+" Select blocks of empty lines with `[a/i]<Space>`
+" Requires 'kana/vim-textobj-user'
+Plug 'deathlyfrantic/vim-textobj-blanklines'
+
+" Select comment blocks with `aC`
+" Requires 'kana/vim-textobj-user'
+Plug 'glts/vim-textobj-comment'
+
+" Select the entire buffer with `[a/i]e`
+" Requires 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+
+" Select folds with `[a/i]z`
+" Requires 'kana/vim-textobj-user'
+Plug 'somini/vim-textobj-fold'
+
+" Select blocks of similarly indented lines with `[a/i]i`
+" Requires 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+
+" Select blocks of indent whitespace with `[a/i]o`
+" Requires 'kana/vim-textobj-user'
+Plug 'glts/vim-textobj-indblock'
+
+" Select function call parameters with `[a/i],`
+" Requires 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
+
+" Select last pasted text with `[a/i]q`
+" Requires 'kana/vim-textobj-user'
+Plug 'saaguero/vim-textobj-pastedtext'
+
+" Select continuous spaces with `[a/i]S`
+" Requires 'kana/vim-textobj-user'
+Plug 'saihoooooooo/vim-textobj-space'
+
+" Select web links with `[a/i]u`, open with `go`
+" Requires 'kana/vim-textobj-user'
+Plug 'jceb/vim-textobj-uri'
+
+" Select variable segments as defined by camelCase or snake_case with `[a/i]v`
+" Requires 'kana/vim-textobj-user'
+Plug 'Julian/vim-textobj-variable-segment'
+
+" }}}
+
 " Completion and diagnostics for various languages
 " Requires Node.js
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -586,61 +641,6 @@ Plug 'glts/vim-radical'
 
 " `:SoftPencil` to mock MS Word line breaks, turn off with `:NoPencil`
 Plug 'preservim/vim-pencil'
-
-" TEXT OBJECTS {{{
-
-" Create custom text objects, required by other text objects plugins
-Plug 'kana/vim-textobj-user'
-
-" Select region between two of the same char {c} with `[a/i]f{c}`
-" Requires 'kana/vim-textobj-user'
-Plug 'thinca/vim-textobj-between'
-
-" Select blocks of empty lines with `[a/i]<Space>`
-" Requires 'kana/vim-textobj-user'
-Plug 'deathlyfrantic/vim-textobj-blanklines'
-
-" Select comment blocks with `aC`
-" Requires 'kana/vim-textobj-user'
-Plug 'glts/vim-textobj-comment'
-
-" Select the entire buffer with `[a/i]e`
-" Requires 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-entire'
-
-" Select folds with `[a/i]z`
-" Requires 'kana/vim-textobj-user'
-Plug 'somini/vim-textobj-fold'
-
-" Select blocks of similarly indented lines with `[a/i]i`
-" Requires 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-
-" Select blocks of indent whitespace with `[a/i]o`
-" Requires 'kana/vim-textobj-user'
-Plug 'glts/vim-textobj-indblock'
-
-" Select function call parameters with `[a/i],`
-" Requires 'kana/vim-textobj-user'
-Plug 'sgur/vim-textobj-parameter'
-
-" Select last pasted text with `[a/i]q`
-" Requires 'kana/vim-textobj-user'
-Plug 'saaguero/vim-textobj-pastedtext'
-
-" Select continuous spaces with `[a/i]S`
-" Requires 'kana/vim-textobj-user'
-Plug 'saihoooooooo/vim-textobj-space'
-
-" Select web links with `[a/i]u`, open with `go`
-" Requires 'kana/vim-textobj-user'
-Plug 'jceb/vim-textobj-uri'
-
-" Select variable segments as defined by camelCase or snake_case with `[a/i]v`
-" Requires 'kana/vim-textobj-user'
-Plug 'Julian/vim-textobj-variable-segment'
-
-" }}}
 
 " }}}
 call plug#end()
