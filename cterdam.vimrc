@@ -377,7 +377,7 @@ map <Leader>Q :cclose<CR>
 " }}}
 " TAB PAGES {{{
 
-" NAVIGATING =================================================================
+" NAVIGATING {{{
 
 " <Leader><n> to switch to tab <n>
 map <Leader>1 :tabn 1<CR>
@@ -398,7 +398,8 @@ map ]<Leader> :tabnext<CR>
 map [\| :tabfirst<CR>
 map ]\| :tablast<CR>
 
-" MOVING =====================================================================
+" }}}
+" MOVING {{{
 
 " <Leader><S-<n>> to move current tab after <n>
 map <Leader>) :tabmove 0<CR>
@@ -418,7 +419,8 @@ map <Leader>} :tabmove +<CR>
 map \|{ :tabmove 0<CR>
 map \|} :tabmove $<CR>
 
-" CLOSING ====================================================================
+" }}}
+" CLOSING {{{
 
 " <Leader><Backspace><n> to close tab <n> with confirmation
 map <Leader><Backspace>1 :tabclose 1<CR>
@@ -453,6 +455,8 @@ map <Leader><Backspace>) :tabclose! 10<CR>
 map <Leader><Backspace>{ :tabclose! -<CR>
 map <Leader><Backspace>} :tabclose! +<CR>
 map <Leader><Backspace>\| :tabclose!<CR>
+
+" }}}
 
 " }}}
 " NORMAL MODE EDITING {{{
@@ -499,7 +503,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin('~/.vim/plugged')
-" Begin list of plugins ======================================================
+" LIST OF PLUGINS {{{
 
 " vim-plug itself for managing plugins
 Plug 'junegunn/vim-plug'
@@ -580,6 +584,11 @@ Plug 'glts/vim-magnum'
 " Requires 'glts/vim-magnum'
 Plug 'glts/vim-radical'
 
+" `:SoftPencil` to mock MS Word line breaks, turn off with `:NoPencil`
+Plug 'preservim/vim-pencil'
+
+" TEXT OBJECTS {{{
+
 " Create custom text objects, required by other text objects plugins
 Plug 'kana/vim-textobj-user'
 
@@ -631,10 +640,9 @@ Plug 'jceb/vim-textobj-uri'
 " Requires 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
 
-" `:SoftPencil` to mock MS Word line breaks, turn off with `:NoPencil`
-Plug 'preservim/vim-pencil'
+" }}}
 
-" End list of plugins ========================================================
+" }}}
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
 " automatically executes 'filetype plugin indent on' and 'syntax enable'.
@@ -658,8 +666,7 @@ call plug#end()
 
 " CONQUERER OF COMPLETION
 " Requires Node.js
-
-" Extensions =================================================================
+" EXTENSIONS {{{
 
 " List:
 " COC will auto install any missing extensions in this list.
@@ -709,8 +716,9 @@ let g:markdown_fenced_languages = [
 " <Leader>y to view yank list
 nnoremap <silent> <Leader>y :<C-u>CocList -A --normal yank<cr>
 
+" }}}
 " The following config are adapted from COC's official sample vimrc:
-" Completion =================================================================
+" COMPLETION {{{
 
 " COC TextEdit might fail if hidden is not set
 set hidden
@@ -739,7 +747,8 @@ endfunction
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-" Diagnostics ================================================================
+" }}}
+" DIAGNOSTICS {{{
 
 " <Leader>g to list all diagnostics of current buffer in location list
 map <Leader>g :CocDiagnostics<CR>
@@ -795,7 +804,8 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
               \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
-" Edit =======================================================================
+" }}}
+" EDIT {{{
 
 " <Leader>r to rename current symbol
 nmap <leader>r <Plug>(coc-rename)
@@ -840,6 +850,8 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " `:OR` command to organize imports of the current buffer
 command! -nargs=0 OR :call
     \ CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" }}}
 
 " }}}
 " NERDTREE {{{
