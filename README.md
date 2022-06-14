@@ -193,7 +193,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
       [ONSV]: https://github.com/OmniSharp/omnisharp-vim
       [COCEX]: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 
-
   - Deploy Rime engine.
 
 ### 6. Macvim
@@ -225,12 +224,16 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     vim by `:1,%sort`, or in the shell with `sort -o
     $CTERDAMRC/fts/ftlist{,}`.
 
-- Then repopulate the `dummy` folder with command `repopft`. It may simply
-  create the needed new file(s), or print out other diagnostic messages.
-  Follow them to fix the `dummy` folder and the `ftlist` file.
+- Then repopulate the `dummy` folder:
 
-  - If things are complicated, just remove the `dummy` directory altogether,
-    and run `repopft` again.
+  ```zsh
+  repopft $CTERDAMRC/fts/dummy $CTERDAMRC/fts/ftlist
+  ```
+
+  - It may simply create the needed new file(s), or print out other diagnostic
+    messages.  Follow them to fix the `dummy` folder and the `ftlist` file. If
+    things are complicated, just remove the `dummy` directory altogether, and
+    run the command again.
 
 - Then, follow instructions in the last section to register the new filetypes.
 
@@ -273,3 +276,4 @@ download everything:
 ```zsh
 git clone --recursive <project url>
 ```
+

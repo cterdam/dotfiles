@@ -160,13 +160,13 @@ rc () {
 # Repopulate/diagnose the directory collecting all listed filetypes
 repopft() {
 
-    # fts: The directory that contains:
-    # - ftlist: a file listing all filetype extensions
-    # - dummy: a subdir hosting a dummy file for each extension
-    ftdir=$CTERDAMRC/fts
+    if [[ $# -ne 2 ]]; then
+        echo "Usage: repopft FTDIR FTLIST"
+        return
+    fi
 
-    # Make sure this dir exists
-    mkdir -p $ftdir/dummy
+    ftdir=$1
+    ftlist=$2
 
     # ====== CHECK ONE ======
 
@@ -176,11 +176,11 @@ repopft() {
     # For each extension in ftlist, find corresponding file in dummy
     while read -r line ; do
         # Number of files with the given extension
-        count=$( (ls -1 $ftdir/dummy/*.${line}) 2>/dev/null |wc -l| stripspace)
+        count=$( (ls -1 $ftdir/*.${line}) 2>/dev/null |wc -l| stripspace)
 
         # No file found, create one
         if [[ $count -eq 0 ]] ; then
-            touch $ftdir/dummy/dummy.$line
+            touch $ftdir/dummy.$line
             echo "Created dummy.$line"
             fterr=1
 
@@ -189,7 +189,7 @@ repopft() {
             echo "Found duplicate files for extension $line"
             fterr=1
         fi
-    done < $ftdir/ftlist
+    done < $ftlist
 
     # Report if no error is found
     if [[ $fterr -ne 1 ]] ; then
@@ -201,11 +201,11 @@ repopft() {
     # Reset error flag
     fterr=0
 
-    for dummyfile in $ftdir/dummy/* ; do
+    for dummyfile in $ftdir/* ; do
         # Get extension of this file
         thisext=$(extname $dummyfile)
         # Number of exact one-line occurrences of this extension in list
-        count=$(grep -o "^"$thisext"$" $ftdir/ftlist | wc -l)
+        count=$(grep -o "^"$thisext"$" $ftlist | wc -l)
 
         # No entry found for this file, report and do nothing
         if [[ count -eq 0 ]] ; then
