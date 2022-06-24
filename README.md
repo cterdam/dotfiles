@@ -41,7 +41,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Once the repo is downloaded, set up terminal appearance by importing
   `hbpro.terminal` to terminal profiles.
 
-### 2. Programming Languages
+### 2. Development Environment
 
 - clang for C-family languages should come installed with the system.
 
@@ -71,7 +71,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Node.js](https://nodejs.org/en/).
 
-### 3. Development Environment
+#### Optional Components
+
+- Install [Genism](https://radimrehurek.com/gensim/) with `pip install
+  --upgrade gensim`.
+  
+  - This is for word vectors & text similarity modeling for NLP.
+
+### 3. Practical Tools
 
 - Install [Oh My Zsh](https://ohmyz.sh/).
 
@@ -97,7 +104,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     - This is for [markdown-preview][MDPV], and possibly some COC extensions.
 
-      [MDPV]: https://github.com/iamcco/markdown-preview.nvim
+    [MDPV]: https://github.com/iamcco/markdown-preview.nvim
 
   - Install [Bash Language Server][BASHLS] with `sudo npm i -g
     bash-language-server`.
@@ -115,6 +122,26 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     [TPM]: https://github.com/tmux-plugins/tpm
 
 ### 4. Other Packages
+
+#### Programming Languages Cont'd
+
+- Install [Octave](https://octave.org/index.html) with `brew install octave`.
+
+#### Other Fonts
+
+- Install [Liberation Fonts][LIBFONT].
+
+  - Installation requires the fontforge command, which can be installed with
+    `brew install fontforge`.
+
+  - Installation also requires the `fonttools` Python package, which should
+    come installed with Anaconda.
+
+  - This is for the English resume.
+
+  [LIBFONT]: https://github.com/liberationfonts/liberation-fonts
+
+#### Misc.
 
 - Install other UNIX tools:
 
