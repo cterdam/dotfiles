@@ -151,19 +151,20 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Rime](https://rime.im/).
 
-  - After installing Rime, install its [plum](https://github.com/rime/plum)
-    package manager. First download it:
+  - Rime needs to be used with its [plum](https://github.com/rime/plum)
+    package manager, which is already incorporated as a submodule.
+
+  - Install all default Rime packages:
 
     ```zsh
-    cd ~/cterdam
-    git clone git@github.com:rime/plum.git
+    cd $HOME/cterdam/dotfiles/plum
+    bash rime-install :all
     ```
 
-  - Then use it to download all Rime packages:
+  - Then install the Wuhan Chinese package:
 
     ```zsh
-    cd plum
-    bash rime-install :all
+    bash rime-install yuxifongfei/hubehua
     ```
 
 - Install [MacTeX](https://tug.org/mactex/), the recommended LaTeX
@@ -267,20 +268,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 ### 7. Profile
 
 - Files related to personal information are stored in another private repo
-  [`cterdam/profile`](https://github.com/cterdam/profile). To make it more
-  accessible, after finishing with the above instructions, clone that repo
-  into the `utility` directory:
+  [`cterdam/profile`](https://github.com/cterdam/profile), incorporated as a
+  submodule in the `utility` directory.
 
-  ```
-  cd $CTERDAMRC/utility
-  git clone git@github.com:cterdam/profile.git
-  ```
-
-- And drag the `utility` folder to the macOS Dock.
+- Drag the `utility` folder to the macOS Dock.
 
 ## Submodules
 
-`github-markdown-css` is incorporated as a git submodule.
+Use `git submodule status --recursive` to see all submodules.
 
 If submodule folders appear empty after cloning, run this to download all
 submodules (and their submodules, if any):

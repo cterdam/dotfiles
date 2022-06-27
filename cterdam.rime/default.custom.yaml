@@ -4,6 +4,8 @@ patch:
     - schema: jyut6ping3
     - schema: double_pinyin_mspy
     - schema: luna_pinyin
+    - schema: wuhan
+    - schema: wubi_trad
 
   switcher:
     caption: 〔方案選單〕

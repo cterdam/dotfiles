@@ -1,0 +1,9 @@
+patch:
+  schema/name: "五筆強化"
+  speller/max_code_length: 4
+  switches:
+    - name: zh_trad
+      reset: 1
+      states: [ 简体, 繁體 ]
+    - name: extended_charset
+      states: [ 常用, 增廣 ]

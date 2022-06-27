@@ -1,5 +1,5 @@
 patch:
-  schema/name: 明月拼音
+  schema/name: 國語拼音
   switches:
     - name: simplification
       states: [ 漢字, 汉字 ]

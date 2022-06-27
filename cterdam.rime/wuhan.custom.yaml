@@ -1,0 +1,8 @@
+patch:
+  translator/enable_completion: false
+  schema/name: "武漢語音"
+  speller/max_code_length: 4
+  switches:
+    - name: simplification
+      reset: 1
+      states: [ 繁體, 简体 ]
