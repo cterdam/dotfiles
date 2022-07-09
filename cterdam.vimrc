@@ -561,6 +561,10 @@ Plug 'jceb/vim-textobj-uri'
 " Requires 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
 
+" Select the current line with `[a/i]l`
+" Requires 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line'
+
 " }}}
 
 " Completion and diagnostics for various languages
