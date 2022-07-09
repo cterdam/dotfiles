@@ -567,6 +567,12 @@ Plug 'Julian/vim-textobj-variable-segment'
 " Requires Node.js
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Compile, debug, syntax, motions & text objects for Tex
+Plug 'lervag/vimtex'
+
+" Completion and diagnostics for C#
+Plug 'OmniSharp/omnisharp-vim'
+
 " Display statusline and tabline
 Plug 'itchyny/lightline.vim'
 
@@ -621,10 +627,6 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " Colorize different levels of parentheses, toggle with `<Leader>n`
 Plug 'luochen1990/rainbow'
-
-" Provide completion and diagnostics for C#
-" So far, the only IDE plugin outside of COC
-Plug 'OmniSharp/omnisharp-vim'
 
 " Display markers in the sign column
 Plug 'kshenoy/vim-signature'
@@ -681,7 +683,8 @@ let g:coc_global_extensions = [
     \'coc-pyright',
     \'coc-sh',
     \'coc-vimlsp',
-    \'coc-yank'
+    \'coc-yank',
+    \'coc-vimtex'
     \]
 " run individual extension commands like this :CocCommand python.runLinting
 " Extension config options are set in :CocConfig
@@ -697,6 +700,8 @@ let g:coc_global_extensions = [
 "   Requires bash-language-server.
 " coc-vimlsp: vimscript language extension.
 " coc-yank: yank completion, plus persistent yank list across vim instances
+" coc-vimtex: incorporate vimtex sources into autocomplete menu
+"   Requires vimtex.
 
 " Settings:
 " Most config options for coc extensions should be set in :CocConfig
@@ -836,7 +841,7 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" <C-s> to expand selections ranges
+" <C-s> to expand selection ranges
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
@@ -1316,5 +1321,71 @@ augroup END
 
 " use `q` to select pasted text
 let g:pastedtext_select_key = 'q'
+
+" }}}
+" VIMTEX {{{
+
+" Enable syntax folding for Tex
+let g:vimtex_fold_enabled = 1
+
+" Enable format handling for Tex
+let g:vimtex_format_enabled = 1
+
+" <Leader>xi to view current tex project info
+map <Leader>xi :VimtexInfo<CR>
+
+" <Leader>xI to view all tex project info
+map <Leader>xI :VimtexInfo!<CR>
+
+" <Leader>xd to show documentation for this package
+map <Leader>xd :VimtexDocPackage<CR>
+
+" <Leader>xz to refresh syntax folds
+map <Leader>xz :VimtexRefreshFolds<CR>
+
+" <Leader>xt to toggle table of contents
+map <Leader>xt :VimtexTocToggle<CR>
+
+" <Leader>xl to view logs
+map <Leader>xl :VimtexLog<CR>
+
+" <Leader>xp to compile and launch preview
+map <Leader>xp :VimtexCompile<CR>
+
+" <Leader>xs to compile the selected region
+map <Leader>xs :VimtexCompileSelected<CR>
+
+" <Leader>xx to stop compilation for the current project
+map <Leader>xx :VimtexStop<CR>
+
+" <Leader>xX to stop compilation for all projects in vim instance
+map <Leader>xX :VimtexStopAll<CR>
+
+" <Leader>xa to view compilation status for current project
+map <Leader>xa :VimtexStatus<CR>
+
+" <Leader>xA to view compilation status for all projects in vim instance
+map <Leader>xA :VimtexStatus!<CR>
+
+" <Leader>xq to clean auxiliary files
+map <Leader>xq :VimtexClean<CR>
+
+" <Leader>xQ to clean auxiliary files and output files
+map <Leader>xQ :VimtexClean!<CR>
+
+" <Leader>xe to view errors
+map <Leader>xe :VimtexErrors<CR>
+
+" <Leader>xcc to show the number of letters
+map <Leader>xcc :VimtexCountLetters<CR>
+
+" <Leader>xcC to show report on number of letters
+map <Leader>xcC :VimtexCountLetters!<CR>
+
+" <Leader>xcw to show the number of words
+map <Leader>xcw :VimtexCountWords<CR>
+
+" <Leader>xcW to show report on number of words
+map <Leader>xcW :VimtexCountWords!<CR>
 
 " }}}
