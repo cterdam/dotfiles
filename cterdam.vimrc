@@ -1380,6 +1380,9 @@ map <Leader>xQ :VimtexClean!<CR>
 " <Leader>xe to view errors
 map <Leader>xe :VimtexErrors<CR>
 
+" <Leader>xv to view output
+map <Leader>xv :VimtexView<CR>
+
 " <Leader>xcc to show the number of letters
 map <Leader>xcc :VimtexCountLetters<CR>
 
