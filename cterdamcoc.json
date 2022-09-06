@@ -4,7 +4,7 @@
         "python",
         "json"
     ],
-    "python.formatting.provider": "autopep8",
+    "python.formatting.provider": "black",
     "python.formatting.blackPath": "black",
     "python.formatting.autopep8Path": "autopep8",
     "python.linting.enabled": false,
