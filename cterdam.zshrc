@@ -367,7 +367,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-}}}
+# }}}
 # PATH {{{
 
 # This section stays at the bottom of zshrc to have final control over PATH
