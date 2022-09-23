@@ -50,6 +50,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - This should also install Python3, Jupyter, among
     [other packages](https://docs.anaconda.com/anaconda/packages/pkg-docs/).
 
+  - Note: Switching to miniforge instead. Use brew to install
+
 - Install [Java](https://www.oracle.com/java/technologies/downloads/).
 
   - At time of writing, Java 17 is the latest LTS version.
