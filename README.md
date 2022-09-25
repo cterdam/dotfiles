@@ -51,6 +51,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     [other packages](https://docs.anaconda.com/anaconda/packages/pkg-docs/).
 
   - Note: Switching to miniforge instead. Use brew to install
+  - and install black and autopep8
 
 - Install [Java](https://www.oracle.com/java/technologies/downloads/).
 
