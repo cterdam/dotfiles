@@ -427,4 +427,7 @@ delpath() {
 if ! inpath $CTERDAMBIN; then
     addpath $CTERDAMBIN head
 fi
+
+# Add rust path
+source "$HOME/.cargo/env"
 # }}}
