@@ -50,8 +50,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - This should also install Python3, Jupyter, among
     [other packages](https://docs.anaconda.com/anaconda/packages/pkg-docs/).
 
-  - Note: Switching to miniforge instead. Use brew to install
-  - and install black and autopep8
+  - Alternatively, for better compatibility for M1 Mac packages, use miniforge instead.
+    - To do this, after installing homebrew (in a later section), run `brew
+      install miniforge`.
+    - Miniforge also comes with significantly less packages, so you need to
+      manually install black and autopep8 with conda.
 
 - Install [Java](https://www.oracle.com/java/technologies/downloads/).
 
@@ -115,6 +118,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     [BASHLS]: https://github.com/bash-lsp/bash-language-server
 
     - This is for [COC-sh](https://github.com/josa42/coc-sh).
+
+  - Install [Rust](https://www.rust-lang.org/).
+    
+    - And install [silicon](https://github.com/Aloxaf/silicon) with `brew
+      install silicon`.
+
+    - This is for [vim-silicon](https://github.com/segeljakt/vim-silicon).
 
 - Install [tmux](https://github.com/tmux/tmux) with `brew install tmux`.
 

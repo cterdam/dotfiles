@@ -648,6 +648,9 @@ Plug 'glts/vim-radical'
 " `:SoftPencil` to mock MS Word line breaks, turn off with `:NoPencil`
 Plug 'preservim/vim-pencil'
 
+" Export code to image
+Plug 'segeljakt/vim-silicon'
+
 " }}}
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -1394,5 +1397,28 @@ map <Leader>xcw :VimtexCountWords<CR>
 
 " <Leader>xcW to show report on number of words
 map <Leader>xcW :VimtexCountWords!<CR>
+
+" }}}
+" VIM-SILICON {{{
+
+" Output picture configuration
+" Themes include 'gruvbox', 'Dracula', 'GitHub', and more
+" Run `silicon --list-themes`
+let g:silicon = {
+            \   'theme':              'gruvbox',
+            \   'font':                  'IBM Plex Mono',
+            \   'background':         '#00000000',
+            \   'shadow-color':       '#555555',
+            \   'line-pad':                   2,
+            \   'pad-horiz':                 80,
+            \   'pad-vert':                 100,
+            \   'shadow-blur-radius':         0,
+            \   'shadow-offset-x':            0,
+            \   'shadow-offset-y':            0,
+            \   'line-number':           v:true,
+            \   'round-corner':          v:true,
+            \   'window-controls':       v:true,
+            \   'output': '~/Desktop/silicon-{time:%Y-%m-%d-%H%M%S}.png'
+            \ }
 
 " }}}
