@@ -1405,19 +1405,19 @@ map <Leader>xcW :VimtexCountWords!<CR>
 " Themes include 'gruvbox', 'Dracula', 'GitHub', and more
 " Run `silicon --list-themes`
 let g:silicon = {
-            \   'theme':              'gruvbox',
-            \   'font':                  'IBM Plex Mono',
-            \   'background':         '#00000000',
-            \   'shadow-color':       '#555555',
-            \   'line-pad':                   2,
-            \   'pad-horiz':                 80,
-            \   'pad-vert':                 100,
-            \   'shadow-blur-radius':         0,
-            \   'shadow-offset-x':            0,
-            \   'shadow-offset-y':            0,
-            \   'line-number':           v:true,
-            \   'round-corner':          v:true,
-            \   'window-controls':       v:true,
+            \   'theme': 'Dracula',
+            \   'font': 'IBM Plex Mono',
+            \   'background': '#00000000',
+            \   'shadow-color': '#555555',
+            \   'line-pad': 2,
+            \   'pad-horiz': 80,
+            \   'pad-vert': 100,
+            \   'shadow-blur-radius': 0,
+            \   'shadow-offset-x': 0,
+            \   'shadow-offset-y': 0,
+            \   'line-number': v:true,
+            \   'round-corner': v:true,
+            \   'window-controls': v:true,
             \   'output': '~/Desktop/silicon-{time:%Y-%m-%d-%H%M%S}.png'
             \ }
 
