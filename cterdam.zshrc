@@ -35,7 +35,7 @@ export CTERDAMRC="$CTERDAMHOME/dotfiles"
 # The files are all symlinked to their default location.
 # This directory should be git cloned.
 
-# VIM ========================================================================
+# VIM {{{
 
 # cterdam's vimrc file
 cterdamvimrc="$CTERDAMRC/cterdam.vimrc"
@@ -59,7 +59,8 @@ if [[ ! -f $cocsettingsloc ]]; then
     ln -s $cterdamcocsettings $cocsettingsloc
 fi
 
-# GIT ========================================================================
+# }}}
+# GIT {{{
 
 # cterdam's gitconfig file
 cterdamgitconfig="$CTERDAMRC/cterdam.gitconfig"
@@ -72,7 +73,8 @@ if [[ ! -f $gitconfigloc ]]; then
     ln -s $cterdamgitconfig $gitconfigloc
 fi
 
-# ZSH ========================================================================
+# }}}
+# ZSH {{{
 
 # cterdam's zshrc file
 cterdamzshrc="$CTERDAMRC/cterdam.zshrc"
@@ -87,7 +89,8 @@ if [[ ! -f $zshrcloc ]]; then
     ln -s $cterdamzshrc $zshrcloc
 fi
 
-# TMUX =======================================================================
+# }}}
+# TMUX {{{
 
 # cterdam's tmux.conf file
 cterdamtmuxconf="$CTERDAMRC/cterdam.tmux.conf"
@@ -100,7 +103,8 @@ if [[ ! -f $tmuxconfloc ]]; then
     ln -s $cterdamtmuxconf $tmuxconfloc
 fi
 
-# RIME =======================================================================
+# }}}
+# RIME {{{
 
 # cterdamrime directory for all Rime dotfiles
 cterdamrime="$CTERDAMRC/cterdam.rime"
@@ -117,7 +121,7 @@ do
     fi
 done
 
-# ============================================================================
+# }}}
 
 # Edit dotfiles with vim
 rc () {
