@@ -648,7 +648,7 @@ Plug 'glts/vim-radical'
 " `:SoftPencil` to mock MS Word line breaks, turn off with `:NoPencil`
 Plug 'preservim/vim-pencil'
 
-" Export code to image
+" `:Silicon` to export code to image
 Plug 'segeljakt/vim-silicon'
 
 " }}}
@@ -748,11 +748,9 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" It's unclear which description block this function belongs to.
-" It seems to have no effect.
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " <CR> to auto-select the first completion item and format on enter
