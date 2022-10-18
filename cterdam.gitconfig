@@ -1,6 +1,6 @@
 [user]
-    name = cterdam
-    email = <llz.joshlee@gmail.com>
+	name = Josh Lee
+	email = llz.joshlee@gmail.com
 
 [core]
     pager = delta
@@ -22,3 +22,9 @@
 
 [submodule]
 	recurse = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

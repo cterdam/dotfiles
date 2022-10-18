@@ -486,6 +486,20 @@ nnoremap j ddp
 nnoremap k ddkkp
 
 " }}}
+" RUSSIAN {{{
+
+" Enable typing normal mode commands with a Russian keyboard
+" some keys are still missing, for example <Leader>
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz,хъжэбю;[]\;'\\,\\.,ХЪЁЖЭБЮ;{}\|\:\"<>
+
+" Enable typing some :commands on a Russian keyboard
+cnorea ц w
+cnorea й q
+cnorea цй wq
+cnorea цф wa
+cnorea йф qa
+
+" }}}
 
 " PLUGINS --------------------------------------------------------------------
 
