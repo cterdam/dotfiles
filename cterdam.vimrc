@@ -1255,7 +1255,7 @@ map <Leader>n :RainbowToggle<CR>
 
 " Supply color hierarchy for raindow
 let g:rainbow_conf = {
-\	'guifgs': ['red', 'orange', 'yellow', 'green', 'lightblue', 'blue',
+\	'guifgs': ['green', 'blue', 'red', 'yellow', 'lightblue', 'orange',
         \'purple'],
 \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
 \	'guis': [''],
