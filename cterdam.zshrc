@@ -354,6 +354,24 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # }}}
+# ANACONDA {{{
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/sterdam/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/sterdam/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/sterdam/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/sterdam/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# }}}
 # PATH {{{
 
 # This section stays at the bottom of zshrc to have final control over PATH

@@ -50,6 +50,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - This should also install Python3, Jupyter, among
     [other packages](https://docs.anaconda.com/anaconda/packages/pkg-docs/).
 
+  - If installation fails, [change the owner of shell config files to the current user][CONDATROUBLESHOOT]:
+
+    [CONDATROUBLESHOOT]: https://docs.anaconda.com/anaconda/user-guide/troubleshooting/#the-installation-failed-message-when-running-a-pkg-installer-on-osx
+
+    ```zsh
+    sudo chown -R $USER ~/.bash_profile ~/.config/fish/config.fish ~/.tcshrc ~/.xonshrc ~/.zshrc
+    ```
+
   - Alternatively, for better compatibility for M1 Mac packages, use miniforge instead.
     - To do this, after installing homebrew (in a later section), run `brew
       install miniforge`.
@@ -120,7 +128,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     - This is for [COC-sh](https://github.com/josa42/coc-sh).
 
   - Install [Rust](https://www.rust-lang.org/).
-    
+
     - And install [silicon](https://github.com/Aloxaf/silicon) with `brew
       install silicon`.
 
@@ -154,7 +162,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   [LIBFONT]: https://github.com/liberationfonts/liberation-fonts
 
-#### Misc.
+#### Misc
 
 - Install other UNIX tools:
 
@@ -311,3 +319,4 @@ download everything:
 ```zsh
 git clone --recursive <project url>
 ```
+
