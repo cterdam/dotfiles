@@ -665,6 +665,9 @@ Plug 'preservim/vim-pencil'
 " `:Silicon` to export code to image
 Plug 'segeljakt/vim-silicon'
 
+" `:Tab /x` to align selection by char `x`
+Plug 'godlygeek/tabular'
+
 " }}}
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
