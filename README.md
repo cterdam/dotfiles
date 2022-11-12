@@ -167,7 +167,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install other UNIX tools:
 
   ```zsh
-  brew install bat git-delta less tree
+  brew install bat git-delta less tree tldr
   ```
 
 - Install [Rime](https://rime.im/).
@@ -319,4 +319,3 @@ download everything:
 ```zsh
 git clone --recursive <project url>
 ```
-
