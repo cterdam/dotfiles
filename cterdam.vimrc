@@ -681,7 +681,6 @@ call plug#end()
 " - kien/ctrlp.vim or junegunn/fzf.vim for finding files
 " - ggreer/the_silver_searcher or mileszs/ack.vim for grepping code
 " - tpope/vim-obsession for saving/loading vim sessions
-" - godlygeek/tabular for lining up text
 " - chrisbra/csv.vim for treating csv files
 " - kyazdani42/nvim-tree.lua for a better file tree
 " - Text objects for specific languages, see kana/vim-textobj-user/wiki
