@@ -432,6 +432,10 @@ if ! inpath $CTERDAMBIN; then
     addpath $CTERDAMBIN head
 fi
 
+# Add pip install path
+addpath ~/.local/bin head
+
 # Add rust path
 source "$HOME/.cargo/env"
+
 # }}}
