@@ -6,4 +6,4 @@ patch:
     - name: simplification
       # Default on traditional
       reset: 0
-      states: [ 繁體, 简体 ]
+      states: [ 漢字, 汉字 ]

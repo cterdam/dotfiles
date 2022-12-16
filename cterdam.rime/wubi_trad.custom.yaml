@@ -5,6 +5,6 @@ patch:
     - name: zh_trad
       # Default on traditional
       reset: 1
-      states: [ 简体, 繁體 ]
+      states: [ 汉字, 漢字 ]
     - name: extended_charset
       states: [ 常用, 增廣 ]
