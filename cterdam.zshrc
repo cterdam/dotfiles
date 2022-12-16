@@ -439,3 +439,10 @@ addpath ~/.local/bin head
 source "$HOME/.cargo/env"
 
 # }}}
+# ALEXA SOCIALBOT {{{
+    # Set cobot home
+    export COBOT_HOME=/Users/sterdam/cterdam/cobot_home
+
+    # Add bin to PATH
+    addpath $COBOT_HOME/bin tail
+# }}}
