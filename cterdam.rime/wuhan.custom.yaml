@@ -4,5 +4,6 @@ patch:
   speller/max_code_length: 4
   switches:
     - name: simplification
-      reset: 1
+      # Default on traditional
+      reset: 0
       states: [ 繁體, 简体 ]

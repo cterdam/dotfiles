@@ -3,6 +3,7 @@ patch:
   speller/max_code_length: 4
   switches:
     - name: zh_trad
+      # Default on traditional
       reset: 1
       states: [ 简体, 繁體 ]
     - name: extended_charset

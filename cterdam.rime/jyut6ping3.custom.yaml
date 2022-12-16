@@ -2,5 +2,5 @@ patch:
   switches:
     - options: [ noop, simplification ]
       states: [ 漢字, 汉字 ]
-      # Default on simplified
-      reset: 1
+      # Default on traditional
+      reset: 0
