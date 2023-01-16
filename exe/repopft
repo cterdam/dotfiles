@@ -1,0 +1,95 @@
+#!zsh
+
+stripspace() {
+    # Strip string of starting and ending space characters
+    # Supports piping
+    if [[ "$#" -ne 0 ]]; then
+        echo $@ | stripspace
+    else
+        sed "s/^ *//g" | sed "s/ *$//g"
+    fi
+}
+
+extname() {
+    # Get the extension name of a file
+    # Supports piping
+    if [[ "$#" -eq 0 ]]; then
+        local in
+        read in
+        $fileandextname=$in
+    else
+        fileandextname=$1
+    fi
+    echo "${fileandextname##*.}"
+}
+
+repopft() {
+    # Repopulate/diagnose the directory collecting all listed filetypes
+
+    if [[ $# -ne 2 ]]; then
+        echo "Usage: repopft FTDIR FTLIST"
+        return
+    fi
+
+    ftdir=$1
+    ftlist=$2
+
+    # ====== CHECK ONE ======
+
+    # Reset Error flag
+    fterr=0
+
+    # For each extension in ftlist, find corresponding file in dummy
+    while read -r line ; do
+        # Number of files with the given extension
+        count=$( (ls -1 $ftdir/*.${line}) 2>/dev/null |wc -l| stripspace)
+
+        # No file found, create one
+        if [[ $count -eq 0 ]] ; then
+            touch $ftdir/dummy.$line
+            echo "Created dummy.$line"
+            fterr=1
+
+        # More than one file found, report and do nothing
+        elif [[ $count -ge 2 ]] ; then
+            echo "Found duplicate files for extension $line"
+            fterr=1
+        fi
+    done < $ftlist
+
+    # Report if no error is found
+    if [[ $fterr -ne 1 ]] ; then
+        echo "Each listed extension corresponds to exactly one dummy file."
+    fi
+
+    # ====== CHECK TWO ======
+
+    # Reset error flag
+    fterr=0
+
+    for dummyfile in $ftdir/* ; do
+        # Get extension of this file
+        thisext=$(extname $dummyfile)
+        # Number of exact one-line occurrences of this extension in list
+        count=$(grep -o "^"$thisext"$" $ftlist | wc -l)
+
+        # No entry found for this file, report and do nothing
+        if [[ count -eq 0 ]] ; then
+            echo "No list entry found for filetype $thisext"
+            fterr=1
+
+        # Duplicate entries found, report and do nothing
+        elif [[ count -ge 2 ]] ; then
+            echo "Duplicate list entries found for filetype $thisext"
+            fterr=1
+        fi
+    done
+
+    # Report if no error is found
+    if [[ $fterr -ne 1 ]] ; then
+        echo "Each dummy file corresponds to exactly one list entry."
+    fi
+
+}
+
+repopft $@

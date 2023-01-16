@@ -14,22 +14,29 @@ fi
 # CTERDAMHOME {{{
 
 # Intended directory structure:
-# - CTERDAMHOME
-#   - CTERDAMRC
-#   - CTERDAMBIN
+# - CTERDAMHOME (development directory)
+#   - CTERDAMBIN (script and other binary symlinks)
+#   - CTERDAMRC (config files)
+#     - CTERDAMEXE (source scripts for execution)
 
 # CTERDAMHOME directory to hold all my terminal material
 export CTERDAMHOME="$HOME/cterdam"
-
-# Make sure that CTERDAMHOME exists (if exists, nothing changes)
 mkdir -p $CTERDAMHOME
 
-# }}}
-# CTERDAMRC {{{
+# CTERDAMBIN directory to hold all my executables.
+# This will be given priority in PATH.
+export CTERDAMBIN="$CTERDAMHOME/bin"
+mkdir -p $CTERDAMBIN
 
 # CTERDAMRC directory to hold all cterdam's custom rc files
 # CTERDAMRC should be named dotfiles as cloned from my git repo.
 export CTERDAMRC="$CTERDAMHOME/dotfiles"
+
+# CTERDAMEXE directory to hold all scripts to be converted to executables
+export CTERDAMEXE="$CTERDAMRC/exe"
+
+# }}}
+# CTERDAMRC {{{
 
 # These rc file names should all start with "cterdam" as in my git repo.
 # The files are all symlinked to their default location.
@@ -161,84 +168,8 @@ rc () {
     esac
 }
 
-# Repopulate/diagnose the directory collecting all listed filetypes
-repopft() {
-
-    if [[ $# -ne 2 ]]; then
-        echo "Usage: repopft FTDIR FTLIST"
-        return
-    fi
-
-    ftdir=$1
-    ftlist=$2
-
-    # ====== CHECK ONE ======
-
-    # Reset Error flag
-    fterr=0
-
-    # For each extension in ftlist, find corresponding file in dummy
-    while read -r line ; do
-        # Number of files with the given extension
-        count=$( (ls -1 $ftdir/*.${line}) 2>/dev/null |wc -l| stripspace)
-
-        # No file found, create one
-        if [[ $count -eq 0 ]] ; then
-            touch $ftdir/dummy.$line
-            echo "Created dummy.$line"
-            fterr=1
-
-        # More than one file found, report and do nothing
-        elif [[ $count -ge 2 ]] ; then
-            echo "Found duplicate files for extension $line"
-            fterr=1
-        fi
-    done < $ftlist
-
-    # Report if no error is found
-    if [[ $fterr -ne 1 ]] ; then
-        echo "Each listed extension corresponds to exactly one dummy file."
-    fi
-
-    # ====== CHECK TWO ======
-
-    # Reset error flag
-    fterr=0
-
-    for dummyfile in $ftdir/* ; do
-        # Get extension of this file
-        thisext=$(extname $dummyfile)
-        # Number of exact one-line occurrences of this extension in list
-        count=$(grep -o "^"$thisext"$" $ftlist | wc -l)
-
-        # No entry found for this file, report and do nothing
-        if [[ count -eq 0 ]] ; then
-            echo "No list entry found for filetype $thisext"
-            fterr=1
-
-        # Duplicate entries found, report and do nothing
-        elif [[ count -ge 2 ]] ; then
-            echo "Duplicate list entries found for filetype $thisext"
-            fterr=1
-        fi
-    done
-
-    # Report if no error is found
-    if [[ $fterr -ne 1 ]] ; then
-        echo "Each dummy file corresponds to exactly one list entry."
-    fi
-
-}
-
 # }}}
 # CTERDAMBIN {{{
-
-# CTERDAMBIN directory to hold all my executables.
-# This will be given priority in PATH.
-export CTERDAMBIN="$CTERDAMHOME/bin"
-
-# Make sure that CTERDAMBIN exists (if exists, nothing changes)
-mkdir -p $CTERDAMBIN
 
 # Symlink all vim binaries from homebrew to CTERDAMBIN, if not already present
 # Reason is homebrew on Mac installs vim with more options than the default vim
@@ -248,6 +179,17 @@ do
     cterdamvimbin="$CTERDAMBIN/$(basename $homebrewvimbin)"
     if [[ ! -f $cterdamvimbin ]]; then
         ln -s $homebrewvimbin $cterdamvimbin
+    fi
+done
+
+# Empower all scripts in CTERDAMRC/scripts, and symlink to CTERDAMBIN if not
+# already present
+for exefile in $CTERDAMRC/exe/*
+do
+    chmod 755 $exefile
+    binexe="$CTERDAMBIN/$(basename $exefile)"
+    if [[ ! -f $binexe ]]; then
+        ln -s $exefile $binexe
     fi
 done
 
@@ -273,32 +215,6 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Use gruvbox theme for bat
 export BAT_THEME="gruvbox-dark"
-
-# }}}
-# UTILS {{{
-
-# Strip string of starting and ending space characters
-# Supports piping
-stripspace() {
-    if [[ "$#" -ne 0 ]]; then
-        echo $@ | stripspace
-    else
-        sed "s/^ *//g" | sed "s/ *$//g"
-    fi
-}
-
-# Get the extension name of a file
-# Supports piping
-extname() {
-    if [[ "$#" -eq 0 ]]; then
-        local in
-        read in
-        $fileandextname=$in
-    else
-        fileandextname=$1
-    fi
-    echo "${fileandextname##*.}"
-}
 
 # }}}
 # OHMYZSH {{{
@@ -379,12 +295,6 @@ unset __conda_setup
 # Prints each PATH directory on its own line
 # (assumes no ':' in directory names)
 alias showpath='echo $PATH | tr ":" "\n"'
-
-# Prints the number of directories currently in PATH
-pathcount() {
-    count=$(showpath | wc -l)
-    echo $count
-}
 
 # Returns true iff argument in PATH
 inpath() {
