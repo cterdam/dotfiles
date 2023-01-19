@@ -216,6 +216,9 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Use gruvbox theme for bat
 export BAT_THEME="gruvbox-dark"
 
+# Command to view the root of this git repo
+alias gitroot='git rev-parse --show-toplevel'
+
 # }}}
 # OHMYZSH {{{
 
