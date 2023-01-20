@@ -260,14 +260,22 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
     git
+    python
     web-search
     copyfile
+    copypath
+    copybuffer
     macos
+    history
 )
 # git: autocompletions with git commands
+# python: `py` for python, `pyclean` to clean dummy files
 # web-search `google milan` to google search milan
-# copyfile: copy the contents of a file to the system clipboard
+# copyfile: `copyfile` to copy a file to clipboard
+# copypath: `copypath` to copy current directory path
+# copybuffer: Ctrl + O to copy command line buffer to clipboard
 # macos: some mac os aliases
+# history: `h` to show history, `hs` to grep history
 
 # Rest of oh-my-zsh
 source $ZSH/oh-my-zsh.sh
