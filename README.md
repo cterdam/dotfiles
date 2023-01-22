@@ -16,7 +16,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - To install, after decompressing, drag all subfolders of the `OpenType`
     folder to Font Book.
 
-- In the Mac terminal, type `git` to trigger downloading developer tools.
+- In terminal, run `xcode-select --install` to download developer tools.
 
 - Log in to [Github](https://github.com/) and follow its [tutorial][GHSSH] to
   set up a new SSH key.
@@ -24,18 +24,10 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   [GHSSH]:
   https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
-- Now make development directory:
+- Now make development directory and clone this repo over SSH:
 
   ```zsh
-  cd
-  mkdir cterdam
-  ```
-
-- Inside `cterdam`, clone this repo over SSH:
-
-  ```zsh
-  cd cterdam
-  git clone --recursive git@github.com:cterdam/dotfiles.git
+  git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
   ```
 
 - Once the repo is downloaded, set up terminal appearance by importing
@@ -58,12 +50,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     sudo chown -R $USER ~/.bash_profile ~/.config/fish/config.fish ~/.tcshrc ~/.xonshrc ~/.zshrc
     ```
 
-  - Alternatively, for better compatibility for M1 Mac packages, use miniforge instead.
-    - To do this, after installing homebrew (in a later section), run `brew
-      install miniforge`.
-    - Miniforge also comes with significantly less packages, so you need to
-      manually install black and autopep8 with conda.
-
 - Install [Java](https://www.oracle.com/java/technologies/downloads/).
 
   - At time of writing, Java 17 is the latest LTS version.
@@ -84,13 +70,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
       well as `mono` to run the compiled executable.
 
 - Install [Node.js](https://nodejs.org/en/).
-
-#### Optional Components
-
-- Install [Genism](https://radimrehurek.com/gensim/) with `pip install
-  --upgrade gensim`.
-  
-  - This is for word vectors & text similarity modeling for NLP.
 
 ### 3. Practical Tools
 
@@ -293,6 +272,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   submodule in the `utility` directory.
 
 - Drag the `utility` folder to the macOS Dock.
+
+## Troubleshooting
+
+- After macOS update, some things fall apart. E.g. `git` disappears.
+
+  - Reinstall Xcode Command Line Tools tools by running
+    `xcode-select --install`.
 
 ## Submodules
 
