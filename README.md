@@ -273,6 +273,46 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Drag the `utility` folder to the macOS Dock.
 
+## Installing on a new Deep Learning EC2 instance
+
+- Send GitHub SSH keys to the instance.
+
+  - ```zsh
+    scp -i <key> <github_key_file> <username>@<ip4add>:~/.ssh
+    # For example,
+    # scp -i "~/.ssh/joshlee_asb.pem" ~/.ssh/id_ed25519 ubuntu@ec2-3-89-155-29.compute-1.amazonaws.com:~/.ssh
+    ```
+
+- SSH into the instance, then do all the work there.
+
+  - Clone this repo with `git clone --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles`
+
+  - Run the setup script with `bash $HOME/cterdam/dotfiles/server_setup.sh`
+
+    - This will automate most of what's in this README file on a Linux
+      environment.
+
+    - C family languages, Anaconda and Java should come pre-installed in Deep
+      Learning AMI. Due to being on a Linux server, this script does not
+      install .NET, Latex, and Rime.
+
+  - After the script finishes, link the zshrc file again:
+
+    - ```zsh
+      rm $HOME/.zshrc
+      ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
+      ```
+
+  - Then log back in a few times. Go to `tmux` and send `Prefix` `Shift+I` to
+    install tmux plugins.
+
+    - If the local instance is also running `tmux`, then `Prefix` might need
+      to be sent twice in order to reach the remote instance.
+
+  - Launch `vim` to install vim plugins.
+
+  - Init conda with `conda init zsh` and re-login.
+
 ## Troubleshooting
 
 - After macOS update, some things fall apart. E.g. `git` disappears.

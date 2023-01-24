@@ -1,8 +1,3 @@
-# To scp GitHub key into instance, run this:
-# scp -i <key> <github_key_file> <username>@<ip4add>:~/.ssh
-# For example:
-# scp -i "~/.ssh/joshlee_asb.pem" ~/.ssh/id_ed25519 ubuntu@ec2-3-89-155-29.compute-1.amazonaws.com:~/.ssh
-
 # Define output text style
 RED=$(tput setaf 1)
 BOLD=$(tput bold)
@@ -33,13 +28,19 @@ sudo npm install --global yarn bash-language-server
 
 alert '>>> Installing other packages'
 # Install tmux plugin manager
-git clone --quiet https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+git clone --quiet https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 alert '>>> Cloning dotfiles >>>'
-git clone --quiet --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
+git clone --quiet --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles
+
+alert '>>> Linking up dotfiles'
+rm $HOME/.*.pre-oh-my-zsh* || true
+rm $HOME/.zshrc || true
+mkdir -p $HOME/.config
+sudo chown -R $(whoami) $HOME/.config
+ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
 
 alert '>>> Installing oh-my-zsh'
 alert '    Remember to make zsh default.'
+rm -rf $HOME/.oh-my-zsh || true
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-alert 'Here!'
