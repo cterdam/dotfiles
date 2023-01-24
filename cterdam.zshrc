@@ -51,7 +51,7 @@ cterdamvimrc="$CTERDAMRC/cterdam.vimrc"
 vimrcloc="$HOME/.vim/vimrc"
 
 # Symlink, if not already present
-if [[ ! -f $vimrcloc ]]; then
+if [[ -f $cterdamvimrc && ! -f $vimrcloc ]]; then
     ln -s $cterdamvimrc $vimrcloc
 fi
 
@@ -62,7 +62,7 @@ cterdamcocsettings="$CTERDAMRC/cterdamcoc.json"
 cocsettingsloc="$HOME/.vim/coc-settings.json"
 
 # Symlink, if not already present
-if [[ ! -f $cocsettingsloc ]]; then
+if [[ -f $cterdamcocsettings && ! -f $cocsettingsloc ]]; then
     ln -s $cterdamcocsettings $cocsettingsloc
 fi
 
@@ -76,7 +76,7 @@ cterdamgitconfig="$CTERDAMRC/cterdam.gitconfig"
 gitconfigloc="$HOME/.gitconfig"
 
 # Symlink, if not already present
-if [[ ! -f $gitconfigloc ]]; then
+if [[ -f cterdamgitconfig && ! -f $gitconfigloc ]]; then
     ln -s $cterdamgitconfig $gitconfigloc
 fi
 
@@ -92,7 +92,7 @@ zshrcloc="$HOME/.zshrc"
 # Symlink, if not already present
 # Actually this doesn't work, symlinking has to be done manually.
 # If there is no zshrc in the appointed location, how can we execute any script?
-if [[ ! -f $zshrcloc ]]; then
+if [[ -f $cterdamzshrc && ! -f $zshrcloc ]]; then
     ln -s $cterdamzshrc $zshrcloc
 fi
 
@@ -106,7 +106,7 @@ cterdamtmuxconf="$CTERDAMRC/cterdam.tmux.conf"
 tmuxconfloc="$HOME/.tmux.conf"
 
 # Symlink, if not already present
-if [[ ! -f $tmuxconfloc ]]; then
+if [[ -f $cterdamtmuxconf && ! -f $tmuxconfloc ]]; then
     ln -s $cterdamtmuxconf $tmuxconfloc
 fi
 
@@ -123,7 +123,7 @@ rimeloc="$HOME/Library/Rime"
 for cterdamrimefile in $cterdamrime/*
 do
     rimefileloc="$rimeloc/$(basename $cterdamrimefile)"
-    if [[ ! -f $rimefileloc ]]; then
+    if [[ -f $cterdamrimefile && ! -f $rimefileloc ]]; then
         ln -s $cterdamrimefile $rimefileloc
     fi
 done
