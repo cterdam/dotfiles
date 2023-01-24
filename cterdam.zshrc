@@ -120,13 +120,15 @@ cterdamrime="$CTERDAMRC/cterdam.rime"
 rimeloc="$HOME/Library/Rime"
 
 # Symlink all rime files into the correct location for Rime
-for cterdamrimefile in $cterdamrime/*
-do
-    rimefileloc="$rimeloc/$(basename $cterdamrimefile)"
-    if [[ -f $cterdamrimefile && ! -f $rimefileloc ]]; then
-        ln -s $cterdamrimefile $rimefileloc
-    fi
-done
+if [[ -d $rimeloc ]]; then
+    for cterdamrimefile in $cterdamrime/*
+    do
+        rimefileloc="$rimeloc/$(basename $cterdamrimefile)"
+        if [[ -f $cterdamrimefile && ! -f $rimefileloc ]]; then
+            ln -s $cterdamrimefile $rimefileloc
+        fi
+    done
+fi
 
 # }}}
 
@@ -230,7 +232,7 @@ fi
 # OHMYZSH {{{
 
 # Path to oh-my-zsh installation
-export ZSH="/Users/sterdam/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
 ZSH_THEME="candy"
@@ -292,14 +294,15 @@ source $ZSH/oh-my-zsh.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/sterdam/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+condaloc=$HOME/'opt/anaconda3/bin/conda'
+__conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/sterdam/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/sterdam/opt/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/sterdam/opt/anaconda3/bin:$PATH"
+        export PATH="$HOME/opt/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -364,12 +367,15 @@ fi
 addpath ~/.local/bin head
 
 # Add rust path
-source "$HOME/.cargo/env"
+cargoenv="$HOME/.cargo/env"
+if [[ -f $cargoenv ]]; then
+    source $cargoenv
+fi
 
 # }}}
 # ALEXA SOCIALBOT {{{
     # Set cobot home
-    export COBOT_HOME=/Users/sterdam/cterdam/cobot_home
+    export COBOT_HOME="$CTERDAMHOME/cobot_home"
 
     # Add bin to PATH
     addpath $COBOT_HOME/bin tail
