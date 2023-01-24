@@ -219,6 +219,11 @@ export BAT_THEME="gruvbox-dark"
 # Command to view the root of this git repo
 alias gitroot='git rev-parse --show-toplevel'
 
+# Solve issue on Ubuntu where bat is named batcat
+if [[ ! $(command -v bat) ]]; then
+    alias bat='batcat'
+fi
+
 # }}}
 # OHMYZSH {{{
 
