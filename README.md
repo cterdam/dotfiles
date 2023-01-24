@@ -306,7 +306,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Then log back in a few times. Go to `tmux` and send `Prefix` `Shift+I` to
     install tmux plugins.
 
-    - If the local instance is also running `tmux`, then `Prefix` might need
+    - If the local instance is also running `tmux`, then these keys might need
       to be sent twice in order to reach the remote instance.
 
   - Launch `vim` to install vim plugins.
