@@ -174,17 +174,19 @@ rc () {
 # Symlink all vim binaries from homebrew to CTERDAMBIN, if not already present
 # Reason is homebrew on Mac installs vim with more options than the default vim
 homebrewbinloc="/opt/homebrew/bin"
-for homebrewvimbin in $homebrewbinloc/(*vim*|vi)
-do
-    cterdamvimbin="$CTERDAMBIN/$(basename $homebrewvimbin)"
-    if [[ ! -f $cterdamvimbin ]]; then
-        ln -s $homebrewvimbin $cterdamvimbin
-    fi
-done
+if [[ -d $homebrewbinloc ]]; then
+    for homebrewvimbin in $homebrewbinloc/(*vim*|vi)
+    do
+        cterdamvimbin="$CTERDAMBIN/$(basename $homebrewvimbin)"
+        if [[ ! -f $cterdamvimbin ]]; then
+            ln -s $homebrewvimbin $cterdamvimbin
+        fi
+    done
+fi
 
 # Empower all scripts in CTERDAMRC/scripts, and symlink to CTERDAMBIN if not
 # already present
-for exefile in $CTERDAMRC/exe/*
+for exefile in $CTERDAMEXE/*
 do
     chmod 755 $exefile
     binexe="$CTERDAMBIN/$(basename $exefile)"
