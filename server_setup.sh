@@ -17,8 +17,10 @@ sudo apt-get -qq install gnupg ca-certificates
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 sudo apt -qq update
+# Add apt repo to install latest vim
+sudo add-apt-repository ppa:jonathonf/vim
 # Finally install all desired packages
-sudo apt-get -qq install zsh golang-go mono-complete vim-nox rustc octave bat git-extras less tree tldr
+sudo apt-get -qq install zsh golang-go mono-complete vim-nox rustc octave bat git-extras less tree tldr vim
 
 alert '>>> Installing snap packages'
 sudo snap install node --classic
