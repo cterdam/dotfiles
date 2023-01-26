@@ -707,7 +707,8 @@ let g:coc_global_extensions = [
     \'coc-sh',
     \'coc-vimlsp',
     \'coc-yank',
-    \'coc-vimtex'
+    \'coc-vimtex',
+    \'coc-java'
     \]
 " run individual extension commands like this :CocCommand python.runLinting
 " Extension config options are set in :CocConfig

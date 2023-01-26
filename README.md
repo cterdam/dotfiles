@@ -54,6 +54,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - At time of writing, Java 17 is the latest LTS version.
 
+    - Java 17 should work fine, but if for any reason a lower version of Java
+      is needed (e.g. Search Engines course), then the `jdt` for `coc-java`
+      might not work correctly. In that case follow [this issue][JAVAISSUE] to
+      replace the automatically-downloaded `jdt` with an older version which
+      works with lower versions of Java.
+
+      [JAVAISSUE]: https://github.com/neoclide/coc-java/issues/99
+
 - Install [Golang](https://go.dev/).
 
 - Install tools for C#:
