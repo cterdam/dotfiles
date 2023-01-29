@@ -60,6 +60,17 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
       replace the automatically-downloaded `jdt` with an older version which
       works with lower versions of Java.
 
+      - Specifically,
+      ```
+      Version 57 of JDT Lang Sever works fine
+      https://download.eclipse.org/jdtls/milestones/0.57.0/
+
+      Quick hack for those who are facing this issue
+      Replace all directories/files in 
+      ~/.config/coc/extensions/coc-java-data/server
+      with directories/files from above extracted JDT lang server tar.
+      ```
+
       [JAVAISSUE]: https://github.com/neoclide/coc-java/issues/99
 
 - Install [Golang](https://go.dev/).
