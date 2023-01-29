@@ -283,12 +283,19 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Installing on a new Deep Learning EC2 instance
 
+- On local machine, register remote instance in `~/.ssh/config`:
+
+  ```config
+  Host <NICKNAME>
+      HostName ec2-12-345-67-890.compute-1.amazonaws.com
+      User ubuntu
+      IdentityFile ~/.ssh/my_key.pem
+  ```
+
 - Send GitHub SSH keys to the instance.
 
   - ```zsh
-    scp -i <key> <github_key_file> <username>@<ip4add>:~/.ssh
-    # For example,
-    # scp -i "~/.ssh/joshlee_asb.pem" ~/.ssh/id_ed25519 ubuntu@ec2-3-89-155-29.compute-1.amazonaws.com:~/.ssh
+    scp <github_key_file> <NICKNAME>:~/.ssh
     ```
 
 - SSH into the instance, then do all the work there.
@@ -304,18 +311,22 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
       Learning AMI. Due to being on a Linux server, this script does not
       install .NET, Latex, and Rime.
 
-  - After the script finishes, link the zshrc file again:
+  - After the script finishes, you will be taken to zsh. Manually run the
+    following:
 
     - ```zsh
-      rm $HOME/.zshrc
+      rm $HOME/.*.pre-oh-my-zsh* || true
+      rm $HOME/.zshrc || true
       ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
       ```
 
-  - Then log back in a few times. Go to `tmux` and send `Prefix` `Shift+I` to
-    install tmux plugins.
+  - Then log out and back in the remote instance. Go to `tmux` and send
+    `Prefix` `Shift+I` to install tmux plugins.
 
     - If the local instance is also running `tmux`, then these keys might need
-      to be sent twice in order to reach the remote instance.
+      to be sent twice in order to reach the remote instance. That is, press
+      `Prefix` `Prefix` `Shift+I` `Shift+I`. The default Prefix for `tmux` is
+      `Ctrl+B`.
 
   - Launch `vim` to install vim plugins.
 

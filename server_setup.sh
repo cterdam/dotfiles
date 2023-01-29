@@ -35,12 +35,9 @@ git clone --quiet https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 alert '>>> Cloning dotfiles >>>'
 git clone --quiet --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles
 
-alert '>>> Linking up dotfiles'
-rm $HOME/.*.pre-oh-my-zsh* || true
-rm $HOME/.zshrc || true
+alert '>>> Other prep'
 mkdir -p $HOME/.config
 sudo chown -R $(whoami) $HOME/.config
-ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
 
 alert '>>> Installing oh-my-zsh'
 alert '    Remember to make zsh default.'

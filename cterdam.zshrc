@@ -48,6 +48,7 @@ export CTERDAMEXE="$CTERDAMRC/exe"
 cterdamvimrc="$CTERDAMRC/cterdam.vimrc"
 
 # Location for vimrc
+mkdir -p $HOME/.vim
 vimrcloc="$HOME/.vim/vimrc"
 
 # Symlink, if not already present
@@ -157,8 +158,11 @@ rc () {
         readme)
             $EDITOR $CTERDAMRC/README.md
             ;;
+        server)
+            $EDITOR $CTERDAMRC/server_setup.sh
+            ;;
         -h)
-            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme"
+            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server"
             ;;
         '')
             echo "Entering $CTERDAMRC"
