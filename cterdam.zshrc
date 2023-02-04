@@ -27,6 +27,9 @@ export CTERDAMRC="$CTERDAMHOME/dotfiles"
 # CTERDAMEXE directory to hold all scripts to be converted to executables
 export CTERDAMEXE="$CTERDAMRC/exe"
 
+# Make profile directory only readable by self
+chmod -R 700 $CTERDAMRC/utility/profile
+
 # }}}
 # CTERDAMRC {{{
 
