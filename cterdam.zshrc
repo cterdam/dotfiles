@@ -3,14 +3,6 @@
 # cterdam.zshrc: cterdam's personal zshrc file.
 # See https://github.com/cterdam/dotfiles
 
-# TMUX {{{
-
-# Start tmux session "default" if tmux not running
-if [[ -z "$TMUX" ]]; then
-    tmux attach -t default || tmux new -s default
-fi
-
-# }}}
 # CTERDAMHOME {{{
 
 # Intended directory structure:
@@ -232,6 +224,22 @@ if [[ ! $(command -v bat) ]]; then
     alias bat='batcat'
 fi
 
+sysname() {
+    case $(uname -a) in
+        *Ubuntu*)
+            echo "Ubuntu"
+            ;;
+        *Darwin*)
+            echo "macOS"
+            ;;
+        *Linux*)
+            echo "Linux"
+            ;;
+        *)
+            echo "default"
+    esac
+}
+
 # }}}
 # OHMYZSH {{{
 
@@ -374,6 +382,14 @@ addpath ~/.local/bin head
 cargoenv="$HOME/.cargo/env"
 if [[ -f $cargoenv ]]; then
     source $cargoenv
+fi
+
+# }}}
+# TMUX {{{
+
+# Start tmux session "default" if tmux not running
+if [[ -z "$TMUX" ]]; then
+    tmux attach -t $(sysname) || tmux new -s $(sysname)
 fi
 
 # }}}
