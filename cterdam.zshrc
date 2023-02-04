@@ -68,11 +68,11 @@ fi
 # cterdam's gitconfig file
 cterdamgitconfig="$CTERDAMRC/cterdam.gitconfig"
 
-# Location for zshrc
+# Location for gitconfig
 gitconfigloc="$HOME/.gitconfig"
 
 # Symlink, if not already present
-if [[ -f cterdamgitconfig && ! -f $gitconfigloc ]]; then
+if [[ -f $cterdamgitconfig && ! -f $gitconfigloc ]]; then
     ln -s $cterdamgitconfig $gitconfigloc
 fi
 
