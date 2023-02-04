@@ -305,11 +305,25 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # }}}
+# TMUX {{{
+
+# Start tmux session if not running
+if [[ -z "$TMUX" ]]; then
+    tmux attach -t $(sysname) || tmux new -s $(sysname)
+fi
+
+# }}}
 # ANACONDA {{{
+
+if [[ -d $HOME/'opt/anaconda3' ]]; then
+    condahomeloc=$HOME/'opt/anaconda3'
+else
+    condahomeloc='/usr/local'
+fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-condaloc=$HOME/'opt/anaconda3/bin/conda'
+condaloc=$condahomeloc/'bin/conda'
 __conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -385,14 +399,6 @@ addpath ~/.local/bin head
 cargoenv="$HOME/.cargo/env"
 if [[ -f $cargoenv ]]; then
     source $cargoenv
-fi
-
-# }}}
-# TMUX {{{
-
-# Start tmux session "default" if tmux not running
-if [[ -z "$TMUX" ]]; then
-    tmux attach -t $(sysname) || tmux new -s $(sysname)
 fi
 
 # }}}
