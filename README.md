@@ -350,6 +350,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Reinstall Xcode Command Line Tools tools by running
     `xcode-select --install`.
 
+- COC Java plugin crashes.
+
+  - This happens when the language server is started on the same directory
+    multiple times. Just clear cache with `:CocCommand java.clean.workspace`.
+
 ## Submodules
 
 Use `git submodule status --recursive` to see all submodules.
