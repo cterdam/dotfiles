@@ -318,9 +318,9 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Send GitHub SSH keys to the instance.
 
-  - ```zsh
-    scp <github_key_file> <NICKNAME>:~/.ssh
-    ```
+  ```zsh
+  scp <github_key_file> <NICKNAME>:~/.ssh
+  ```
 
 - SSH into the instance, then do all the work there.
 
@@ -338,11 +338,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - After the script finishes, you will be taken to zsh. Manually run the
     following:
 
-    - ```zsh
-      rm $HOME/.*.pre-oh-my-zsh* || true
-      rm $HOME/.zshrc || true
-      ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
-      ```
+    ```zsh
+    rm $HOME/.*.pre-oh-my-zsh* || true
+    rm $HOME/.zshrc || true
+    ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
+    ```
 
   - Then log out and back in the remote instance. Go to `tmux` and send
     `Prefix` `Shift+I` to install tmux plugins.
@@ -355,6 +355,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Launch `vim` to install vim plugins.
 
   - Init conda with `conda init zsh` and re-login.
+
+  - Install other packages which couldn't be installed without re-sourcing the
+    shell:
+
+    ```zsh
+    gem install jekyll bundler
+    ```
 
 ## Troubleshooting
 
