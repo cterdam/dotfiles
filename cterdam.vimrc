@@ -318,7 +318,7 @@ set updatecount=100
 
 " If for 100 miliseconds nothing is typed, write the swap file
 " This also governs such other update events as gitgutter update
-set updatetime=100
+set updatetime=500
 
 " Ensure that swapdir exists
 if !isdirectory($HOME . "/.vim/swap")
