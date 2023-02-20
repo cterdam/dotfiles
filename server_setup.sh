@@ -20,7 +20,7 @@ sudo apt -qq update
 # Add apt repo to install latest vim
 sudo add-apt-repository ppa:jonathonf/vim
 # Finally install all desired packages
-sudo apt-get -qq install zsh golang-go mono-complete vim-nox rustc octave bat git-extras less tree tldr vim
+sudo apt-get -qq install zsh golang-go mono-complete vim-nox rustc octave bat git-extras less tree tldr vim ruby-full build-essential zlib1g-dev
 
 alert '>>> Installing snap packages'
 sudo snap install node --classic
@@ -31,6 +31,8 @@ sudo npm install --global yarn bash-language-server
 alert '>>> Installing other packages'
 # Install tmux plugin manager
 git clone --quiet https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+# Install Jekyll
+gem install jekyll bundler
 
 alert '>>> Cloning dotfiles >>>'
 git clone --quiet --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles

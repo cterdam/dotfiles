@@ -146,6 +146,19 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Octave](https://octave.org/index.html) with `brew install octave`.
 
+#### Jekyll for Github Pages
+
+- Install [Jekyll](https://jekyllrb.com/docs/installation/macos/).
+
+  - The above link basically tells you to run these:
+
+    ```zsh
+    brew install chruby ruby-install xz
+    ruby-install ruby 3.1.3
+    ruby -v # 3.1.3p185 or above
+    gem install jekyll
+    ```
+
 #### Other Fonts
 
 - Install [Liberation Fonts][LIBFONT].
