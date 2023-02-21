@@ -701,14 +701,15 @@ call plug#end()
 let g:coc_global_extensions = [
     \'coc-calc',
     \'coc-clangd',
+    \'coc-java',
     \'coc-json',
     \'coc-markdownlint',
     \'coc-pyright',
     \'coc-sh',
     \'coc-vimlsp',
-    \'coc-yank',
     \'coc-vimtex',
-    \'coc-java'
+    \'coc-yank',
+    \'coc-yaml'
     \]
 " run individual extension commands like this :CocCommand python.runLinting
 " Extension config options are set in :CocConfig
@@ -717,15 +718,17 @@ let g:coc_global_extensions = [
 " coc-calc: autocomplete mathematical expression calculations.
 " coc-clangd: C-language family extension.
 "   Requires Node.js and clangd in PATH.
+" coc-java: Java diagnostic extension.
 " coc-json: json file extension.
 " coc-markdownlint: markdown file extension.
 " coc-pyright: pyright extension for python.
 " coc-sh: SH language extension.
 "   Requires bash-language-server.
 " coc-vimlsp: vimscript language extension.
-" coc-yank: yank completion, plus persistent yank list across vim instances
 " coc-vimtex: incorporate vimtex sources into autocomplete menu
 "   Requires vimtex.
+" coc-yank: yank completion, plus persistent yank list across vim instances
+" coc-yaml: YAML dianostic extension.
 
 " Settings:
 " Most config options for coc extensions should be set in :CocConfig
