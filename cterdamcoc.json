@@ -21,8 +21,8 @@
     "markdownlint.onChange": true,
     "markdownlint.onSave": true,
     "java.project.referencedLibraries": [
-        "/Users/sterdam/cterdam/11642/hw1/lucene-8.1.1/*.jar",
-        "/Users/sterdam/cterdam/11642/hw1/QryEval"
+        "/Users/sterdam/cterdam/11642/qryeval/lucene-8.1.1/*.jar",
+        "/Users/sterdam/cterdam/11642/qryeval/QryEval"
     ],
     "coc.preferences.jumpCommand": "tabe"
 }
