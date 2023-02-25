@@ -3,6 +3,129 @@
 # cterdam.zshrc: cterdam's personal zshrc file.
 # See https://github.com/cterdam/dotfiles
 
+# GENERAL {{{
+
+# Edit anything with vim
+export EDITOR="vim"
+
+# Show Chinese characters
+alias tree='tree -N'
+
+# Do actual work here
+cd $CTERDAMHOME
+
+# Function to view git diff with bat
+batdiff() {
+    command git diff --name-only --diff-filter=d $@ | xargs bat --diff
+}
+
+# Use bat to view man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Use gruvbox theme for bat
+export BAT_THEME="gruvbox-dark"
+
+# Command to view the root of this git repo
+alias gitroot='git rev-parse --show-toplevel'
+
+# Solve issue on Ubuntu where bat is named batcat
+if [[ ! $(command -v bat) ]]; then
+    alias bat='batcat'
+fi
+
+# Get current system name
+sysname() {
+    case $(uname -a) in
+        *Ubuntu*)
+            echo "Ubuntu"
+            ;;
+        *Darwin*)
+            echo "macOS"
+            ;;
+        *Linux*)
+            echo "Linux"
+            ;;
+        *)
+            echo "default"
+    esac
+}
+
+# }}}
+# PATH {{{
+
+# Prints each PATH directory on its own line
+# (assumes no ':' in directory names)
+alias showpath='echo $PATH | tr ":" "\n"'
+
+# Returns true iff argument in PATH
+inpath() {
+    # Alternative one-line implementation
+    # [[ :$PATH: == *:$1:* ]]
+    if [[ :$PATH: == *:$1:* ]]; then
+        true
+    else
+        false
+    fi
+}
+
+# Adds something to PATH, head or tail
+addpath() {
+    if [[ $2 == "head" ]]; then
+        export PATH="$1:$PATH"
+    elif [[ $2 == "tail" ]]; then
+        export PATH="$PATH:$1"
+    elif [[ $2 == "" ]]; then
+        echo "Usage: addpath TARGET [head|tail]"
+    else
+        echo "Unknown option: $2"
+    fi
+}
+
+# Deletes something from PATH, if present
+delpath() {
+    if [[ $2 == "first" ]]; then
+        findstr="s%:$1%%"
+    elif [[ $2 == "all" ]]; then
+        findstr="s%:$1%%g"
+    elif [[ $2 == "" ]]; then
+        echo "Usage: delpath TARGET [first|all]"
+        return
+    else
+        echo "Unknown option: $2"
+        return
+    fi
+
+    export PATH=$(echo :$PATH | sed $findstr | sed "s%^:%%g")
+}
+
+# Prepend CTERDAMBIN if not included aleady
+if ! inpath $CTERDAMBIN; then
+    addpath $CTERDAMBIN head
+fi
+
+# Add pip install path
+addpath ~/.local/bin head
+
+# Add rust path
+cargoenv="$HOME/.cargo/env"
+if [[ -f $cargoenv ]]; then
+    source $cargoenv
+fi
+
+# Fix ruby versioning issues for Jekyll
+if [[ `sysname` == "macOS" ]]; then
+    # Use chruby to manage alternative Ruby versions
+    source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+    # Enable auto-switching of Rubies specified by .ruby-version files
+    source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
+    # Use ruby version 3.1.3 (for Jekyll for Github Pages)
+    chruby ruby-3.1.3
+elif [[ `sysname` == "Ubuntu" ]]; then
+    export GEM_HOME="$HOME/gems"
+    addpath $HOME/gems/bin head
+fi
+
+# }}}
 # CTERDAMHOME {{{
 
 # Intended directory structure:
@@ -196,126 +319,10 @@ do
     fi
 done
 
-# }}}
-# PATH {{{
-
-# Prints each PATH directory on its own line
-# (assumes no ':' in directory names)
-alias showpath='echo $PATH | tr ":" "\n"'
-
-# Returns true iff argument in PATH
-inpath() {
-    # Alternative one-line implementation
-    # [[ :$PATH: == *:$1:* ]]
-    if [[ :$PATH: == *:$1:* ]]; then
-        true
-    else
-        false
-    fi
-}
-
-# Adds something to PATH, head or tail
-addpath() {
-    if [[ $2 == "head" ]]; then
-        export PATH="$1:$PATH"
-    elif [[ $2 == "tail" ]]; then
-        export PATH="$PATH:$1"
-    elif [[ $2 == "" ]]; then
-        echo "Usage: addpath TARGET [head|tail]"
-    else
-        echo "Unknown option: $2"
-    fi
-}
-
-# Deletes something from PATH, if present
-delpath() {
-    if [[ $2 == "first" ]]; then
-        findstr="s%:$1%%"
-    elif [[ $2 == "all" ]]; then
-        findstr="s%:$1%%g"
-    elif [[ $2 == "" ]]; then
-        echo "Usage: delpath TARGET [first|all]"
-        return
-    else
-        echo "Unknown option: $2"
-        return
-    fi
-
-    export PATH=$(echo :$PATH | sed $findstr | sed "s%^:%%g")
-}
-
-# Prepend CTERDAMBIN if not included aleady
-if ! inpath $CTERDAMBIN; then
-    addpath $CTERDAMBIN head
-fi
-
-# Add pip install path
-addpath ~/.local/bin head
-
-# Add rust path
-cargoenv="$HOME/.cargo/env"
-if [[ -f $cargoenv ]]; then
-    source $cargoenv
-fi
-
-# }}}
-# GENERAL {{{
-
-# Edit anything with vim
-export EDITOR="vim"
-
-# Show Chinese characters
-alias tree='tree -N'
-
-# Do actual work here
-cd $CTERDAMHOME
-
-# Function to view git diff with bat
-batdiff() {
-    command git diff --name-only --diff-filter=d $@ | xargs bat --diff
-}
-
-# Use bat to view man pages
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-# Use gruvbox theme for bat
-export BAT_THEME="gruvbox-dark"
-
-# Command to view the root of this git repo
-alias gitroot='git rev-parse --show-toplevel'
-
-# Solve issue on Ubuntu where bat is named batcat
-if [[ ! $(command -v bat) ]]; then
-    alias bat='batcat'
-fi
-
-# Get current system name
-sysname() {
-    case $(uname -a) in
-        *Ubuntu*)
-            echo "Ubuntu"
-            ;;
-        *Darwin*)
-            echo "macOS"
-            ;;
-        *Linux*)
-            echo "Linux"
-            ;;
-        *)
-            echo "default"
-    esac
-}
-
-if [[ `sysname` == "macOS" ]]; then
-    # Use chruby to manage alternative Ruby versions
-    source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
-    # Enable auto-switching of Rubies specified by .ruby-version files
-    source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
-    # Use ruby version 3.1.3 (for Jekyll for Github Pages)
-    chruby ruby-3.1.3
-elif [[ `sysname` == "Ubuntu" ]]; then
-    export GEM_HOME="$HOME/gems"
-    addpath $HOME/gems/bin head
+# Fix issue where bat goes by batcat on Ubuntu
+batexe=$CTERDAMBIN/bat
+if [[ `sysname` == "Ubuntu" && ! -f $batexe ]]; then
+    ln -s `which batcat` $batexe
 fi
 
 # }}}
@@ -380,14 +387,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # }}}
-# TMUX {{{
-
-# Start tmux session if not running
-if [[ -z "$TMUX" ]]; then
-    tmux attach -t $(sysname) || tmux new -s $(sysname)
-fi
-
-# }}}
 # ANACONDA {{{
 
 if [[ -d $HOME/'opt/anaconda3' ]]; then
@@ -419,4 +418,12 @@ unset __conda_setup
 
     # Add bin to PATH
     addpath $COBOT_HOME/bin tail
+# }}}
+# TMUX {{{
+
+# Start tmux session if not running
+if [[ -z "$TMUX" ]]; then
+    tmux attach -t $(sysname) || tmux new -s $(sysname)
+fi
+
 # }}}
