@@ -98,13 +98,13 @@ delpath() {
     export PATH=$(echo :$PATH | sed $findstr | sed "s%^:%%g")
 }
 
-# Prepend CTERDAMBIN if not included aleady
+# Add pip install path
+addpath ~/.local/bin head
+
+# Prepend CTERDAMBIN
 if ! inpath $CTERDAMBIN; then
     addpath $CTERDAMBIN head
 fi
-
-# Add pip install path
-addpath ~/.local/bin head
 
 # Add rust path
 cargoenv="$HOME/.cargo/env"
@@ -124,6 +124,10 @@ elif [[ `sysname` == "Ubuntu" ]]; then
     export GEM_HOME="$HOME/gems"
     addpath $HOME/gems/bin head
 fi
+
+# Add cobot home to path
+export COBOT_HOME="$CTERDAMHOME/cobot_home"
+addpath $COBOT_HOME/bin tail
 
 # }}}
 # CTERDAMHOME {{{
@@ -411,13 +415,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-# }}}
-# ALEXA SOCIALBOT {{{
-    # Set cobot home
-    export COBOT_HOME="$CTERDAMHOME/cobot_home"
-
-    # Add bin to PATH
-    addpath $COBOT_HOME/bin tail
 # }}}
 # TMUX {{{
 
