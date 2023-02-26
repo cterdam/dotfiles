@@ -3,6 +3,95 @@
 # cterdam.zshrc: cterdam's personal zshrc file.
 # See https://github.com/cterdam/dotfiles
 
+# OHMYZSH {{{
+
+# Path to oh-my-zsh installation
+export ZSH="$HOME/.oh-my-zsh"
+
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
+ZSH_THEME="candy"
+
+# Use case-insensitive completion
+CASE_SENSITIVE="false"
+
+# Use hyphen-insensitive completion. Treat _ and - interchangeably.
+HYPHEN_INSENSITIVE="true"
+
+# Just remind me to update when it's time
+zstyle ':omz:update' mode reminder
+
+# Trigger auto-update every 13 days
+zstyle ':omz:update' frequency 13
+
+# Disable auto-setting terminal title
+DISABLE_AUTO_TITLE="true"
+
+# Enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Mark untracked files under VCS as dirty,
+# at the expense of repo status check speed.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Manage the command execution time stamp shown in the history command output.
+HIST_STAMPS="yyyy-mm-dd"
+
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+plugins=(
+    git
+    python
+    web-search
+    copyfile
+    copypath
+    copybuffer
+    macos
+    history
+)
+# git: autocompletions with git commands
+# python: `py` for python, `pyclean` to clean dummy files
+# web-search `google milan` to google search milan
+# copyfile: `copyfile` to copy a file to clipboard
+# copypath: `copypath` to copy current directory path
+# copybuffer: Ctrl + O to copy command line buffer to clipboard
+# macos: some mac os aliases
+# history: `h` to show history, `hs` to grep history
+
+# Rest of oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# }}}
+# CTERDAMHOME {{{
+
+# Intended directory structure:
+# - CTERDAMHOME (development directory)
+#   - CTERDAMBIN (script and other binary symlinks)
+#   - CTERDAMRC (config files)
+#     - CTERDAMEXE (source scripts for execution)
+
+# CTERDAMHOME directory to hold all my terminal material
+export CTERDAMHOME="$HOME/cterdam"
+mkdir -p $CTERDAMHOME
+
+# CTERDAMBIN directory to hold all my executables.
+# This will be given priority in PATH.
+export CTERDAMBIN="$CTERDAMHOME/bin"
+mkdir -p $CTERDAMBIN
+
+# CTERDAMRC directory to hold all cterdam's custom rc files
+# CTERDAMRC should be named dotfiles as cloned from my git repo.
+export CTERDAMRC="$CTERDAMHOME/dotfiles"
+
+# CTERDAMEXE directory to hold all scripts to be converted to executables
+export CTERDAMEXE="$CTERDAMRC/exe"
+
+# Make profile directory only readable by self
+chmod -R 700 $CTERDAMRC/utility/profile
+
+# }}}
 # GENERAL {{{
 
 # Edit anything with vim
@@ -49,6 +138,14 @@ sysname() {
             echo "default"
     esac
 }
+
+# }}}
+# TMUX {{{
+
+# Start tmux session if not running
+if [[ -z "$TMUX" ]]; then
+    tmux attach -t $(sysname) || tmux new -s $(sysname)
+fi
 
 # }}}
 # PATH {{{
@@ -98,8 +195,10 @@ delpath() {
     export PATH=$(echo :$PATH | sed $findstr | sed "s%^:%%g")
 }
 
-# Add pip install path
-addpath ~/.local/bin head
+# Prepend pip install path
+if ! inpath ~/.local/bin; then
+    addpath ~/.local/bin head
+fi
 
 # Prepend CTERDAMBIN
 if ! inpath $CTERDAMBIN; then
@@ -122,40 +221,40 @@ if [[ `sysname` == "macOS" ]]; then
     chruby ruby-3.1.3
 elif [[ `sysname` == "Ubuntu" ]]; then
     export GEM_HOME="$HOME/gems"
-    addpath $HOME/gems/bin head
+    addpath $HOME/gems/bin tail
 fi
 
 # Add cobot home to path
-export COBOT_HOME="$CTERDAMHOME/cobot_home"
-addpath $COBOT_HOME/bin tail
+export COBOT_HOME=$CTERDAMHOME/cobot_home
+if ! inpath $COBOT_HOME/bin; then
+    addpath $COBOT_HOME/bin tail
+fi
 
 # }}}
-# CTERDAMHOME {{{
+# ANACONDA {{{
 
-# Intended directory structure:
-# - CTERDAMHOME (development directory)
-#   - CTERDAMBIN (script and other binary symlinks)
-#   - CTERDAMRC (config files)
-#     - CTERDAMEXE (source scripts for execution)
+if [[ -d $HOME/'opt/anaconda3' ]]; then
+    condahomeloc=$HOME/'opt/anaconda3'
+else
+    condahomeloc='/usr/local'
+fi
 
-# CTERDAMHOME directory to hold all my terminal material
-export CTERDAMHOME="$HOME/cterdam"
-mkdir -p $CTERDAMHOME
-
-# CTERDAMBIN directory to hold all my executables.
-# This will be given priority in PATH.
-export CTERDAMBIN="$CTERDAMHOME/bin"
-mkdir -p $CTERDAMBIN
-
-# CTERDAMRC directory to hold all cterdam's custom rc files
-# CTERDAMRC should be named dotfiles as cloned from my git repo.
-export CTERDAMRC="$CTERDAMHOME/dotfiles"
-
-# CTERDAMEXE directory to hold all scripts to be converted to executables
-export CTERDAMEXE="$CTERDAMRC/exe"
-
-# Make profile directory only readable by self
-chmod -R 700 $CTERDAMRC/utility/profile
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+condaloc=$condahomeloc/'bin/conda'
+__conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="$HOME/opt/anaconda3/bin:$PATH"
+        # addpath "$HOME/opt/anaconda3/bin:$PATH" head
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
 # }}}
 # CTERDAMRC {{{
@@ -327,100 +426,6 @@ done
 batexe=$CTERDAMBIN/bat
 if [[ `sysname` == "Ubuntu" && ! -f $batexe ]]; then
     ln -s `which batcat` $batexe
-fi
-
-# }}}
-# OHMYZSH {{{
-
-# Path to oh-my-zsh installation
-export ZSH="$HOME/.oh-my-zsh"
-
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
-ZSH_THEME="candy"
-
-# Use case-insensitive completion
-CASE_SENSITIVE="false"
-
-# Use hyphen-insensitive completion. Treat _ and - interchangeably.
-HYPHEN_INSENSITIVE="true"
-
-# Just remind me to update when it's time
-zstyle ':omz:update' mode reminder
-
-# Trigger auto-update every 13 days
-zstyle ':omz:update' frequency 13
-
-# Disable auto-setting terminal title
-DISABLE_AUTO_TITLE="true"
-
-# Enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Mark untracked files under VCS as dirty,
-# at the expense of repo status check speed.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Manage the command execution time stamp shown in the history command output.
-HIST_STAMPS="yyyy-mm-dd"
-
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(
-    git
-    python
-    web-search
-    copyfile
-    copypath
-    copybuffer
-    macos
-    history
-)
-# git: autocompletions with git commands
-# python: `py` for python, `pyclean` to clean dummy files
-# web-search `google milan` to google search milan
-# copyfile: `copyfile` to copy a file to clipboard
-# copypath: `copypath` to copy current directory path
-# copybuffer: Ctrl + O to copy command line buffer to clipboard
-# macos: some mac os aliases
-# history: `h` to show history, `hs` to grep history
-
-# Rest of oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-
-# }}}
-# ANACONDA {{{
-
-if [[ -d $HOME/'opt/anaconda3' ]]; then
-    condahomeloc=$HOME/'opt/anaconda3'
-else
-    condahomeloc='/usr/local'
-fi
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-condaloc=$condahomeloc/'bin/conda'
-__conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/opt/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# }}}
-# TMUX {{{
-
-# Start tmux session if not running
-if [[ -z "$TMUX" ]]; then
-    tmux attach -t $(sysname) || tmux new -s $(sysname)
 fi
 
 # }}}
