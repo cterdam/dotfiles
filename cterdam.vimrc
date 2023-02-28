@@ -257,8 +257,8 @@ set foldignore=
 " Enable folds by default, can be toggled with 'zi'
 set foldenable
 
-" Display fold level on the leftmost one column
-set foldcolumn=1
+" Do not display fold level on the leftmost one column
+set foldcolumn=0
 
 " Press <Space> to toggle current fold
 nnoremap <Space> za
