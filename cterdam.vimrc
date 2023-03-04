@@ -668,6 +668,9 @@ Plug 'segeljakt/vim-silicon'
 " `:Tab /x` to align selection by char `x`
 Plug 'godlygeek/tabular'
 
+" Show symbols of the current document. Toggle with `<Leader>o`
+Plug 'liuchengxu/vista.vim'
+
 " }}}
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -785,8 +788,8 @@ map <Leader>g :CocDiagnostics<CR>
 " <Leader><S-g> to list all diagnostics for fuzzy searching
 map <Leader><S-g> :<C-u>CocList diagnostics<cr>
 
-" <Leader>o to list outline of current document
-map <Leader>o :CocOutline<CR>
+" Do not use :CocOutline. Use Vista to list outline of current document instead.
+
 " <Leader><S-o> to list outline of current document for fuzzy searching
 map <Leader><S-o> :CocList outline<CR>
 " <Leader><C-o> to search symbols in current workspace
@@ -1039,10 +1042,10 @@ let g:lightline= {
     \ 'active': {
         \ 'left': [ [ 'mode', 'paste' ],
         \           [ 'readonly', 'filename', 'modified'],
-        \           [ 'gitbranch', 'gitstatus' ] ],
+        \           [ 'method', 'statusdiagnostic' ] ],
         \ 'right': [ [ 'percent', 'lineinfo'],
         \            [ 'filetype' ],
-        \            [ 'statusdiagnostic' ] ] },
+        \            [ 'gitbranch', 'gitstatus' ] ] },
     \ 'inactive':{
         \ 'left': [ [ 'readonly', 'absolutepath', 'modified' ] ],
         \ 'right': [ [ 'lineinfo' ],
@@ -1053,7 +1056,8 @@ let g:lightline= {
     \ 'component_function': {
         \ 'gitbranch': 'FugitiveHead',
         \ 'gitstatus': 'GitStatus',
-        \ 'statusdiagnostic': 'StatusDiagnostic'}
+        \ 'statusdiagnostic': 'StatusDiagnostic',
+		\ 'method': 'NearestMethodOrFunction'}
 \ }
 
 " Function to format current file git info
@@ -1072,14 +1076,17 @@ function! StatusDiagnostic() abort
     let info = get(b:, 'coc_diagnostic_info', {})
     if empty(info) | return '' | endif
     let msgs = []
-
     " Display the number of errors even if it's 0
     call add(msgs, '!' . info['error'])
-
     " Display the number of warnings even if it's 0
     call add(msgs, '?' . info['warning'])
-
     return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+endfunction
+
+" Function to fetch the nearest function
+" This requires Vista
+function! NearestMethodOrFunction() abort
+	return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 
 " }}}
@@ -1438,5 +1445,34 @@ let g:silicon = {
             \   'window-controls': v:true,
             \   'output': '~/Desktop/silicon-{time:%Y-%m-%d-%H%M%S}.png'
             \ }
+
+" }}}
+" VISTA {{{
+
+" Use COC for symbol finding.
+let g:vista_executive_for = {
+	\ 'python': 'coc',
+	\ 'java': 'coc',
+	\ 'c': 'coc',
+	\ 'cpp': 'coc',
+	\ 'vim': 'coc'
+	\ }
+let g:vista_finder_alternative_executives = ['coc']
+
+" `<Leader>o` to toggle showing symbols in the current document.
+map <Leader>o :Vista<CR>
+
+" Launch the function that shows the nearest function name in lightline.
+" It is actually still needed to run `:Vista coc`, and then quit that window if
+" needed, to have Vista running and have the function name show in
+" lightline. Tedious but no good solution as of now.
+augroup showVista
+	" Want to launch the function automatically, since vista.vim is not run
+	" without being called explicitly.
+	" However, this seems to have no effect.
+	autocmd VimEnter * Vista coc
+	autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+	autocmd VimEnter * call timer_start(1000, { tid -> execute('call vista#RunForNearestMethodOrFunction()')})
+augroup END
 
 " }}}
