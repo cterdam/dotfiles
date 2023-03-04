@@ -20,7 +20,8 @@ sudo apt -qq update
 # Add apt repo to install latest vim
 sudo add-apt-repository ppa:jonathonf/vim
 # Finally install all desired packages
-sudo apt-get -qq install zsh golang-go mono-complete vim-nox rustc octave bat git-extras less tree tldr vim ruby-full build-essential zlib1g-dev
+sudo apt-get -qq install zsh golang-go mono-complete vim-nox rustc octave bat git-extras less tree tldr vim ruby-full build-essential zlib1g-dev shellcheck
+pip install vim-vint
 
 alert '>>> Installing snap packages'
 sudo snap install node --classic
