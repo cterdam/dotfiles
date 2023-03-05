@@ -887,6 +887,146 @@ command! -nargs=0 OR :call
 " }}}
 
 " }}}
+" LIGHTLINE {{{
+
+" Display the statusline
+set laststatus=2
+
+" Hide that default '-- INSERT --' as that info is covered by lightline
+set noshowmode
+
+" Define fields of the statusline and tabline.
+" For more available fields, See :help lightline,
+" and more specifically :help g:lightline.component
+let g:lightline= {
+    \ 'active': {
+        \ 'left': [ [ 'mode', 'paste' ],
+        \           [ 'readonly', 'filename', 'modified', 'narrowindowft'],
+        \           [ 'method', 'statusdiagnostic' ] ],
+        \ 'right': [ [ 'percent', 'lineinfo'],
+        \            [ 'filetype' ],
+        \            [ 'gitbranch', 'gitstatus' ] ] },
+    \ 'inactive':{
+        \ 'left': [ [ 'readonly', 'absolutepath', 'modified' ] ],
+        \ 'right': [ [ 'lineinfo' ],
+        \            [ 'percent' ] ] },
+    \ 'tabline': {
+        \ 'left': [ [ 'tabs' ] ],
+        \ 'right': [] },
+    \ 'component_function': {
+		\ 'mode': 'TrimMode',
+		\ 'paste': 'TrimPaste',
+		\ 'narrowindowft': 'NarrowWindowFt',
+		\ 'readonly': 'TrimReadOnly',
+		\ 'filename': 'TrimFileName',
+		\ 'modified': 'TrimModified',
+		\ 'method': 'NearestMethodOrFunction',
+		\ 'statusdiagnostic': 'StatusDiagnostic',
+		\ 'percent': 'TrimPercent',
+		\ 'lineinfo': 'TrimLineInfo',
+		\ 'filetype': 'TrimFileType',
+        \ 'gitbranch': 'TrimGitBranch',
+		\ 'gitstatus': 'GitStatus'}
+\ }
+
+" A wide window is defined as a window of width more than 25 (at least 26).
+" Plugin split windows will commonly be defined at this width so are narrow.
+let g:wide_window_thres = 25
+
+" In narrow windows (likely NERDTree or UndoTree), just display the file type.
+function! NarrowWindowFt()
+	return winwidth(0) > g:wide_window_thres ? '' : &filetype
+endfunction
+
+" In each of the following component functions, no info is displayed if window
+" is too narrow.
+
+function! TrimMode()
+	return winwidth(0) > g:wide_window_thres ? lightline#mode() : ''
+endfunction
+
+function! TrimPaste()
+	return winwidth(0) > g:wide_window_thres ? &paste?"PASTE":"" : ''
+endfunction
+
+function! TrimReadOnly()
+	return winwidth(0) > g:wide_window_thres ? lightline#tab#readonly(0) : ''
+endfunction
+
+function! TrimFileName()
+	return winwidth(0) > g:wide_window_thres ? lightline#tab#filename(0) : ''
+endfunction
+
+function! TrimModified()
+	return winwidth(0) > g:wide_window_thres ? lightline#tab#modified(0) : ''
+endfunction
+
+function! TrimLineInfo()
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		return string(line('.')) . ':' . string(col('.'))
+	endif
+endfunction
+
+function! TrimFileType()
+	return winwidth(0) > g:wide_window_thres ? &filetype : ''
+endfunction
+
+" Function to fetch the nearest function
+" This requires Vista
+function! NearestMethodOrFunction() abort
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		return get(b:, 'vista_nearest_method_or_function', '')
+	endif
+endfunction
+
+" Function to get formatted status diagnostic from COC
+function! StatusDiagnostic() abort
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		let info = get(b:, 'coc_diagnostic_info', {})
+		if empty(info) | return '' | endif
+		let msgs = []
+		" Display the number of errors even if it's 0
+		call add(msgs, '!' . info['error'])
+		" Display the number of warnings even if it's 0
+		call add(msgs, '?' . info['warning'])
+		return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+	endif
+endfunction
+
+function! TrimPercent()
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		return line('.') * 100 / line('$') . '%'
+	endif
+endfunction
+
+function! TrimGitBranch()
+	return winwidth(0) > g:wide_window_thres ? FugitiveHead() : ''
+endfunction
+
+" Function to format current file git info
+" This requires vim-gitgutter and vim-fugitive
+function! GitStatus()
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		if FugitiveHead() == ''
+			return ''
+		else
+			let [a,m,r] = GitGutterGetHunkSummary()
+			return printf('+%d ~%d -%d', a, m, r)
+		endif
+    endif
+endfunction
+
+" }}}
 " NERDTREE {{{
 
 " <Leader>t to recover and switch to an existing NERDTree window
@@ -895,8 +1035,8 @@ nnoremap <Leader>t :NERDTreeFocus<CR>
 " <Leader>T to close NERDTree
 nnoremap <Leader>T :NERDTreeClose<CR>
 
-" Confine NERDTree window to 25 chars wide
-let g:NERDTreeWinSize = 25
+" Confine NERDTree window to standard plugin split window width
+let g:NERDTreeWinSize = g:wide_window_thres
 
 " Hide guide text but still type '?' for help
 let NERDTreeMinimalUI = 1
@@ -920,8 +1060,8 @@ let g:undotree_TreeNodeShape = '*'
 " Hide guide text but still type '?' for help
 let g:undotree_HelpLine = 0
 
-" Limit tree window to 25 chars wide
-let g:undotree_SplitWidth = 25
+" Limit tree window to standard plugin split window width
+let g:undotree_SplitWidth = g:wide_window_thres
 
 " Limit preview window to 10 chars high
 let g:undotree_DiffpanelHeight = 10
@@ -1025,145 +1165,6 @@ function! ToggleHunks()
     endif
 endfunction
 map <Leader>H :call ToggleHunks()<CR>
-
-" }}}
-" LIGHTLINE {{{
-
-" Display the statusline
-set laststatus=2
-
-" Hide that default '-- INSERT --' as that info is covered by lightline
-set noshowmode
-
-" Define fields of the statusline and tabline.
-" For more available fields, See :help lightline,
-" and more specifically :help g:lightline.component
-let g:lightline= {
-    \ 'active': {
-        \ 'left': [ [ 'mode', 'paste' ],
-        \           [ 'readonly', 'filename', 'modified', 'narrowindowft'],
-        \           [ 'method', 'statusdiagnostic' ] ],
-        \ 'right': [ [ 'percent', 'lineinfo'],
-        \            [ 'filetype' ],
-        \            [ 'gitbranch', 'gitstatus' ] ] },
-    \ 'inactive':{
-        \ 'left': [ [ 'readonly', 'absolutepath', 'modified' ] ],
-        \ 'right': [ [ 'lineinfo' ],
-        \            [ 'percent' ] ] },
-    \ 'tabline': {
-        \ 'left': [ [ 'tabs' ] ],
-        \ 'right': [] },
-    \ 'component_function': {
-		\ 'mode': 'TrimMode',
-		\ 'paste': 'TrimPaste',
-		\ 'narrowindowft': 'NarrowWindowFt',
-		\ 'readonly': 'TrimReadOnly',
-		\ 'filename': 'TrimFileName',
-		\ 'modified': 'TrimModified',
-		\ 'method': 'NearestMethodOrFunction',
-		\ 'statusdiagnostic': 'StatusDiagnostic',
-		\ 'percent': 'TrimPercent',
-		\ 'lineinfo': 'TrimLineInfo',
-		\ 'filetype': 'TrimFileType',
-        \ 'gitbranch': 'TrimGitBranch',
-		\ 'gitstatus': 'GitStatus'}
-\ }
-
-" A wide window is defined as a window of width more than 25 (at least 26).
-let g:wide_window_thres = 25
-
-" In narrow windows (likely NERDTree or UndoTree), just display the file type.
-function! NarrowWindowFt()
-	return winwidth(0) > g:wide_window_thres ? '' : &filetype
-endfunction
-
-" In each of the following component functions, no info is displayed if window
-" is too narrow.
-
-function! TrimMode()
-	return winwidth(0) > g:wide_window_thres ? lightline#mode() : ''
-endfunction
-
-function! TrimPaste()
-	return winwidth(0) > g:wide_window_thres ? &paste?"PASTE":"" : ''
-endfunction
-
-function! TrimReadOnly()
-	return winwidth(0) > g:wide_window_thres ? lightline#tab#readonly(0) : ''
-endfunction
-
-function! TrimFileName()
-	return winwidth(0) > g:wide_window_thres ? lightline#tab#filename(0) : ''
-endfunction
-
-function! TrimModified()
-	return winwidth(0) > g:wide_window_thres ? lightline#tab#modified(0) : ''
-endfunction
-
-function! TrimLineInfo()
-	if winwidth(0) <= g:wide_window_thres
-		return ''
-	else
-		return string(line('.')) . ':' . string(col('.'))
-	endif
-endfunction
-
-function! TrimFileType()
-	return winwidth(0) > g:wide_window_thres ? &filetype : ''
-endfunction
-
-" Function to fetch the nearest function
-" This requires Vista
-function! NearestMethodOrFunction() abort
-	if winwidth(0) <= g:wide_window_thres
-		return ''
-	else
-		return get(b:, 'vista_nearest_method_or_function', '')
-	endif
-endfunction
-
-" Function to get formatted status diagnostic from COC
-function! StatusDiagnostic() abort
-	if winwidth(0) <= g:wide_window_thres
-		return ''
-	else
-		let info = get(b:, 'coc_diagnostic_info', {})
-		if empty(info) | return '' | endif
-		let msgs = []
-		" Display the number of errors even if it's 0
-		call add(msgs, '!' . info['error'])
-		" Display the number of warnings even if it's 0
-		call add(msgs, '?' . info['warning'])
-		return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
-	endif
-endfunction
-
-function! TrimPercent()
-	if winwidth(0) <= g:wide_window_thres
-		return ''
-	else
-		return line('.') * 100 / line('$') . '%'
-	endif
-endfunction
-
-function! TrimGitBranch()
-	return winwidth(0) > g:wide_window_thres ? FugitiveHead() : ''
-endfunction
-
-" Function to format current file git info
-" This requires vim-gitgutter and vim-fugitive
-function! GitStatus()
-	if winwidth(0) <= g:wide_window_thres
-		return ''
-	else
-		if FugitiveHead() == ''
-			return ''
-		else
-			let [a,m,r] = GitGutterGetHunkSummary()
-			return printf('+%d ~%d -%d', a, m, r)
-		endif
-    endif
-endfunction
 
 " }}}
 " VIM-DIFFSAVE {{{
