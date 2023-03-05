@@ -1029,7 +1029,7 @@ map <Leader>H :call ToggleHunks()<CR>
 " }}}
 " LIGHTLINE {{{
 
-" Successfully display the statusline
+" Display the statusline
 set laststatus=2
 
 " Hide that default '-- INSERT --' as that info is covered by lightline
@@ -1041,7 +1041,7 @@ set noshowmode
 let g:lightline= {
     \ 'active': {
         \ 'left': [ [ 'mode', 'paste' ],
-        \           [ 'readonly', 'filename', 'modified'],
+        \           [ 'readonly', 'filename', 'modified', 'narrowindowft'],
         \           [ 'method', 'statusdiagnostic' ] ],
         \ 'right': [ [ 'percent', 'lineinfo'],
         \            [ 'filetype' ],
@@ -1054,39 +1054,115 @@ let g:lightline= {
         \ 'left': [ [ 'tabs' ] ],
         \ 'right': [] },
     \ 'component_function': {
-        \ 'gitbranch': 'FugitiveHead',
-        \ 'gitstatus': 'GitStatus',
-        \ 'statusdiagnostic': 'StatusDiagnostic',
-		\ 'method': 'NearestMethodOrFunction'}
+		\ 'mode': 'TrimMode',
+		\ 'paste': 'TrimPaste',
+		\ 'narrowindowft': 'NarrowWindowFt',
+		\ 'readonly': 'TrimReadOnly',
+		\ 'filename': 'TrimFileName',
+		\ 'modified': 'TrimModified',
+		\ 'method': 'NearestMethodOrFunction',
+		\ 'statusdiagnostic': 'StatusDiagnostic',
+		\ 'percent': 'TrimPercent',
+		\ 'lineinfo': 'TrimLineInfo',
+		\ 'filetype': 'TrimFileType',
+        \ 'gitbranch': 'TrimGitBranch',
+		\ 'gitstatus': 'GitStatus'}
 \ }
 
-" Function to format current file git info
-" This requires vim-gitgutter and vim-fugitive
-function! GitStatus()
-    if FugitiveHead() == ''
-        return ''
-    else
-        let [a,m,r] = GitGutterGetHunkSummary()
-        return printf('+%d ~%d -%d', a, m, r)
-    endif
+" A wide window is defined as a window of width more than 25 (at least 26).
+let g:wide_window_thres = 25
+
+" In narrow windows (likely NERDTree or UndoTree), just display the file type.
+function! NarrowWindowFt()
+	return winwidth(0) > g:wide_window_thres ? '' : &filetype
 endfunction
 
-" Function to get formatted status diagnostic from COC
-function! StatusDiagnostic() abort
-    let info = get(b:, 'coc_diagnostic_info', {})
-    if empty(info) | return '' | endif
-    let msgs = []
-    " Display the number of errors even if it's 0
-    call add(msgs, '!' . info['error'])
-    " Display the number of warnings even if it's 0
-    call add(msgs, '?' . info['warning'])
-    return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+" In each of the following component functions, no info is displayed if window
+" is too narrow.
+
+function! TrimMode()
+	return winwidth(0) > g:wide_window_thres ? lightline#mode() : ''
+endfunction
+
+function! TrimPaste()
+	return winwidth(0) > g:wide_window_thres ? &paste?"PASTE":"" : ''
+endfunction
+
+function! TrimReadOnly()
+	return winwidth(0) > g:wide_window_thres ? lightline#tab#readonly(0) : ''
+endfunction
+
+function! TrimFileName()
+	return winwidth(0) > g:wide_window_thres ? lightline#tab#filename(0) : ''
+endfunction
+
+function! TrimModified()
+	return winwidth(0) > g:wide_window_thres ? lightline#tab#modified(0) : ''
+endfunction
+
+function! TrimLineInfo()
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		return string(line('.')) . ':' . string(col('.'))
+	endif
+endfunction
+
+function! TrimFileType()
+	return winwidth(0) > g:wide_window_thres ? &filetype : ''
 endfunction
 
 " Function to fetch the nearest function
 " This requires Vista
 function! NearestMethodOrFunction() abort
-	return get(b:, 'vista_nearest_method_or_function', '')
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		return get(b:, 'vista_nearest_method_or_function', '')
+	endif
+endfunction
+
+" Function to get formatted status diagnostic from COC
+function! StatusDiagnostic() abort
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		let info = get(b:, 'coc_diagnostic_info', {})
+		if empty(info) | return '' | endif
+		let msgs = []
+		" Display the number of errors even if it's 0
+		call add(msgs, '!' . info['error'])
+		" Display the number of warnings even if it's 0
+		call add(msgs, '?' . info['warning'])
+		return join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+	endif
+endfunction
+
+function! TrimPercent()
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		return line('.') * 100 / line('$') . '%'
+	endif
+endfunction
+
+function! TrimGitBranch()
+	return winwidth(0) > g:wide_window_thres ? FugitiveHead() : ''
+endfunction
+
+" Function to format current file git info
+" This requires vim-gitgutter and vim-fugitive
+function! GitStatus()
+	if winwidth(0) <= g:wide_window_thres
+		return ''
+	else
+		if FugitiveHead() == ''
+			return ''
+		else
+			let [a,m,r] = GitGutterGetHunkSummary()
+			return printf('+%d ~%d -%d', a, m, r)
+		endif
+    endif
 endfunction
 
 " }}}
