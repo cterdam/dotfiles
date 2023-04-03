@@ -353,6 +353,13 @@ if [[ -d $rimeloc ]]; then
 fi
 
 # }}}
+# {{{ SECRET
+
+# Load secrets
+secretfile="$CTERDAMHOME/dotfiles/utility/profile/shell/exec.sh"
+source $secretfile
+
+# }}}
 
 # Edit dotfiles with vim
 rc () {
@@ -382,8 +389,11 @@ rc () {
         server)
             $EDITOR $CTERDAMRC/server_setup.sh
             ;;
+        secret)
+            $EDITOR $secretfile
+            ;;
         -h)
-            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server"
+            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server, secret"
             ;;
         '')
             echo "Entering $CTERDAMRC"
