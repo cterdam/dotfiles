@@ -33,6 +33,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Once the repo is downloaded, set up terminal appearance by importing
   `hbpro.terminal` to terminal profiles.
 
+- Install [Oh My Zsh](https://ohmyz.sh/).
+
 ### 2. Development Environment
 
 - clang for C-family languages should come installed with the system.
@@ -91,8 +93,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install [Node.js](https://nodejs.org/en/).
 
 ### 3. Practical Tools
-
-- Install [Oh My Zsh](https://ohmyz.sh/).
 
 - Install [homebrew](https://brew.sh/).
 
