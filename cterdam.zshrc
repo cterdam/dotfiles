@@ -92,7 +92,156 @@ export CTERDAMEXE="$CTERDAMRC/exe"
 chmod -R 700 $CTERDAMRC/utility/profile
 
 # }}}
+# CTERDAMRC {{{
+
+# rc files are all symlinked to their default location.
+
+# VIM {{{
+
+# cterdam's vimrc file
+cterdamvimrc="$CTERDAMRC/cterdam.vimrc"
+
+# Location for vimrc
+mkdir -p $HOME/.vim
+vimrcloc="$HOME/.vim/vimrc"
+
+# Symlink, if not already present
+if [[ -f $cterdamvimrc && ! -f $vimrcloc ]]; then
+    ln -s $cterdamvimrc $vimrcloc
+fi
+
+# coc settings json file
+cterdamcocsettings="$CTERDAMRC/cterdamcoc.json"
+
+# Location for coc settings
+cocsettingsloc="$HOME/.vim/coc-settings.json"
+
+# Symlink, if not already present
+if [[ -f $cterdamcocsettings && ! -f $cocsettingsloc ]]; then
+    ln -s $cterdamcocsettings $cocsettingsloc
+fi
+
+# }}}
+# GIT {{{
+
+# cterdam's gitconfig file
+cterdamgitconfig="$CTERDAMRC/cterdam.gitconfig"
+
+# Location for gitconfig
+gitconfigloc="$HOME/.gitconfig"
+
+# Symlink, if not already present
+if [[ -f $cterdamgitconfig && ! -f $gitconfigloc ]]; then
+    ln -s $cterdamgitconfig $gitconfigloc
+fi
+
+# }}}
+# ZSH {{{
+
+# cterdam's zshrc file
+cterdamzshrc="$CTERDAMRC/cterdam.zshrc"
+
+# Location for zshrc
+zshrcloc="$HOME/.zshrc"
+
+# Symlink, if not already present
+# Actually this doesn't work, symlinking has to be done manually.
+# If there is no zshrc in the appointed location, how can we execute any script?
+if [[ -f $cterdamzshrc && ! -f $zshrcloc ]]; then
+    ln -s $cterdamzshrc $zshrcloc
+fi
+
+# }}}
+# TMUX {{{
+
+# cterdam's tmux.conf file
+cterdamtmuxconf="$CTERDAMRC/cterdam.tmux.conf"
+
+# Location for tmux.conf
+tmuxconfloc="$HOME/.tmux.conf"
+
+# Symlink, if not already present
+if [[ -f $cterdamtmuxconf && ! -f $tmuxconfloc ]]; then
+    ln -s $cterdamtmuxconf $tmuxconfloc
+fi
+
+# }}}
+# RIME {{{
+
+# cterdamrime directory for all Rime dotfiles
+cterdamrime="$CTERDAMRC/cterdam.rime"
+
+# Location for Rime config folder
+rimeloc="$HOME/Library/Rime"
+
+# Symlink all rime files into the correct location for Rime
+if [[ -d $rimeloc ]]; then
+    for cterdamrimefile in $cterdamrime/*
+    do
+        rimefileloc="$rimeloc/$(basename $cterdamrimefile)"
+        if [[ -f $cterdamrimefile && ! -f $rimefileloc ]]; then
+            ln -s $cterdamrimefile $rimefileloc
+        fi
+    done
+fi
+
+# }}}
+# {{{ SECRET
+
+# Locate secrets
+secretfile="$CTERDAMRC/utility/profile/shell/exec.sh"
+
+# }}}
+
+# Edit dotfiles with vim
+rc () {
+    case $1 in
+        vim | vi)
+            $EDITOR $cterdamvimrc
+            ;;
+        coc)
+            $EDITOR $cterdamcocsettings
+            ;;
+        git)
+            $EDITOR $cterdamgitconfig
+            ;;
+        zsh)
+            $EDITOR $cterdamzshrc
+            ;;
+        tmux)
+            $EDITOR $cterdamtmuxconf
+            ;;
+        rime)
+            echo "Entering $cterdamrime"
+            cd $cterdamrime
+            ;;
+        readme)
+            $EDITOR $CTERDAMRC/README.md
+            ;;
+        server)
+            $EDITOR $CTERDAMRC/server_setup.sh
+            ;;
+        secret)
+            $EDITOR $secretfile
+            ;;
+        -h)
+            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server, secret"
+            ;;
+        '')
+            echo "Entering $CTERDAMRC"
+            cd $CTERDAMRC
+            ;;
+        *)
+            echo "No config for $1!"
+            ;;
+    esac
+}
+
+# }}}
 # GENERAL {{{
+
+# Load secrets
+source $secretfile
 
 # Edit anything with vim
 export EDITOR="vim"
@@ -235,175 +384,27 @@ fi
 
 if [[ -d $HOME/'opt/anaconda3' ]]; then
     condahomeloc=$HOME/'opt/anaconda3'
-else
+elif [[ -f /usr/local/bin/conda ]]; then
     condahomeloc='/usr/local'
+elif [[ -d $HOME/anaconda3 ]]; then
+    condahomeloc=$HOME/anaconda3
 fi
 
 # >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
 condaloc=$condahomeloc/'bin/conda'
+# !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOME/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/opt/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "$condahomeloc/etc/profile.d/conda.sh" ]; then
+        . "$condahomeloc/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/opt/anaconda3/bin:$PATH"
-        # addpath "$HOME/opt/anaconda3/bin:$PATH" head
+        addpath "$condahomeloc/bin:$PATH" tail
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# }}}
-# CTERDAMRC {{{
-
-# These rc file names should all start with "cterdam" as in my git repo.
-# The files are all symlinked to their default location.
-# This directory should be git cloned.
-
-# VIM {{{
-
-# cterdam's vimrc file
-cterdamvimrc="$CTERDAMRC/cterdam.vimrc"
-
-# Location for vimrc
-mkdir -p $HOME/.vim
-vimrcloc="$HOME/.vim/vimrc"
-
-# Symlink, if not already present
-if [[ -f $cterdamvimrc && ! -f $vimrcloc ]]; then
-    ln -s $cterdamvimrc $vimrcloc
-fi
-
-# coc settings json file
-cterdamcocsettings="$CTERDAMRC/cterdamcoc.json"
-
-# Location for coc settings
-cocsettingsloc="$HOME/.vim/coc-settings.json"
-
-# Symlink, if not already present
-if [[ -f $cterdamcocsettings && ! -f $cocsettingsloc ]]; then
-    ln -s $cterdamcocsettings $cocsettingsloc
-fi
-
-# }}}
-# GIT {{{
-
-# cterdam's gitconfig file
-cterdamgitconfig="$CTERDAMRC/cterdam.gitconfig"
-
-# Location for gitconfig
-gitconfigloc="$HOME/.gitconfig"
-
-# Symlink, if not already present
-if [[ -f $cterdamgitconfig && ! -f $gitconfigloc ]]; then
-    ln -s $cterdamgitconfig $gitconfigloc
-fi
-
-# }}}
-# ZSH {{{
-
-# cterdam's zshrc file
-cterdamzshrc="$CTERDAMRC/cterdam.zshrc"
-
-# Location for zshrc
-zshrcloc="$HOME/.zshrc"
-
-# Symlink, if not already present
-# Actually this doesn't work, symlinking has to be done manually.
-# If there is no zshrc in the appointed location, how can we execute any script?
-if [[ -f $cterdamzshrc && ! -f $zshrcloc ]]; then
-    ln -s $cterdamzshrc $zshrcloc
-fi
-
-# }}}
-# TMUX {{{
-
-# cterdam's tmux.conf file
-cterdamtmuxconf="$CTERDAMRC/cterdam.tmux.conf"
-
-# Location for tmux.conf
-tmuxconfloc="$HOME/.tmux.conf"
-
-# Symlink, if not already present
-if [[ -f $cterdamtmuxconf && ! -f $tmuxconfloc ]]; then
-    ln -s $cterdamtmuxconf $tmuxconfloc
-fi
-
-# }}}
-# RIME {{{
-
-# cterdamrime directory for all Rime dotfiles
-cterdamrime="$CTERDAMRC/cterdam.rime"
-
-# Location for Rime config folder
-rimeloc="$HOME/Library/Rime"
-
-# Symlink all rime files into the correct location for Rime
-if [[ -d $rimeloc ]]; then
-    for cterdamrimefile in $cterdamrime/*
-    do
-        rimefileloc="$rimeloc/$(basename $cterdamrimefile)"
-        if [[ -f $cterdamrimefile && ! -f $rimefileloc ]]; then
-            ln -s $cterdamrimefile $rimefileloc
-        fi
-    done
-fi
-
-# }}}
-# {{{ SECRET
-
-# Load secrets
-secretfile="$CTERDAMHOME/dotfiles/utility/profile/shell/exec.sh"
-source $secretfile
-
-# }}}
-
-# Edit dotfiles with vim
-rc () {
-    case $1 in
-        vim | vi)
-            $EDITOR $cterdamvimrc
-            ;;
-        coc)
-            $EDITOR $cterdamcocsettings
-            ;;
-        git)
-            $EDITOR $cterdamgitconfig
-            ;;
-        zsh)
-            $EDITOR $cterdamzshrc
-            ;;
-        tmux)
-            $EDITOR $cterdamtmuxconf
-            ;;
-        rime)
-            echo "Entering $cterdamrime"
-            cd $cterdamrime
-            ;;
-        readme)
-            $EDITOR $CTERDAMRC/README.md
-            ;;
-        server)
-            $EDITOR $CTERDAMRC/server_setup.sh
-            ;;
-        secret)
-            $EDITOR $secretfile
-            ;;
-        -h)
-            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server, secret"
-            ;;
-        '')
-            echo "Entering $CTERDAMRC"
-            cd $CTERDAMRC
-            ;;
-        *)
-            echo "No config for $1!"
-            ;;
-    esac
-}
 
 # }}}
 # CTERDAMBIN {{{
