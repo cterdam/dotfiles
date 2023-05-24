@@ -192,6 +192,20 @@ fi
 secretfile="$CTERDAMRC/utility/profile/shell/exec.sh"
 
 # }}}
+# {{{ SSH CONFIG
+
+# cterdam's ssh config file
+cterdamsshconf="$CTERDAMRC/cterdam.sshconf"
+
+# Location for ssh config
+sshconfloc="$HOME/.ssh/config"
+
+# Symlink, if not already present
+if [[ -f $cterdamsshconf && ! -f $sshconfloc ]]; then
+    ln -s $cterdamsshconf $sshconfloc
+fi
+
+# }}}
 
 # Edit dotfiles with vim
 rc () {
@@ -224,8 +238,11 @@ rc () {
         secret)
             $EDITOR $secretfile
             ;;
+        ssh)
+            $EDITOR $cterdamsshconf
+            ;;
         -h)
-            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server, secret"
+            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server, secret, ssh"
             ;;
         '')
             echo "Entering $CTERDAMRC"

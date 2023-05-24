@@ -1,0 +1,16 @@
+Host joshlee_genpur
+    HostName ec2-18-209-166-1.compute-1.amazonaws.com
+    User ubuntu
+    IdentityFile ~/.ssh/joshlee_asb.pem
+
+Host scsgp
+    HostName linux.gp.cs.cmu.edu
+    User liangzel
+
+Host emo
+    HostName emo.speech.cs.cmu.edu
+    User liangzel
+
+Host git-codecommit.*.amazonaws.com
+    User APKAYR3A765H4ZLJZK7H
+    IdentityFile ~/.ssh/codecommit_rsa
