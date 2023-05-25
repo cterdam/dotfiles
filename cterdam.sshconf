@@ -14,3 +14,7 @@ Host emo
 Host git-codecommit.*.amazonaws.com
     User APKAYR3A765H4ZLJZK7H
     IdentityFile ~/.ssh/codecommit_rsa
+
+Host oci
+    HostName 100.102.8.2
+    User liangzli
