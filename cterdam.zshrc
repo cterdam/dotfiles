@@ -292,7 +292,7 @@ fi
 sysname() {
     case $(uname -a) in
         *Ubuntu*)
-            echo "Ubuntu"
+            echo "Ubntu"
             ;;
         *Darwin*)
             echo "macOS"
@@ -301,7 +301,7 @@ sysname() {
             echo "Linux"
             ;;
         *)
-            echo "default"
+            echo "admin"
     esac
 }
 
