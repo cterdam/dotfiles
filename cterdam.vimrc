@@ -52,6 +52,9 @@ set notimeout
 set ttimeout
 set ttimeoutlen=0
 
+" Use system clipboard
+set clipboard=unnamed
+
 " }}}
 " APPEARANCE {{{
 
