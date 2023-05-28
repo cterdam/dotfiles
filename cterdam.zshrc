@@ -306,14 +306,6 @@ sysname() {
 }
 
 # }}}
-# TMUX {{{
-
-# Start tmux session if not running
-if [[ -z "$TMUX" ]]; then
-    tmux attach -t $(sysname) || tmux new -s $(sysname)
-fi
-
-# }}}
 # PATH {{{
 
 # Prints each PATH directory on its own line
@@ -454,6 +446,14 @@ done
 batexe=$CTERDAMBIN/bat
 if [[ `sysname` == "Ubuntu" && ! -f $batexe ]]; then
     ln -s `which batcat` $batexe
+fi
+
+# }}}
+# TMUX {{{
+
+# Start tmux session if not running
+if [[ -z "$TMUX" ]]; then
+    tmux attach -t $(sysname) || tmux new -s $(sysname)
 fi
 
 # }}}
