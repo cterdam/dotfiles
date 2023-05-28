@@ -376,6 +376,15 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - This happens when the language server is started on the same directory
     multiple times. Just clear cache with `:CocCommand java.clean.workspace`.
 
+- Installing on a server without sudo access
+
+  - Some packages are installable with conda.
+
+    ```zsh
+    conda install tmux node rust
+    conda install -c conda-forge vim bat git-delta tree tldr
+    ```
+
 ## Submodules
 
 Use `git submodule status --recursive` to see all submodules.
