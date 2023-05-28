@@ -284,7 +284,7 @@ export BAT_THEME="gruvbox-dark"
 alias gitroot='git rev-parse --show-toplevel'
 
 # Solve issue on Ubuntu where bat is named batcat
-if [[ ! $(command -v bat) ]]; then
+if [ ! "$(command -v bat)" ]; then
     alias bat='batcat'
 fi
 
