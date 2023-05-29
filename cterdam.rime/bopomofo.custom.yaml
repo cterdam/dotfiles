@@ -1,0 +1,10 @@
+patch:
+  schema/name: 國語注音
+  switches:
+    - options:
+        - zh_hant
+        - zh_hans
+      states:
+        - 漢字
+        - 汉字
+      reset: 0

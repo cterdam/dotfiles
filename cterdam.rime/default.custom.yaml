@@ -8,6 +8,7 @@ patch:
     - schema: wubi_trad
     - schema: luna_pinyin
     - schema: wubi86
+    - schema: bopomofo
 
   switcher:
     caption: 〔方案選單〕
