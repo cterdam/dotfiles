@@ -194,10 +194,10 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     bash rime-install :all
     ```
 
-  - Then install the Wuhan Chinese package:
+  - Then install the Wuhan Chinese and Cantonese Soeng-Ping packages:
 
     ```zsh
-    bash rime-install yuxifongfei/hubehua
+    bash rime-install yuxifongfei/hubehua MrCorn0-0/jyutsp
     ```
 
 - Install [MacTeX](https://tug.org/mactex/), the recommended LaTeX

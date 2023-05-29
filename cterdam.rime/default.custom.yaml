@@ -6,6 +6,7 @@ patch:
     - schema: luna_pinyin
     - schema: wuhan
     - schema: wubi_trad
+    - schema: jyutsp
 
   switcher:
     caption: 〔方案選單〕

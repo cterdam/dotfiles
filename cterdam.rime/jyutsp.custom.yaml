@@ -1,0 +1,7 @@
+patch:
+  schema/name: "粵語雙拼"
+  switches:
+    - options: [ noop, simp_cn ]
+      states: [ 漢字, 汉字 ]
+      # Default on traditional
+      reset: 0
