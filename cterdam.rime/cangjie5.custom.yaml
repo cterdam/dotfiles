@@ -1,0 +1,6 @@
+patch:
+  switches:
+    - name: simplification
+      states: [ 漢字, 汉字 ]
+    - name: extended_charset
+      states: [ 常用, 增廣 ]
