@@ -1,0 +1,13 @@
+#!/usr/bin/expect -f
+
+spawn ssh -X osrdr
+
+expect "liangzli@100.109.20.38's password: "
+send $env(OCI_PW)
+send "\n"
+
+expect "liangzli@osrdr-proj-mlrg-language-models02's password: "
+send $env(OCI_PW)
+send "\n"
+
+interact

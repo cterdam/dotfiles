@@ -18,3 +18,12 @@ Host git-codecommit.*.amazonaws.com
 Host oci
     HostName 100.102.8.2
     User liangzli
+
+Host springboard-osrdr
+    HostName 100.109.20.38
+    User liangzli
+
+Host osrdr
+    HostName osrdr-proj-mlrg-language-models02
+    User liangzli
+    ProxyJump springboard-osrdr
