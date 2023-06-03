@@ -55,6 +55,9 @@ set ttimeoutlen=0
 " Use system clipboard
 set clipboard=unnamed
 
+" Use your mouse
+set mouse=a
+
 " }}}
 " APPEARANCE {{{
 
