@@ -388,6 +388,9 @@ if ! inpath $COBOT_HOME/bin; then
     addpath $COBOT_HOME/bin tail
 fi
 
+# Add Maple to path
+addpath /Library/Frameworks/Maple.framework/Versions/Current/bin tail
+
 # }}}
 # ANACONDA {{{
 
