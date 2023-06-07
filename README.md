@@ -381,7 +381,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Some packages are installable with conda.
 
     ```zsh
-    conda install tmux nodejs rust
+    conda install tmux nodejs rust go
     conda install -c conda-forge vim bat git-delta tree tldr
     ```
 
