@@ -1,0 +1,25 @@
+#!/usr/bin/expect -f
+
+spawn scp osrdr:/raid/users/liangzli/llm-training-sweta/loss.png /Users/liangzel/Desktop
+
+expect "liangzli@100.109.20.38's password: "
+send $env(OCI_PW)
+send "\n"
+
+expect "liangzli@osrdr-proj-mlrg-language-models02's password: "
+send $env(OCI_PW)
+send "\n"
+
+interact
+
+spawn scp osrdr:/raid/users/liangzli/llm-training-sweta/perplexity.png /Users/liangzel/Desktop
+
+expect "liangzli@100.109.20.38's password: "
+send $env(OCI_PW)
+send "\n"
+
+expect "liangzli@osrdr-proj-mlrg-language-models02's password: "
+send $env(OCI_PW)
+send "\n"
+
+interact
