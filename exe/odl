@@ -2,7 +2,7 @@
 
 set source [lindex $argv 0]
 
-spawn scp $source /Users/liangzel/Desktop
+spawn scp osrdr:$source /Users/liangzel/Desktop
 
 expect "liangzli@100.109.20.38's password: "
 send $env(OCI_PW)
