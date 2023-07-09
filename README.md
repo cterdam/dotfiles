@@ -35,6 +35,12 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Oh My Zsh](https://ohmyz.sh/).
 
+  - After Oh My Zsh is installed and launched, install custom ZSH plugins:
+
+    ```zsh
+    git clone https://github.com/esc/conda-zsh-completion $ZSH_CUSTOM/plugins/conda-zsh-completion
+    ```
+
 ### 2. Development Environment
 
 - clang for C-family languages should come installed with the system.
@@ -63,12 +69,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
       works with lower versions of Java.
 
       - Specifically,
+
       ```
       Version 57 of JDT Lang Sever works fine
       https://download.eclipse.org/jdtls/milestones/0.57.0/
 
       Quick hack for those who are facing this issue
-      Replace all directories/files in 
+      Replace all directories/files in
       ~/.config/coc/extensions/coc-java-data/server
       with directories/files from above extracted JDT lang server tar.
       ```
@@ -410,3 +417,4 @@ download everything:
 ```zsh
 git clone --recursive <project url>
 ```
+

@@ -50,6 +50,7 @@ plugins=(
     copybuffer
     macos
     history
+    conda-zsh-completion
 )
 # git: autocompletions with git commands
 # python: `py` for python, `pyclean` to clean dummy files
@@ -417,6 +418,12 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+# Conda aliases
+alias cact="conda activate"
+alias cdeact="conda deactivate"
+alias cels="conda env list"
+alias ccen="conda create --name"
 
 # }}}
 # CTERDAMBIN {{{
