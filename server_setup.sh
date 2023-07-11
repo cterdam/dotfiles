@@ -45,5 +45,7 @@ sudo chown -R $(whoami) $HOME/.config
 alert '>>> Installing oh-my-zsh'
 alert '    Remember to make zsh default.'
 rm -rf $HOME/.oh-my-zsh || true
-git clone https://github.com/esc/conda-zsh-completion $ZSH_CUSTOM/plugins/conda-zsh-completion
+# Install Conda completion plugin
+git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

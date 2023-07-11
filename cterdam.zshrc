@@ -9,7 +9,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
-ZSH_THEME="candy"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Use case-insensitive completion
 CASE_SENSITIVE="false"

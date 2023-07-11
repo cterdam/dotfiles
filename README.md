@@ -35,10 +35,12 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Oh My Zsh](https://ohmyz.sh/).
 
-  - After Oh My Zsh is installed and launched, install custom ZSH plugins:
+  - After Oh My Zsh is installed and launched, install custom ZSH plugins and
+    themes:
 
     ```zsh
-    git clone https://github.com/esc/conda-zsh-completion $ZSH_CUSTOM/plugins/conda-zsh-completion
+    git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
     ```
 
 ### 2. Development Environment
