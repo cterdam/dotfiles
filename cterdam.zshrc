@@ -3,12 +3,20 @@
 # cterdam.zshrc: cterdam's personal zshrc file.
 # See https://github.com/cterdam/dotfiles
 
-# OHMYZSH {{{
+# ZSH {{{
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 # Path to oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
+# ZSH_THEME="candy"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Use case-insensitive completion
@@ -60,9 +68,13 @@ plugins=(
 # copybuffer: Ctrl + O to copy command line buffer to clipboard
 # macos: some mac os aliases
 # history: `h` to show history, `hs` to grep history
+# conda-zsh-completion: Conda zsh completion
 
 # Rest of oh-my-zsh
 source $ZSH/oh-my-zsh.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # }}}
 # CTERDAMHOME {{{
@@ -152,6 +164,18 @@ if [[ -f $cterdamzshrc && ! -f $zshrcloc ]]; then
     ln -s $cterdamzshrc $zshrcloc
 fi
 
+# cterdam's powerlevel10k config file
+cterdamp10k="$CTERDAMRC/cterdam.p10k.zsh"
+
+# Location for powerlevel10k config
+p10kloc="$HOME/.p10k.zsh"
+
+# Symlink, if not already present
+if [[ -f $cterdamp10k && ! -f $p10kloc ]]; then
+    ln -s $cterdamp10k $p10kloc
+fi
+
+
 # }}}
 # TMUX {{{
 
@@ -222,6 +246,9 @@ rc () {
             ;;
         zsh)
             $EDITOR $cterdamzshrc
+            ;;
+        p10k)
+            $EDITOR $cterdamp10k
             ;;
         tmux)
             $EDITOR $cterdamtmuxconf
