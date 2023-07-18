@@ -59,7 +59,10 @@ plugins=(
     macos
     history
     conda-zsh-completion
+    zsh-syntax-highlighting
+    zsh-autosuggestions
 )
+
 # git: autocompletions with git commands
 # python: `py` for python, `pyclean` to clean dummy files
 # web-search `google milan` to google search milan
@@ -69,6 +72,16 @@ plugins=(
 # macos: some mac os aliases
 # history: `h` to show history, `hs` to grep history
 # conda-zsh-completion: Conda zsh completion
+# zsh-syntax-highlighting: Provides highlighting when on command line
+# zsh-autosuggestions: Auto-suggest zsh commands on command line
+
+# AUTO-SUGGEST STRATGEGY
+# completion: Chooses a suggestion based on what tab-completion would suggest.
+#     (requires zpty module)
+# match_prev_cmd: Like history, but chooses the most recent match whose
+#     preceding history item matches the most recently executed command
+# history: Chooses the most recent match from history.
+ZSH_AUTOSUGGEST_STRATEGY=(completion match_prev_cmd history)
 
 # Rest of oh-my-zsh
 source $ZSH/oh-my-zsh.sh
