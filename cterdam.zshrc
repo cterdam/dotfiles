@@ -81,7 +81,7 @@ plugins=(
 # match_prev_cmd: Like history, but chooses the most recent match whose
 #     preceding history item matches the most recently executed command
 # history: Chooses the most recent match from history.
-ZSH_AUTOSUGGEST_STRATEGY=(completion match_prev_cmd history)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
 # Rest of oh-my-zsh
 source $ZSH/oh-my-zsh.sh
