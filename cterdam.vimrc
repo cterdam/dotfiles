@@ -242,8 +242,8 @@ set incsearch
 " Highlight search results throughout text
 set hlsearch
 
-" To be or not to be is the question...
-set ignorecase
+" case-insensitive only if search term is all smaller case. Otherwise sensitive
+set smartcase
 
 " <Leader>/ to clear highlight
 map <Leader>/ :nohl<CR>
