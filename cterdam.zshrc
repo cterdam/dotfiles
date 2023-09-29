@@ -453,7 +453,7 @@ else
     if [ -f "$condahomeloc/etc/profile.d/conda.sh" ]; then
         . "$condahomeloc/etc/profile.d/conda.sh"
     else
-        addpath "$condahomeloc/bin:$PATH" tail
+        addpath "$condahomeloc/bin:$PATH" head
     fi
 fi
 unset __conda_setup
