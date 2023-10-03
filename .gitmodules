@@ -2,10 +2,6 @@
 	path = github-markdown-css
     ; url = git@github.com:sindresorhus/github-markdown-css.git
     url = https://github.com/sindresorhus/github-markdown-css.git
-[submodule "utility/profile"]
-	path = utility/profile
-    ; url = git@github.com:cterdam/profile.git
-    url = https://github.com/cterdam/profile.git
 [submodule "plum"]
 	path = plum
     ; url = git@github.com:rime/plum.git
