@@ -6,3 +6,6 @@
 	path = plum
     ; url = git@github.com:rime/plum.git
     url = https://github.com/rime/plum.git
+[submodule "utility/profile"]
+	path = utility/profile
+	url = git@github.com:cterdam/profile.git
