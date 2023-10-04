@@ -4,7 +4,7 @@
 
 cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
-## Installing on a new Mac
+## Installing on macOS
 
 ### 1. Basic dependencies
 
@@ -18,13 +18,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - In terminal, run `xcode-select --install` to download developer tools.
 
-- Log in to [Github](https://github.com/) and follow its [tutorial][GHSSH] to
-  set up a new SSH key at `~/.ssh/github`.
+- Follow the GitHub [tutorial][GHSSH] to set up a new SSH key at
+  `~/.ssh/github`.
 
   [GHSSH]:
   https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
-- Now make development directory and clone this repo over SSH:
+- Now clone this repo over SSH:
 
   ```zsh
   git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
@@ -53,20 +53,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - This should also install Python3, Jupyter, among
     [other packages](https://docs.anaconda.com/anaconda/packages/pkg-docs/).
-
-  - If installation cannot start, change install to [for the current user
-    only, as opposed for all users][CONDAUSERS].
-
-    [CONDAUSERS]: https://stackoverflow.com/questions/75968081/i-cant-install-anaconda-on-a-macbook-pro-m1-with-ventura-13-3-1
-
-  - If installation ultimately fails, [change the owner of shell config files
-    to the current user][CONDATROUBLESHOOT]:
-
-    [CONDATROUBLESHOOT]: https://docs.anaconda.com/anaconda/user-guide/troubleshooting/#the-installation-failed-message-when-running-a-pkg-installer-on-osx
-
-    ```zsh
-    sudo chown -R $USER ~/.bash_profile ~/.config/fish/config.fish ~/.tcshrc ~/.xonshrc ~/.zshrc
-    ```
 
 - Install [Java](https://www.oracle.com/java/technologies/downloads/).
 
@@ -219,7 +205,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     bash rime-install :all
     ```
 
-  - Then install the Wuhan Chinese and Cantonese Soeng-Ping packages:
+  - Then install the WU HAN Chinese and Cantonese Soeng-Ping packages:
 
     ```zsh
     bash rime-install yuxifongfei/hubehua MrCorn0-0/jyutsp
@@ -332,6 +318,76 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Drag the `utility` folder to the macOS Dock.
 
+## Installing on a Linux server without sudo access
+
+- Change the default shell to `zsh`:
+
+  ```zsh
+  chsh -s $(which zsh)
+  ```
+
+- Log in again, and follow the GitHub [tutorial][GHSSH] to set up a new SSH
+  key at `~/.ssh/github`.
+
+  [GHSSH]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+- Now clone this repo over SSH:
+
+  ```zsh
+  git clone --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles
+  ```
+
+- Install [Oh My Zsh](https://ohmyz.sh/).
+
+  - After Oh My Zsh is installed and launched, install custom ZSH theme and
+    plugins:
+
+    ```zsh
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    ```
+
+- Install Anaconda.
+
+  - Retrieve the [Anaconda installer](https://www.anaconda.com/download) with
+    `wget` and run it with the default shell.
+
+  - When the installer finishes, inspect the paragraph it inserts into the
+    default shell config. Update `cterdam.zshrc` with that conda location.
+
+- Install [Tmux Plugin Manager][TPM].
+
+  [TPM]: https://github.com/tmux-plugins/tpm
+
+- Now activate the shell scripts:
+
+  - Delete old `zshrc`:
+
+    ```zsh
+    rm $HOME/.zshrc
+    ```
+
+  - Link `cterdam.zshrc` to the real `zshrc` location:
+
+    ```zsh
+    ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
+    ```
+
+  - Restart shell, then restart again. Now type `Prefix` `Shift + I` to
+    install tmux plugins.
+
+    - `Prefix` is the tmux prefix, by default `Ctrl+b`.
+
+- Install additional packages if they are not already on the cluster:
+
+    ```zsh
+    conda install tmux nodejs rust go
+    npm install yarn bash-language-server
+    conda install -c conda-forge vim bat git-delta tree tldr universal-ctags
+    ```
+
 ## Installing on a new Deep Learning EC2 instance
 
 - On local machine, register remote instance in `~/.ssh/config`:
@@ -343,13 +399,12 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
       IdentityFile ~/.ssh/my_key.pem
   ```
 
-- Send GitHub SSH keys to the instance.
-
-  ```zsh
-  scp <github_key_file> <NICKNAME>:~/.ssh
-  ```
-
 - SSH into the instance, then do all the work there.
+
+  - Follow the GitHub [tutorial][GHSSH] to set up a new SSH key at
+    `~/.ssh/github`.
+
+    [GHSSH]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
   - Clone this repo with `git clone --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles`
 
@@ -392,6 +447,22 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Troubleshooting
 
+- Anaconda cannot install.
+
+  - If installation cannot start, change install to [for the current user
+    only, as opposed for all users][CONDAUSERS].
+
+    [CONDAUSERS]: https://stackoverflow.com/questions/75968081/i-cant-install-anaconda-on-a-macbook-pro-m1-with-ventura-13-3-1
+
+  - If installation ultimately fails, [change the owner of shell config files
+    to the current user][CONDATROUBLESHOOT]:
+
+    [CONDATROUBLESHOOT]: https://docs.anaconda.com/anaconda/user-guide/troubleshooting/#the-installation-failed-message-when-running-a-pkg-installer-on-osx
+
+    ```zsh
+    sudo chown -R $USER ~/.bash_profile ~/.config/fish/config.fish ~/.tcshrc ~/.xonshrc ~/.zshrc
+    ```
+
 - After macOS update, some things fall apart. E.g. `git` disappears.
 
   - Reinstall Xcode Command Line Tools tools by running
@@ -401,15 +472,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - This happens when the language server is started on the same directory
     multiple times. Just clear cache with `:CocCommand java.clean.workspace`.
-
-- Installing on a server without sudo access
-
-  - Some packages are installable with conda.
-
-    ```zsh
-    conda install tmux nodejs rust go
-    conda install -c conda-forge vim bat git-delta tree tldr
-    ```
 
 ## Submodules
 
