@@ -1,0 +1,7 @@
+#!/usr/bin/expect -f
+
+spawn ssh emo
+expect "liangzel@emo.speech.cs.cmu.edu's password: "
+send $env(SCSPW)
+send "\r"
+interact

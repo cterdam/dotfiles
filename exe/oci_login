@@ -2,6 +2,6 @@
 
 spawn ssh oci
 expect "liangzli@100.102.8.2's password: "
-send $env(OCI_PW)
+send $env(OCIPW)
 send "\r"
 interact
