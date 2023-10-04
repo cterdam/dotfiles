@@ -19,7 +19,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - In terminal, run `xcode-select --install` to download developer tools.
 
 - Log in to [Github](https://github.com/) and follow its [tutorial][GHSSH] to
-  set up a new SSH key.
+  set up a new SSH key at `~/.ssh/github`.
 
   [GHSSH]:
   https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
@@ -54,7 +54,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - This should also install Python3, Jupyter, among
     [other packages](https://docs.anaconda.com/anaconda/packages/pkg-docs/).
 
-  - If installation fails, [change the owner of shell config files to the current user][CONDATROUBLESHOOT]:
+  - If installation cannot start, change install to [for the current user
+    only, as opposed for all users][CONDAUSERS].
+
+    [CONDAUSERS]: https://stackoverflow.com/questions/75968081/i-cant-install-anaconda-on-a-macbook-pro-m1-with-ventura-13-3-1
+
+  - If installation ultimately fails, [change the owner of shell config files
+    to the current user][CONDATROUBLESHOOT]:
 
     [CONDATROUBLESHOOT]: https://docs.anaconda.com/anaconda/user-guide/troubleshooting/#the-installation-failed-message-when-running-a-pkg-installer-on-osx
 
@@ -66,11 +72,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - At time of writing, Java 17 is the latest LTS version.
 
-    - Java 17 should work fine, but if for any reason a lower version of Java
-      is needed (e.g. Search Engines course), then the `jdt` for `coc-java`
-      might not work correctly. In that case follow [this issue][JAVAISSUE] to
-      replace the automatically-downloaded `jdt` with an older version which
-      works with lower versions of Java.
+    - Java 17 or any other LTS version should work just fine, but if for any
+      reason a lower version of Java is needed (e.g. Search Engines course),
+      then the `jdt` for `coc-java` might not work correctly. In that case
+      follow [this issue][JAVAISSUE] to replace the automatically-downloaded
+      `jdt` with an older version which works with lower versions of Java.
 
       - Specifically,
 
@@ -143,6 +149,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     - This is for [vim-silicon](https://github.com/segeljakt/vim-silicon).
 
+  - Install [Universal Ctags][UCTAGS] with `brew install --HEAD
+    universal-ctags/universal-ctags/universal-ctags`
+
+    [UCTAGS]: https://github.com/liuchengxu/vista.vim/issues/159
+
+    - This is for [vista.vim](https://github.com/liuchengxu/vista.vim).
+    
+
 - Install [tmux](https://github.com/tmux/tmux) with `brew install tmux`.
 
   - When it's done, install [Tmux Plugin Manager][TPM]. Don't worry about
@@ -167,7 +181,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     brew install chruby ruby-install xz
     ruby-install ruby 3.1.3
     ruby -v # 3.1.3p185 or above
-    gem install jekyll
+    sudo gem install jekyll
     ```
 
 #### Other Fonts
@@ -253,7 +267,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     sudo chown -R $(whoami) $HOME/.config
     ```
 
-  - Now run `vim` and it will auto install all plugins, including COC plugins.
+  - Now run `sudo vim` and it will auto install all plugins, including COC
+    plugins.
 
     - Currently, C# diagnostics and completion in Vim is supported by
       [omnisharp-vim][ONSV], and not part of COC. Check if COC has an active
