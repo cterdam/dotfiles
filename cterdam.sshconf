@@ -1,7 +1,7 @@
-Host joshlee_genpur
-    HostName ec2-18-209-166-1.compute-1.amazonaws.com
-    User ubuntu
-    IdentityFile ~/.ssh/joshlee_asb.pem
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/github
 
 Host scsgp
     HostName linux.gp.cs.cmu.edu
@@ -10,10 +10,6 @@ Host scsgp
 Host emo
     HostName emo.speech.cs.cmu.edu
     User liangzel
-
-Host git-codecommit.*.amazonaws.com
-    User APKAYR3A765H4ZLJZK7H
-    IdentityFile ~/.ssh/codecommit_rsa
 
 Host oci
     HostName 100.102.8.2
@@ -27,8 +23,3 @@ Host osrdr
     HostName osrdr-proj-mlrg-language-models02
     User liangzli
     ProxyJump springboard-osrdr
-
-Host github.com
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/cterdam

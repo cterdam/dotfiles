@@ -1,9 +1,0 @@
-#!bash
-
-dir=$1
-files="empty_epoch.png empty_step.png length_epoch.png length_step.png metrics_epoch.png metrics_step.png"
-
-for file in $files
-do
-    odl $dir/$file
-done
