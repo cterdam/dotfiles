@@ -1,7 +1,0 @@
-#!/usr/bin/expect -f
-
-spawn ssh scsgp
-expect "liangzel@linux.gp.cs.cmu.edu's password: "
-send $env(SCSPW)
-send "\r"
-interact

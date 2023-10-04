@@ -1,4 +1,0 @@
-#!/bin/bash
-
-tmux rename-window oci
-oci_login

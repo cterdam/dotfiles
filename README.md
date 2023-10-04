@@ -320,6 +320,15 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Installing on a Linux server without sudo access
 
+- Configure SSH connection on server:
+
+  ```zsh
+  vim ~/.ssh/authorized_keys
+  ```
+
+  - Paste the `github` public key of any connecting device into this file.
+    Comment lines can start with `#`.
+
 - Change the default shell to `zsh`:
 
   ```zsh

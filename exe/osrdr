@@ -1,4 +1,0 @@
-#!/bin/bash
-
-tmux rename-window osrdr
-osrdr_login

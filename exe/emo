@@ -1,4 +1,4 @@
 #!/bin/bash
 
 tmux rename-window emo
-emo_login
+ssh emo
