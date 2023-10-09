@@ -298,6 +298,9 @@ rc () {
 # }}}
 # GENERAL {{{
 
+# Use anaconda python instead of any system-installed python3
+alias python3="python"
+
 # Load secrets
 source $secretfile
 
