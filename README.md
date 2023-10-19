@@ -18,8 +18,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - In terminal, run `xcode-select --install` to download developer tools.
 
-- Follow the GitHub [tutorial][GHSSH] to set up a new SSH key at
-  `~/.ssh/github`.
+- Follow the GitHub [tutorial][GHSSH] to set up a new SSH key in
+  `~/.ssh`.
 
   [GHSSH]:
   https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
@@ -326,7 +326,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   vim ~/.ssh/authorized_keys
   ```
 
-  - Paste the `github` public key of any connecting device into this file.
+  - Paste the public key of any connecting device into this file.
     Comment lines can start with `#`.
 
 - Change the default shell to `zsh`:
@@ -336,7 +336,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   ```
 
 - Log in again, and follow the GitHub [tutorial][GHSSH] to set up a new SSH
-  key at `~/.ssh/github`.
+  key in `~/.ssh`.
 
   [GHSSH]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 
@@ -410,7 +410,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - SSH into the instance, then do all the work there.
 
-  - Follow the GitHub [tutorial][GHSSH] to set up a new SSH key at
+  - Follow the GitHub [tutorial][GHSSH] to set up a new SSH key in
     `~/.ssh/github`.
 
     [GHSSH]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
