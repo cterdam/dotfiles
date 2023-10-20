@@ -1,4 +1,9 @@
 #!/bin/bash
 
 tmux rename-window emo
-ssh emo
+
+# Connect to the tmux session already running on the server.
+# If there is no tmux session, connection will fail.
+# Therefore, we must close any connection by <CR>~. instad of by manually
+# exiting all sessions.
+ssh emo -t tmux a
