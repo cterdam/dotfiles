@@ -146,7 +146,7 @@ secretfile="$CTERDAMRC/utility/profile/shell/exec.sh"
 # {{{ SSH CONFIG
 
 # cterdam's ssh config file
-cterdamsshconf="$CTERDAMRC/cterdam.sshconf"
+cterdamsshconf="$CTERDAMRC/cterdam.sshconfig"
 
 # Location for ssh config
 sshconfloc="$HOME/.ssh/config"

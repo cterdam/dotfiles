@@ -21,14 +21,16 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for
   this device.
 
-- Now clone this repo over SSH:
+- Now clone this repo over SSH and destroy the dummy SSH config created in the
+  previous step:
 
   ```zsh
   git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
+  rm ~/.ssh/config
   ```
 
-- Once the repo is downloaded, set up terminal appearance by importing
-  `hbpro.terminal` to terminal profiles.
+- Set up terminal appearance by importing `hbpro.terminal` to terminal
+  profiles.
 
 - Install [Oh My Zsh](https://ohmyz.sh/).
 
@@ -335,11 +337,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for
   this device.
 
-- Now clone this repo over SSH:
+- Now clone this repo over SSH and destroy the dummy SSH config created in the
+  previous step:
 
   ```zsh
-  git clone --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles
+  git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
+  rm ~/.ssh/config
   ```
+
 
 - Install [Oh My Zsh](https://ohmyz.sh/).
 
@@ -408,10 +413,12 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for
   this device.
 
-- Now clone this repo over SSH:
+- Now clone this repo over SSH and destroy the dummy SSH config created in the
+  previous step:
 
   ```zsh
-  git clone --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles
+  git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
+  rm ~/.ssh/config
   ```
 
 - Run the setup script with `bash $HOME/cterdam/dotfiles/server_setup.sh`
@@ -469,6 +476,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   ```
 
 - Add the contents of `cterdam.pub` to GitHub as a new SSH key.
+
+- Create the `~/.ssh/config` file, and insert this content:
+
+  ```sshconfig
+  Host github.com
+      IdentityFile ~/.ssh/cterdam
+  ```
 
 
 ## Troubleshooting
