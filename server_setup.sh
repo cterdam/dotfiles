@@ -21,7 +21,7 @@ sudo apt -qq update
 sudo add-apt-repository ppa:jonathonf/vim
 # Finally install all desired packages
 sudo apt-get -qq install zsh golang-go mono-complete vim-nox rustc octave bat git-extras less tree tldr vim ruby-full build-essential zlib1g-dev shellcheck universal-ctags
-pip install vim-vint
+pip install vim-vint autopep8
 
 alert '>>> Installing snap packages'
 sudo snap install node --classic

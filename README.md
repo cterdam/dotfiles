@@ -189,7 +189,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   ```zsh
   brew install bat git-delta less tree tldr shellcheck jq
-  pip install vim-vint
+  pip install vim-vint autopep8
   ```
 
 - Install [Rime](https://rime.im/).
@@ -395,6 +395,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     conda install tmux nodejs rust go
     npm install yarn bash-language-server
     conda install -c conda-forge vim bat git-delta tree tldr universal-ctags
+    pip install vim-vint autopep8
     ```
 
 ## Installing on a new Deep Learning EC2 instance
