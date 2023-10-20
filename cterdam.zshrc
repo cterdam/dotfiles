@@ -3,93 +3,6 @@
 # cterdam.zshrc: cterdam's personal zshrc file.
 # See https://github.com/cterdam/dotfiles
 
-# ZSH {{{
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Path to oh-my-zsh installation
-export ZSH="$HOME/.oh-my-zsh"
-
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
-# ZSH_THEME="candy"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Use case-insensitive completion
-CASE_SENSITIVE="false"
-
-# Use hyphen-insensitive completion. Treat _ and - interchangeably.
-HYPHEN_INSENSITIVE="true"
-
-# Just remind me to update when it's time
-zstyle ':omz:update' mode reminder
-
-# Trigger auto-update every 13 days
-zstyle ':omz:update' frequency 13
-
-# Disable auto-setting terminal title
-DISABLE_AUTO_TITLE="true"
-
-# Enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Mark untracked files under VCS as dirty,
-# at the expense of repo status check speed.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Manage the command execution time stamp shown in the history command output.
-HIST_STAMPS="yyyy-mm-dd"
-
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-plugins=(
-    git
-    python
-    web-search
-    copyfile
-    copypath
-    copybuffer
-    macos
-    history
-    conda-zsh-completion
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-)
-
-# git: autocompletions with git commands
-# python: `py` for python, `pyclean` to clean dummy files
-# web-search `google milan` to google search milan
-# copyfile: `copyfile` to copy a file to clipboard
-# copypath: `copypath` to copy current directory path
-# copybuffer: Ctrl + O to copy command line buffer to clipboard
-# macos: some mac os aliases
-# history: `h` to show history, `hs` to grep history
-# conda-zsh-completion: Conda zsh completion
-# zsh-syntax-highlighting: Provides highlighting when on command line
-# zsh-autosuggestions: Auto-suggest zsh commands on command line
-
-# AUTO-SUGGEST STRATGEGY
-# completion: Chooses a suggestion based on what tab-completion would suggest.
-#     (requires zpty module)
-# match_prev_cmd: Like history, but chooses the most recent match whose
-#     preceding history item matches the most recently executed command
-# history: Chooses the most recent match from history.
-ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
-
-# Rest of oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# }}}
 # CTERDAMHOME {{{
 
 # Intended directory structure:
@@ -294,6 +207,93 @@ rc () {
             ;;
     esac
 }
+
+# }}}
+# ZSH {{{
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Path to oh-my-zsh installation
+export ZSH="$HOME/.oh-my-zsh"
+
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes for a list of themes
+# ZSH_THEME="candy"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Use case-insensitive completion
+CASE_SENSITIVE="false"
+
+# Use hyphen-insensitive completion. Treat _ and - interchangeably.
+HYPHEN_INSENSITIVE="true"
+
+# Just remind me to update when it's time
+zstyle ':omz:update' mode reminder
+
+# Trigger auto-update every 13 days
+zstyle ':omz:update' frequency 13
+
+# Disable auto-setting terminal title
+DISABLE_AUTO_TITLE="true"
+
+# Enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Mark untracked files under VCS as dirty,
+# at the expense of repo status check speed.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Manage the command execution time stamp shown in the history command output.
+HIST_STAMPS="yyyy-mm-dd"
+
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+plugins=(
+    git
+    python
+    web-search
+    copyfile
+    copypath
+    copybuffer
+    macos
+    history
+    conda-zsh-completion
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+)
+
+# git: autocompletions with git commands
+# python: `py` for python, `pyclean` to clean dummy files
+# web-search `google milan` to google search milan
+# copyfile: `copyfile` to copy a file to clipboard
+# copypath: `copypath` to copy current directory path
+# copybuffer: Ctrl + O to copy command line buffer to clipboard
+# macos: some mac os aliases
+# history: `h` to show history, `hs` to grep history
+# conda-zsh-completion: Conda zsh completion
+# zsh-syntax-highlighting: Provides highlighting when on command line
+# zsh-autosuggestions: Auto-suggest zsh commands on command line
+
+# AUTO-SUGGEST STRATGEGY
+# completion: Chooses a suggestion based on what tab-completion would suggest.
+#     (requires zpty module)
+# match_prev_cmd: Like history, but chooses the most recent match whose
+#     preceding history item matches the most recently executed command
+# history: Chooses the most recent match from history.
+ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
+
+# Rest of oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # }}}
 # GENERAL {{{

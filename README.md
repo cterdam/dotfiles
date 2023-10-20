@@ -18,11 +18,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - In terminal, run `xcode-select --install` to download developer tools.
 
-- Follow the GitHub [tutorial][GHSSH] to set up a new SSH key in
-  `~/.ssh`.
-
-  [GHSSH]:
-  https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+- Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for
+  this device.
 
 - Now clone this repo over SSH:
 
@@ -335,10 +332,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   chsh -s $(which zsh)
   ```
 
-- Log in again, and follow the GitHub [tutorial][GHSSH] to set up a new SSH
-  key in `~/.ssh`.
-
-  [GHSSH]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+- Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for
+  this device.
 
 - Now clone this repo over SSH:
 
@@ -410,49 +405,71 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - SSH into the instance, then do all the work there.
 
-  - Follow the GitHub [tutorial][GHSSH] to set up a new SSH key in
-    `~/.ssh/github`.
+- Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for
+  this device.
 
-    [GHSSH]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+- Now clone this repo over SSH:
 
-  - Clone this repo with `git clone --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles`
+  ```zsh
+  git clone --recursive git@github.com:cterdam/dotfiles.git $HOME/cterdam/dotfiles
+  ```
 
-  - Run the setup script with `bash $HOME/cterdam/dotfiles/server_setup.sh`
+- Run the setup script with `bash $HOME/cterdam/dotfiles/server_setup.sh`
 
-    - This will automate most of what's in this README file on a Linux
-      environment.
+- This will automate most of what's in this README file on a Linux
+  environment.
 
-    - C family languages, Anaconda and Java should come pre-installed in Deep
-      Learning AMI. Due to being on a Linux server, this script does not
-      install .NET, Latex, and Rime.
+- C family languages, Anaconda and Java should come pre-installed in Deep
+  Learning AMI. Due to being on a Linux server, this script does not
+  install .NET, Latex, and Rime.
 
-  - After the script finishes, you will be taken to zsh. Manually run the
-    following:
+- After the script finishes, you will be taken to zsh. Manually run the
+  following:
 
-    ```zsh
-    rm $HOME/.*.pre-oh-my-zsh* || true
-    rm $HOME/.zshrc || true
-    ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
-    ```
+  ```zsh
+  rm $HOME/.*.pre-oh-my-zsh* || true
+  rm $HOME/.zshrc || true
+  ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
+  ```
 
-  - Then log out and back in the remote instance. Go to `tmux` and send
-    `Prefix` `Shift+I` to install tmux plugins.
+- Then log out and back in the remote instance. Go to `tmux` and send `Prefix`
+  `Shift+I` to install tmux plugins.
 
-    - If the local instance is also running `tmux`, then these keys might need
-      to be sent twice in order to reach the remote instance. That is, press
-      `Prefix` `Prefix` `Shift+I` `Shift+I`. The default Prefix for `tmux` is
-      `Ctrl+B`.
+- If the local instance is also running `tmux`, then these keys might need
+  to be sent twice in order to reach the remote instance. That is, press
+  `Prefix` `Prefix` `Shift+I` `Shift+I`. The default Prefix for `tmux` is
+  `Ctrl+B`.
 
-  - Launch `vim` to install vim plugins.
+- Launch `vim` to install vim plugins.
 
-  - Init conda with `conda init zsh` and re-login.
+- Init conda with `conda init zsh` and re-login.
 
-  - Install other packages which couldn't be installed without re-sourcing the
-    shell:
+- Install other packages which couldn't be installed without re-sourcing the
+  shell:
 
-    ```zsh
-    gem install jekyll bundler
-    ```
+  ```zsh
+  gem install jekyll bundler
+  ```
+
+## Setting up a new SSH key
+
+- Produce a new pair of keys:
+
+  ```zsh
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+  ```
+
+  Name the key after the device and save it in `~/.ssh`.
+
+- Link that keypair to `cterdam` and `cterdam.pub`:
+
+  ```zsh
+  ln -s ~/.ssh/<PRIVATE_KEY> ~/.ssh/cterdam
+  ln -s ~/.ssh/<PUBLIC_KEY> ~/.ssh/cterdam.pub
+  ```
+
+- Add the contents of `cterdam.pub` to GitHub as a new SSH key.
+
 
 ## Troubleshooting
 
