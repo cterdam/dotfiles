@@ -421,7 +421,7 @@ if [[ `sysname` == "macOS" ]]; then
     source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
     # Use ruby version 3.1.3 (for Jekyll for Github Pages)
     chruby ruby-3.1.3
-elif [[ `sysname` == "Ubuntu" ]]; then
+elif [[ `sysname` == "Ubntu" ]]; then
     export GEM_HOME="$HOME/gems"
     addpath $HOME/gems/bin tail
 fi
