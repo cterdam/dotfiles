@@ -319,7 +319,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Installing on a Linux server without sudo access
 
-- Configure SSH connection on server:
+- Get on the server. Configure SSH connection from local machines:
 
   ```zsh
   vim ~/.ssh/authorized_keys
@@ -328,7 +328,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Paste the public key of any connecting device into this file.
     Comment lines can start with `#`.
 
-- Change the default shell to `zsh`:
+  - On local machines, make utilities for connecting to the server as well.
+    This includes registering an entry in  `~/.ssh/config` and making an
+    executable in `$CTERDAMRC/exe`.
+
+- Get back on the server. Change the default shell to `zsh`:
 
   ```zsh
   chsh -s $(which zsh)

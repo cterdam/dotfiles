@@ -5,3 +5,8 @@ Host emo
     HostName emo.speech.cs.cmu.edu
     User liangzel
     IdentityFile ~/.ssh/cterdam
+
+Host babel
+    HostName babel.lti.cs.cmu.edu
+    User liangzel
+    IdentityFile ~/.ssh/cterdam
