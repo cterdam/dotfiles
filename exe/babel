@@ -2,8 +2,4 @@
 
 tmux rename-window babel
 
-# Connect to the tmux session already running on the server.
-# If there is no tmux session, connection will fail.
-# Therefore, we must close any connection by <CR>~. instad of by manually
-# exiting all sessions.
-ssh babel -t tmux a
+ssh babel
