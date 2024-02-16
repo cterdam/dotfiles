@@ -256,28 +256,30 @@ HIST_STAMPS="yyyy-mm-dd"
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(
-    git
-    python
-    web-search
+    conda
+    conda-zsh-completion
+    copybuffer
     copyfile
     copypath
-    copybuffer
-    macos
+    git
     history
-    conda-zsh-completion
-    zsh-syntax-highlighting
+    macos
+    python
+    web-search
     zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
-# git: autocompletions with git commands
-# python: `py` for python, `pyclean` to clean dummy files
-# web-search `google milan` to google search milan
+# conda: provide aliases for conda commands themselves
+# conda-zsh-completion: Complete conda command arguments
+# copybuffer: Ctrl + O to copy command line buffer to clipboard
 # copyfile: `copyfile` to copy a file to clipboard
 # copypath: `copypath` to copy current directory path
-# copybuffer: Ctrl + O to copy command line buffer to clipboard
-# macos: some mac os aliases
+# git: autocompletions with git commands
 # history: `h` to show history, `hs` to grep history
-# conda-zsh-completion: Conda zsh completion
+# macos: `cdf` to cd to current Finder location, `rmdsstore` to remove dsstore
+# python: `py` for python, `pyclean` to clean dummy files
+# web-search `google milan` to google search milan
 # zsh-syntax-highlighting: Provides highlighting when on command line
 # zsh-autosuggestions: Auto-suggest zsh commands on command line
 
@@ -287,7 +289,7 @@ plugins=(
 # match_prev_cmd: Like history, but chooses the most recent match whose
 #     preceding history item matches the most recently executed command
 # history: Chooses the most recent match from history.
-ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
+ZSH_AUTOSUGGEST_STRATEGY=(completion history match_prev_cmd)
 
 # Rest of oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -298,8 +300,13 @@ source $ZSH/oh-my-zsh.sh
 # }}}
 # GENERAL {{{
 
-# Use anaconda python instead of any system-installed python3
+# Use anaconda python and pip instead of any system-installed versions
 alias python3="python"
+alias pip3="pip"
+
+# Use alias for python and ipython
+alias py="python"
+alias ipy="ipython"
 
 # Load secrets
 source $secretfile
@@ -461,12 +468,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# Conda aliases
-alias cact="conda activate"
-alias cdeact="conda deactivate"
-alias cels="conda env list"
-alias ccen="conda create --name"
 
 # }}}
 # CTERDAMBIN {{{
