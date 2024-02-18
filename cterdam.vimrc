@@ -886,10 +886,10 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 " `:FM` command to format current buffer
-command! -nargs=0 Format :call CocActionAsync('format')
+command! -nargs=0 FM :call CocActionAsync('format')
 
 " `:OI` command to organize imports of the current buffer
-command! -nargs=0 Sort :call
+command! -nargs=0 OI :call
     \ CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " }}}
