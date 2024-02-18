@@ -197,8 +197,8 @@ highlight LineNr ctermfg=darkgrey
 " Keep your line within 80 chars
 set colorcolumn=81
 
-" Break lines longer than 78 chars. Vim forces this to 78 anyways
-set textwidth=78
+" Break lines longer than 80 chars.
+set textwidth=80
 
 " Do not horizontally extend a line past screen boundary
 set wrap
@@ -713,6 +713,7 @@ let g:coc_global_extensions = [
     \'coc-java',
     \'coc-json',
     \'coc-markdownlint',
+    \'coc-pydocstring',
     \'coc-pyright',
     \'coc-sh',
     \'coc-vimlsp',
@@ -730,6 +731,7 @@ let g:coc_global_extensions = [
 " coc-java: Java diagnostic extension.
 " coc-json: json file extension.
 " coc-markdownlint: markdown file extension.
+" coc-pydocstring: auto generate docstring for python. installs its own `doq`.
 " coc-pyright: pyright extension for python.
 " coc-sh: SH language extension.
 "   Requires bash-language-server.

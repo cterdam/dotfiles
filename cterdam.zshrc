@@ -49,7 +49,7 @@ if [[ -f $cterdamvimrc && ! -f $vimrcloc ]]; then
     ln -s $cterdamvimrc $vimrcloc
 fi
 
-# coc settings json file
+# cterdam's coc settings json file
 cterdamcocsettings="$CTERDAMRC/cterdamcoc.json"
 
 # Location for coc settings
@@ -58,6 +58,17 @@ cocsettingsloc="$HOME/.vim/coc-settings.json"
 # Symlink, if not already present
 if [[ -f $cterdamcocsettings && ! -f $cocsettingsloc ]]; then
     ln -s $cterdamcocsettings $cocsettingsloc
+fi
+
+# cterdam's pylintrc file
+cterdampylintrc="$CTERDAMRC/cterdam.pylintrc"
+
+# Location for pylinerc
+pylintrcloc="$HOME/.pylintrc"
+
+# Symlink, if not already present
+if [[ -f $cterdampylintrc && ! -f $pylintrcloc ]]; then
+    ln -s $cterdampylintrc $pylintrcloc
 fi
 
 # }}}
@@ -119,7 +130,7 @@ fi
 # }}}
 # RIME {{{
 
-# cterdamrime directory for all Rime dotfiles
+# cterdam's rime directory for all Rime dotfiles
 cterdamrime="$CTERDAMRC/cterdam.rime"
 
 # Location for Rime config folder
@@ -161,8 +172,12 @@ fi
 # Edit dotfiles with vim
 rc () {
     case $1 in
-        vim | vi)
-            $EDITOR $cterdamvimrc
+        '')
+            echo "Entering $CTERDAMRC"
+            cd $CTERDAMRC
+            ;;
+        -h)
+            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server, secret, ssh"
             ;;
         coc)
             $EDITOR $cterdamcocsettings
@@ -170,37 +185,36 @@ rc () {
         git)
             $EDITOR $cterdamgitconfig
             ;;
-        zsh)
-            $EDITOR $cterdamzshrc
-            ;;
         p10k)
             $EDITOR $cterdamp10k
             ;;
-        tmux)
-            $EDITOR $cterdamtmuxconf
+        pylint)
+            $EDITOR $cterdampylintrc
+            ;;
+        readme)
+            $EDITOR $CTERDAMRC/README.md
             ;;
         rime)
             echo "Entering $cterdamrime"
             cd $cterdamrime
             ;;
-        readme)
-            $EDITOR $CTERDAMRC/README.md
+        secret)
+            $EDITOR $secretfile
             ;;
         server)
             $EDITOR $CTERDAMRC/server_setup.sh
             ;;
-        secret)
-            $EDITOR $secretfile
-            ;;
         ssh)
             $EDITOR $cterdamsshconf
             ;;
-        -h)
-            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server, secret, ssh"
+        tmux)
+            $EDITOR $cterdamtmuxconf
             ;;
-        '')
-            echo "Entering $CTERDAMRC"
-            cd $CTERDAMRC
+        vi | vim)
+            $EDITOR $cterdamvimrc
+            ;;
+        zsh)
+            $EDITOR $cterdamzshrc
             ;;
         *)
             echo "No config for $1!"
