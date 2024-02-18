@@ -882,14 +882,14 @@ omap ac <Plug>(coc-classobj-a)
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
-" `:Format` command to format current buffer
-command! -nargs=0 Format :call CocActionAsync('format')
-
 " `:Fold` command to fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
-" `:OR` command to organize imports of the current buffer
-command! -nargs=0 OR :call
+" `:FM` command to format current buffer
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" `:OI` command to organize imports of the current buffer
+command! -nargs=0 Sort :call
     \ CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " }}}
