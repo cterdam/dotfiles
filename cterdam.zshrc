@@ -318,9 +318,12 @@ source $ZSH/oh-my-zsh.sh
 alias python3="python"
 alias pip3="pip"
 
-# Use alias for python and ipython
+# Aliases for python and ipython
 alias py="python"
 alias ipy="ipython"
+
+# Alias for ls
+alias l="ls"
 
 # Load secrets
 source $secretfile
