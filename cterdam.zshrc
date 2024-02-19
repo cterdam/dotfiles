@@ -284,6 +284,7 @@ plugins=(
     zsh-syntax-highlighting
 )
 
+# Individual WhatIs:
 # conda: provide aliases for conda commands themselves
 # conda-zsh-completion: Complete conda command arguments
 # copybuffer: Ctrl + O to copy command line buffer to clipboard
@@ -294,8 +295,11 @@ plugins=(
 # macos: `cdf` to cd to current Finder location, `rmdsstore` to remove dsstore
 # python: `py` for python, `pyclean` to clean dummy files
 # web-search `google milan` to google search milan
-# zsh-syntax-highlighting: Provides highlighting when on command line
-# zsh-autosuggestions: Auto-suggest zsh commands on command line
+# zsh-syntax-highlighting: provides highlighting when on command line
+# zsh-autosuggestions: auto-suggest zsh commands on command line
+
+# TODO: Some things to consider in the future:
+# ChrisPenner/copy-pasta: use copy and paste like in GUI
 
 # AUTO-SUGGEST STRATGEGY
 # completion: Chooses a suggestion based on what tab-completion would suggest.
