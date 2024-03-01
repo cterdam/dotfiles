@@ -649,7 +649,7 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Highlighting trailing whitespaces, remove with <C-<Space>>
 Plug 'ntpeters/vim-better-whitespace'
 
-" Colorize different levels of parentheses, toggle with `<Leader>n`
+" Colorize different levels of parentheses, toggle with `<Leader>b`
 Plug 'luochen1990/rainbow'
 
 " Display markers in the sign column
@@ -677,6 +677,8 @@ Plug 'godlygeek/tabular'
 " Show symbols of the current document. Toggle with `<Leader>o`
 Plug 'liuchengxu/vista.vim'
 
+" Show context of current code on top. Toggle with `<Leader>n`
+Plug 'wellle/context.vim'
 " }}}
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -1348,8 +1350,8 @@ let g:better_whitespace_verbosity=1
 " Disable colorizing parens by default
 let g:rainbow_active = 0
 
-" <Leader>n to toggle rainbow coloring
-map <Leader>n :RainbowToggle<CR>
+" <Leader>b to toggle rainbow coloring
+map <Leader>b :RainbowToggle<CR>
 
 " Supply color hierarchy for raindow
 let g:rainbow_conf = {
@@ -1559,5 +1561,29 @@ augroup showVista
 	autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 	autocmd VimEnter * call timer_start(1000, { tid -> execute('call vista#RunForNearestMethodOrFunction()')})
 augroup END
+
+" }}}
+" CONTEXT {{{
+
+" Enable context
+let g:context_enabled = 1
+
+" Do not blacklist any filetype
+let g:context_filetype_blacklist = []
+
+" Show only the first and last ten if context longer than 21 lines
+let g:context_max_height = 21
+
+" Show only the first and last two if current indent level context more than 5
+let g:context_max_per_indent = 5
+
+" Skip context building for empty lines, comments and C preprocessor statements
+let g:context_skip_regex = '^\s*\($\|#\|//\|/\*\|\*\($\|/s\|\/\)\)'
+
+" Join lines without word chars with the previous line
+let g:context_join_regex = '^\W*$'
+
+" `<Leader>n` to toggle showing context
+map <Leader>n :ContextToggle<CR>
 
 " }}}
