@@ -29,6 +29,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   rm ~/.ssh/config
   ```
 
+- In Finder, add `~/cterdam` to the side bar.
+
 - Set up terminal appearance by importing `hbpro.terminal` to terminal
   profiles.
 
@@ -42,7 +44,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone git@github.com:KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/conda
+    git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/conda
     ```
 
 ### 2. Development Environment
@@ -56,42 +58,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Java](https://www.oracle.com/java/technologies/downloads/).
 
-  - At time of writing, Java 17 is the latest LTS version.
-
-    - Java 17 or any other LTS version should work just fine, but if for any
-      reason a lower version of Java is needed (e.g. Search Engines course),
-      then the `jdt` for `coc-java` might not work correctly. In that case
-      follow [this issue][JAVAISSUE] to replace the automatically-downloaded
-      `jdt` with an older version which works with lower versions of Java.
-
-      - Specifically,
-
-      ```
-      Version 57 of JDT Lang Sever works fine
-      https://download.eclipse.org/jdtls/milestones/0.57.0/
-
-      Quick hack for those who are facing this issue
-      Replace all directories/files in
-      ~/.config/coc/extensions/coc-java-data/server
-      with directories/files from above extracted JDT lang server tar.
-      ```
-
-      [JAVAISSUE]: https://github.com/neoclide/coc-java/issues/99
-
 - Install [Golang](https://go.dev/).
-
-- Install tools for C#:
-
-  - Install Microsoft's [.NET][.NET] SDK.
-
-    [.NET]: https://dotnet.microsoft.com/en-us/download/dotnet
-
-    - This installs command `dotnet` to build and run C# apps.
-
-  - Install [Mono](https://www.mono-project.com/).
-
-    - This installs commands `csc` and `mcs` to compile single C# files, as
-      well as `mono` to run the compiled executable.
 
 - Install [Node.js](https://nodejs.org/en/).
 
@@ -108,11 +75,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - MacOS already comes with a builtin distribution of vim, but the default
     version lacks many key features such as conceal, lua, perl, and
     python3. The version of vim on homebrew includes these features.
-
-  - Upon finishing installing the brew version, run `which vim` and you might
-    see that it's still the system vim (and not the brew vim) which gets
-    evoked. This is because brew-installed apps are not given priority in PATH.
-    Don't worry about it; `cterdam.zshrc` will fix this.
 
   - Install [yarn](https://classic.yarnpkg.com/en/) with `sudo npm install
     --global yarn`.
@@ -135,13 +97,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     - This is for [vim-silicon](https://github.com/segeljakt/vim-silicon).
 
-  - Install [Universal Ctags][UCTAGS] with `brew install --HEAD
-    universal-ctags/universal-ctags/universal-ctags`
+  - Install [Universal Ctags][UCTAGS] with `brew install --HEAD universal-ctags`
 
     [UCTAGS]: https://github.com/liuchengxu/vista.vim/issues/159
 
     - This is for [vista.vim](https://github.com/liuchengxu/vista.vim).
-    
 
 - Install [tmux](https://github.com/tmux/tmux) with `brew install tmux`.
 
@@ -151,11 +111,47 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     [TPM]: https://github.com/tmux-plugins/tpm
 
-### 4. Other Packages
+### 4. Activate shell scripts
 
-#### Programming Languages Cont'd
+- We have not dealt with `zshrc` in the new system yet, but the Anaconda and Oh
+  My Zsh installation scripts should have created one in the home directory.
+  Read it through, but everything there should already be incorporated into
+  `cterdam.zshrc` which will be installed later. So just delete it so we can use
+  our own shell script:
 
-- Install [Octave](https://octave.org/index.html) with `brew install octave`.
+  ```zsh
+  rm $HOME/.zshrc
+  ```
+
+- Now activate the shell scripts:
+
+  - Link `cterdam.zshrc` to the real `zshrc` location:
+
+    ```zsh
+    ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
+    ```
+
+  - Restart shell, then restart again. Now type `Prefix` `Shift + I` to
+    install tmux plugins.
+
+    - `Prefix` is the tmux prefix, by default `Ctrl+b`.
+
+  - Now run `sudo vim` and it will auto install all plugins, including COC
+    plugins.
+
+    - Currently, C# diagnostics and completion in Vim is supported by
+      [omnisharp-vim][ONSV], and not part of COC. Check if COC has an active
+      [extension][COCEX] for C#. If yes, switch away from omnisharp-vim. If
+      no, the existing script integrates omnisharp-vim well already. Just open
+      any `.cs` file and follow the instruction and type `Y` to download the
+      language server.
+
+      [ONSV]: https://github.com/OmniSharp/omnisharp-vim
+      [COCEX]: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+
+  - Deploy Rime engine.
+
+### 5. Other Packages
 
 #### Jekyll for Github Pages
 
@@ -211,6 +207,24 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     bash rime-install yuxifongfei/hubehua MrCorn0-0/jyutsp
     ```
 
+#### Optional Packages
+
+- Install [Octave](https://octave.org/index.html) with `brew install
+  octave`.
+
+- Install tools for C#:
+
+  - Install Microsoft's [.NET][.NET] SDK.
+
+    [.NET]: https://dotnet.microsoft.com/en-us/download/dotnet
+
+    - This installs command `dotnet` to build and run C# apps.
+
+  - Install [Mono](https://www.mono-project.com/).
+
+    - This installs commands `csc` and `mcs` to compile single C# files, as
+      well as `mono` to run the compiled executable.
+
 - Install [MacTeX](https://tug.org/mactex/), the recommended LaTeX
   distribution for macOS.
 
@@ -221,52 +235,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     sudo cpan install YAML::Tiny File::HomeDir Unicode::GCString
     ```
 
-### 5. Activate shell scripts
-
-- We have not dealt with `zshrc` in the new system yet, but the Anaconda and Oh
-  My Zsh installation scripts should have created one in the home directory.
-  Read it through, but everything there should already be incorporated into
-  `cterdam.zshrc` which will be installed later. So just delete it so we can use
-  our own shell script:
-
-  ```zsh
-  rm $HOME/.zshrc
-  ```
-
-- Now activate the shell scripts:
-
-  - Link `cterdam.zshrc` to the real `zshrc` location:
-
-    ```zsh
-    ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
-    ```
-
-  - Restart shell, then restart again. Now type `Prefix` `Shift + I` to
-    install tmux plugins.
-
-    - `Prefix` is the tmux prefix, by default `Ctrl+b`.
-
-  - To prevent COC from throwing permission errors in vim, first reset
-    permissions for the `$HOME/.config` folder:
-
-    ```zsh
-    sudo chown -R $(whoami) $HOME/.config
-    ```
-
-  - Now run `sudo vim` and it will auto install all plugins, including COC
-    plugins.
-
-    - Currently, C# diagnostics and completion in Vim is supported by
-      [omnisharp-vim][ONSV], and not part of COC. Check if COC has an active
-      [extension][COCEX] for C#. If yes, switch away from omnisharp-vim. If
-      no, the existing script integrates omnisharp-vim well already. Just open
-      any `.cs` file and follow the instruction and type `Y` to download the
-      language server.
-
-      [ONSV]: https://github.com/OmniSharp/omnisharp-vim
-      [COCEX]: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-
-  - Deploy Rime engine.
 
 ### 6. Macvim
 
@@ -375,6 +343,16 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   [TPM]: https://github.com/tmux-plugins/tpm
 
+  - The install instructions should just amount to cloning the TPM source code
+    into the tmux plugin location:
+
+    ```zsh
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    ```
+
+  - The next step is to load TPM as a plugin in `~/.tmux.conf`, but we don't
+    need to explicitly do that since this is already covered in our script.
+
 - Now activate the shell scripts:
 
   - Delete old `zshrc`:
@@ -477,11 +455,15 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Link that keypair to `cterdam` and `cterdam.pub`:
 
   ```zsh
-  ln -s ~/.ssh/<PRIVATE_KEY> ~/.ssh/cterdam
-  ln -s ~/.ssh/<PUBLIC_KEY> ~/.ssh/cterdam.pub
+  ln -s ~/.ssh/<KEY_NAME> ~/.ssh/cterdam
+  ln -s ~/.ssh/<KEY_NAME>.pub ~/.ssh/cterdam.pub
   ```
 
-- Add the contents of `cterdam.pub` to GitHub as a new SSH key.
+- Add the contents of `cterdam.pub` to GitHub as a new SSH Authentication key:
+
+  ```
+  cat ~/.ssh/cterdam.pub | pbcopy
+  ```
 
 - Create the `~/.ssh/config` file, and insert this content:
 
@@ -518,6 +500,55 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - This happens when the language server is started on the same directory
     multiple times. Just clear cache with `:CocCommand java.clean.workspace`.
+
+- A different Java version is needed. 
+
+  - Any Java LTS version should work just fine, but if for any reason a lower
+    version of Java is needed (e.g. Search Engines course), then the `jdt` for
+    `coc-java` might not work correctly. In that case follow [this
+    issue][JAVAISSUE] to replace the automatically-downloaded `jdt` with an
+    older version which works with lower versions of Java. Specifically,
+
+    ```
+    Version 57 of JDT Lang Sever works fine
+    https://download.eclipse.org/jdtls/milestones/0.57.0/
+
+    Quick hack for those who are facing this issue
+    Replace all directories/files in
+    ~/.config/coc/extensions/coc-java-data/server
+    with directories/files from above extracted JDT lang server tar.
+    ```
+
+    [JAVAISSUE]: https://github.com/neoclide/coc-java/issues/99
+
+- Rust installation script needs to alter shell files which are nonexistent.
+
+  - Just use the graphic installer. After running the installer, the installed
+    Rust environment might not be in `$PATH` right away, but the our `zshrc`
+    should take care of that once activated.
+
+- Vim installed through brew does not seem to replace system vim.
+
+  - Upon finishing installing the brew version, run `which vim` and you might
+    see that it's still the system vim (and not the brew vim) which gets
+    evoked. This is because brew-installed apps are not given priority in PATH.
+    Don't worry about it; `cterdam.zshrc` will fix this.
+
+- Vim needs file permissions for undo files or other functionalities.
+
+  - Change the ownership of the Vim folder to the user:
+
+    ```zsh
+    sudo chown -R `whoami` $HOME/.vim
+    ```
+
+- COC needs file permissions for config.
+
+  - Change the ownership of the config folder to the user:
+
+    ```zsh
+    sudo chown -R $(whoami) $HOME/.config
+    ```
 
 ## Submodules
 
