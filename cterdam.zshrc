@@ -468,6 +468,8 @@ addpath /Library/Frameworks/Maple.framework/Versions/Current/bin tail
 
 if [[ -d $HOME/'opt/anaconda3' ]]; then
     condahomeloc=$HOME/'opt/anaconda3'
+elif [[ -d '/opt/anaconda3' ]]; then
+    condahomeloc='/opt/anaconda3'
 elif [[ -f /usr/local/bin/conda ]]; then
     condahomeloc='/usr/local'
 elif [[ -d $HOME/anaconda3 ]]; then
@@ -484,7 +486,7 @@ else
     if [ -f "$condahomeloc/etc/profile.d/conda.sh" ]; then
         . "$condahomeloc/etc/profile.d/conda.sh"
     else
-        addpath "$condahomeloc/bin:$PATH" head
+        addpath "$condahomeloc/bin" head
     fi
 fi
 unset __conda_setup
