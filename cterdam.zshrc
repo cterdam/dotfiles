@@ -316,6 +316,20 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # }}}
+# GIT {{{
+
+# Function to view git diff with bat
+batdiff() {
+    command git diff --name-only --diff-filter=d $@ | xargs bat --diff
+}
+
+# Command to view the root of this git repo
+alias gitroot='git rev-parse --show-toplevel'
+
+# Command to view git logline
+alias gll='git logline'
+
+# }}}
 # GENERAL {{{
 
 # Use anaconda python and pip instead of any system-installed versions
@@ -341,19 +355,11 @@ alias tree='tree -N'
 # Do actual work here
 cd $CTERDAMHOME
 
-# Function to view git diff with bat
-batdiff() {
-    command git diff --name-only --diff-filter=d $@ | xargs bat --diff
-}
-
 # Use bat to view man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Use gruvbox theme for bat
 export BAT_THEME="gruvbox-dark"
-
-# Command to view the root of this git repo
-alias gitroot='git rev-parse --show-toplevel'
 
 # Solve issue on Ubuntu where bat is named batcat
 if [ ! "$(command -v bat)" ]; then
