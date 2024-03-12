@@ -243,6 +243,7 @@ set incsearch
 set hlsearch
 
 " case-insensitive only if search term is all smaller case. Otherwise sensitive
+set ignorecase
 set smartcase
 
 " <Leader>/ to clear highlight
