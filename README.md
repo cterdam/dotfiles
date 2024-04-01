@@ -185,7 +185,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install other UNIX tools:
 
   ```zsh
-  brew install bat git-delta less tree tldr shellcheck jq
+  brew install bat git-delta git-lfs less tree tldr shellcheck jq
   pip install vim-vint autopep8
   ```
 
