@@ -9,3 +9,6 @@
 [submodule "utility/profile"]
 	path = utility/profile
 	url = git@github.com:cterdam/profile.git
+[submodule "utility/resume"]
+	path = utility/resume
+	url = git@github.com:cterdam/resume.git
