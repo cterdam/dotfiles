@@ -343,6 +343,9 @@ alias ipy="ipython"
 # Alias for ls
 alias l="ls"
 
+# Clear thoroughly
+alias clear="clear && clear"
+
 # Load secrets
 source $secretfile
 
