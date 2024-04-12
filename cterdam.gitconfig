@@ -31,6 +31,7 @@
 
 [alias]
 	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    root = rev-parse --show-toplevel
 
 [credential]
 ; 	helper = !printf 'host=%s\\nprotocol=https\\n\\n' 'git-codecommit.us-east-1.amazonaws.com' | git credential-osxkeychain erase && aws codecommit credential-helper $@
