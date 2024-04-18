@@ -151,7 +151,7 @@ fi
 # {{{ SECRET
 
 # Locate secrets
-secretfile="$CTERDAMRC/utility/profile/shell/exec.sh"
+secretfile="$CTERDAMRC/utility/profile/shell/.exec.sh"
 
 # }}}
 # {{{ SSH CONFIG
