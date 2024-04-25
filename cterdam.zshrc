@@ -340,18 +340,6 @@ alias pip3="pip"
 alias py="python"
 alias ipy="ipython"
 
-# Alias for ls
-alias l="ls"
-
-# Automatically ls when changing directory
-function list_all() {
-  emulate -L zsh
-  ls
-}
-if [[ ${chpwd_functions[(r)list_all]} != "list_all" ]];then
-  chpwd_functions=(${chpwd_functions[@]} "list_all")
-fi
-
 # Clear thoroughly
 alias clear="clear && clear"
 
@@ -366,6 +354,18 @@ alias tree='tree -N'
 
 # Do actual work here
 cd $CTERDAMHOME
+
+# Alias for ls
+alias l="ls"
+
+# Automatically ls when changing directory
+function list_all() {
+  emulate -L zsh
+  ls
+}
+if [[ ${chpwd_functions[(r)list_all]} != "list_all" ]];then
+  chpwd_functions=(${chpwd_functions[@]} "list_all")
+fi
 
 # Use bat to view man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
