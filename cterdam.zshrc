@@ -481,6 +481,9 @@ fi
 # Add Maple to path
 addpath /Library/Frameworks/Maple.framework/Versions/Current/bin tail
 
+# Add flutter bin. Added by flutter installation
+export PATH="$PATH:/Users/joshlee/development/flutter/bin"
+
 # }}}
 # ANACONDA {{{
 
