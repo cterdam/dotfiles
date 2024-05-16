@@ -15,12 +15,6 @@
     "inlayHint.enable": false,
     "": "Do not insert fake floating text in my code about type info etc",
     "": "",
-    "java.project.referencedLibraries": [
-        "/Users/sterdam/cterdam/11642/qryeval/lucene-8.1.1/*.jar",
-        "/Users/sterdam/cterdam/11642/qryeval/QryEval"
-    ],
-    "": "Took 11642 Search Engines at CMUSCSLTI in Spring 2023",
-    "": "",
     "markdownlint.onChange": true,
     "markdownlint.onOpen": true,
     "markdownlint.onSave": true,
