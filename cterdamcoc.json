@@ -1,50 +1,54 @@
+// vim: ft=jsonc
+
 {
+
+    // Automatically format these filetypes when saving write
     "coc.preferences.formatOnSaveFiletypes": [
         "java",
         "json",
         "python"
     ],
-    "": "Automatically format these filetypes when saving write",
-    "": "",
+
+    // Open up a new tab upon following a tag to a new location
     "coc.preferences.jumpCommand": "tabe",
-    "": "Open up a new tab upon following a tag to a new location",
-    "": "",
+
+    // Display diagnostics on the current line and not just cursor location
     "diagnostic.checkCurrentLine": true,
-    "": "Display diagnostics on the current line and not just cursor location",
-    "": "",
+
+    // Do not insert fake floating text in my code about type info etc
     "inlayHint.enable": false,
-    "": "Do not insert fake floating text in my code about type info etc",
-    "": "",
+
+    // Automatically lint Markdown whenever
     "markdownlint.onChange": true,
     "markdownlint.onOpen": true,
     "markdownlint.onSave": true,
-    "": "Automatically lint Markdown whenever",
-    "": "",
+
+    // Use Google style for coc-pydocstring and not sphinx or numpy
     "pydocstring.formatter": "google",
-    "": "Use Google style for coc-pydocstring and not sphinx or numpy",
-    "": "",
+
+    // The whole file action just means adding docstring for each function
     "pydocstring.enableFileAction": false,
-    "": "The whole file action just means adding docstring for each function",
-    "": "",
+
+    // Using pylint for diagnostics so disabling pyright diagnostics
     "pyright.disableDiagnostics": true,
-    "": "Using pylint for diagnostics so disabling pyright diagnostics",
-    "": "",
+
+    // Use isort to sort imports, see python.sortImports.args for isort args
     "pyright.organizeimports.provider": "isort",
-    "": "Use isort to sort imports, see python.sortImports.args for isort args",
-    "": "",
+
+    // Use Google style for formatting with YAPF
     "python.formatting.provider": "yapf",
     "python.formatting.yapfArgs": "--style=google",
-    "": "Use Google style for formatting with YAPF",
-    "": "",
+
+    // Use pylint with .pylintrc to enforce Google Style. More tools in docs
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
-    "": "Use pylint with .pylintrc to enforce Google Style. More tools in docs",
-    "": "",
+
+    // Use Google style for sorting imports with isort
     "python.sortImports.args": [
         "--profile",
         "google"
     ],
-    "": "Use Google style for sorting imports with isort",
-    "": "",
-    "suggest.noselect": true
+
+    // Do not automatically select the first item on popup menu
+    "suggest.noselect": false
 }
