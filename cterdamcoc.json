@@ -50,5 +50,5 @@
     ],
 
     // Do not automatically select the first item on popup menu
-    "suggest.noselect": false
+    "suggest.noselect": true
 }
