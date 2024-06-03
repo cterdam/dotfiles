@@ -343,14 +343,14 @@ alias ipy="ipython"
 # Clear thoroughly
 alias clear="clear && clear"
 
+# Show Chinese characters; Do not show pycache
+alias tree="tree -N -I '__pycache__'"
+
 # Load secrets
 source $secretfile
 
 # Edit anything with vim
 export EDITOR="vim"
-
-# Show Chinese characters
-alias tree='tree -N'
 
 # Do actual work here
 cd $CTERDAMHOME
