@@ -9,6 +9,9 @@
         "python"
     ],
 
+    // Do not automatically select the first item on popup menu
+    "suggest.noselect": true,
+
     // Open up a new tab upon following a tag to a new location
     "coc.preferences.jumpCommand": "tabe",
 
@@ -29,26 +32,7 @@
     // The whole file action just means adding docstring for each function
     "pydocstring.enableFileAction": false,
 
-    // Using pylint for diagnostics so disabling pyright diagnostics
-    "pyright.disableDiagnostics": true,
+    // Use black for both formatting and organizing imports for Python
+    "python.formatting.provider": "black"
 
-    // Use isort to sort imports, see python.sortImports.args for isort args
-    "pyright.organizeimports.provider": "isort",
-
-    // Use Google style for formatting with YAPF
-    "python.formatting.provider": "yapf",
-    "python.formatting.yapfArgs": "--style=google",
-
-    // Use pylint with .pylintrc to enforce Google Style. More tools in docs
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-
-    // Use Google style for sorting imports with isort
-    "python.sortImports.args": [
-        "--profile",
-        "google"
-    ],
-
-    // Do not automatically select the first item on popup menu
-    "suggest.noselect": true
 }
