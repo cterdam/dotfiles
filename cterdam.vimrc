@@ -194,11 +194,11 @@ highlight LineNr ctermfg=darkgrey
 " }}}
 " WIDTH & WRAP {{{
 
-" Keep your line within 80 chars
-set colorcolumn=81
+" Keep your line within 88 chars
+set colorcolumn=89
 
-" Break lines longer than 80 chars.
-set textwidth=80
+" Break lines longer than 88 chars
+set textwidth=88
 
 " Do not horizontally extend a line past screen boundary
 set wrap
