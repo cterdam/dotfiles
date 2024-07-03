@@ -332,7 +332,7 @@ alias gll='git logline'
 # }}}
 # GENERAL {{{
 
-# Use anaconda python and pip instead of any system-installed versions
+# Use conda python and pip instead of any system-installed versions
 alias python3="python"
 alias pip3="pip"
 
@@ -485,16 +485,22 @@ addpath /Library/Frameworks/Maple.framework/Versions/Current/bin tail
 export PATH="$PATH:/Users/joshlee/development/flutter/bin"
 
 # }}}
-# ANACONDA {{{
+# CONDA {{{
 
 if [[ -d $HOME/'opt/anaconda3' ]]; then
     condahomeloc=$HOME/'opt/anaconda3'
 elif [[ -d '/opt/anaconda3' ]]; then
     condahomeloc='/opt/anaconda3'
-elif [[ -f /usr/local/bin/conda ]]; then
-    condahomeloc='/usr/local'
 elif [[ -d $HOME/anaconda3 ]]; then
     condahomeloc=$HOME/anaconda3
+elif [[ -d $HOME/'opt/miniconda3' ]]; then
+    condahomeloc=$HOME/'opt/miniconda3'
+elif [[ -d '/opt/miniconda3' ]]; then
+    condahomeloc='/opt/miniconda3'
+elif [[ -d $HOME/miniconda3 ]]; then
+    condahomeloc=$HOME/miniconda3
+elif [[ -f /usr/local/bin/conda ]]; then
+    condahomeloc='/usr/local'
 fi
 
 # >>> conda initialize >>>
