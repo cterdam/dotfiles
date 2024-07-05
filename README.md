@@ -111,6 +111,24 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     [TPM]: https://github.com/tmux-plugins/tpm
 
+- Install [Rime](https://rime.im/).
+
+  - Rime needs to be used with its [plum](https://github.com/rime/plum)
+    package manager, which is already incorporated as a submodule.
+
+  - Install all default Rime packages:
+
+    ```zsh
+    cd $HOME/cterdam/dotfiles/plum
+    bash rime-install :all
+    ```
+
+  - Then install the WU HAN Chinese and Cantonese Soeng-Ping packages:
+
+    ```zsh
+    bash rime-install yuxifongfei/hubehua MrCorn0-0/jyutsp
+    ```
+
 ### 4. Activate shell scripts
 
 - We have not dealt with `zshrc` in the new system yet, but the Anaconda and Oh
@@ -149,7 +167,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
       [ONSV]: https://github.com/OmniSharp/omnisharp-vim
       [COCEX]: https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 
-  - Deploy Rime engine.
+  - Deploy Rime engine. Log out and log back in.
 
 ### 5. Other Packages
 
@@ -186,26 +204,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   ```zsh
   brew install bat git-delta git-lfs less tree tldr shellcheck jq
-  pip install vim-vint autopep8
+  pip install vim-vint ipython black
   ```
-
-- Install [Rime](https://rime.im/).
-
-  - Rime needs to be used with its [plum](https://github.com/rime/plum)
-    package manager, which is already incorporated as a submodule.
-
-  - Install all default Rime packages:
-
-    ```zsh
-    cd $HOME/cterdam/dotfiles/plum
-    bash rime-install :all
-    ```
-
-  - Then install the WU HAN Chinese and Cantonese Soeng-Ping packages:
-
-    ```zsh
-    bash rime-install yuxifongfei/hubehua MrCorn0-0/jyutsp
-    ```
 
 #### Optional Packages
 
@@ -255,28 +255,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Select all files, and press `Command + Option + I`. Select MacVim in the
   "Open with" menu, and click on "Change All...".
-
-#### Adding new filetypes
-
-- Append the new filetype extension name, without the dot, as a new line into
-  `$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
-
-  - After inserting, sort all lines in the file. This can be done either in
-    vim by `:1,%sort`, or in the shell with `sort -o
-    $CTERDAMRC/fts/ftlist{,}`.
-
-- Then repopulate the `dummy` folder:
-
-  ```zsh
-  repopft $CTERDAMRC/fts/dummy $CTERDAMRC/fts/ftlist
-  ```
-
-  - It may simply create the needed new file(s), or print out other diagnostic
-    messages.  Follow them to fix the `dummy` folder and the `ftlist` file. If
-    things are complicated, just remove the `dummy` directory altogether, and
-    run the command again.
-
-- Then, follow instructions in the last section to register the new filetypes.
 
 ### 7. Profile
 
@@ -475,6 +453,31 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Troubleshooting
 
+### Adding new filetypes for MacVim
+
+- Append the new filetype extension name, without the dot, as a new line into
+  `$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
+
+  - After inserting, sort all lines in the file. This can be done either in
+    vim by `:1,%sort`, or in the shell with `sort -o
+    $CTERDAMRC/fts/ftlist{,}`.
+
+- Then repopulate the `dummy` folder:
+
+  ```zsh
+  repopft $CTERDAMRC/fts/dummy $CTERDAMRC/fts/ftlist
+  ```
+
+  - It may simply create the needed new file(s), or print out other diagnostic
+    messages. Follow them to fix the `dummy` folder and the `ftlist` file. If
+    things are complicated, just remove the `dummy` directory altogether, and
+    run the command again.
+
+- Then, follow instructions in this [section](#register-filetypes-to-open-with-macvim)
+  to register the new filetypes.
+
+### Other troubles
+
 - Anaconda cannot install.
 
   - If installation cannot start, change install to [for the current user
@@ -575,4 +578,3 @@ download everything:
 ```zsh
 git clone --recursive <project url>
 ```
-
