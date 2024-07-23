@@ -191,8 +191,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Deploy Rime engine. Log out and log back in.
 
-#### Misc
-
 - Install other UNIX tools:
 
   ```zsh
