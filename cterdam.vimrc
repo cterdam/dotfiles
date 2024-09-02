@@ -43,12 +43,12 @@ set pastetoggle=<C-q>
 set notimeout
 
 " Timeout immediately on key encodings
-" Arrow key, function key, and Meta- combo key encodings actually start with an
-" <Esc> sequence. Type <C-v> + key to find out the key encoding. This setting
-" makes sure an <Esc> input will not be interpreted as part of a larger
-" sequence and escapes Insert Mode instantly. `noesckeys` has a similar effect,
-" but disables arrow and function keys while in Insert Mode. The current
-" setting enables these keys, but still disables Meta mappings in Insert Mode!
+" Arrow key, function key, and Meta- combo key encodings actually start with an <Esc>
+" sequence. Type <C-v> + key in insert mode to find out the key encoding. This setting
+" makes sure an <Esc> input will not be interpreted as part of a larger sequence and
+" escapes Insert Mode instantly. `noesckeys` has a similar effect, but disables arrow
+" and function keys while in Insert Mode. The current setting enables these keys, but
+" still disables Meta mappings in Insert Mode!
 set ttimeout
 set ttimeoutlen=0
 
@@ -323,9 +323,9 @@ set swapfile
 " Update the swap file every 100 characters
 set updatecount=100
 
-" If for 100 miliseconds nothing is typed, write the swap file
+" If for this many miliseconds nothing is typed, write the swap file
 " This also governs such other update events as gitgutter update
-set updatetime=500
+set updatetime=1000
 
 " Ensure that swapdir exists
 if !isdirectory($HOME . "/.vim/swap")
