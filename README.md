@@ -68,13 +68,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     lacks many key features such as conceal, lua, perl, and python3. The version of vim
     on homebrew includes these features.
 
-  - Ensure ownership of vim and COC folders:
-
-    ```zsh
-    sudo chown -R `whoami` $HOME/.vim
-    sudo chown -R $(whoami) $HOME/.config
-    ```
-
   - Install [yarn](https://classic.yarnpkg.com/en/docs/install) with `sudo npm install
     --global yarn`.
 
@@ -91,6 +84,10 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Install [Rust](https://www.rust-lang.org/tools/install).
 
     - Use the command found on the website. Prepend `sudo` and run it.
+
+    - The installer might show some commands to run after installation. You can still
+      run them to avoid any surprises, but the `zshrc` is supposed to take care of
+      configuring the correct paths once activated.
 
     - And install [silicon](https://github.com/Aloxaf/silicon) with `brew install
       silicon`.
@@ -135,8 +132,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     - `Prefix` is the tmux prefix, by default `Ctrl+b`.
 
-  - Now run `sudo vim` and it will auto install all plugins, including COC plugins.
+  - Ensure ownership of vim and COC folders:
 
+    ```zsh
+    sudo chown -R `whoami` $HOME/.vim
+    sudo chown -R $(whoami) $HOME/.config
+    ```
+
+  - Now run `sudo vim` and it will auto install all plugins, including COC plugins.
 
 ### 5. Other Packages
 
