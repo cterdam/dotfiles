@@ -381,6 +381,9 @@ fi
 # Get current system name
 sysname() {
     case $(uname -a) in
+        *googler*)
+            echo "gLinx"
+            ;;
         *Ubuntu*)
             echo "Ubntu"
             ;;
