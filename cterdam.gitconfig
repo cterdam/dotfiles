@@ -1,10 +1,19 @@
 [user]
 	name = Josh Lee
     email = cterdam@google.com
+    signingkey = ~/.ssh/cterdam
 
 [url "git@github.com:"]
-    # Always use SSH when pushing to or pulling from GitHub
+    # Always use SSH when interacting with GitHub
     insteadOf = https://github.com/
+
+[commit]
+    # Always sign commits
+    gpgsign = true
+
+[gpg]
+    # Use SSH key to sign commits instead of GPG
+    format = ssh
 
 [core]
     pager = delta
