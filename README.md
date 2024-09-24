@@ -422,8 +422,8 @@ This section is a *summary* of native instructions from GitHub found [here][GHSS
   cat ~/.ssh/cterdam.pub | pbcopy
   ```
 
-  And add it to GitHub [here](https://github.com/settings/keys) as a new
-  *Authentication* key.
+  And add it to GitHub [here](https://github.com/settings/keys) both as an
+  Authentication key and as a Signing key.
 
 - Create the `~/.ssh/config` file, and insert this content:
 

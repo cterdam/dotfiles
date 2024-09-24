@@ -1,7 +1,7 @@
 [user]
 	name = Josh Lee
     email = cterdam@google.com
-    signingkey = ~/.ssh/cterdam
+    signingkey = ~/.ssh/cterdam.pub
 
 [url "git@github.com:"]
     # Always use SSH when interacting with GitHub
