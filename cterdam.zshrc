@@ -464,12 +464,16 @@ fi
 
 # Fix ruby versioning issues for Jekyll
 if [[ `sysname` == "macOS" ]]; then
+
+    # These commands are managed by the brew installation of chruby
+
     # Use chruby to manage alternative Ruby versions
     source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
     # Enable auto-switching of Rubies specified by .ruby-version files
     source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
     # Use ruby version 3.1.3 (for Jekyll for Github Pages)
     chruby ruby-3.1.3
+
 elif [[ `sysname` == "Ubntu" ]]; then
     export GEM_HOME="$HOME/gems"
     addpath $HOME/gems/bin tail
