@@ -1,6 +1,10 @@
 [user]
 	name = Josh Lee
-	email = me@llz.info
+    email = cterdam@google.com
+
+[url "git@github.com:"]
+    # Always use SSH when pushing to or pulling from GitHub
+    insteadOf = https://github.com/
 
 [core]
     pager = delta
@@ -9,7 +13,8 @@
     diffFilter = delta --color-only
 
 [delta]
-    navigate = true  # use n and N to move between diff sections
+    # Use n and N to move between diff sections
+    navigate = true
     line-numbers = true
     side-by-side = true
     hyperlinks = true
@@ -32,7 +37,3 @@
 [alias]
 	logline = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     root = rev-parse --show-toplevel
-
-[credential]
-; 	helper = !printf 'host=%s\\nprotocol=https\\n\\n' 'git-codecommit.us-east-1.amazonaws.com' | git credential-osxkeychain erase && aws codecommit credential-helper $@
-	UseHttpPath = true
