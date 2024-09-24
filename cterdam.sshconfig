@@ -1,17 +1,5 @@
 Host github.com
     IdentityFile ~/.ssh/cterdam
 
-Host emo
-    HostName emo.speech.cs.cmu.edu
-    User liangzel
-    IdentityFile ~/.ssh/cterdam
-
-Host altali
-    HostName altali.speech.cs.cmu.edu
-    User liangzel
-    IdentityFile ~/.ssh/cterdam
-
-Host babel
-    HostName babel.lti.cs.cmu.edu
-    User liangzel
-    IdentityFile ~/.ssh/cterdam
+Host cloudtop
+    HostName cterdam.c.googlers.com
