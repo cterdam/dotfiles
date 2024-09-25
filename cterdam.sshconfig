@@ -1,7 +1,3 @@
-Host github.com
-    IdentityFile ~/.ssh/cterdam
-    IdentitiesOnly yes
-
 Host cloudtop
     HostName cterdam.c.googlers.com
     ForwardAgent yes
