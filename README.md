@@ -190,9 +190,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install other UNIX tools:
 
   ```zsh
-  brew install bat git-delta git-lfs less tree tldr shellcheck jq
+  brew install bat git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace
   pip install vim-vint ipython black
   ```
+
+  - `reattach-to-user-namespace` is needed for the `tmux-yank` plugin.
 
 #### Optional Packages
 
