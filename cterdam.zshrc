@@ -177,10 +177,14 @@ rc () {
             cd $CTERDAMRC
             ;;
         -h)
-            echo "Available configs: vi(m), coc, git, zsh, tmux, rime, readme, server, secret, ssh"
+            echo "Available configs: vi(m), coc, exe, git, zsh, tmux, rime, readme, server, secret, ssh"
             ;;
         coc)
             $EDITOR $cterdamcocsettings
+            ;;
+        exe)
+            echo "Entering $CTERDAMEXE"
+            cd $CTERDAMEXE
             ;;
         git)
             $EDITOR $cterdamgitconfig
@@ -373,7 +377,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 # Use gruvbox theme for bat
 export BAT_THEME="gruvbox-dark"
 
-# Solve issue on Ubuntu where bat is named batcat
+# Fix issue where bat goes by batcat on Debian / Ubuntu
 if [ ! "$(command -v bat)" ]; then
     alias bat='batcat'
 fi
@@ -397,6 +401,9 @@ sysname() {
             echo "admin"
     esac
 }
+
+# Add this device key to ssh-agent so it can be forwarded to remotes
+ssh-add ~/.ssh/cterdam &> /dev/null
 
 # }}}
 # PATH {{{
@@ -541,18 +548,22 @@ do
     fi
 done
 
-# Fix issue where bat goes by batcat on Ubuntu
-batexe=$CTERDAMBIN/bat
-if [[ `sysname` == "Ubuntu" && ! -f $batexe ]]; then
-    ln -s `which batcat` $batexe
-fi
-
 # }}}
 # TMUX {{{
 
+# Pick correct tmux command name
+if [ $(sysname) = "gLinx" ]; then
+    # Use tmx2 as tmux command name on gLinux
+    tmuxname=tmx2
+    # Use tmux completion for tmx2
+    compdef tmx2=tmux
+else
+    tmuxname=tmux
+fi
+
 # Start tmux session if not running
 if [[ -z "$TMUX" ]]; then
-    tmux attach -t $(sysname) || tmux new -s $(sysname)
+    $tmuxname new-session -A -s $(sysname)
 fi
 
 # }}}
