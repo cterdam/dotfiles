@@ -1588,3 +1588,12 @@ let g:context_join_regex = '^\W*$'
 map <Leader>n :ContextToggle<CR>
 
 " }}}
+" {{{ GOOGLE
+
+" " Source Google vimrc. See go/vim
+let googlevimrcloc=expand("/usr/share/vim/google/google.vim")
+if filereadable(googlevimrcloc)
+    execute 'source' googlevimrcloc
+endif
+
+" }}}
