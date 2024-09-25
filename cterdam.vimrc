@@ -493,13 +493,13 @@ nnoremap j ddp
 nnoremap k ddkkp
 
 " }}}
-" RUSSIAN {{{
+" CYRILLIC {{{
 
-" Enable typing normal mode commands with a Russian keyboard
+" Enable typing normal mode commands on a Cyrillic keyboard
 " some keys are still missing, for example <Leader>
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz,хъжэбю;[]\;'\\,\\.,ХЪЁЖЭБЮ;{}\|\:\"<>
 
-" Enable typing some :commands on a Russian keyboard
+" Enable typing some :commands
 cnorea ц w
 cnorea й q
 cnorea цй wq
