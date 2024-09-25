@@ -1,0 +1,10 @@
+#!/bin/bash
+
+tmux rename-window cloudtop
+
+# Connect to the tmux session already running on the server.
+# If there is no tmux session, connection will fail.
+# Therefore, we must close any connection by <CR>~. instad of by manually
+# exiting all sessions.
+ssh cloudtop -t -- /bin/bash -c "gcertstatus -nocheck_ssh -check_remaining=1h || gcert; tmx2 new-session -A -s gLinx"
+# ssh cloudtop -t -- /bin/bash -c "gcertstatus -nocheck_ssh -check_remaining=1h || gcert"
