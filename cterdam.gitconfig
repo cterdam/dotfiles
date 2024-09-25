@@ -1,7 +1,6 @@
 [user]
 	name = Josh Lee
     email = cterdam@google.com
-    signingkey = ~/.ssh/cterdam.pub
 
 [url "git@github.com:"]
     # Always use SSH when interacting with GitHub
@@ -14,6 +13,11 @@
 [gpg]
     # Use SSH key to sign commits instead of GPG
     format = ssh
+
+[gpg "ssh"]
+    # Without specifying a fixed user.signingkey, this finds a key with certain email
+    # address from ssh-agent for signing. This email needs to stay in sync with GitHub.
+    defaultKeyCommand = sh -c 'ssh-add -L | grep "me@llz.info"'
 
 [core]
     pager = delta
