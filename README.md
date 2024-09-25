@@ -35,15 +35,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Oh My Zsh](https://ohmyz.sh/).
 
-  - After Oh My Zsh is installed and launched, install custom ZSH theme and plugins:
-
-    ```zsh
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/conda
-    ```
+  - After Oh My Zsh is installed and launched, install [ZSH theme and
+    plugins](#zsh-theme-and-plugins).
 
 ### 2. Development Environment
 
@@ -217,7 +210,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     - This installs commands `csc` and `mcs` to compile single C# files, as well as
       `mono` to run the compiled executable.
-  
+
 ### 6. Macvim
 
 - To conveniently open files with vim from Finder, after finishing the above
@@ -245,54 +238,69 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Drag the `utility` folder to the macOS Dock.
 
-## Installing on a Linux server without sudo access
+## Installing on a Linux remote
 
-- Get on the server. Configure SSH connection from local machines:
+### Remote access
 
-  ```zsh
-  vim ~/.ssh/authorized_keys
-  ```
+- To use an SSH key to connect to remote:
 
-  - Paste the public key of any connecting device into this file. Comment lines can
-    start with `#`.
+  - On the server, insert local public keys into this file. Comment lines can start with
+    `#`.
 
-  - On local machines, make utilities for connecting to the server as well. This
-    includes registering an entry in  `~/.ssh/config` and making an executable in
-    `$CTERDAMRC/exe`.
+    ```zsh
+    vim ~/.ssh/authorized_keys
+    ```
 
-- Get back on the server. Change the default shell to `zsh`:
+  - Locally, register an entry in `~/.ssh/config`.
+
+    - Use `ForwardAgent yes` so the remote can use the local's ssh-agent for things like
+      GitHub, without needing its separate key.
+
+  - Optionally, make a local executable for connection in `$CTERDAMRC/exe`.
+
+- Optionally, use X11 to forward clipboard content from remote to local:
+
+  - Ensure that remote `/etc/ssh/sshd_config` contains this line:
+
+    ```zsh
+    X11Forwarding yes
+    ```
+
+  - Ensure `xauth` is installed on server.
+
+  - If connecting through local macOS, ensure that local connections are made from
+    XQuartz, and that `$DISPLAY` is set.
+
+  - Either use `ssh -Y -C` each session, or add these to local `ssh` config:
+
+    ```zsh
+    ForwardX11 yes
+    ForwardX11Timeout 0
+    Compression yes
+    ```
+
+### Environment setup
+
+- Change the default shell to `zsh`:
 
   ```zsh
   chsh -s $(which zsh)
   ```
 
-- Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for this
-  device.
-
-- Now clone this repo over SSH and destroy the dummy SSH config created in the previous
-  step:
+- Clone this repo over SSH:
 
   ```zsh
   git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
-  rm ~/.ssh/config
   ```
-
 
 - Install [Oh My Zsh](https://ohmyz.sh/).
 
-  - After Oh My Zsh is installed and launched, install custom ZSH theme and plugins:
+  - After Oh My Zsh is installed and launched, install [ZSH theme and
+    plugins](#zsh-theme-and-plugins).
 
-    ```zsh
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-    git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    ```
+- Install [Conda](https://docs.anaconda.com/miniconda/miniconda-install/).
 
-- Install Anaconda.
-
-  - Retrieve the [Anaconda installer](https://www.anaconda.com/download) with `wget` and
-    run it with the default shell.
+  - Retrieve the installer with `wget` and run it with the default shell.
 
   - When the installer finishes, inspect the paragraph it inserts into the default shell
     config. Update `cterdam.zshrc` with that conda location.
@@ -301,17 +309,15 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   [TPM]: https://github.com/tmux-plugins/tpm
 
-  - The install instructions should just amount to cloning the TPM source code into the
-    tmux plugin location:
+  - The install instruction should just amount to cloning a repo into this location:
 
     ```zsh
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     ```
 
-  - The next step is to load TPM as a plugin in `~/.tmux.conf`, but we don't need to
-    explicitly do that since this is already covered in our script.
+  - No need to manually change `~/.tmux.conf` because this is covered in shell scripts.
 
-- Now activate the shell scripts:
+- Now activate shell scripts:
 
   - Delete old `zshrc`:
 
@@ -336,7 +342,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     conda install tmux nodejs rust go
     npm install yarn bash-language-server
     conda install -c conda-forge vim bat git-delta tree tldr universal-ctags
-    pip install vim-vint autopep8
+    pip install vim-vint black
     ```
 
 ## Installing on a new Deep Learning EC2 instance
@@ -416,7 +422,7 @@ This section is a *summary* of native instructions from GitHub found [here][GHSS
   ln -s ~/.ssh/<KEY_NAME>.pub ~/.ssh/cterdam.pub
   ```
 
-- Copy the contents of `cterdam.pub` 
+- Copy the contents of `cterdam.pub`
 
   ```zsh
   cat ~/.ssh/cterdam.pub | pbcopy
@@ -431,6 +437,16 @@ This section is a *summary* of native instructions from GitHub found [here][GHSS
   Host github.com
       IdentityFile ~/.ssh/cterdam
   ```
+
+## Zsh theme and plugins
+
+```zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone https://github.com/esc/conda-zsh-completion ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/conda-zsh-completion
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/conda
+```
 
 ## Troubleshooting
 
@@ -483,7 +499,7 @@ This section is a *summary* of native instructions from GitHub found [here][GHSS
   - This happens when the language server is started on the same directory multiple
     times. Just clear cache with `:CocCommand java.clean.workspace`.
 
-- A different Java version is needed. 
+- A different Java version is needed.
 
   - Any Java LTS version should work just fine, but if for any reason a lower version of
     Java is needed (e.g. Search Engines course), then the `jdt` for `coc-java` might not
