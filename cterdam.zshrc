@@ -362,15 +362,6 @@ cd $CTERDAMHOME
 # Alias for ls
 alias l="ls"
 
-# Automatically ls when changing directory
-function list_all() {
-  emulate -L zsh
-  ls
-}
-if [[ ${chpwd_functions[(r)list_all]} != "list_all" ]];then
-  chpwd_functions=(${chpwd_functions[@]} "list_all")
-fi
-
 # Use bat to view man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
@@ -404,6 +395,28 @@ sysname() {
 
 # Add this device key to ssh-agent so it can be forwarded to remotes
 ssh-add ~/.ssh/cterdam &> /dev/null
+
+# }}}
+# {{{ AUTOMATIC
+
+# Automatically run function when changing directory
+function change_dir_auto() {
+
+    # Run in zsh-compatible local mode
+    emulate -L zsh
+
+    # Auto ls
+    ls
+
+    # If in tmux, force redraw status line
+    if [[ -n "$TMUX" ]]; then
+        tmux refresh-client -S
+    fi
+
+}
+if [[ ${chpwd_functions[(r)list_all]} != "change_dir_auto" ]];then
+  chpwd_functions=(${chpwd_functions[@]} "change_dir_auto")
+fi
 
 # }}}
 # PATH {{{
@@ -565,5 +578,9 @@ fi
 if [[ -z "$TMUX" ]]; then
     $tmuxname new-session -A -s $(sysname)
 fi
+
+# Make tmux refresh every second
+# The same setting in tmux.conf doesn't seem to work
+tmux set-option -g status-interval 1
 
 # }}}
