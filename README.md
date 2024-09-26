@@ -191,6 +191,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   ```zsh
   brew install bat git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace
+  brew install xquartz --cask
   pip install vim-vint ipython black
   ```
 
