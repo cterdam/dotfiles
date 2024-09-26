@@ -587,7 +587,10 @@ tmux set-option -g status-interval 1
 # }}}
 # GOOGLE {{{
 
-# Use hgd
-source /etc/bash_completion.d/hgd
+if [ $(sysname) = "gLinx" ]; then
+
+    # Use hgd
+    source /etc/bash_completion.d/hgd
+fi
 
 # }}}
