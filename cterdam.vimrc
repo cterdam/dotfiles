@@ -3,7 +3,7 @@
 " cterdam.vimrc: cterdam's personal vimrc file.
 " See https://github.com/cterdam/dotfiles
 
-" BUILTIN --------------------------------------------------------------------
+" BUILTIN -----------------------------------------------------------------------------
 
 " GENERAL {{{
 
@@ -508,7 +508,7 @@ cnorea йф qa
 
 " }}}
 
-" PLUGINS --------------------------------------------------------------------
+" PLUGINS -----------------------------------------------------------------------------
 
 " VIM-PLUG {{{
 
@@ -680,6 +680,7 @@ Plug 'liuchengxu/vista.vim'
 
 " Show context of current code on top. Toggle with `<Leader>n`
 Plug 'wellle/context.vim'
+
 " }}}
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
@@ -1590,22 +1591,33 @@ map <Leader>n :ContextToggle<CR>
 " }}}
 " {{{ GOOGLE
 
-" If opening a file on Piper FS, enter 'Google mode'
+" If opening a file on CitC, enter 'Google mode'
 let current_file = expand('%:p')
 if current_file =~? '^/google/src/cloud'
 
-    " Google vimrc. See go/vim
+    " Load Google Vimrc ---------------------------------------------------------------
+
+    " See go/vim
     let googlevimrcloc=expand("/usr/share/vim/google/google.vim")
-    " Load Google vimrc
     execute 'source' googlevimrcloc
 
-    " Load Google-specific plugins
+    " Load internal plugins -----------------------------------------------------------
+
     Glug critique
     Glug codefmt
     Glug codefmt-google
-    Glug youcompleteme-google
 
-    " Use Google tools for autoformatting
+    " Load external plugins -----------------------------------------------------------
+
+    call plug#begin('~/.vim/plugged')
+
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+    call plug#end()
+
+    " Set up Google autoformatting tools ----------------------------------------------
     augroup UseGoogleTools
 
         autocmd!
@@ -1632,36 +1644,64 @@ if current_file =~? '^/google/src/cloud'
 
     augroup END
 
-    " Caveat exists for YCM for Python.
-    " See https://g3doc.corp.google.com/third_party/YouCompleteMe/g3doc/google.md#python
-    let g:ycm_goto_buffer_command = "split"
+    " Set up other syntax tools -------------------------------------------------------
 
-    " Syntax and linting for Python in Google environment
-    augroup GooglePythonGoodies
+    " Register Cider LSP with Vim-Lsp
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'CiderLSP',
+        \ 'cmd': {server_info->[
+        \   '/google/bin/releases/cider/ciderlsp/ciderlsp',
+        \   '--tooltag=vim-lsp',
+        \   '--noforward_sync_responses',
+        \ ]},
+        \ 'allowlist': [
+        \   'c', 'cpp', 'java', 'kotlin', 'proto', 'textpb', 'go', 'python'
+        \ ],
+        \})
+
+    " Vim-lsp settings
+
+    " Send async completion requests
+    let g:lsp_async_completion = 1
+    " Do not lint
+    let g:lsp_diagnostics_enabled = 0
+    " Automatically show completion options
+    let g:asyncomplete_auto_popup = 1
+    " Do not highlight references to current symbol
+    let g:lsp_document_highlight_enabled = 0
+
+    " Utility to use GPylint
+    " https://g3doc.corp.google.com/devtools/gpylint/g3doc/editor_integration.md#vim
+    function! s:GPylint()
+        let l:lint = '/usr/bin/gpylint --mode=style '
+                    \. '--msg-template="{path}:{line}: [{msg_id}({symbol})] {msg}"'
+        cexpr system(l:lint . ' ' . expand('%'))
+    endfunction
+
+    " Syntax and linting in Google environment
+    augroup GoogleGoodies
 
         " Clear previous autocmds
         autocmd!
 
-        " Define YCM hotkeys for Python
-        autocmd FileType python nmap <silent> gd :tab YcmCompleter GoTo<CR>
-        autocmd FileType python nmap <silent> gr :tab YcmCompleter GoToReferences<CR>
-        autocmd FileType python nmap <silent> <S-k> :YcmCompleter GetDoc<CR>
-        autocmd FileType python nmap <silent> <C-k> :YcmCompleter GetType<CR>
-        autocmd FileType python nmap <leader>r :YcmCompleter RefactorRename 
+        " LSP hotkeys
+        autocmd FileType python nnoremap <buffer> <C-k> :LspHover<CR>
+        autocmd FileType python nnoremap <buffer> <leader>o ::LspDocumentSymbol<CR>
+        autocmd FileType python nnoremap <buffer> <leader>r :LspRename<CR>
+        autocmd FileType python nnoremap <buffer> gd :LspDefinition<CR>
+        autocmd FileType python nnoremap <buffer> gp :LspPeekDefinition<CR>
+        autocmd FileType python nnoremap <buffer> gr :LspReferences<CR>
+        autocmd FileType python noremap <buffer> <expr><C-f> lsp#scroll(+4)
+        autocmd FileType python noremap <buffer> <expr><C-b> lsp#scroll(-4)
 
         " Use `:Lint` or save file to run gpylint in quickfix list
-        " https://g3doc.corp.google.com/devtools/gpylint/g3doc/editor_integration.md#vim
-        function! s:GPylint()
-            let l:lint = '/usr/bin/gpylint --mode=style '
-                        \. '--msg-template="{path}:{line}: [{msg_id}({symbol})] {msg}"'
-            cexpr system(l:lint . ' ' . expand('%'))
-        endfunction
         autocmd FileType python command! Lint :call s:GPylint()
         autocmd FileType python autocmd BufWritePost <buffer> call s:GPylint()
 
     augroup end
 
-    " Add blame functionality for Piper (see go/VimPerforce)
+    " Add blame functionality for Piper -----------------------------------------------
+    " see go/VimPerforce
     function! G4Blame(...)
 
         " Grab the filename from the argument, use expand() to expand '%'.
