@@ -1,3 +1,19 @@
 Host cloudtop
+
     HostName cterdam.c.googlers.com
+
+    # Use local SSH key on remote server
     ForwardAgent yes
+
+    # Trust X11 forwarding from remote. Display remote graphical apps locally
+    ForwardX11Trusted yes
+    ForwardX11 yes
+    ForwardX11Timeout 0
+
+    # Improve performance on slow connections
+    Compression yes
+
+    # Prefer to reuse existent connections
+    ControlMaster auto
+    ControlPath ~/.ssh/ctrl-%C
+    ControlPersist yes
