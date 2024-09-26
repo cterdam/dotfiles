@@ -1599,13 +1599,17 @@ if current_file =~? '^/google/src/cloud'
     " Load Google vimrc
     execute 'source' googlevimrcloc
 
-    " Load plugins
+    " Load Google-specific plugins
     Glug critique
     Glug codefmt
     Glug codefmt-google
+    Glug youcompleteme-google
 
     " Use Google tools for autoformatting
     augroup UseGoogleTools
+
+        autocmd!
+
         autocmd FileType borg,gcl,patchpanel AutoFormatBuffer gclfmt
         autocmd FileType bzl AutoFormatBuffer buildifier
         autocmd FileType c,cpp AutoFormatBuffer clang-format
@@ -1622,14 +1626,44 @@ if current_file =~? '^/google/src/cloud'
         autocmd FileType soy AutoFormatBuffer soyfmt
         autocmd FileType sql AutoFormatBuffer format_sql
         autocmd FileType textpb AutoFormatBuffer text-proto-format
+
         " Disable COC for these file types
         autocmd FileType c,cpp,go,java,html,json,markdown,python let b:coc_enabled = 0
+
     augroup END
 
-" PIPER {{{
+    " Caveat exists for YCM for Python.
+    " See https://g3doc.corp.google.com/third_party/YouCompleteMe/g3doc/google.md#python
+    let g:ycm_goto_buffer_command = "split"
+
+    " Syntax and linting for Python in Google environment
+    augroup GooglePythonGoodies
+
+        " Clear previous autocmds
+        autocmd!
+
+        " Define YCM hotkeys for Python
+        autocmd FileType python nmap <silent> gd :tab YcmCompleter GoTo<CR>
+        autocmd FileType python nmap <silent> gr :tab YcmCompleter GoToReferences<CR>
+        autocmd FileType python nmap <silent> <S-k> :YcmCompleter GetDoc<CR>
+        autocmd FileType python nmap <silent> <C-k> :YcmCompleter GetType<CR>
+        autocmd FileType python nmap <leader>r :YcmCompleter RefactorRename 
+
+        " Use `:Lint` or save file to run gpylint in quickfix list
+        " https://g3doc.corp.google.com/devtools/gpylint/g3doc/editor_integration.md#vim
+        function! s:GPylint()
+            let l:lint = '/usr/bin/gpylint --mode=style '
+                        \. '--msg-template="{path}:{line}: [{msg_id}({symbol})] {msg}"'
+            cexpr system(l:lint . ' ' . expand('%'))
+        endfunction
+        autocmd FileType python command! Lint :call s:GPylint()
+        autocmd FileType python autocmd BufWritePost <buffer> call s:GPylint()
+
+    augroup end
 
     " Add blame functionality for Piper (see go/VimPerforce)
     function! G4Blame(...)
+
         " Grab the filename from the argument, use expand() to expand '%'.
         if a:0 > 0
             let file = expand(a:1)
@@ -1658,16 +1692,14 @@ if current_file =~? '^/google/src/cloud'
         endif
         " Get the non-active pane scrolled to the same relative offset.
         syncbind
+
     endfunction
     com! -nargs=? -complete=file Blame :call G4Blame(<f-args>)
-
-" }}}
 
 endif
 
 " Other TODO:
 " - Blaze plugin
-" - YCM plugin
-" - Hotkeys for Blaze, Fig, YCM, Critique, and Blame functions
+" - Hotkeys for Blaze, Fig, Critique, and Blame functions
 
 " }}}
