@@ -1590,10 +1590,84 @@ map <Leader>n :ContextToggle<CR>
 " }}}
 " {{{ GOOGLE
 
-" " Source Google vimrc. See go/vim
-let googlevimrcloc=expand("/usr/share/vim/google/google.vim")
-if filereadable(googlevimrcloc)
+" If opening a file on Piper FS, enter 'Google mode'
+let current_file = expand('%:p')
+if current_file =~? '^/google/src/cloud'
+
+    " Google vimrc. See go/vim
+    let googlevimrcloc=expand("/usr/share/vim/google/google.vim")
+    " Load Google vimrc
     execute 'source' googlevimrcloc
+
+    " Load plugins
+    Glug critique
+    Glug codefmt
+    Glug codefmt-google
+
+    " Use Google tools for autoformatting
+    augroup UseGoogleTools
+        autocmd FileType borg,gcl,patchpanel AutoFormatBuffer gclfmt
+        autocmd FileType bzl AutoFormatBuffer buildifier
+        autocmd FileType c,cpp AutoFormatBuffer clang-format
+        autocmd FileType dart AutoFormatBuffer dartfmt
+        autocmd FileType go AutoFormatBuffer gofmt
+        autocmd FileType java AutoFormatBuffer google-java-format
+        autocmd FileType javascript,typescript,typescriptreact AutoFormatBuffer google-prettier
+        autocmd FileType javascriptreact,css,scss,html,json AutoFormatBuffer google-prettier
+        autocmd FileType jslayout AutoFormatBuffer jslfmt
+        autocmd FileType markdown AutoFormatBuffer mdformat
+        autocmd FileType ncl AutoFormatBuffer nclfmt
+        autocmd FileType proto AutoFormatBuffer protofmt
+        autocmd FileType python,piccolo AutoFormatBuffer pyformat
+        autocmd FileType soy AutoFormatBuffer soyfmt
+        autocmd FileType sql AutoFormatBuffer format_sql
+        autocmd FileType textpb AutoFormatBuffer text-proto-format
+        " Disable COC for these file types
+        autocmd FileType c,cpp,go,java,html,json,markdown,python let b:coc_enabled = 0
+    augroup END
+
+" PIPER {{{
+
+    " Add blame functionality for Piper (see go/VimPerforce)
+    function! G4Blame(...)
+        " Grab the filename from the argument, use expand() to expand '%'.
+        if a:0 > 0
+            let file = expand(a:1)
+        else
+            let file = expand('%')
+        endif
+        " Lock scrolling in right pane
+        setl scb
+        " Create left pane
+        vnew
+        " It's 37 columns wide
+        vert res 37
+        " Get the output, split it on newline and keep empty lines, skip the first 2
+        " lines because they're headers we don't need, and put it in starting on line
+        " 1 of the left pane
+        call setline(1, split(system('g4 blame ' . file), '\n', 1)[2:])
+        " Lock scrolling in left pane, turn off word wrap, set the buffer as
+        " not-modified, remove any listchars highlighting (common in google code), set
+        " it readonly (to make modifications slightly more annoying).
+        setl scb nowrap nomod nolist ro
+        " Move back to the right pane (not sure if there's a better way to do this?)
+        exe "normal \<c-w>\<right>"
+        " if a file was specified, open it
+        if a:0 > 0
+            execute "e ". file
+        endif
+        " Get the non-active pane scrolled to the same relative offset.
+        syncbind
+    endfunction
+    com! -nargs=? -complete=file Blame :call G4Blame(<f-args>)
+
+" }}}
+
 endif
+
+" Other TODO:
+" - Blaze plugin
+" - YCM plugin
+" - Hotkeys for Blaze, Fig, YCM, Critique, and Blame functions
 
 " }}}
