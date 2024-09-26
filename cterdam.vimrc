@@ -1665,6 +1665,7 @@ if current_file =~? '^/google/src/cloud'
     let g:lsp_async_completion = 1
     " Do not lint
     let g:lsp_diagnostics_enabled = 0
+    let g:lsp_signs_enabled = 0
     " Automatically show completion options
     let g:asyncomplete_auto_popup = 1
     " Do not highlight references to current symbol
