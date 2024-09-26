@@ -363,15 +363,10 @@ cd $CTERDAMHOME
 alias l="ls"
 
 # Use bat to view man pages
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER="bat -l man -p'"
 
 # Use gruvbox theme for bat
 export BAT_THEME="gruvbox-dark"
-
-# Fix issue where bat goes by batcat on Debian / Ubuntu
-if [ ! "$(command -v bat)" ]; then
-    alias bat='batcat'
-fi
 
 # Get current system name
 sysname() {
@@ -561,6 +556,12 @@ do
     fi
 done
 
+# Fix issue where bat goes by batcat on some Linux systems
+batexe=$CTERDAMBIN/bat
+if [[ ! "$(command -v bat)" && "$(command -v batcat)" ]]; then
+    ln -s `which batcat` $batexe
+fi
+
 # }}}
 # TMUX {{{
 
@@ -582,5 +583,11 @@ fi
 # Make tmux refresh every second
 # The same setting in tmux.conf doesn't seem to work
 tmux set-option -g status-interval 1
+
+# }}}
+# GOOGLE {{{
+
+# Use hgd
+source /etc/bash_completion.d/hgd
 
 # }}}
