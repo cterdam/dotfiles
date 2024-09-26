@@ -1687,13 +1687,13 @@ if current_file =~? '^/google/src/cloud'
 
         " LSP hotkeys
         autocmd FileType python nnoremap <buffer> <C-k> :LspHover<CR>
-        autocmd FileType python nnoremap <buffer> <leader>o ::LspDocumentSymbol<CR>
-        autocmd FileType python nnoremap <buffer> <leader>r :LspRename<CR>
-        autocmd FileType python nnoremap <buffer> gd :LspDefinition<CR>
-        autocmd FileType python nnoremap <buffer> gp :LspPeekDefinition<CR>
-        autocmd FileType python nnoremap <buffer> gr :LspReferences<CR>
+        autocmd FileType python nmap <buffer> <S-k> :tab LspPeekDefinition<CR>
+        autocmd FileType python nmap <buffer> gd :tab LspDefinition<CR>
+        autocmd FileType python nmap <buffer> gr :tab LspReferences<CR>
         autocmd FileType python noremap <buffer> <expr><C-f> lsp#scroll(+4)
         autocmd FileType python noremap <buffer> <expr><C-b> lsp#scroll(-4)
+        autocmd FileType python nnoremap <buffer> <leader>o ::LspDocumentSymbol<CR>
+        autocmd FileType python nnoremap <buffer> <leader>r :LspRename<CR>
 
         " Use `:Lint` or save file to run gpylint in quickfix list
         autocmd FileType python command! Lint :call s:GPylint()
