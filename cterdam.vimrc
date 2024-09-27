@@ -1595,6 +1595,9 @@ map <Leader>n :ContextToggle<CR>
 let current_file = expand('%:p')
 if current_file =~? '^/google/src/cloud'
 
+    " Google style guide requires max line len of 80 chars
+    set colorcolumn=81
+
     " Load Google Vimrc ---------------------------------------------------------------
 
     " See go/vim
