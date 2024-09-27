@@ -591,6 +591,12 @@ if [ $(sysname) = "gLinx" ]; then
 
     # Use hgd
     source /etc/bash_completion.d/hgd
+
+    # Load GDM common bashrc
+    if [ -r /google/data/ro/teams/deepmind-eng/config/bashrc ] ; then
+        source /google/data/ro/teams/deepmind-eng/config/bashrc
+    fi
+
 fi
 
 # }}}
