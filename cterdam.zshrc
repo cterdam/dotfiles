@@ -409,8 +409,8 @@ function change_dir_auto() {
     fi
 
 }
-if [[ ${chpwd_functions[(r)list_all]} != "change_dir_auto" ]];then
-  chpwd_functions=(${chpwd_functions[@]} "change_dir_auto")
+if [[ ${chpwd_functions[(r)change_dir_auto]} != "change_dir_auto" ]]; then
+  chpwd_functions+=("change_dir_auto")
 fi
 
 # }}}
