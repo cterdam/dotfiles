@@ -363,7 +363,7 @@ cd $CTERDAMHOME
 alias l="ls"
 
 # Use bat to view man pages
-export MANPAGER="bat -l man -p'"
+export MANPAGER="bat -l man -p"
 
 # Use gruvbox theme for bat
 export BAT_THEME="gruvbox-dark"
