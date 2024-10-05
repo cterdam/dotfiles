@@ -819,8 +819,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " `Ctrl+k` to show documentation in preview window
-nnoremap <silent> <C-k> :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -830,23 +828,24 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
+nnoremap <silent> <C-k> :call <SID>show_documentation()<CR>
 
 " Remap <C-f> and <C-b> to scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f>
-              \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b>
-              \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f>
+  nnoremap <silent><nowait><expr> <C-d>
+              \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+  nnoremap <silent><nowait><expr> <C-u>
+              \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+  inoremap <silent><nowait><expr> <C-d>
               \ coc#float#has_scroll() ?
               \ "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b>
+  inoremap <silent><nowait><expr> <C-u>
               \ coc#float#has_scroll() ?
               \ "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f>
-              \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b>
-              \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  vnoremap <silent><nowait><expr> <C-d>
+              \ coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+  vnoremap <silent><nowait><expr> <C-u>
+              \ coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
 endif
 
 " }}}
@@ -1693,8 +1692,8 @@ if current_file =~? '^/google/src/cloud'
         autocmd FileType python nmap <buffer> <S-k> :tab LspPeekDefinition<CR>
         autocmd FileType python nmap <buffer> gd :tab LspDefinition<CR>
         autocmd FileType python nmap <buffer> gr :tab LspReferences<CR>
-        autocmd FileType python noremap <buffer> <expr><C-f> lsp#scroll(+4)
-        autocmd FileType python noremap <buffer> <expr><C-b> lsp#scroll(-4)
+        autocmd FileType python noremap <buffer> <expr><C-d> lsp#scroll(+4)
+        autocmd FileType python noremap <buffer> <expr><C-u> lsp#scroll(-4)
         autocmd FileType python nnoremap <buffer> <leader>o ::LspDocumentSymbol<CR>
         autocmd FileType python nnoremap <buffer> <leader>r :LspRename<CR>
 
