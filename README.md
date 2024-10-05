@@ -48,6 +48,14 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Node.js](https://nodejs.org/en/download/prebuilt-installer).
 
+- Install [Rust](https://www.rust-lang.org/tools/install).
+
+  - Use the command found on the website. Prepend `sudo` and run it.
+
+  - The installer might show some commands to run after installation. You can still
+    run them to avoid any surprises, but the `zshrc` is supposed to take care of
+    configuring the correct paths once activated.
+
 ### 3. Practical Tools
 
 - Install [homebrew](https://brew.sh/).
@@ -74,20 +82,17 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     - This is for [COC-sh](https://github.com/josa42/coc-sh).
 
-  - Install [Rust](https://www.rust-lang.org/tools/install).
-
-    - Use the command found on the website. Prepend `sudo` and run it.
-
-    - The installer might show some commands to run after installation. You can still
-      run them to avoid any surprises, but the `zshrc` is supposed to take care of
-      configuring the correct paths once activated.
-
-    - And install [silicon](https://github.com/Aloxaf/silicon) with `brew install
-      silicon`.
+  - Install [silicon](https://github.com/Aloxaf/silicon) with `brew install silicon`.
 
     - This is for [vim-silicon](https://github.com/segeljakt/vim-silicon).
+  
+  - Install [code-minimap][CODEMINIMAP] with `cargo install --locked code-minimap`
 
-  - Install [Universal Ctags][UCTAGS] with `brew install --HEAD universal-ctags`
+    [CODEMINIMAP]: https://github.com/wfxr/code-minimap
+
+    - This is for [minimap.vim](https://github.com/wfxr/minimap.vim).
+
+  - Install [universal-ctags][UCTAGS] with `brew install --HEAD universal-ctags`
 
     [UCTAGS]: https://github.com/liuchengxu/vista.vim/issues/159
 
@@ -190,12 +195,13 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install other UNIX tools:
 
   ```zsh
-  brew install bat git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace
+  brew install bat git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace coreutils
   brew install xquartz --cask
   pip install vim-vint ipython black
   ```
 
   - `reattach-to-user-namespace` is needed for the `tmux-yank` plugin.
+  - `xquartz` is needed for clipboard forwarding with SSH remote.
 
 #### Optional Packages
 
@@ -346,6 +352,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     npm install yarn bash-language-server
     conda install -c conda-forge vim bat git-delta tree tldr universal-ctags
     pip install vim-vint black
+    cargo install --locked code-minimap
     ```
 
 ## Installing on a new Deep Learning EC2 instance

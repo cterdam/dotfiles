@@ -247,7 +247,7 @@ set ignorecase
 set smartcase
 
 " <Leader>/ to clear highlight
-map <Leader>/ :nohl<CR>
+map <Leader>/ :nohl<CR>:call minimap#vim#ClearColorSearch()<CR>
 
 " Show search index
 set shortmess-=S
@@ -634,6 +634,7 @@ Plug 'sickill/vim-monokai'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Focused writing, toggle with `<Leader>e`
+" Some functionality seems broken with minimap.vim
 Plug 'junegunn/goyo.vim'
 
 " Preview markdown, toggle with `<Leader>p`
@@ -680,6 +681,13 @@ Plug 'liuchengxu/vista.vim'
 
 " Show context of current code on top. Toggle with `<Leader>n`
 Plug 'wellle/context.vim'
+
+" Show code minimap. Toggle with `<Leader>m`
+" Requires code-minimap
+Plug 'wfxr/minimap.vim'
+
+" Show scrollbar.
+Plug 'obcat/vim-sclow'
 
 " }}}
 call plug#end()
@@ -1245,24 +1253,14 @@ let g:goyo_linenr = 0
 
 " This function will be executed when entering goyo
 function! s:goyo_enter()
-    set showmode
-    let b:quitting = 0
-    let b:quitting_bang = 0
-    autocmd QuitPre <buffer> let b:quitting = 1
-    cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+    :MinimapClose
+    :SclowDisable
 endfunction
 
 " This function will be executed when leaving goyo
 function! s:goyo_leave()
-    set noshowmode
-    " Quit Vim if this is the only remaining buffer
-    if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-        if b:quitting_bang
-            qa!
-        else
-            qa
-        endif
-    endif
+    :SclowEnable
+    :Minimap
 endfunction
 
 " Bind enter and leave functions to goyo command
@@ -1586,6 +1584,58 @@ let g:context_join_regex = '^\W*$'
 
 " `<Leader>n` to toggle showing context
 map <Leader>n :ContextToggle<CR>
+
+" }}}
+" MINIMAP {{{
+
+" `<Leader>`m to toggle minimap
+map <Leader>m :MinimapToggle<CR>
+
+" `<Leader>`<S-m> to refresh minimap
+map <Leader><S-m> :MinimapRefresh<CR>
+
+" Width of minimap window
+let g:minimap_width = 10
+
+" Show minimap at startup
+let g:minimap_auto_start = 1
+
+" Show minimap on WinEnter
+let g:minimap_auto_start_win_enter = 1
+
+" Disable minimap for specific file types
+let g:minimap_block_filetypes = ['fugitive', 'nerdtree']
+
+" Disable minimap for specific buffer types
+let g:minimap_block_buftypes = ['nofile', 'nowrite', 'quickfix', 'terminal', 'prompt']
+
+" Highlight range of visible lines
+let g:minimap_highlight_range = 1
+
+" Highlight searched patterns
+let g:minimap_highlight_search = 1
+
+" Documentation says this uses a background job to get the longest line
+" DO NOT turn on; leads to error
+let g:minimap_background_processing = 0
+
+" Highlight range of changes as reported by git
+let g:minimap_git_colors = 1
+
+" Let minimap create an autocommand to set highlights on color scheme changes
+let g:minimap_enable_highlight_colorgroup = 1
+
+" }}}
+" VIM-SCLOW {{{
+
+" No scrollbar on these filetypes
+let g:sclow_block_filetypes = ['netrw', 'nerdtree', 'minimap']
+
+" No scrollbar on these buftypes
+let g:sclow_block_buftypes = ['terminal', 'prompt']
+
+" No scrollbar if file shorter than one full screen
+let g:sclow_hide_full_length = 1
 
 " }}}
 " {{{ GOOGLE
