@@ -336,6 +336,29 @@ alias gll='git logline'
 # }}}
 # GENERAL {{{
 
+# Get current system name
+sysname() {
+    case $(uname -a) in
+        *googler*)
+            echo "gLinx"
+            ;;
+        *Ubuntu*)
+            echo "Ubntu"
+            ;;
+        *Darwin*)
+            echo "macOS"
+            ;;
+        *Linux*)
+            echo "Linux"
+            ;;
+        *)
+            echo "admin"
+    esac
+}
+
+# Add this device key to ssh-agent so it can be forwarded to remotes
+ssh-add ~/.ssh/cterdam &> /dev/null
+
 # Use conda python and pip instead of any system-installed versions
 alias python3="python"
 alias pip3="pip"
@@ -362,34 +385,15 @@ cd $CTERDAMHOME
 # Alias for ls
 alias l="ls"
 
-# Use bat to view man pages
-export MANPAGER="bat -l man -p"
-
 # Use gruvbox theme for bat
 export BAT_THEME="gruvbox-dark"
 
-# Get current system name
-sysname() {
-    case $(uname -a) in
-        *googler*)
-            echo "gLinx"
-            ;;
-        *Ubuntu*)
-            echo "Ubntu"
-            ;;
-        *Darwin*)
-            echo "macOS"
-            ;;
-        *Linux*)
-            echo "Linux"
-            ;;
-        *)
-            echo "admin"
-    esac
-}
-
-# Add this device key to ssh-agent so it can be forwarded to remotes
-ssh-add ~/.ssh/cterdam &> /dev/null
+# Use bat to view man pages
+if [[ `sysname` == "macOS" ]]; then
+    export MANPAGER="bat -p"
+else
+    export MANPAGER="bat -l man -p"
+fi
 
 # }}}
 # {{{ AUTOMATIC
@@ -489,9 +493,11 @@ if [[ `sysname` == "macOS" ]]; then
     # Use ruby version 3.1.3 (for Jekyll for Github Pages)
     chruby ruby-3.1.3
 
-elif [[ `sysname` == "Ubntu" ]]; then
+else
+
     export GEM_HOME="$HOME/gems"
     addpath $HOME/gems/bin tail
+
 fi
 
 # }}}
