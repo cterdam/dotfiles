@@ -1243,7 +1243,7 @@ autocmd vimenter * ++nested colorscheme gruvbox
 map <Leader>e :Goyo<CR>
 
 " Set goyo width
-let g:goyo_width = 80
+let g:goyo_width = 88
 
 " Set goyo height
 let g:goyo_height = 45
