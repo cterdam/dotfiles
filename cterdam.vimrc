@@ -1640,7 +1640,7 @@ let g:sclow_hide_full_length = 1
 " }}}
 " {{{ GOOGLE
 
-" If opening a file on CitC, enter 'Google mode'
+" If editing a file on CitC, enter 'Google mode'
 let current_file = expand('%:p')
 if current_file =~? '^/google/src/cloud'
 
@@ -1711,17 +1711,22 @@ if current_file =~? '^/google/src/cloud'
         \ ],
         \})
 
-    " Vim-lsp settings
+    " Vim-lsp settings ----------------------------------------------------------------
 
     " Send async completion requests
     let g:lsp_async_completion = 1
+
     " Do not lint
     let g:lsp_diagnostics_enabled = 0
     let g:lsp_signs_enabled = 0
+
     " Automatically show completion options
     let g:asyncomplete_auto_popup = 1
+
     " Do not highlight references to current symbol
     let g:lsp_document_highlight_enabled = 0
+
+    " Syntax and linting in Google environment ----------------------------------------
 
     " Utility to use GPylint
     " https://g3doc.corp.google.com/devtools/gpylint/g3doc/editor_integration.md#vim
@@ -1731,7 +1736,6 @@ if current_file =~? '^/google/src/cloud'
         cexpr system(l:lint . ' ' . expand('%'))
     endfunction
 
-    " Syntax and linting in Google environment
     augroup GoogleGoodies
 
         " Clear previous autocmds
