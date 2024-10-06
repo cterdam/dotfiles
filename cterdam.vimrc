@@ -805,13 +805,13 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 
 " <Leader>g to list all diagnostics of current buffer in location list
 map <Leader>g :CocDiagnostics<CR>
-" <Leader><S-g> to list all diagnostics for fuzzy searching
-map <Leader><S-g> :<C-u>CocList diagnostics<cr>
+" <Leader>G to list all diagnostics for fuzzy searching
+map <Leader>G :<C-u>CocList diagnostics<cr>
 
 " Do not use :CocOutline. Use Vista to list outline of current document instead.
 
-" <Leader><S-o> to list outline of current document for fuzzy searching
-map <Leader><S-o> :CocList outline<CR>
+" <Leader>O to list outline of current document for fuzzy searching
+map <Leader>O :CocList outline<CR>
 " <Leader><C-o> to search symbols in current workspace
 map <Leader><C-o> :CocList -I symbols<CR>
 
@@ -1591,8 +1591,8 @@ map <Leader>n :ContextToggle<CR>
 " `<Leader>`m to toggle minimap
 map <Leader>m :MinimapToggle<CR>
 
-" `<Leader>`<S-m> to refresh minimap
-map <Leader><S-m> :MinimapRefresh<CR>
+" `<Leader>`M to refresh minimap
+map <Leader>M :MinimapRefresh<CR>
 
 " Width of minimap window
 let g:minimap_width = 10
@@ -1739,7 +1739,7 @@ if current_file =~? '^/google/src/cloud'
 
         " LSP hotkeys
         autocmd FileType python nnoremap <buffer> <C-k> :LspHover<CR>
-        autocmd FileType python nmap <buffer> <S-k> :tab LspPeekDefinition<CR>
+        autocmd FileType python nmap <buffer> K :tab LspPeekDefinition<CR>
         autocmd FileType python nmap <buffer> gd :tab LspDefinition<CR>
         autocmd FileType python nmap <buffer> gr :tab LspReferences<CR>
         autocmd FileType python noremap <buffer> <expr><C-d> lsp#scroll(+4)
