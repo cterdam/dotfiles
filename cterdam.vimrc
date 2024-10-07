@@ -1597,11 +1597,11 @@ map <Leader>M :MinimapRefresh<CR>
 " Width of minimap window
 let g:minimap_width = 10
 
-" Show minimap at startup
-let g:minimap_auto_start = 1
+" Do not auto start minimap at startup
+let g:minimap_auto_start = 0
 
-" Show minimap on WinEnter
-let g:minimap_auto_start_win_enter = 1
+" Do not auto start minimap on WinEnter
+let g:minimap_auto_start_win_enter = 0
 
 " Disable minimap for specific file types
 let g:minimap_block_filetypes = ['fugitive', 'nerdtree']
