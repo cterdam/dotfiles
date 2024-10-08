@@ -1,3 +1,5 @@
+# vim: filetype=sshconfig
+
 Host cloudtop
 
     HostName cterdam.c.googlers.com

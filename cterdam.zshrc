@@ -1,4 +1,4 @@
-# vim:foldmethod=marker
+# vim:foldmethod=marker filetype=zsh
 
 # cterdam.zshrc: cterdam's personal zshrc file.
 # See https://github.com/cterdam/dotfiles

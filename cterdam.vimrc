@@ -1,4 +1,4 @@
-" vim:foldmethod=marker
+" vim: foldmethod=marker filetype=vim
 
 " cterdam.vimrc: cterdam's personal vimrc file.
 " See https://github.com/cterdam/dotfiles
