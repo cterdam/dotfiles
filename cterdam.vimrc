@@ -619,7 +619,7 @@ Plug 'tpope/vim-surround'
 " Floating terminals, toggle with `<F12>`
 Plug 'voldikss/vim-floaterm'
 
-" Integrate git commands `:Git add`
+" Integrate git commands, e.g. `:Git add`
 Plug 'tpope/vim-fugitive'
 
 " View git status per line; highlight, preview, stage, and undo hunks
@@ -688,6 +688,9 @@ Plug 'wfxr/minimap.vim'
 
 " Show scrollbar.
 Plug 'obcat/vim-sclow'
+
+" `:GV` for Git commit browser, `:GV!` for curr file only, `:GV?` for version list
+Plug 'junegunn/gv.vim'
 
 " }}}
 call plug#end()
