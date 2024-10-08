@@ -1263,7 +1263,6 @@ endfunction
 " This function will be executed when leaving goyo
 function! s:goyo_leave()
     :SclowEnable
-    :Minimap
 endfunction
 
 " Bind enter and leave functions to goyo command
