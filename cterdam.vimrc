@@ -76,9 +76,6 @@ set cursorline
 " Supply text color suitable for a dark background
 set background=dark
 
-" Make sign column black for use by vim-gitgutter
-highlight SignColumn ctermbg=black ctermfg=yellow
-
 " vim-hexokinase needs this to display text code colors
 " This also makes vim appear weird outside tmux, but why use vim without tmux?
 set termguicolors
@@ -324,7 +321,7 @@ set swapfile
 set updatecount=100
 
 " If for this many miliseconds nothing is typed, write the swap file
-" This also governs such other update events as gitgutter update
+" This also governs such other update events as sign column update
 set updatetime=1000
 
 " Ensure that swapdir exists
@@ -622,9 +619,6 @@ Plug 'voldikss/vim-floaterm'
 " Integrate git commands, e.g. `:Git add`
 Plug 'tpope/vim-fugitive'
 
-" View git status per line; highlight, preview, stage, and undo hunks
-Plug 'airblade/vim-gitgutter'
-
 " View file diff against disk save, toggle with `<Leader>w`
 Plug 'cterdam/vim-diffsave'
 
@@ -691,6 +685,9 @@ Plug 'obcat/vim-sclow'
 
 " `:GV` for Git commit browser, `:GV!` for curr file only, `:GV?` for version list
 Plug 'junegunn/gv.vim'
+
+" Show VCS diagnostics in sign column including Git and Hg
+Plug 'mhinz/vim-signify'
 
 " }}}
 call plug#end()
@@ -927,7 +924,7 @@ let g:lightline= {
         \           [ 'method', 'statusdiagnostic' ] ],
         \ 'right': [ [ 'percent', 'lineinfo'],
         \            [ 'filetype' ],
-        \            [ 'gitbranch', 'gitstatus' ] ] },
+        \            [ 'gitbranch', 'vcsstatus' ] ] },
     \ 'inactive':{
         \ 'left': [ [ 'readonly', 'absolutepath', 'modified' ] ],
         \ 'right': [ [ 'lineinfo' ],
@@ -948,7 +945,7 @@ let g:lightline= {
 		\ 'lineinfo': 'TrimLineInfo',
 		\ 'filetype': 'TrimFileType',
         \ 'gitbranch': 'TrimGitBranch',
-		\ 'gitstatus': 'GitStatus'}
+		\ 'vcsstatus': 'VcsStatus'}
 \ }
 
 " A wide window is defined as a window of width more than 25 (at least 26).
@@ -1033,16 +1030,17 @@ function! TrimGitBranch()
 	return winwidth(0) > g:wide_window_thres ? FugitiveHead() : ''
 endfunction
 
-" Function to format current file git info
-" This requires vim-gitgutter and vim-fugitive
-function! GitStatus()
+" Function to format current file VCS info
+" This requires Vim-signify
+function! VcsStatus()
 	if winwidth(0) <= g:wide_window_thres
 		return ''
 	else
-		if FugitiveHead() == ''
+        let [a,m,r] = sy#repo#get_stats()
+		if a == -1
+            " Vim-signify returns -1 for all three numbers when VCS absent
 			return ''
 		else
-			let [a,m,r] = GitGutterGetHunkSummary()
 			return printf('+%d ~%d -%d', a, m, r)
 		endif
     endif
@@ -1132,63 +1130,53 @@ let g:floaterm_position = 'center'
 let g:floaterm_autoclose = 2
 
 " }}}
-" VIM-GITGUTTER {{{
+" VIM-SIGNIFY {{{
 
-" Supply colors for GitGutter signs.
-" These don't seem to get used, but removing them spawns another set of colors.
-highlight GitGutterAdd    ctermbg=black ctermfg=green ctermfg=2
-highlight GitGutterChange ctermbg=black ctermfg=yellow ctermfg=3
-highlight GitGutterDelete ctermbg=black ctermfg=red ctermfg=1
+" Use `~` in place of `!` for change
+let g:signify_sign_change = '~'
 
-" Turn off hunk highlighting on default
-autocmd VimEnter * GitGutterLineHighlightsDisable
-
-" Do not automatically create any key mappings
-let g:gitgutter_map_keys = 0
+" Turn off any highlighting on default
+let g:signify_line_highlight = 0
+let g:signify_number_highlight = 0
 
 " Use ]h and [h to navigate to the next/previous hunk
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
+nmap ]h <plug>(signify-next-hunk)
+nmap [h <plug>(signify-prev-hunk)
 
-" Use `h` as a motion object for hunk
-omap ih <Plug>(GitGutterTextObjectInnerPending)
-omap ah <Plug>(GitGutterTextObjectOuterPending)
-xmap ih <Plug>(GitGutterTextObjectInnerVisual)
-xmap ah <Plug>(GitGutterTextObjectOuterVisual)
-
-" <Leader>hh to toggle hunk highlighting
-map <Leader>hh :GitGutterLineHighlightsToggle<CR>
-
-" <Leader>hs to stage hunk
-nmap <Leader>hs <Plug>(GitGutterStageHunk)
-
-" <Leader>hu to undo hunk
-nmap <Leader>hu <Plug>(GitGutterUndoHunk)
-
-" <Leader>hp to preview hunk
-nmap <Leader>hp <Plug>(GitGutterPreviewHunk)
-
-" <Leader>hd to open a diff window of the current buffer relative to origin
-map <Leader>hd :GitGutterDiffOrig<CR>
-
-" <Leader>hz to toggle folding of all unchanged lines
-map <Leader>hz :GitGutterFold<CR>
-
-" Use location list and not quickfix for hunks
-let g:gitgutter_use_location_list = 1
-
-" <Leader>H to toggle change list (view/hide hunks)
-function! ToggleHunks()
-    if get(getloclist(0, {'winid':0}), 'winid', 0)
-        :lclose
-    else
-        :GitGutterQuickFix
-        :lopen
+" When jumping to hunk, display hunk number and total count
+autocmd User SignifyHunk call s:show_current_hunk()
+function! s:show_current_hunk() abort
+    let h = sy#util#get_hunk_stats()
+    if !empty(h)
+        echo printf('[Hunk %d/%d]', h.current_hunk, h.total_hunks)
     endif
 endfunction
-map <Leader>H :call ToggleHunks()<CR>
 
-" }}}
+" Use `h` as a motion object for hunk
+omap ih <plug>(signify-motion-inner-pending)
+omap ah <plug>(signify-motion-outer-pending)
+xmap ih <plug>(signify-motion-inner-visual)
+xmap ah <plug>(signify-motion-outer-visual)
+
+" <Leader>hh to toggle hunk highlighting
+map <Leader>hh :SignifyToggleHighlight<CR>
+
+" <Leader>hu to undo hunk
+nmap <Leader>hu :SignifyHunkUndo<CR>
+
+" <C-h> to preview hunk
+nmap <C-h> :SignifyHunkDiff<CR>
+
+" <Leader>hd to show diff of the current buffer relative to origin in new tab
+nmap <Leader>hd :SignifyDiff<CR>
+
+" <Leader>hz to open current buffer folding unchanged parts in new tab
+nmap <Leader>hz :SignifyFold<CR>
+
+" <Leader>H to toggle hunk list
+nmap <Leader>H :SignifyList<CR>
+
+" " }}}
 " VIM-DIFFSAVE {{{
 
 " <Leader>w to toggle the diffsave window
