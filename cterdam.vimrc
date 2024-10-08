@@ -689,6 +689,9 @@ Plug 'junegunn/gv.vim'
 " Show VCS diagnostics in sign column including Git and Hg
 Plug 'mhinz/vim-signify'
 
+" :HGblame and :HGdiff. Another choice is 'ludovicchabanc/vim-lawrencium'
+Plug 'jlfwong/vim-mercenary'
+
 " }}}
 call plug#end()
 " According to specs (https://github.com/junegunn/vim-plug) This also
