@@ -353,6 +353,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     conda install -c conda-forge vim bat git-delta tree tldr universal-ctags
     pip install vim-vint black
     cargo install --locked code-minimap
+    cargo install silicon
     ```
 
 ## Installing on a new Deep Learning EC2 instance
