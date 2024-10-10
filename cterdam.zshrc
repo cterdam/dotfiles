@@ -603,9 +603,9 @@ if [ $(sysname) = "gLinx" ]; then
         source /google/data/ro/teams/deepmind-eng/config/bashrc
     fi
 
-    # Go to supportassist from google3
-    SA_PATH="learning/deepmind/incubation/applied_language/conv_ai/supportassist"
-    alias sa="cd $SA_PATH"
+    # google3 shortcuts
+    alias sa="cd learning/deepmind/incubation/applied_language/conv_ai/supportassist"
+    alias gemax="cd learning/gemini/gemax/experimental/supportassist"
 
 fi
 
