@@ -760,8 +760,10 @@ let g:coc_global_extensions = [
 " Most config options for coc extensions should be set in :CocConfig
 
 " coc-sh:
-" Automatically recognize these files as sh
-autocmd BufNewFile,BufRead *.zshrc,*.zsh,*.sh set filetype=sh
+" Recognize different shell scripts as sh files
+let g:coc_filetype_map = {
+  \ 'zsh': 'sh',
+  \ }
 
 " coc-vimlsp:
 " Apply highlight in these filetypes

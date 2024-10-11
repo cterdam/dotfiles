@@ -76,12 +76,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     [MDPV]: https://github.com/iamcco/markdown-preview.nvim
 
-  - Install [Bash Language Server][BASHLS] with `sudo npm i -g bash-language-server`.
-
-    [BASHLS]: https://github.com/bash-lsp/bash-language-server
-
-    - This is for [COC-sh](https://github.com/josa42/coc-sh).
-
   - Install [silicon](https://github.com/Aloxaf/silicon) with `brew install silicon`.
 
     - This is for [vim-silicon](https://github.com/segeljakt/vim-silicon).
@@ -349,7 +343,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     ```zsh
     conda install tmux nodejs rust go
-    npm install yarn bash-language-server
+    npm install yarn
     conda install -c conda-forge vim bat git-delta tree tldr universal-ctags
     pip install vim-vint black
     cargo install --locked code-minimap
