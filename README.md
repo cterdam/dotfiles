@@ -435,9 +435,10 @@ This section is a *summary* of native instructions from GitHub found [here][GHSS
 
 - Copy the contents of `cterdam.pub`
 
-  ```zsh
-  cat ~/.ssh/cterdam.pub | pbcopy
-  ```
+  - If on macOS:
+    ```sh
+    cat ~/.ssh/cterdam.pub | pbcopy
+    ```
 
   And add it to GitHub [here](https://github.com/settings/keys) both as an
   Authentication key and as a Signing key.
