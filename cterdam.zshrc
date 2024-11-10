@@ -60,17 +60,6 @@ if [[ -f $cterdamcocsettings && ! -f $cocsettingsloc ]]; then
     ln -s $cterdamcocsettings $cocsettingsloc
 fi
 
-# cterdam's pylintrc file
-cterdampylintrc="$CTERDAMRC/cterdam.pylintrc"
-
-# Location for pylinerc
-pylintrcloc="$HOME/.pylintrc"
-
-# Symlink, if not already present
-if [[ -f $cterdampylintrc && ! -f $pylintrcloc ]]; then
-    ln -s $cterdampylintrc $pylintrcloc
-fi
-
 # }}}
 # GIT {{{
 
@@ -154,7 +143,7 @@ fi
 secretfile="$CTERDAMRC/utility/profile/shell/.exec.sh"
 
 # }}}
-# {{{ SSH CONFIG
+# {{{ SSH
 
 # cterdam's ssh config file
 cterdamsshconf="$CTERDAMRC/cterdam.sshconfig"
@@ -165,6 +154,20 @@ sshconfloc="$HOME/.ssh/config"
 # Symlink, if not already present
 if [[ -f $cterdamsshconf && ! -f $sshconfloc ]]; then
     ln -s $cterdamsshconf $sshconfloc
+fi
+
+# }}}
+# HG {{{
+
+# cterdam's hgrc file
+cterdamhgrc="$CTERDAMRC/cterdam.hgrc"
+
+# Location for hgrc
+hgrcloc="$HOME/.hgrc"
+
+# Symlink, if not already present
+if [[ -f $cterdamhgrc && ! -f $hgrcloc ]]; then
+    ln -s $cterdamhgrc $hgrcloc
 fi
 
 # }}}
@@ -189,11 +192,11 @@ rc () {
         git)
             $EDITOR $cterdamgitconfig
             ;;
+        hg)
+            $EDITOR $cterdamhgrc
+            ;;
         p10k)
             $EDITOR $cterdamp10k
-            ;;
-        pylint)
-            $EDITOR $cterdampylintrc
             ;;
         readme)
             $EDITOR $CTERDAMRC/README.md

@@ -1,0 +1,8 @@
+[extensions]
+hgext.extdiff =
+
+[extdiff]
+cmd.delta =
+
+[alias]
+diff = delta
