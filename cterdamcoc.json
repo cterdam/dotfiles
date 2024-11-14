@@ -6,6 +6,7 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "java",
         "json",
+        "proto",
         "python"
     ],
 

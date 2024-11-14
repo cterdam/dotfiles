@@ -1653,6 +1653,7 @@ if current_file =~? '^/google/src/cloud'
     Glug critique
     Glug codefmt
     Glug codefmt-google
+    Glug corpweb
 
     " Load external plugins -----------------------------------------------------------
 
