@@ -123,7 +123,15 @@ fi
 cterdamrime="$CTERDAMRC/cterdam.rime"
 
 # Location for Rime config folder
-rimeloc="$HOME/Library/Rime"
+if [[ -d "$HOME/Library/Rime" ]]; then
+    rimeloc="$HOME/Library/Rime"
+elif [[ -d "$HOME/.config/ibus/rime/" ]]; then
+    rimeloc="$HOME/.config/ibus/rime/"
+elif [[ -d "$HOME/.ibus/rime/" ]]; then
+    rimeloc="$HOME/.ibus/rime/"
+elif [[ -d "$HOME/.local/share/fcitx5/rime/" ]]; then
+    rimeloc="$HOME/.local/share/fcitx5/rime/"
+fi
 
 # Symlink all rime files into the correct location for Rime
 if [[ -d $rimeloc ]]; then
