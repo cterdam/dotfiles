@@ -1792,6 +1792,7 @@ if current_file =~? '^/google/src/cloud'
 endif
 
 " Other TODO:
+" - go/fzf-query
 " - Blaze plugin
 " - Hotkeys for Blaze, Fig, Critique, and Blame functions
 
