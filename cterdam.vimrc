@@ -53,7 +53,7 @@ set ttimeout
 set ttimeoutlen=0
 
 " Use system clipboard
-set clipboard=unnamed
+set clipboard+=unnamedplus
 
 " Use your mouse
 set mouse=a
