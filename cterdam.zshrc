@@ -619,12 +619,13 @@ if [ $(sysname) = "gLinx" ]; then
         source /google/data/ro/teams/deepmind-eng/config/bashrc
     fi
 
-    # google3 path shortcuts
+    # path shortcuts
     alias sa="cd learning/deepmind/incubation/applied_language/conv_ai/supportassist"
     alias gemax="cd learning/gemini/gemax/experimental/supportassist"
 
-    # Other shortcuts
+    # program shortcuts
     alias hm='/google/bin/releases/heinzelmaennchen-team-policy/cli/hm'
+    alias woodshed='/google/bin/releases/woodshed/woodshed'
 
 fi
 
