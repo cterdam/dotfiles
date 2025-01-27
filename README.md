@@ -189,7 +189,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Install other UNIX tools:
 
   ```zsh
-  brew install bat git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace coreutils
+  brew install bat fzf git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace coreutils
   brew install xquartz --cask
   pip install vim-vint ipython black
   ```
