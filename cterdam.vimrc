@@ -103,8 +103,7 @@ function! ToggleConceal()
         let &conceallevel = w:concealStash
         let w:concealStash = w:concealCurrent
         unlet w:concealCurrent
-        echo printf("conceallevel set to %d from %d", &conceallevel,
-                    \w:concealStash)
+        echo printf("conceallevel set from %d to %d", w:concealStash, &conceallevel)
 	else
         " Stash 0 and try again
         let w:concealStash = 0
