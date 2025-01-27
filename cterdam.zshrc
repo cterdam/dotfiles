@@ -626,6 +626,7 @@ if [ $(sysname) = "gLinx" ]; then
     # program shortcuts
     alias hm='/google/bin/releases/heinzelmaennchen-team-policy/cli/hm'
     alias woodshed='/google/bin/releases/woodshed/woodshed'
+    alias abc="/google/data/ro/projects/smartass/brain/abc"
 
 fi
 
