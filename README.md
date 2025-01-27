@@ -344,7 +344,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     ```zsh
     conda install tmux nodejs rust go
     npm install yarn
-    conda install -c conda-forge vim bat git-delta tree tldr universal-ctags
+    conda install -c conda-forge vim bat fzf git-delta tree tldr universal-ctags
     pip install vim-vint black
     cargo install --locked code-minimap
     cargo install silicon
