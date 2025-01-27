@@ -345,6 +345,41 @@ alias gitroot='git rev-parse --show-toplevel'
 alias gll='git logline'
 
 # }}}
+# CONDA {{{
+
+if [[ -d $HOME/'opt/anaconda3' ]]; then
+    condahomeloc=$HOME/'opt/anaconda3'
+elif [[ -d '/opt/anaconda3' ]]; then
+    condahomeloc='/opt/anaconda3'
+elif [[ -d $HOME/anaconda3 ]]; then
+    condahomeloc=$HOME/anaconda3
+elif [[ -d $HOME/'opt/miniconda3' ]]; then
+    condahomeloc=$HOME/'opt/miniconda3'
+elif [[ -d '/opt/miniconda3' ]]; then
+    condahomeloc='/opt/miniconda3'
+elif [[ -d $HOME/miniconda3 ]]; then
+    condahomeloc=$HOME/miniconda3
+elif [[ -f /usr/local/bin/conda ]]; then
+    condahomeloc='/usr/local'
+fi
+
+# >>> conda initialize >>>
+condaloc=$condahomeloc/'bin/conda'
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$condahomeloc/etc/profile.d/conda.sh" ]; then
+        . "$condahomeloc/etc/profile.d/conda.sh"
+    else
+        addpath "$condahomeloc/bin" head
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# }}}
 # GENERAL {{{
 
 # Get current system name
@@ -520,41 +555,6 @@ else
 fi
 
 # }}}
-# CONDA {{{
-
-if [[ -d $HOME/'opt/anaconda3' ]]; then
-    condahomeloc=$HOME/'opt/anaconda3'
-elif [[ -d '/opt/anaconda3' ]]; then
-    condahomeloc='/opt/anaconda3'
-elif [[ -d $HOME/anaconda3 ]]; then
-    condahomeloc=$HOME/anaconda3
-elif [[ -d $HOME/'opt/miniconda3' ]]; then
-    condahomeloc=$HOME/'opt/miniconda3'
-elif [[ -d '/opt/miniconda3' ]]; then
-    condahomeloc='/opt/miniconda3'
-elif [[ -d $HOME/miniconda3 ]]; then
-    condahomeloc=$HOME/miniconda3
-elif [[ -f /usr/local/bin/conda ]]; then
-    condahomeloc='/usr/local'
-fi
-
-# >>> conda initialize >>>
-condaloc=$condahomeloc/'bin/conda'
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$condahomeloc/etc/profile.d/conda.sh" ]; then
-        . "$condahomeloc/etc/profile.d/conda.sh"
-    else
-        addpath "$condahomeloc/bin" head
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# }}}
 # CTERDAMBIN {{{
 
 # Symlink all vim binaries from homebrew to CTERDAMBIN, if not already present
@@ -631,7 +631,43 @@ if [ $(sysname) = "gLinx" ]; then
     alias woodshed='/google/bin/releases/woodshed/woodshed'
     alias abc="/google/data/ro/projects/smartass/brain/abc"
 
-fi
+    # Fig integration -----------------------------------------------------------------
+    # go/zsh-prompt#zsh-fig-prompt-fig-status-fig-prompt-and-powerlevel10k-custom-segment
 
+    # Enable Fig prompt information
+    source /google/src/files/head/depot/google3/experimental/fig_contrib/prompts/fig_status/zsh/fig_prompt
+
+    # Template Arguments:
+    #   FIG_PROMPT_MODIFIED: Replaced with $modified
+    #   FIG_PROMPT_ADDED: Replaced with $added
+    #   FIG_PROMPT_DELETED: Replaced with $deleted
+    #   FIG_PROMPT_UNKNOWN: Replaced with $unknown
+    #   FIG_PROMPT_UNEXPORTED: Replaced with $unexported
+    #   FIG_PROMPT_OBSOLETE: Replaced with $obsolete
+    #   FIG_PROMPT_CL: Replaced with $cl
+    #   FIG_PROMPT_DESCRIPTION: Replaced with $description
+    #   FIG_PROMPT_CHANGENAME: Replaced with $changename
+    #   FIG_PROMPT_HAS_SHELVE: Replaced with $has_shelve
+    function get_fig_prompt_template() {
+        echo -n '%F{green}FIG_PROMPT_ADDED'
+        echo -n ' %F{yellow}FIG_PROMPT_MODIFIED'
+        echo -n ' %F{red}FIG_PROMPT_DELETED'
+        echo -n ' %F{magenta}FIG_PROMPT_UNKNOWN'
+        echo -n ' %F{magenta}FIG_PROMPT_HAS_SHELVE'
+        echo -n ' %F{white}FIG_PROMPT_DESCRIPTION'
+        echo -n ' %F{blue}FIG_PROMPT_UNEXPORTED'
+        echo -n ' %F{red}FIG_PROMPT_OBSOLETE'
+        echo -n ' %F{white}FIG_PROMPT_CL'
+    }
+
+    # Custom p10k segment for fig
+    # Will only appear when the directory is a citc client
+    function prompt_fig() {
+        local fig_prompt
+        fig_prompt="$(get_fig_prompt)"
+        p10k segment -f 208 -c $fig_prompt -t $fig_prompt
+    }
+
+fi
 
 # }}}

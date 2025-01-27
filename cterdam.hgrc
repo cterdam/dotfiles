@@ -1,5 +1,17 @@
+[trainingwheels]
+warn-head-paths = False
+
 [extensions]
 hgext.extdiff =
+figstatus = /google/src/head/depot/google3/experimental/fig_contrib/prompts/fig_status/fig_status.py
+
+[figstatus]
+added_str = '+'
+modified_str = '~'
+deleted_str = '-'
+unknown_str = '?'
+unexported_str = '#'
+obsolete_str = '&'
 
 [extdiff]
 cmd.delta =
