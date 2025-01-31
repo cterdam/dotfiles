@@ -508,7 +508,12 @@
   # Show status of repositories of these types. You can add svn and/or hg if you are
   # using them. If you do, your prompt may become slow even when your current directory
   # isn't in an svn or hg repository.
-  typeset -g POWERLEVEL9K_VCS_BACKENDS=(git hg)
+  # Note: Disabling hg for vcs as using fig for more info
+  typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
+
+  #####################################[ fig: hg status for google ]######################################
+
+  typeset -g POWERLEVEL9K_FIG_BACKGROUND=11
 
   ##########################[ status: exit code of the last command ]###########################
   # Enable OK_PIPE, ERROR_PIPE and ERROR_SIGNAL status states to allow us to enable, disable and
