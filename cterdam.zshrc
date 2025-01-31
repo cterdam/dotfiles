@@ -650,13 +650,13 @@ if [ $(sysname) = "gLinx" ]; then
     #   FIG_PROMPT_HAS_SHELVE: Replaced with $has_shelve
     function get_fig_prompt_template() {
         echo -n '%F{black}FIG_PROMPT_ADDED'
-        echo -n ' %F{black}FIG_PROMPT_MODIFIED'
-        echo -n ' %F{black}FIG_PROMPT_DELETED'
-        echo -n ' %F{black}FIG_PROMPT_UNKNOWN'
-        echo -n ' %F{black}FIG_PROMPT_HAS_SHELVE'
-        echo -n ' %F{black}FIG_PROMPT_UNEXPORTED'
-        echo -n ' %F{black}FIG_PROMPT_OBSOLETE'
-        echo -n ' %F{black}FIG_PROMPT_DESCRIPTION'
+        echo -n '%F{black}FIG_PROMPT_MODIFIED'
+        echo -n '%F{black}FIG_PROMPT_DELETED'
+        echo -n '%F{black}FIG_PROMPT_UNKNOWN'
+        echo -n '%F{black}FIG_PROMPT_HAS_SHELVE'
+        echo -n '%F{black}FIG_PROMPT_UNEXPORTED'
+        echo -n '%F{black}FIG_PROMPT_OBSOLETE'
+        echo -n '  %F{black}FIG_PROMPT_DESCRIPTION'
         echo -n ' %F{240}FIG_PROMPT_CL'
     }
 
