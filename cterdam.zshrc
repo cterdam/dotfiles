@@ -625,6 +625,7 @@ if [ $(sysname) = "gLinx" ]; then
     # path shortcuts
     alias sa="cd learning/deepmind/incubation/applied_language/conv_ai/supportassist"
     alias gemax="cd learning/gemini/gemax/experimental/supportassist"
+    alias gt="cd gdm/ads/geminitagger"
 
     # program shortcuts
     alias hm='/google/bin/releases/heinzelmaennchen-team-policy/cli/hm'
