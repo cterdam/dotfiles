@@ -33,7 +33,10 @@
     // The whole file action just means adding docstring for each function
     "pydocstring.enableFileAction": false,
 
-    // Use black for both formatting and organizing imports for Python
-    "python.formatting.provider": "black"
+    // Use black for formatting
+    "python.formatting.provider": "black",
+
+    // Use isort to organize imports
+    "pyright.organizeimports.provider": "isort"
 
 }

@@ -191,7 +191,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   ```zsh
   brew install bat fzf git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace coreutils
   brew install xquartz --cask
-  pip install vim-vint ipython black
+  pip install vim-vint ipython black isort
   ```
 
   - `reattach-to-user-namespace` is needed for the `tmux-yank` plugin.
