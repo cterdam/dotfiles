@@ -635,8 +635,34 @@ if [ $(sysname) = "gLinx" ]; then
     # Fig integration -----------------------------------------------------------------
     # go/zsh-prompt#zsh-fig-prompt-fig-status-fig-prompt-and-powerlevel10k-custom-segment
 
-    # Enable Fig prompt information
-    source /google/src/files/head/depot/google3/experimental/fig_contrib/prompts/fig_status/zsh/fig_prompt
+    ### Fig prompt file
+
+    # Fig prompt file on google3
+    figpromptsource=/google/src/files/head/depot/google3/experimental/fig_contrib/prompts/fig_status/zsh/fig_prompt
+
+    # Location for fig prompt
+    figpromptloc="$HOME/.figprompt"
+
+    # Copy, if not already present
+    if [[ -f $figpromptsource && ! -f $figpromptloc ]]; then
+        cp $figpromptsource $figpromptloc
+    fi
+
+    # Source the fig prompt file
+    source $figpromptloc
+
+    ### Fig status file
+
+    # Fig status file on google3
+    figstatussource=/google/src/head/depot/google3/experimental/fig_contrib/prompts/fig_status/fig_status.py
+
+    # Location for fig prompt
+    figstatusloc="$HOME/.figstatus"
+
+    # Copy, if not already present
+    if [[ -f $figstatussource && ! -f $figstatusloc ]]; then
+        cp $figstatussource $figstatusloc
+    fi
 
     # Template Arguments:
     #   FIG_PROMPT_MODIFIED: Replaced with $modified
