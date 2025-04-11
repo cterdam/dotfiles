@@ -450,7 +450,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # }}}
-# {{{ AUTOMATIC
+# {{{ AUTO
 
 # Automatically run function when changing directory
 function change_dir_auto() {
