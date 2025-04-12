@@ -502,6 +502,9 @@ cnorea цй wq
 cnorea цф wa
 cnorea йф qa
 
+" Use English
+language en_US.UTF-8
+
 " }}}
 
 " PLUGINS -----------------------------------------------------------------------------
