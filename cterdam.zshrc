@@ -425,6 +425,9 @@ source $secretfile
 # Edit anything with vim
 export EDITOR="vim"
 
+# Use vim key bindings on cmdline
+bindkey -v
+
 # Do actual work here
 cd $CTERDAMHOME
 
