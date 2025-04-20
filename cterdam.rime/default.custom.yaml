@@ -13,6 +13,7 @@ patch:
   switcher:
     caption: 〔方案選單〕
     hotkeys:
-      - Control+Shift+space
+      - Control+grave
+      - F4
   menu:
     page_size: 9
