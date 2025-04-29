@@ -635,6 +635,7 @@ if [ $(sysname) = "gLinx" ]; then
     alias woodshed='/google/bin/releases/woodshed/woodshed'
     alias abc="/google/data/ro/projects/smartass/brain/abc"
     alias legoml='/google/data/ro/teams/legoml/legoml'
+    alias bkill='/google/data/ro/teams/borgtools/bkill'
 
     # Fig integration -----------------------------------------------------------------
     # go/zsh-prompt#zsh-fig-prompt-fig-status-fig-prompt-and-powerlevel10k-custom-segment
