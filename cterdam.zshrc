@@ -629,7 +629,7 @@ if [ $(sysname) = "gLinx" ]; then
         source /google/data/ro/teams/dmgi/configs/google_xm_bashrc
     fi
     # Load Adbrain bashrc
-    if [ -r . /usr/share/adbrain/adbrain.sh ] ; then
+    if [ -r /usr/share/adbrain/adbrain.sh ] ; then
         . /usr/share/adbrain/adbrain.sh
     fi
 
