@@ -1643,6 +1643,8 @@ if current_file =~? '^/google/src/cloud'
 
     " Google style guide requires max line len of 80 chars
     set colorcolumn=81
+    " Macro for borg file
+    let @a = "14jA\<BackSpace>, 'qianshen']\<Esc>5jomodel_priority = 1\<Esc>"
 
     " Load Google Vimrc ---------------------------------------------------------------
 

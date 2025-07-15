@@ -624,6 +624,14 @@ if [ $(sysname) = "gLinx" ]; then
     if [ -r /google/data/ro/teams/deepmind-eng/config/bashrc ] ; then
         source /google/data/ro/teams/deepmind-eng/config/bashrc
     fi
+    # Load XManager bashrc
+    if [ -r /google/data/ro/teams/dmgi/configs/google_xm_bashrc ] ; then
+        source /google/data/ro/teams/dmgi/configs/google_xm_bashrc
+    fi
+    # Load Adbrain bashrc
+    if [ -r . /usr/share/adbrain/adbrain.sh ] ; then
+        . /usr/share/adbrain/adbrain.sh
+    fi
 
     # path shortcuts
     alias sa="cd learning/deepmind/incubation/applied_language/conv_ai/supportassist"
@@ -631,11 +639,13 @@ if [ $(sysname) = "gLinx" ]; then
     alias gt="cd gdm/ads/geminitagger"
 
     # program shortcuts
+    alias er='/google/data/ro/users/ho/hooper/er'
     alias hm='/google/bin/releases/heinzelmaennchen-team-policy/cli/hm'
-    alias woodshed='/google/bin/releases/woodshed/woodshed'
-    alias abc="/google/data/ro/projects/smartass/brain/abc"
     alias legoml='/google/data/ro/teams/legoml/legoml'
     alias bkill='/google/data/ro/teams/borgtools/bkill'
+
+    # other aliases
+    alias hga='hg amend && hg ut'
 
     # Fig integration -----------------------------------------------------------------
     # go/zsh-prompt#zsh-fig-prompt-fig-status-fig-prompt-and-powerlevel10k-custom-segment
