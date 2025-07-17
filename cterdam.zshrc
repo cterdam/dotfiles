@@ -645,10 +645,10 @@ if [ $(sysname) = "gLinx" ]; then
     alias bkill='/google/data/ro/teams/borgtools/bkill'
 
     # hg aliases
-    alias hs='hg status'
-    alias hl='hg citc -l'
-    alias hc='hg commit'
-    alias hmu='hg amend && hg ut'
+    alias hgs='hg status'
+    alias hgl='hg citc -l'
+    alias hgc='hg commit'
+    alias hgmu='hg amend && hg ut'
 
     # Fig integration -----------------------------------------------------------------
     # go/zsh-prompt#zsh-fig-prompt-fig-status-fig-prompt-and-powerlevel10k-custom-segment
