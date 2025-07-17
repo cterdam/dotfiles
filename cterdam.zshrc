@@ -644,8 +644,11 @@ if [ $(sysname) = "gLinx" ]; then
     alias legoml='/google/data/ro/teams/legoml/legoml'
     alias bkill='/google/data/ro/teams/borgtools/bkill'
 
-    # other aliases
-    alias hga='hg amend && hg ut'
+    # hg aliases
+    alias hs='hg status'
+    alias hl='hg citc -l'
+    alias hc='hg commit'
+    alias hmu='hg amend && hg ut'
 
     # Fig integration -----------------------------------------------------------------
     # go/zsh-prompt#zsh-fig-prompt-fig-status-fig-prompt-and-powerlevel10k-custom-segment
