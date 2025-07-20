@@ -547,8 +547,9 @@ if [[ `sysname` == "macOS" ]]; then
     source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
     # Enable auto-switching of Rubies specified by .ruby-version files
     source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
-    # Use ruby version 3.1.3 (for Jekyll for Github Pages)
-    chruby ruby-3.1.3
+
+    # Configure ruby version for Jekyll for Github Pages
+    chruby ruby-3.4.1
 
 else
 

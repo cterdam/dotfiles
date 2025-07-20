@@ -145,8 +145,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
     ```zsh
     brew install chruby ruby-install xz
-    ruby-install ruby 3.1.3
-    ruby -v # 3.1.3p185 or above
+    ruby-install ruby 3.4.1
+    ruby -v # 3.4.1 or above
     sudo gem install jekyll
     ```
 
