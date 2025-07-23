@@ -638,6 +638,7 @@ if [ $(sysname) = "gLinx" ]; then
     alias sa="cd learning/deepmind/incubation/applied_language/conv_ai/supportassist"
     alias gemax="cd learning/gemini/gemax/experimental/supportassist"
     alias gt="cd gdm/ads/geminitagger"
+    alias exp="cd experimental/users/cterdam"
 
     # program shortcuts
     alias er='/google/data/ro/users/ho/hooper/er'
