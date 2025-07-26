@@ -645,6 +645,7 @@ if [ $(sysname) = "gLinx" ]; then
     alias hm='/google/bin/releases/heinzelmaennchen-team-policy/cli/hm'
     alias legoml='/google/data/ro/teams/legoml/legoml'
     alias bkill='/google/data/ro/teams/borgtools/bkill'
+    alias colab="/google/bin/releases/grp-ix-team/rapid/colab-cli/cli.par"
 
     # hg aliases
     alias hgs='hg status'
