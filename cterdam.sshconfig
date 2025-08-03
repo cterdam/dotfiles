@@ -19,3 +19,6 @@ Host cloudtop
     ControlMaster auto
     ControlPath ~/.ssh/ctrl-%C
     ControlPersist yes
+
+    # View port 8001 for redis insight
+    LocalForward 8001 localhost:8001
