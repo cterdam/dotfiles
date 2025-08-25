@@ -653,6 +653,8 @@ if [ $(sysname) = "gLinx" ]; then
     alias hgl='hg citc -l'
     alias hgc='hg commit'
     alias hgmu='hg amend && hg ut'
+    alias hguc='hg uc'
+    alias hgut='hg ut'
 
     # Fig integration -----------------------------------------------------------------
     # go/zsh-prompt#zsh-fig-prompt-fig-status-fig-prompt-and-powerlevel10k-custom-segment
