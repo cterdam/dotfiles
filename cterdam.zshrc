@@ -50,14 +50,18 @@ if [[ -f $cterdamvimrc && ! -f $vimrcloc ]]; then
 fi
 
 # cterdam's coc settings json file
-cterdamcocsettings="$CTERDAMRC/cterdamcoc.json"
+cterdamcocsettings="$CTERDAMRC/cterdam.coc.json"
 
 # Location for coc settings
-cocsettingsloc="$HOME/.vim/coc-settings.json"
+vimcocsettingsloc="$HOME/.vim/coc-settings.json"
+nvcocsettingsloc="$HOME/.config/nvim/coc-settings.json"
 
 # Symlink, if not already present
 if [[ -f $cterdamcocsettings && ! -f $cocsettingsloc ]]; then
     ln -s $cterdamcocsettings $cocsettingsloc
+fi
+if [[ -f $cterdamcocsettings && ! -f $nvimcocsettingsloc ]]; then
+    ln -s $cterdamcocsettings $nvcocsettingsloc
 fi
 
 # cterdam's neovim init lua file
