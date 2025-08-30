@@ -60,6 +60,30 @@ if [[ -f $cterdamcocsettings && ! -f $cocsettingsloc ]]; then
     ln -s $cterdamcocsettings $cocsettingsloc
 fi
 
+# cterdam's neovim init lua file
+cterdamnvinitlua="$CTERDAMRC/cterdam.nvim.init.lua"
+
+# Location for neovim init lua
+mkdir -p $HOME/.config/nvim
+nvinitlualoc="$HOME/.config/nvim/init.lua"
+
+# Symlink, if not already present
+if [[ -f $cterdamnvinitlua && ! -f $nvinitlualoc ]]; then
+    ln -s $cterdamnvinitlua $nvinitlualoc
+fi
+
+# cterdam's neovim vimrc
+cterdamnvvimrc="$CTERDAMRC/cterdam.nvim.vimrc"
+
+# Location for neovim vimrc
+mkdir -p $HOME/.config/nvim
+nvvimrcloc="$HOME/.config/nvim/vimrc"
+
+# Symlink, if not already present
+if [[ -f $cterdamnvvimrc && ! -f $nvvimrcloc ]]; then
+    ln -s $cterdamnvvimrc $nvvimrcloc
+fi
+
 # }}}
 # GIT {{{
 
@@ -422,8 +446,9 @@ alias tree="tree -N -I '__pycache__'"
 # Load secrets
 source $secretfile
 
-# Edit anything with vim
-export EDITOR="vim"
+# Edit anything with neovim
+alias nv="nvim"
+export EDITOR="nvim"
 
 # Use vim key bindings on cmdline
 bindkey -v

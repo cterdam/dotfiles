@@ -63,11 +63,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Upon finishing installation, the script will print a 'Next steps' section which
     mentions two commands to run in order to add homebrew to PATH. Run them.
 
-- Now install [vim](https://www.vim.org/) with `brew install vim`.
-
-  - MacOS already comes with a builtin distribution of vim, but the default version
-    lacks many key features such as conceal, lua, perl, and python3. The version of vim
-    on homebrew includes these features.
+- Now install Neovim with `brew install neovim`.
 
   - Install [yarn](https://classic.yarnpkg.com/en/docs/install) with `sudo npm install
     --global yarn`.
