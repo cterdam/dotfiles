@@ -57,10 +57,10 @@ vimcocsettingsloc="$HOME/.vim/coc-settings.json"
 nvcocsettingsloc="$HOME/.config/nvim/coc-settings.json"
 
 # Symlink, if not already present
-if [[ -f $cterdamcocsettings && ! -f $cocsettingsloc ]]; then
-    ln -s $cterdamcocsettings $cocsettingsloc
+if [[ -f $cterdamcocsettings && ! -f $vimcocsettingsloc ]]; then
+    ln -s $cterdamcocsettings $vimcocsettingsloc
 fi
-if [[ -f $cterdamcocsettings && ! -f $nvimcocsettingsloc ]]; then
+if [[ -f $cterdamcocsettings && ! -f $nvcocsettingsloc ]]; then
     ln -s $cterdamcocsettings $nvcocsettingsloc
 fi
 
@@ -216,7 +216,7 @@ rc () {
             cd $CTERDAMRC
             ;;
         -h)
-            echo "Available configs: vi(m), coc, exe, git, zsh, tmux, rime, readme, server, secret, ssh"
+            echo "Available configs: vi(m), nv(im), coc, exe, git, zsh, tmux, rime, readme, server, secret, ssh"
             ;;
         coc)
             $EDITOR $cterdamcocsettings
@@ -255,6 +255,9 @@ rc () {
             ;;
         vi | vim)
             $EDITOR $cterdamvimrc
+            ;;
+        nv | nvim)
+            $EDITOR $cterdamnvvimrc
             ;;
         zsh)
             $EDITOR $cterdamzshrc
