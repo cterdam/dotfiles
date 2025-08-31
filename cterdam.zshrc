@@ -688,6 +688,12 @@ if [ $(sysname) = "gLinx" ]; then
     alias hguc='hg uc'
     alias hgut='hg ut'
 
+    # Prepend CTERDAMBIN
+    jetski_path="/Users/cterdam/.jetski/jetski/bin"
+    if ! inpath $jetski_path; then
+        addpath $jetski_path tail
+    fi
+
     # Fig integration -----------------------------------------------------------------
     # go/zsh-prompt#zsh-fig-prompt-fig-status-fig-prompt-and-powerlevel10k-custom-segment
 
