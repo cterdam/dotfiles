@@ -75,7 +75,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - Install [silicon](https://github.com/Aloxaf/silicon) with `brew install silicon`.
 
     - This is for [vim-silicon](https://github.com/segeljakt/vim-silicon).
-  
+
   - Install [code-minimap][CODEMINIMAP] with `cargo install --locked code-minimap`
 
     [CODEMINIMAP]: https://github.com/wfxr/code-minimap
@@ -127,7 +127,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     sudo chown -R $(whoami) $HOME/.config
     ```
 
-  - Now run `sudo vim` and it will auto install all plugins, including COC plugins.
+  - Now run `sudo nvim` and it will auto install all plugins, including COC plugins.
 
 ### 5. Other Packages
 
@@ -247,7 +247,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     `#`.
 
     ```zsh
-    vim ~/.ssh/authorized_keys
+    nvim ~/.ssh/authorized_keys
     ```
 
   - Locally, register an entry in `~/.ssh/config`.
@@ -457,7 +457,7 @@ git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:
 - Append the new filetype extension name, without the dot, as a new line into
   `$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
 
-  - After inserting, sort all lines in the file. This can be done either in vim by
+  - After inserting, sort all lines in the file. This can be done either in nvim by
     `:1,%sort`, or in the shell with `sort -o $CTERDAMRC/fts/ftlist{,}`.
 
 - Then repopulate the `dummy` folder:
