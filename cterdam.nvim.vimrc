@@ -3,7 +3,7 @@
 " cterdam.vimrc: cterdam's personal vimrc file.
 " See https://github.com/cterdam/dotfiles
 
-" BUILTIN -----------------------------------------------------------------------------
+" BUILTIN ----------------------------------------------------------------------
 
 " GENERAL {{{
 
@@ -40,12 +40,12 @@ let mapleader='\'
 set notimeout
 
 " Timeout immediately on key encodings
-" Arrow key, function key, and Meta- combo key encodings actually start with an <Esc>
-" sequence. Type <C-v> + key in insert mode to find out the key encoding. This setting
-" makes sure an <Esc> input will not be interpreted as part of a larger sequence and
-" escapes Insert Mode instantly. `noesckeys` has a similar effect, but disables arrow
-" and function keys while in Insert Mode. The current setting enables these keys, but
-" still disables Meta mappings in Insert Mode!
+" Arrow key, function key, and Meta- combo key encodings actually start with an
+" <Esc> sequence. Type <C-v> + key in insert mode to find out the key encoding.
+" This setting makes sure an <Esc> input will not be interpreted as part of a
+" larger sequence and escapes Insert Mode instantly. `noesckeys` has a similar
+" effect, but disables arrow and function keys while in Insert Mode. The current
+" setting enables these keys, but still disables Meta mappings in Insert Mode!
 set ttimeout
 set ttimeoutlen=0
 
@@ -504,7 +504,7 @@ language en_US.UTF-8
 
 " }}}
 
-" PLUGINS -----------------------------------------------------------------------------
+" PLUGINS ----------------------------------------------------------------------
 
 " VIM-PLUG {{{
 
@@ -1604,20 +1604,20 @@ if current_file =~? '^/google/src/cloud'
     " Macro for borg file
     let @a = "14jA\<BackSpace>, 'qianshen']\<Esc>5jomodel_priority = 1\<Esc>"
 
-    " Load Google Vimrc ---------------------------------------------------------------
+    " Load Google Vimrc --------------------------------------------------------
 
     " See go/vim
     let googlevimrcloc=expand("/usr/share/vim/google/google.vim")
     execute 'source' googlevimrcloc
 
-    " Load internal plugins -----------------------------------------------------------
+    " Load internal plugins ----------------------------------------------------
 
     Glug critique
     Glug codefmt
     Glug codefmt-google
     Glug corpweb
 
-    " Load external plugins -----------------------------------------------------------
+    " Load external plugins ----------------------------------------------------
 
     call plug#begin('~/.vim/plugged')
 
@@ -1627,7 +1627,7 @@ if current_file =~? '^/google/src/cloud'
 
     call plug#end()
 
-    " Set up Google autoformatting tools ----------------------------------------------
+    " Set up Google autoformatting tools ---------------------------------------
     augroup UseGoogleTools
 
         autocmd!
@@ -1654,7 +1654,7 @@ if current_file =~? '^/google/src/cloud'
 
     augroup END
 
-    " Set up other syntax tools -------------------------------------------------------
+    " Set up other syntax tools ------------------------------------------------
 
     " Register Cider LSP with Vim-Lsp
     au User lsp_setup call lsp#register_server({
@@ -1669,7 +1669,7 @@ if current_file =~? '^/google/src/cloud'
         \ ],
         \})
 
-    " Vim-lsp settings ----------------------------------------------------------------
+    " Vim-lsp settings ---------------------------------------------------------
 
     " Send async completion requests
     let g:lsp_async_completion = 1
@@ -1684,7 +1684,7 @@ if current_file =~? '^/google/src/cloud'
     " Do not highlight references to current symbol
     let g:lsp_document_highlight_enabled = 0
 
-    " Syntax and linting in Google environment ----------------------------------------
+    " Syntax and linting in Google environment ---------------------------------
 
     " Utility to use GPylint
     " https://g3doc.corp.google.com/devtools/gpylint/g3doc/editor_integration.md#vim
@@ -1715,7 +1715,7 @@ if current_file =~? '^/google/src/cloud'
 
     augroup end
 
-    " Add blame functionality for Piper -----------------------------------------------
+    " Add blame functionality for Piper ----------------------------------------
     " see go/VimPerforce
     function! G4Blame(...)
 

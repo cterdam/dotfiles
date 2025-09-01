@@ -10,19 +10,19 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Download the [IBM Plex](https://www.ibm.com/plex/) font.
 
-  - Follow the link to the Github releases page. Download the OpenType font from the
-    latest release.
+  - Follow the link to the Github releases page. Download the OpenType font from
+    the latest release.
 
-  - To install, after decompressing, drag all subfolders of the `OpenType` folder to
-    Font Book.
+  - To install, after decompressing, drag all subfolders of the `OpenType`
+    folder to Font Book.
 
 - In terminal, run `xcode-select --install` to download developer tools.
 
-- Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for this
-  device.
+- Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for
+  this device.
 
-- Now clone this repo over SSH and destroy the dummy SSH config created in the previous
-  step:
+- Now clone this repo over SSH and destroy the dummy SSH config created in the
+  previous step:
 
   ```zsh
   git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
@@ -90,18 +90,19 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [tmux](https://github.com/tmux/tmux) with `brew install tmux`.
 
-  - Also install [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) with `git
-    clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`.
+  - Also install [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) with
+    `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`.
 
-  - Don't worry about installing actual plugins for now: `cterdam.tmux.conf` will take
-    care of it.
+  - Don't worry about installing actual plugins for now: `cterdam.tmux.conf`
+    will take care of it.
 
 ### 4. Activate shell scripts
 
-- We have not dealt with `zshrc` in the new system yet, but the Conda and Oh My Zsh
-  installation scripts should have created one in the home directory. Read it through,
-  but everything there should already be incorporated into `cterdam.zshrc` which will be
-  installed later. So just delete it so we can use our own shell script:
+- We have not dealt with `zshrc` in the new system yet, but the Conda and Oh My
+  Zsh installation scripts should have created one in the home directory. Read
+  it through, but everything there should already be incorporated into
+  `cterdam.zshrc` which will be installed later. So just delete it so we can use
+  our own shell script:
 
   ```zsh
   rm $HOME/.zshrc
@@ -207,8 +208,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Install [Mono](https://www.mono-project.com/).
 
-    - This installs commands `csc` and `mcs` to compile single C# files, as well as
-      `mono` to run the compiled executable.
+    - This installs commands `csc` and `mcs` to compile single C# files, as well
+      as `mono` to run the compiled executable.
 
 ### 6. Macvim
 
@@ -226,8 +227,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   open .
   ```
 
-- Select all files, and press `Command + Option + I`. Select MacVim in the "Open with"
-  menu, and click on "Change All...".
+- Select all files, and press `Command + Option + I`. Select MacVim in the "Open
+  with" menu, and click on "Change All...".
 
 ### 7. Profile
 
@@ -243,8 +244,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - To use an SSH key to connect to remote:
 
-  - On the server, insert local public keys into this file. Comment lines can start with
-    `#`.
+  - On the server, insert local public keys into this file. Comment lines can
+    start with `#`.
 
     ```zsh
     nvim ~/.ssh/authorized_keys
@@ -252,8 +253,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Locally, register an entry in `~/.ssh/config`.
 
-    - Use `ForwardAgent yes` so the remote can use the local's ssh-agent for things like
-      GitHub, without needing its separate key.
+    - Use `ForwardAgent yes` so the remote can use the local's ssh-agent for
+      things like GitHub, without needing its separate key.
 
   - Optionally, make a local executable for connection in `$CTERDAMRC/exe`.
 
@@ -301,8 +302,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
   - Retrieve the installer with `wget` and run it with the default shell.
 
-  - When the installer finishes, inspect the paragraph it inserts into the default shell
-    config. Update `cterdam.zshrc` with that conda location.
+  - When the installer finishes, inspect the paragraph it inserts into the
+    default shell config. Update `cterdam.zshrc` with that conda location.
 
 - Install [Tmux Plugin Manager][TPM].
 
@@ -374,8 +375,9 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - This will automate most of what's in this README file on a Linux environment.
 
-- C family languages, Anaconda and Java should come pre-installed in Deep Learning AMI.
-  Due to being on a Linux server, this script does not install .NET, Latex, and Rime.
+- C family languages, Anaconda and Java should come pre-installed in Deep
+  Learning AMI. Due to being on a Linux server, this script does not install
+  .NET, Latex, and Rime.
 
 - After the script finishes, you will be taken to zsh. Manually run the following:
 
@@ -388,9 +390,9 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Then log out and back in the remote instance. Go to `tmux` and send `Prefix` `Shift+I`
   to install tmux plugins.
 
-- If the local instance is also running `tmux`, then these keys might need to be sent
-  twice in order to reach the remote instance. That is, press `Prefix` `Prefix`
-  `Shift+I` `Shift+I`. The default Prefix for `tmux` is `Ctrl+B`.
+- If the local instance is also running `tmux`, then these keys might need to be
+  sent twice in order to reach the remote instance. That is, press `Prefix`
+  `Prefix` `Shift+I` `Shift+I`. The default Prefix for `tmux` is `Ctrl+B`.
 
 - Launch `vim` to install vim plugins.
 
@@ -426,6 +428,7 @@ This section is a *summary* of native instructions from GitHub found [here][GHSS
 - Copy the contents of `cterdam.pub`
 
   - If on macOS:
+
     ```sh
     cat ~/.ssh/cterdam.pub | pbcopy
     ```
@@ -457,8 +460,8 @@ git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:
 - Append the new filetype extension name, without the dot, as a new line into
   `$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
 
-  - After inserting, sort all lines in the file. This can be done either in nvim by
-    `:1,%sort`, or in the shell with `sort -o $CTERDAMRC/fts/ftlist{,}`.
+  - After inserting, sort all lines in the file. This can be done either in nvim
+    by `:1,%sort`, or in the shell with `sort -o $CTERDAMRC/fts/ftlist{,}`.
 
 - Then repopulate the `dummy` folder:
 
@@ -483,8 +486,8 @@ git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:
 
     [CONDAUSERS]: https://stackoverflow.com/questions/75968081/i-cant-install-anaconda-on-a-macbook-pro-m1-with-ventura-13-3-1
 
-  - If installation ultimately fails, [change the owner of shell config files to the
-    current user][CONDATROUBLESHOOT]:
+  - If installation ultimately fails, [change the owner of shell config files to
+    the current user][CONDATROUBLESHOOT]:
 
     [CONDATROUBLESHOOT]: https://docs.anaconda.com/anaconda/user-guide/troubleshooting/#the-installation-failed-message-when-running-a-pkg-installer-on-osx
 
@@ -503,13 +506,13 @@ git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:
 
 - A different Java version is needed.
 
-  - Any Java LTS version should work just fine, but if for any reason a lower version of
-    Java is needed (e.g. Search Engines course), then the `jdt` for `coc-java` might not
-    work correctly. In that case follow [this issue][JAVAISSUE] to replace the
-    automatically-downloaded `jdt` with an older version which works with lower versions
-    of Java. Specifically,
+  - Any Java LTS version should work just fine, but if for any reason a lower
+    version of Java is needed (e.g. Search Engines course), then the `jdt` for
+    `coc-java` might not work correctly. In that case follow [this
+    issue][JAVAISSUE] to replace the automatically-downloaded `jdt` with an
+    older version which works with lower versions of Java. Specifically,
 
-    ```
+    ```txt
     Version 57 of JDT Lang Sever works fine
     https://download.eclipse.org/jdtls/milestones/0.57.0/
 
@@ -523,16 +526,16 @@ git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:
 
 - Rust installation script needs to alter shell files which are nonexistent.
 
-  - Just use the graphic installer. After running the installer, the installed Rust
-    environment might not be in `$PATH` right away, but the our `zshrc` should take care
-    of that once activated.
+  - Just use the graphic installer. After running the installer, the installed
+    Rust environment might not be in `$PATH` right away, but the our `zshrc`
+    should take care of that once activated.
 
 - Vim installed through brew does not seem to replace system vim.
 
-  - Upon finishing installing the brew version, run `which vim` and you might see that
-    it's still the system vim (and not the brew vim) which gets evoked. This is because
-    brew-installed apps are not given priority in PATH.  Don't worry about it;
-    `cterdam.zshrc` will fix this.
+  - Upon finishing installing the brew version, run `which vim` and you might
+    see that it's still the system vim (and not the brew vim) which gets evoked.
+    This is because brew-installed apps are not given priority in PATH.  Don't
+    worry about it; `cterdam.zshrc` will fix this.
 
 ## Submodules
 
@@ -545,9 +548,9 @@ If submodule folders appear empty after cloning, run this to download all submod
 git submodule update --init --recursive
 ```
 
-Note that updating the parent repo will not automatically update submodules.  To update
-submodules, since git 1.8.2 the option `--remote` was added to support updating to
-latest tips of remote branches:
+Note that updating the parent repo will not automatically update submodules.  To
+update submodules, since git 1.8.2 the option `--remote` was added to support
+updating to latest tips of remote branches:
 
 ```zsh
 git submodule update --recursive --remote
