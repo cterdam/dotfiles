@@ -683,10 +683,14 @@ if [ $(sysname) = "gLinx" ]; then
     # hg aliases
     alias hgs='hg status'
     alias hgl='hg citc -l'
+    alias hga='hg add'
     alias hgc='hg commit'
+    alias hgm='hg amend'
     alias hgmu='hg amend && hg ut'
     alias hguc='hg uc'
     alias hgut='hg ut'
+    alias hgxl='hg xl'
+    alias hgdf='hg diff'
 
     # Prepend CTERDAMBIN
     jetski_path="/Users/cterdam/.jetski/jetski/bin"
