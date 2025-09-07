@@ -691,6 +691,7 @@ if [ $(sysname) = "gLinx" ]; then
     alias hgut='hg ut'
     alias hgxl='hg xl'
     alias hgdf='hg diff'
+    alias hgeu='hg evolve && hg ut'
 
     # Prepend CTERDAMBIN
     jetski_path="/Users/cterdam/.jetski/jetski/bin"
