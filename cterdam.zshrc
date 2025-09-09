@@ -762,6 +762,13 @@ if [ $(sysname) = "gLinx" ]; then
         p10k segment -f 208 -c $fig_prompt -t $fig_prompt
     }
 
+    # Add support for Snap (go/snap-cl) and enable it by default. #!>>SNAP<<!#
+    if [[ -r /google/data/ro/teams/ix-ml/snap/config/bashrc ]] ; then #!>>SNAP<<!#
+      source /google/data/ro/teams/ix-ml/snap/config/bashrc #!>>SNAP<<!#
+    fi #!>>SNAP<<!#
+    export SNAP_DEFAULT_FOR_SYNC=true #!>>SNAP<<!#
+    export SNAP_DEFAULT_FOR_NEW_WORKSPACE=true #!>>SNAP<<!#
+
 fi
 
 # }}}
