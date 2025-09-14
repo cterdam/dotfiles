@@ -1,4 +1,4 @@
-# vim:foldmethod=marker filetype=zsh
+#bat vim:foldmethod=marker filetype=zsh
 
 # cterdam.zshrc: cterdam's personal zshrc file.
 # See https://github.com/cterdam/dotfiles
@@ -28,7 +28,7 @@ export CTERDAMRC="$CTERDAMHOME/dotfiles"
 export CTERDAMEXE="$CTERDAMRC/exe"
 
 # Make profile directory only readable by self
-chmod -R 700 $CTERDAMRC/utility/profile
+chmod -R 700 $CTERDAMRC/utility/.profile
 
 # }}}
 # CTERDAMRC {{{
@@ -176,7 +176,7 @@ fi
 # {{{ SECRET
 
 # Locate secrets
-secretfile="$CTERDAMRC/utility/profile/shell/.exec.sh"
+secretfile="$CTERDAMRC/utility/.profile/shell/.exec.sh"
 
 # }}}
 # {{{ SSH
