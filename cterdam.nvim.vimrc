@@ -1264,11 +1264,6 @@ autocmd! User GoyoLeave call <SID>goyo_leave()
 " Echo preview page url in command line when opening preview page
 let g:mkdp_echo_preview_url = 1
 
-" use a custom markdown style must be absolute path
-" This file enables previewing Github-flavored Markdown
-let g:mkdp_markdown_css = expand("$CTERDAMRC") .
-            \"/github-markdown-css/github-markdown.css"
-
 " <Leader>p to toggle preview window
 map <Leader>p <Plug>MarkdownPreviewToggle
 
