@@ -679,6 +679,7 @@ if [ $(sysname) = "gLinx" ]; then
     alias bkill='/google/data/ro/teams/borgtools/bkill'
     alias colab="/google/bin/releases/grp-ix-team/rapid/colab-cli/cli.par"
     alias gemini='/google/bin/releases/gemini-cli/tools/gemini'
+    alias hghead='readlink /google/src/files/head'
 
     # hg aliases
     alias hgs='hg status'
