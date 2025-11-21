@@ -673,13 +673,15 @@ if [ $(sysname) = "gLinx" ]; then
     alias exp="cd experimental/users/cterdam"
 
     # program shortcuts
+    alias aclcheck='/google/bin/releases/ganpati-acls/tools/aclcheck'
+    alias bkill='/google/data/ro/teams/borgtools/bkill'
+    alias clhead='readlink /google/src/files/head'
+    alias colab="/google/bin/releases/grp-ix-team/rapid/colab-cli/cli.par"
     alias er='/google/data/ro/users/ho/hooper/er'
+    alias gemini='/google/bin/releases/gemini-cli/tools/gemini'
     alias hm='/google/bin/releases/heinzelmaennchen-team-policy/cli/hm'
     alias legoml='/google/data/ro/teams/legoml/legoml'
-    alias bkill='/google/data/ro/teams/borgtools/bkill'
-    alias colab="/google/bin/releases/grp-ix-team/rapid/colab-cli/cli.par"
-    alias gemini='/google/bin/releases/gemini-cli/tools/gemini'
-    alias hghead='readlink /google/src/files/head'
+    alias securemymodel='/google/bin/releases/airr-saif-data/securemymodel/securemymodel'
 
     # hg aliases
     alias hgs='hg status'
