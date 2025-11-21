@@ -772,6 +772,54 @@ if [ $(sysname) = "gLinx" ]; then
     export SNAP_DEFAULT_FOR_SYNC=true #!>>SNAP<<!#
     export SNAP_DEFAULT_FOR_NEW_WORKSPACE=true #!>>SNAP<<!#
 
+    # Utility to rename citc workspace
+    function citc_rename() {
+        if [ $# -ne 2 ]; then
+            echo "Usage: citc_rename <oldname> <newname>"
+            return 1
+        fi
+
+        local old_name="$1"
+        local new_name="$2"
+        local current_dir=$(pwd)
+        local workspace_root="/google/src/cloud/$USER/${old_name}"
+
+        # Check if the current directory is within the workspace being renamed
+        if [[ "${current_dir}" == "${workspace_root}"* ]]; then
+            echo "ERROR: You cannot run this script from within the workspace you are trying to rename."
+            echo "Please change your current directory outside of '${workspace_root}' and try again."
+            return 1
+        fi
+
+        local delete_output
+        local ws_num
+
+        delete_output=$(hg citc -d "${old_name}")
+        if [ $? -ne 0 ]; then
+            echo "Failed to delete workspace ${old_name}"
+            return 1
+        fi
+
+        echo "${delete_output}"
+        ws_num=$(echo "${delete_output}" | awk '/--undelete/ {print $(NF)}')
+
+        if [ -z "${ws_num}" ]; then
+            echo "Could not extract workspace number from hg output."
+            return 1
+        fi
+
+        hg citc "${new_name}" --undelete "${ws_num}"
+        if [ $? -ne 0 ]; then
+            echo "Failed to undelete workspace as ${new_name}"
+            # Attempt to restore the old workspace
+            echo "Attempting to restore ${old_name}..."
+            hg citc "${old_name}" --undelete "${ws_num}"
+            return 1
+        fi
+
+        echo "Successfully renamed workspace '${old_name}' to '${new_name}'"
+    }
+
 fi
 
 # }}}
