@@ -1,14 +1,15 @@
 patch:
   schema_list:
     - schema: jyut6ping3
+    - schema: wugniu
     - schema: cangjie5
-    - schema: jyutsp
     - schema: double_pinyin_mspy
     - schema: wuhan
     - schema: wubi_trad
     - schema: luna_pinyin
     - schema: wubi86
     - schema: bopomofo
+    - schema: jyutsp
 
   switcher:
     caption: 〔方案選單〕
