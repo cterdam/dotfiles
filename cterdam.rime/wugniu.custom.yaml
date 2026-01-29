@@ -1,5 +1,5 @@
 patch:
-  schema/name: 上海言語
+  schema/name: 上海閒話
   switches:
     - options: [ noop, simplification ]
       states: [ 漢字, 汉字 ]
