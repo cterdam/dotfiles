@@ -410,6 +410,8 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+alias cerm='conda env remove -n'
+
 # }}}
 # GENERAL {{{
 
