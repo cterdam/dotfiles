@@ -571,6 +571,10 @@ cargoenv="$HOME/.cargo/env"
 if [[ -f $cargoenv ]]; then
     source $cargoenv
 fi
+cargobin="$HOME/.cargo/bin"
+if ! inpath $cargobin; then
+    addpath $cargobin head
+fi
 
 # Fix ruby versioning issues for Jekyll
 if [[ `sysname` == "macOS" ]]; then
