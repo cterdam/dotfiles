@@ -1,6 +1,6 @@
 # vim: filetype=sshconfig
 
-Host cloudtop cterdam.c.googlers.com
+Host clp cterdam.c.googlers.com
 
     HostName cterdam.c.googlers.com
 
@@ -17,13 +17,14 @@ Host cloudtop cterdam.c.googlers.com
 
     # Prefer to reuse existent connections
     ControlMaster auto
-    ControlPath ~/.ssh/ctrl-%C
+    ControlPath ~/.ssh/ctrl/ctrl-%C
     ControlPersist yes
 	ServerAliveInterval 30
 	ServerAliveCountMax 5
 
 Host coc
 
+    User josh
     HostName 167.234.218.131
 
     # Use local SSH key on remote server
@@ -39,7 +40,7 @@ Host coc
 
     # Prefer to reuse existent connections
     ControlMaster auto
-    ControlPath ~/.ssh/ctrl-%C
+    ControlPath ~/.ssh/ctrl/ctrl-%C
     ControlPersist yes
 	ServerAliveInterval 30
 	ServerAliveCountMax 5

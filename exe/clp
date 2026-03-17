@@ -1,7 +1,7 @@
 #!/bin/bash
 
-tmux rename-window cloudtop
+tmux rename-window clp
 
 # Connect to the tmux session already running on the server.
 gcertstatus -nocheck_ssh -check_remaining=1h || gcert
-ssh cloudtop -t -- /bin/bash -c "gcertstatus -nocheck_ssh -check_remaining=1h || gcert; tmx2 new-session -A -s gLinx"
+ssh clp -t -- /bin/bash -c "gcertstatus -nocheck_ssh -check_remaining=1h || gcert; tmx2 new-session -A -s gLinx"

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+tmux rename-window coc
+ssh coc

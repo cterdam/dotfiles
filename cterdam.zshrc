@@ -438,6 +438,9 @@ sysname() {
 # Add this device key to ssh-agent so it can be forwarded to remotes
 ssh-add ~/.ssh/cterdam &> /dev/null
 
+# Make SSH ctrl path dir
+mkdir -p ~/.ssh/ctrl
+
 # Use conda python and pip instead of any system-installed versions
 alias python3="python"
 alias pip3="pip"
