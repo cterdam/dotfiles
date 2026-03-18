@@ -481,9 +481,6 @@ else
     export MANPAGER="bat -l man -p"
 fi
 
-# Load fzf shell integration
-source <(fzf --zsh)
-
 # Load Node Version Manager (NVM) if found
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
