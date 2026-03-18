@@ -24,7 +24,7 @@ Host clp cterdam.c.googlers.com
 
 Host coc
 
-    User josh
+    User llz
     HostName 167.234.218.131
 
     # Use local SSH key on remote server
