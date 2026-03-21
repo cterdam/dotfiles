@@ -21,11 +21,11 @@
   previous step:
 
   ```zsh
-  git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
+  git clone --recursive git@github.com:cterdam/dotfiles.git ~/llz/cfg
   rm ~/.ssh/config
   ```
 
-- Add `~/cterdam` to the Finder side bar and Dock.
+- Add `~/llz` to the Finder side bar and Dock.
 
 - Set up terminal appearance by importing `hbpro.terminal` to terminal profiles.
 
@@ -87,15 +87,15 @@
   - Also install [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) with
     `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`.
 
-  - Don't worry about installing actual plugins for now: `cterdam.tmux.conf`
-    will take care of it.
+  - Don't worry about installing actual plugins for now: `dot/tmux.conf` will
+    take care of it.
 
 ### 4. Activate shell scripts
 
 - We have not dealt with `zshrc` in the new system yet, but the Conda and Oh My
   Zsh installation scripts should have created one in the home directory. Read
   it through, but everything there should already be incorporated into
-  `cterdam.zshrc` which will be installed later. So just delete it so we can use
+  `zshrc` which will be installed later. So just delete it so we can use
   our own shell script:
 
   ```zsh
@@ -104,10 +104,10 @@
 
 - Now activate the shell scripts:
 
-  - Link `cterdam.zshrc` to the real `zshrc` location:
+  - Link `dot/zshrc` to the real `zshrc` location:
 
     ```zsh
-    ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
+    ln -s $HOME/llz/cfg/dot/zshrc $HOME/.zshrc
     ```
 
   - Restart shell, then restart again. Now type `Prefix` `Shift + I` to install
@@ -167,7 +167,7 @@
   - Install all default Rime packages:
 
     ```zsh
-    cd $HOME/cterdam/dotfiles/plum
+    cd $HOME/llz/cfg/plum
     bash rime-install :all
     ```
 
@@ -224,7 +224,7 @@
 - Open this location in Finder:
 
   ```zsh
-  cd $CTERDAMRC/fts/dummy
+  cd $LLZHOME/cfg/fts/dummy
   open .
   ```
 
@@ -265,19 +265,19 @@ This section is a *summary* of native instructions from GitHub found [here][GHSS
 
   Name the key after the device and save it in `~/.ssh`.
 
-- Link that keypair to `cterdam` and `cterdam.pub`:
+- Link that keypair to `llz` and `llz.pub`:
 
   ```zsh
-  ln -s ~/.ssh/<KEY_NAME> ~/.ssh/cterdam
-  ln -s ~/.ssh/<KEY_NAME>.pub ~/.ssh/cterdam.pub
+  ln -s ~/.ssh/<KEY_NAME> ~/.ssh/llz
+  ln -s ~/.ssh/<KEY_NAME>.pub ~/.ssh/llz.pub
   ```
 
-- Copy the contents of `cterdam.pub`
+- Copy the contents of `llz.pub`
 
   - If on macOS:
 
     ```sh
-    cat ~/.ssh/cterdam.pub | pbcopy
+    cat ~/.ssh/llz.pub | pbcopy
     ```
 
   And add it to GitHub [here](https://github.com/settings/keys) both as an
@@ -287,7 +287,7 @@ This section is a *summary* of native instructions from GitHub found [here][GHSS
 
   ```sshconfig
   Host github.com
-      IdentityFile ~/.ssh/cterdam
+      IdentityFile ~/.ssh/llz
   ```
 
 ## Zsh theme and plugins
@@ -305,15 +305,15 @@ git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:
 ### Adding new filetypes for MacVim
 
 - Append the new filetype extension name, without the dot, as a new line into
-  `$CTERDAMRC/fts/ftlist`. Do not leave empty lines in the file.
+  `$LLZHOME/cfg/fts/ftlist`. Do not leave empty lines in the file.
 
   - After inserting, sort all lines in the file. This can be done either in nvim
-    by `:1,%sort`, or in the shell with `sort -o $CTERDAMRC/fts/ftlist{,}`.
+    by `:1,%sort`, or in the shell with `sort -o $LLZHOME/cfg/fts/ftlist{,}`.
 
 - Then repopulate the `dummy` folder:
 
   ```zsh
-  repopft $CTERDAMRC/fts/dummy $CTERDAMRC/fts/ftlist
+  repopft $LLZHOME/cfg/fts/dummy $LLZHOME/cfg/fts/ftlist
   ```
 
   - It may simply create the needed new file(s), or print out other diagnostic messages.
@@ -382,7 +382,7 @@ git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:
   - Upon finishing installing the brew version, run `which vim` and you might
     see that it's still the system vim (and not the brew vim) which gets evoked.
     This is because brew-installed apps are not given priority in PATH.  Don't
-    worry about it; `cterdam.zshrc` will fix this.
+    worry about it; `dot/zshrc` will fix this.
 
 ## Submodules
 

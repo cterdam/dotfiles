@@ -5,21 +5,21 @@
 # Overall home
 export LLZHOME="$HOME/llz"
 # dir to hold dotfiles
-export LLZCFG="$LLZHOME/cfg/dot"
+export LLZDOT="$LLZHOME/cfg/dot"
 
 # Dotfile src -> dst pairs
 LLZDOTPAIRS=(
-    $LLZCFG/vimrc         $HOME/.vim/vimrc
-    $LLZCFG/nvim.vimrc    $HOME/.config/nvim/vimrc
-    $LLZCFG/nvim.init.lua $HOME/.config/nvim/init.lua
-    $LLZCFG/coc.json      $HOME/.vim/coc-settings.json
-    $LLZCFG/coc.json      $HOME/.config/nvim/coc-settings.json
-    $LLZCFG/gitconfig     $HOME/.gitconfig
-    $LLZCFG/zshrc         $HOME/.zshrc
-    $LLZCFG/p10k.zsh      $HOME/.p10k.zsh
-    $LLZCFG/tmux.conf     $HOME/.tmux.conf
-    $LLZCFG/ssh-config    $HOME/.ssh/config
-    $LLZCFG/hgrc          $HOME/.hgrc
+    $LLZDOT/vimrc         $HOME/.vim/vimrc
+    $LLZDOT/nvim.vimrc    $HOME/.config/nvim/vimrc
+    $LLZDOT/nvim.init.lua $HOME/.config/nvim/init.lua
+    $LLZDOT/coc.json      $HOME/.vim/coc-settings.json
+    $LLZDOT/coc.json      $HOME/.config/nvim/coc-settings.json
+    $LLZDOT/gitconfig     $HOME/.gitconfig
+    $LLZDOT/zshrc         $HOME/.zshrc
+    $LLZDOT/p10k.zsh      $HOME/.p10k.zsh
+    $LLZDOT/tmux.conf     $HOME/.tmux.conf
+    $LLZDOT/ssh-config    $HOME/.ssh/config
+    $LLZDOT/hgrc          $HOME/.hgrc
 )
 
 # Symlink a dotfile to their default location
@@ -50,31 +50,44 @@ else
     rimeloc=""
 fi
 if [[ -n $rimeloc ]]; then
-    for llzrimefile in "$LLZCFG/rime"/*; do
+    for llzrimefile in "$LLZDOT/rime"/*; do
         linkfile "$llzrimefile" "$rimeloc/$(basename $llzrimefile)"
     done
 fi
 
+# Clear link
+cleardotlinks() {
+    for ((i=2; i<=${#LLZDOTPAIRS[@]}; i+=2)); do
+        [[ -L ${LLZDOTPAIRS[$i]} ]] && rm ${LLZDOTPAIRS[$i]}
+    done
+    if [[ -n $rimeloc ]]; then
+        for f in "$LLZDOT/rime"/*; do
+            local target="$rimeloc/$(basename $f)"
+            [[ -L $target ]] && rm $target
+        done
+    fi
+}
+
 # Edit dotfiles
 rc() {
     local -A files=(
-        [coc]=$LLZCFG/coc.json
-        [git]=$LLZCFG/gitconfig
-        [hg]=$LLZCFG/hgrc
-        [nv]=$LLZCFG/nvim.vimrc
-        [nvim]=$LLZCFG/nvim.vimrc
-        [p10k]=$LLZCFG/p10k.zsh
-        [readme]=$LLZCFG/README.md
-        [ssh]=$LLZCFG/sshconfig
-        [tmux]=$LLZCFG/tmux.conf
-        [vi]=$LLZCFG/vimrc
-        [vim]=$LLZCFG/vimrc
-        [zsh]=$LLZCFG/zshrc
+        [coc]=$LLZDOT/coc.json
+        [git]=$LLZDOT/gitconfig
+        [hg]=$LLZDOT/hgrc
+        [nv]=$LLZDOT/nvim.vimrc
+        [nvim]=$LLZDOT/nvim.vimrc
+        [p10k]=$LLZDOT/p10k.zsh
+        [readme]=$LLZDOT/README.md
+        [ssh]=$LLZDOT/ssh-config
+        [tmux]=$LLZDOT/tmux.conf
+        [vi]=$LLZDOT/vimrc
+        [vim]=$LLZDOT/vimrc
+        [zsh]=$LLZDOT/zshrc
     )
     local -A dirs=(
-        ['']=$LLZCFG
+        ['']=$LLZDOT
         [exe]="$LLZHOME/cfg/exe"
-        [rime]="$LLZCFG/rime"
+        [rime]="$LLZDOT/rime"
     )
     if [[ $1 == -h ]]; then
         echo "Available configs: vi(m), nv(im), coc, exe, git, zsh, p10k, tmux, rime, readme, ssh"
@@ -85,19 +98,6 @@ rc() {
         cd ${dirs[$1]}
     else
         echo "No config for $1!"
-    fi
-}
-
-# Clear link
-cleardotlinks() {
-    for ((i=2; i<=${#LLZDOTPAIRS[@]}; i+=2)); do
-        [[ -L ${LLZDOTPAIRS[$i]} ]] && rm ${LLZDOTPAIRS[$i]}
-    done
-    if [[ -n $rimeloc ]]; then
-        for f in "$LLZCFG/rime"/*; do
-            local target="$rimeloc/$(basename $f)"
-            [[ -L $target ]] && rm $target
-        done
     fi
 }
 
@@ -218,7 +218,7 @@ sysname() {
 }
 
 # Add this device key to ssh-agent so it can be forwarded to remotes
-ssh-add ~/.ssh/cterdam &> /dev/null
+ssh-add ~/.ssh/llz &> /dev/null
 
 # Make SSH ctrl path dir
 mkdir -p ~/.ssh/ctrl
