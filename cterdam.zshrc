@@ -27,9 +27,6 @@ export CTERDAMRC="$CTERDAMHOME/dotfiles"
 # CTERDAMEXE directory to hold all scripts to be converted to executables
 export CTERDAMEXE="$CTERDAMRC/exe"
 
-# Make profile directory only readable by self
-chmod -R 700 $CTERDAMRC/utility/.profile
-
 # }}}
 # CTERDAMRC {{{
 
@@ -171,12 +168,6 @@ if [[ -d $rimeloc ]]; then
         fi
     done
 fi
-
-# }}}
-# {{{ SECRET
-
-# Locate secrets
-secretfile="$CTERDAMRC/utility/.profile/shell/.exec.sh"
 
 # }}}
 # {{{ SSH
@@ -454,9 +445,6 @@ alias clear="clear && clear"
 
 # Show Chinese characters; Do not show pycache
 alias tree="tree -N -I '__pycache__'"
-
-# Load secrets
-source $secretfile
 
 # Edit anything with neovim
 alias nv="nvim"
