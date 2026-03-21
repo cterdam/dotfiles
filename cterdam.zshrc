@@ -1,153 +1,44 @@
-#bat vim:foldmethod=marker filetype=zsh
+# vim:foldmethod=marker filetype=zsh
 
-# cterdam.zshrc: cterdam's personal zshrc file.
-# See https://github.com/cterdam/dotfiles
+# HOME {{{
 
-# CTERDAMHOME {{{
+# Overall home
+export LLZHOME="$HOME/cterdam"
+mkdir -p $LLZHOME
 
-# Intended directory structure:
-# - CTERDAMHOME (development directory)
-#   - CTERDAMBIN (script and other binary symlinks)
-#   - CTERDAMRC (config files)
-#     - CTERDAMEXE (source scripts for execution)
+# dir to hold dotfiles
+export LLZCFG="$LLZHOME/dotfiles"
 
-# CTERDAMHOME directory to hold all my terminal material
-export CTERDAMHOME="$HOME/cterdam"
-mkdir -p $CTERDAMHOME
-
-# CTERDAMBIN directory to hold all my executables.
-# This will be given priority in PATH.
-export CTERDAMBIN="$CTERDAMHOME/bin"
-mkdir -p $CTERDAMBIN
-
-# CTERDAMRC directory to hold all cterdam's custom rc files
-# CTERDAMRC should be named dotfiles as cloned from my git repo.
-export CTERDAMRC="$CTERDAMHOME/dotfiles"
-
-# CTERDAMEXE directory to hold all scripts to be converted to executables
-export CTERDAMEXE="$CTERDAMRC/exe"
+# dir to hold executable scripts
+export LLZEXE="$LLZCFG/exe"
 
 # }}}
-# CTERDAMRC {{{
+# CFG {{{
 
-# rc files are all symlinked to their default location.
+# Symlink a dotfile to their default location
+linkfile() {
+    local src="$1"
+    local dst="$2"
+    mkdir -p "$(dirname "$dst")"
+    if [[ -f $src && ! -f $dst ]]; then
+        ln -s "$src" "$dst"
+    fi
+}
 
-# VIM {{{
+# Various dotfiles
+linkfile "$LLZCFG/cterdam.vimrc"         "$HOME/.vim/vimrc"
+linkfile "$LLZCFG/cterdam.nvim.vimrc"    "$HOME/.config/nvim/vimrc"
+linkfile "$LLZCFG/cterdam.nvim.init.lua" "$HOME/.config/nvim/init.lua"
+linkfile "$LLZCFG/cterdam.coc.json"      "$HOME/.vim/coc-settings.json"
+linkfile "$LLZCFG/cterdam.coc.json"      "$HOME/.config/nvim/coc-settings.json"
+linkfile "$LLZCFG/cterdam.gitconfig"     "$HOME/.gitconfig"
+linkfile "$LLZCFG/cterdam.zshrc"         "$HOME/.zshrc"
+linkfile "$LLZCFG/cterdam.p10k.zsh"      "$HOME/.p10k.zsh"
+linkfile "$LLZCFG/cterdam.tmux.conf"     "$HOME/.tmux.conf"
+linkfile "$LLZCFG/cterdam.sshconfig"     "$HOME/.ssh/config"
+linkfile "$LLZCFG/cterdam.hgrc"          "$HOME/.hgrc"
 
-# cterdam's vimrc file
-cterdamvimrc="$CTERDAMRC/cterdam.vimrc"
-
-# Location for vimrc
-mkdir -p $HOME/.vim
-vimrcloc="$HOME/.vim/vimrc"
-
-# Symlink, if not already present
-if [[ -f $cterdamvimrc && ! -f $vimrcloc ]]; then
-    ln -s $cterdamvimrc $vimrcloc
-fi
-
-# cterdam's coc settings json file
-cterdamcocsettings="$CTERDAMRC/cterdam.coc.json"
-
-# Location for coc settings
-vimcocsettingsloc="$HOME/.vim/coc-settings.json"
-nvcocsettingsloc="$HOME/.config/nvim/coc-settings.json"
-
-# Symlink, if not already present
-if [[ -f $cterdamcocsettings && ! -f $vimcocsettingsloc ]]; then
-    ln -s $cterdamcocsettings $vimcocsettingsloc
-fi
-if [[ -f $cterdamcocsettings && ! -f $nvcocsettingsloc ]]; then
-    ln -s $cterdamcocsettings $nvcocsettingsloc
-fi
-
-# cterdam's neovim init lua file
-cterdamnvinitlua="$CTERDAMRC/cterdam.nvim.init.lua"
-
-# Location for neovim init lua
-mkdir -p $HOME/.config/nvim
-nvinitlualoc="$HOME/.config/nvim/init.lua"
-
-# Symlink, if not already present
-if [[ -f $cterdamnvinitlua && ! -f $nvinitlualoc ]]; then
-    ln -s $cterdamnvinitlua $nvinitlualoc
-fi
-
-# cterdam's neovim vimrc
-cterdamnvvimrc="$CTERDAMRC/cterdam.nvim.vimrc"
-
-# Location for neovim vimrc
-mkdir -p $HOME/.config/nvim
-nvvimrcloc="$HOME/.config/nvim/vimrc"
-
-# Symlink, if not already present
-if [[ -f $cterdamnvvimrc && ! -f $nvvimrcloc ]]; then
-    ln -s $cterdamnvvimrc $nvvimrcloc
-fi
-
-# }}}
-# GIT {{{
-
-# cterdam's gitconfig file
-cterdamgitconfig="$CTERDAMRC/cterdam.gitconfig"
-
-# Location for gitconfig
-gitconfigloc="$HOME/.gitconfig"
-
-# Symlink, if not already present
-if [[ -f $cterdamgitconfig && ! -f $gitconfigloc ]]; then
-    ln -s $cterdamgitconfig $gitconfigloc
-fi
-
-# }}}
-# ZSH {{{
-
-# cterdam's zshrc file
-cterdamzshrc="$CTERDAMRC/cterdam.zshrc"
-
-# Location for zshrc
-zshrcloc="$HOME/.zshrc"
-
-# Symlink, if not already present
-# Actually this doesn't work, symlinking has to be done manually.
-# If there is no zshrc in the appointed location, how can we execute any script?
-if [[ -f $cterdamzshrc && ! -f $zshrcloc ]]; then
-    ln -s $cterdamzshrc $zshrcloc
-fi
-
-# cterdam's powerlevel10k config file
-cterdamp10k="$CTERDAMRC/cterdam.p10k.zsh"
-
-# Location for powerlevel10k config
-p10kloc="$HOME/.p10k.zsh"
-
-# Symlink, if not already present
-if [[ -f $cterdamp10k && ! -f $p10kloc ]]; then
-    ln -s $cterdamp10k $p10kloc
-fi
-
-
-# }}}
-# TMUX {{{
-
-# cterdam's tmux.conf file
-cterdamtmuxconf="$CTERDAMRC/cterdam.tmux.conf"
-
-# Location for tmux.conf
-tmuxconfloc="$HOME/.tmux.conf"
-
-# Symlink, if not already present
-if [[ -f $cterdamtmuxconf && ! -f $tmuxconfloc ]]; then
-    ln -s $cterdamtmuxconf $tmuxconfloc
-fi
-
-# }}}
-# RIME {{{
-
-# cterdam's rime directory for all Rime dotfiles
-cterdamrime="$CTERDAMRC/cterdam.rime"
-
-# Location for Rime config folder
+# Rime dotfiles
 if [[ -d "$HOME/Library/Rime" ]]; then
     rimeloc="$HOME/Library/Rime"
 elif [[ -d "$HOME/.config/ibus/rime/" ]]; then
@@ -156,107 +47,39 @@ elif [[ -d "$HOME/.ibus/rime/" ]]; then
     rimeloc="$HOME/.ibus/rime/"
 elif [[ -d "$HOME/.local/share/fcitx5/rime/" ]]; then
     rimeloc="$HOME/.local/share/fcitx5/rime/"
+else
+    echo "Warning: Rime config directory not found, skipping." >&2
+    rimeloc=""
 fi
-
-# Symlink all rime files into the correct location for Rime
-if [[ -d $rimeloc ]]; then
-    for cterdamrimefile in $cterdamrime/*
-    do
-        rimefileloc="$rimeloc/$(basename $cterdamrimefile)"
-        if [[ -f $cterdamrimefile && ! -f $rimefileloc ]]; then
-            ln -s $cterdamrimefile $rimefileloc
-        fi
+if [[ -n $rimeloc ]]; then
+    for llzrimefile in "$LLZCFG/cterdam.rime"/*; do
+        linkfile "$llzrimefile" "$rimeloc/$(basename $llzrimefile)"
     done
 fi
 
-# }}}
-# {{{ SSH
-
-# cterdam's ssh config file
-cterdamsshconf="$CTERDAMRC/cterdam.sshconfig"
-
-# Location for ssh config
-sshconfloc="$HOME/.ssh/config"
-
-# Symlink, if not already present
-if [[ -f $cterdamsshconf && ! -f $sshconfloc ]]; then
-    ln -s $cterdamsshconf $sshconfloc
-fi
-
-# }}}
-# HG {{{
-
-# cterdam's hgrc file
-cterdamhgrc="$CTERDAMRC/cterdam.hgrc"
-
-# Location for hgrc
-hgrcloc="$HOME/.hgrc"
-
-# Symlink, if not already present
-if [[ -f $cterdamhgrc && ! -f $hgrcloc ]]; then
-    ln -s $cterdamhgrc $hgrcloc
-fi
-
-# }}}
-
-# Edit dotfiles with vim
-rc () {
-    case $1 in
-        '')
-            echo "Entering $CTERDAMRC"
-            cd $CTERDAMRC
-            ;;
-        -h)
-            echo "Available configs: vi(m), nv(im), coc, exe, git, zsh, tmux, rime, readme, server, secret, ssh"
-            ;;
-        coc)
-            $EDITOR $cterdamcocsettings
-            ;;
-        exe)
-            echo "Entering $CTERDAMEXE"
-            cd $CTERDAMEXE
-            ;;
-        git)
-            $EDITOR $cterdamgitconfig
-            ;;
-        hg)
-            $EDITOR $cterdamhgrc
-            ;;
-        p10k)
-            $EDITOR $cterdamp10k
-            ;;
-        readme)
-            $EDITOR $CTERDAMRC/README.md
-            ;;
-        rime)
-            echo "Entering $cterdamrime"
-            cd $cterdamrime
-            ;;
-        secret)
-            $EDITOR $secretfile
-            ;;
-        server)
-            $EDITOR $CTERDAMRC/server_setup.sh
-            ;;
-        ssh)
-            $EDITOR $cterdamsshconf
-            ;;
-        tmux)
-            $EDITOR $cterdamtmuxconf
-            ;;
-        vi | vim)
-            $EDITOR $cterdamvimrc
-            ;;
-        nv | nvim)
-            $EDITOR $cterdamnvvimrc
-            ;;
-        zsh)
-            $EDITOR $cterdamzshrc
-            ;;
-        *)
-            echo "No config for $1!"
-            ;;
-    esac
+# Edit dotfiles
+rc() {
+    local -A files=(
+        [coc]=$LLZCFG/cterdam.coc.json      [git]=$LLZCFG/cterdam.gitconfig
+        [hg]=$LLZCFG/cterdam.hgrc           [p10k]=$LLZCFG/cterdam.p10k.zsh
+        [readme]=$LLZCFG/README.md          [ssh]=$LLZCFG/cterdam.sshconfig
+        [tmux]=$LLZCFG/cterdam.tmux.conf    [vi]=$LLZCFG/cterdam.vimrc
+        [vim]=$LLZCFG/cterdam.vimrc         [nv]=$LLZCFG/cterdam.nvim.vimrc
+        [nvim]=$LLZCFG/cterdam.nvim.vimrc   [zsh]=$LLZCFG/cterdam.zshrc
+    )
+    local -A dirs=(
+        ['']=$LLZCFG  [exe]=$LLZEXE  [rime]="$LLZCFG/cterdam.rime"
+    )
+    if [[ $1 == -h ]]; then
+        echo "Available configs: vi(m), nv(im), coc, exe, git, zsh, p10k, tmux, rime, readme, ssh"
+    elif [[ -n ${files[$1]+_} ]]; then
+        $EDITOR ${files[$1]}
+    elif [[ -n ${dirs[$1]+_} ]]; then
+        echo "Entering ${dirs[$1]}"
+        cd ${dirs[$1]}
+    else
+        echo "No config for $1!"
+    fi
 }
 
 # }}}
@@ -321,7 +144,7 @@ plugins=(
     zsh-syntax-highlighting
 )
 
-# Individual WhatIs:
+# Individual descs:
 # conda: provide aliases for conda commands themselves
 # conda-zsh-completion: Complete conda command arguments
 # copybuffer: Ctrl + O to copy command line buffer to clipboard
@@ -365,43 +188,6 @@ alias gitroot='git rev-parse --show-toplevel'
 
 # Command to view git logline
 alias gll='git logline'
-
-# }}}
-# CONDA {{{
-
-if [[ -d $HOME/'opt/anaconda3' ]]; then
-    condahomeloc=$HOME/'opt/anaconda3'
-elif [[ -d '/opt/anaconda3' ]]; then
-    condahomeloc='/opt/anaconda3'
-elif [[ -d $HOME/anaconda3 ]]; then
-    condahomeloc=$HOME/anaconda3
-elif [[ -d $HOME/'opt/miniconda3' ]]; then
-    condahomeloc=$HOME/'opt/miniconda3'
-elif [[ -d '/opt/miniconda3' ]]; then
-    condahomeloc='/opt/miniconda3'
-elif [[ -d $HOME/miniconda3 ]]; then
-    condahomeloc=$HOME/miniconda3
-elif [[ -f /usr/local/bin/conda ]]; then
-    condahomeloc='/usr/local'
-fi
-
-# >>> conda initialize >>>
-condaloc=$condahomeloc/'bin/conda'
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$condahomeloc/etc/profile.d/conda.sh" ]; then
-        . "$condahomeloc/etc/profile.d/conda.sh"
-    else
-        addpath "$condahomeloc/bin" head
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-alias cerm='conda env remove -n'
 
 # }}}
 # GENERAL {{{
@@ -454,7 +240,7 @@ export EDITOR="nvim"
 bindkey -v
 
 # Do actual work here
-cd $CTERDAMHOME
+cd $LLZHOME
 
 # Alias for ls
 alias l="ls"
@@ -473,6 +259,26 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Fix ruby versioning issues for Jekyll
+if [[ $(sysname) == "macOS" ]]; then
+
+    # These commands are managed by the brew installation of chruby
+
+    # Use chruby to manage alternative Ruby versions
+    source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
+    # Enable auto-switching of Rubies specified by .ruby-version files
+    source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
+
+    # Configure ruby version for Jekyll for Github Pages
+    chruby ruby-3.4.1
+
+else
+
+    export GEM_HOME="$HOME/gems"
+    addpath $HOME/gems/bin tail
+
+fi
 
 # }}}
 # {{{ AUTO
@@ -499,122 +305,108 @@ fi
 # }}}
 # PATH {{{
 
-# Prints each PATH directory on its own line
+# Prints each dir from PATH on its own line
 # (assumes no ':' in directory names)
 alias showpath='echo $PATH | tr ":" "\n"'
 
 # Returns true iff argument in PATH
 inpath() {
-    # Alternative one-line implementation
-    # [[ :$PATH: == *:$1:* ]]
-    if [[ :$PATH: == *:$1:* ]]; then
-        true
-    else
-        false
-    fi
+    [[ :$PATH: == *:$1:* ]]
 }
 
 # Adds something to PATH, head or tail
 addpath() {
-    if [[ $2 == "head" ]]; then
-        export PATH="$1:$PATH"
-    elif [[ $2 == "tail" ]]; then
-        export PATH="$PATH:$1"
-    elif [[ $2 == "" ]]; then
-        echo "Usage: addpath TARGET [head|tail]"
-    else
-        echo "Unknown option: $2"
-    fi
+    case $2 in
+        head) export PATH="$1:$PATH" ;;
+        tail) export PATH="$PATH:$1" ;;
+        "")   echo "Usage: addpath TARGET [head|tail]" ;;
+        *)    echo "Unknown option: $2" ;;
+    esac
 }
 
 # Deletes something from PATH, if present
 delpath() {
-    if [[ $2 == "first" ]]; then
-        findstr="s%:$1%%"
-    elif [[ $2 == "all" ]]; then
-        findstr="s%:$1%%g"
-    elif [[ $2 == "" ]]; then
-        echo "Usage: delpath TARGET [first|all]"
-        return
-    else
-        echo "Unknown option: $2"
-        return
-    fi
-
-    export PATH=$(echo :$PATH | sed $findstr | sed "s%^:%%g")
+    case $2 in
+        first) export PATH=$(echo :$PATH | sed "s%:$1%%" | sed "s%^:%%g") ;;
+        all)   export PATH=$(echo :$PATH | sed "s%:$1%%g" | sed "s%^:%%g") ;;
+        "")    echo "Usage: delpath TARGET [first|all]" ;;
+        *)     echo "Unknown option: $2" ;;
+    esac
 }
 
 # Prepend pip install path
-if ! inpath ~/.local/bin; then
-    addpath ~/.local/bin head
-fi
-
-# Prepend CTERDAMBIN
-if ! inpath $CTERDAMBIN; then
-    addpath $CTERDAMBIN head
-fi
+inpath ~/.local/bin || addpath ~/.local/bin head
 
 # Add rust path
-cargoenv="$HOME/.cargo/env"
-if [[ -f $cargoenv ]]; then
-    source $cargoenv
-fi
-cargobin="$HOME/.cargo/bin"
-if ! inpath $cargobin; then
-    addpath $cargobin head
-fi
-
-# Fix ruby versioning issues for Jekyll
-if [[ `sysname` == "macOS" ]]; then
-
-    # These commands are managed by the brew installation of chruby
-
-    # Use chruby to manage alternative Ruby versions
-    source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh
-    # Enable auto-switching of Rubies specified by .ruby-version files
-    source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
-
-    # Configure ruby version for Jekyll for Github Pages
-    chruby ruby-3.4.1
-
-else
-
-    export GEM_HOME="$HOME/gems"
-    addpath $HOME/gems/bin tail
-
-fi
+[[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
+inpath $HOME/.cargo/bin || addpath $HOME/.cargo/bin head
 
 # }}}
-# CTERDAMBIN {{{
+# CONDA {{{
 
-# Symlink all vim binaries from homebrew to CTERDAMBIN, if not already present
-# Reason is homebrew on Mac installs vim with more options than the default vim
+if [[ -d $HOME/opt/anaconda3 ]]; then
+    condahomeloc=$HOME/opt/anaconda3
+elif [[ -d /opt/anaconda3 ]]; then
+    condahomeloc=/opt/anaconda3
+elif [[ -d $HOME/anaconda3 ]]; then
+    condahomeloc=$HOME/anaconda3
+elif [[ -d $HOME/opt/miniconda3 ]]; then
+    condahomeloc=$HOME/opt/miniconda3
+elif [[ -d /opt/miniconda3 ]]; then
+    condahomeloc=/opt/miniconda3
+elif [[ -d $HOME/miniconda3 ]]; then
+    condahomeloc=$HOME/miniconda3
+elif [[ -f /usr/local/bin/conda ]]; then
+    condahomeloc=/usr/local
+else
+    echo "Warning: conda installation not found, skipping." >&2
+    condahomeloc=""
+fi
+
+# >>> conda initialize >>>
+if [[ -n $condahomeloc ]]; then
+    condaloc=$condahomeloc/bin/conda
+    __conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$condahomeloc/etc/profile.d/conda.sh" ]; then
+            . "$condahomeloc/etc/profile.d/conda.sh"
+        else
+            addpath "$condahomeloc/bin" head
+        fi
+    fi
+    unset __conda_setup
+fi
+# <<< conda initialize <<<
+
+alias cerm='conda env remove -n'
+
+# }}}
+# LLZBIN {{{
+
+# dir to hold executables
+export LLZBIN="$LLZHOME/bin"
+mkdir -p $LLZBIN
+inpath $LLZBIN || addpath $LLZBIN head
+
+# Prioritize homebrew vi over default
 homebrewbinloc="/opt/homebrew/bin"
 if [[ -d $homebrewbinloc ]]; then
-    for homebrewvimbin in $homebrewbinloc/(*vim*|vi)
-    do
-        cterdamvimbin="$CTERDAMBIN/$(basename $homebrewvimbin)"
-        if [[ ! -f $cterdamvimbin ]]; then
-            ln -s $homebrewvimbin $cterdamvimbin
-        fi
+    for homebrewvimbin in $homebrewbinloc/(*vim*|vi); do
+        linkfile "$homebrewvimbin" "$LLZBIN/$(basename $homebrewvimbin)"
     done
 fi
 
-# Empower all scripts in CTERDAMRC/scripts, and symlink to CTERDAMBIN if not
-# already present
-for exefile in $CTERDAMEXE/*
-do
+# Add exe from cfg
+for exefile in $LLZEXE/*; do
     chmod 755 $exefile
-    binexe="$CTERDAMBIN/$(basename $exefile)"
-    if [[ ! -f $binexe ]]; then
-        ln -s $exefile $binexe
-    fi
+    linkfile "$exefile" "$LLZBIN/$(basename $exefile)"
 done
 
 # Fix issue where bat goes by batcat on some Linux systems
-batexe=$CTERDAMBIN/bat
 if [[ ! "$(command -v bat)" && "$(command -v batcat)" ]]; then
-    ln -s `which batcat` $batexe
+    linkfile "$(which batcat)" "$LLZBIN/bat"
 fi
 
 # }}}
