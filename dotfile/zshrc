@@ -1,19 +1,11 @@
 # vim:foldmethod=marker filetype=zsh
 
-# HOME {{{
+# CFG {{{
 
 # Overall home
-export LLZHOME="$HOME/cterdam"
-mkdir -p $LLZHOME
-
+export LLZHOME="$HOME/llz"
 # dir to hold dotfiles
-export LLZCFG="$LLZHOME/dotfiles"
-
-# dir to hold executable scripts
-export LLZEXE="$LLZCFG/exe"
-
-# }}}
-# CFG {{{
+export LLZCFG="$LLZHOME/cfg/dotfile"
 
 # Symlink a dotfile to their default location
 linkfile() {
@@ -26,17 +18,17 @@ linkfile() {
 }
 
 # Various dotfiles
-linkfile "$LLZCFG/cterdam.vimrc"         "$HOME/.vim/vimrc"
-linkfile "$LLZCFG/cterdam.nvim.vimrc"    "$HOME/.config/nvim/vimrc"
-linkfile "$LLZCFG/cterdam.nvim.init.lua" "$HOME/.config/nvim/init.lua"
-linkfile "$LLZCFG/cterdam.coc.json"      "$HOME/.vim/coc-settings.json"
-linkfile "$LLZCFG/cterdam.coc.json"      "$HOME/.config/nvim/coc-settings.json"
-linkfile "$LLZCFG/cterdam.gitconfig"     "$HOME/.gitconfig"
-linkfile "$LLZCFG/cterdam.zshrc"         "$HOME/.zshrc"
-linkfile "$LLZCFG/cterdam.p10k.zsh"      "$HOME/.p10k.zsh"
-linkfile "$LLZCFG/cterdam.tmux.conf"     "$HOME/.tmux.conf"
-linkfile "$LLZCFG/cterdam.sshconfig"     "$HOME/.ssh/config"
-linkfile "$LLZCFG/cterdam.hgrc"          "$HOME/.hgrc"
+linkfile "$LLZCFG/vimrc"         "$HOME/.vim/vimrc"
+linkfile "$LLZCFG/nvim.vimrc"    "$HOME/.config/nvim/vimrc"
+linkfile "$LLZCFG/nvim.init.lua" "$HOME/.config/nvim/init.lua"
+linkfile "$LLZCFG/coc.json"      "$HOME/.vim/coc-settings.json"
+linkfile "$LLZCFG/coc.json"      "$HOME/.config/nvim/coc-settings.json"
+linkfile "$LLZCFG/gitconfig"     "$HOME/.gitconfig"
+linkfile "$LLZCFG/zshrc"         "$HOME/.zshrc"
+linkfile "$LLZCFG/p10k.zsh"      "$HOME/.p10k.zsh"
+linkfile "$LLZCFG/tmux.conf"     "$HOME/.tmux.conf"
+linkfile "$LLZCFG/ssh-config"    "$HOME/.ssh/config"
+linkfile "$LLZCFG/hgrc"          "$HOME/.hgrc"
 
 # Rime dotfiles
 if [[ -d "$HOME/Library/Rime" ]]; then
@@ -52,7 +44,7 @@ else
     rimeloc=""
 fi
 if [[ -n $rimeloc ]]; then
-    for llzrimefile in "$LLZCFG/cterdam.rime"/*; do
+    for llzrimefile in "$LLZCFG/rime"/*; do
         linkfile "$llzrimefile" "$rimeloc/$(basename $llzrimefile)"
     done
 fi
@@ -60,15 +52,23 @@ fi
 # Edit dotfiles
 rc() {
     local -A files=(
-        [coc]=$LLZCFG/cterdam.coc.json      [git]=$LLZCFG/cterdam.gitconfig
-        [hg]=$LLZCFG/cterdam.hgrc           [p10k]=$LLZCFG/cterdam.p10k.zsh
-        [readme]=$LLZCFG/README.md          [ssh]=$LLZCFG/cterdam.sshconfig
-        [tmux]=$LLZCFG/cterdam.tmux.conf    [vi]=$LLZCFG/cterdam.vimrc
-        [vim]=$LLZCFG/cterdam.vimrc         [nv]=$LLZCFG/cterdam.nvim.vimrc
-        [nvim]=$LLZCFG/cterdam.nvim.vimrc   [zsh]=$LLZCFG/cterdam.zshrc
+        [coc]=$LLZCFG/coc.json
+        [git]=$LLZCFG/gitconfig
+        [hg]=$LLZCFG/hgrc
+        [nv]=$LLZCFG/nvim.vimrc
+        [nvim]=$LLZCFG/nvim.vimrc
+        [p10k]=$LLZCFG/p10k.zsh
+        [readme]=$LLZCFG/README.md
+        [ssh]=$LLZCFG/sshconfig
+        [tmux]=$LLZCFG/tmux.conf
+        [vi]=$LLZCFG/vimrc
+        [vim]=$LLZCFG/vimrc
+        [zsh]=$LLZCFG/zshrc
     )
     local -A dirs=(
-        ['']=$LLZCFG  [exe]=$LLZEXE  [rime]="$LLZCFG/cterdam.rime"
+        ['']=$LLZCFG
+        [exe]="$LLZHOME/cfg/exe"
+        [rime]="$LLZCFG/rime"
     )
     if [[ $1 == -h ]]; then
         echo "Available configs: vi(m), nv(im), coc, exe, git, zsh, p10k, tmux, rime, readme, ssh"
@@ -176,20 +176,6 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # }}}
-# GIT {{{
-
-# Function to view git diff with bat
-batdiff() {
-    command git diff --name-only --diff-filter=d $@ | xargs bat --diff
-}
-
-# Command to view the root of this git repo
-alias gitroot='git rev-parse --show-toplevel'
-
-# Command to view git logline
-alias gll='git logline'
-
-# }}}
 # GENERAL {{{
 
 # Get current system name
@@ -281,28 +267,6 @@ else
 fi
 
 # }}}
-# {{{ AUTO
-
-# Automatically run function when changing directory
-function change_dir_auto() {
-
-    # Run in zsh-compatible local mode
-    emulate -L zsh
-
-    # Auto ls
-    ls
-
-    # If in tmux, force redraw status line
-    if [[ -n "$TMUX" ]]; then
-        tmux refresh-client -S
-    fi
-
-}
-if [[ ${chpwd_functions[(r)change_dir_auto]} != "change_dir_auto" ]]; then
-  chpwd_functions+=("change_dir_auto")
-fi
-
-# }}}
 # PATH {{{
 
 # Prints each dir from PATH on its own line
@@ -383,6 +347,42 @@ fi
 alias cerm='conda env remove -n'
 
 # }}}
+# GIT {{{
+
+# Function to view git diff with bat
+batdiff() {
+    command git diff --name-only --diff-filter=d $@ | xargs bat --diff
+}
+
+# Command to view the root of this git repo
+alias gitroot='git rev-parse --show-toplevel'
+
+# Command to view git logline
+alias gll='git logline'
+
+# }}}
+# {{{ AUTO
+
+# Automatically run function when changing directory
+function change_dir_auto() {
+
+    # Run in zsh-compatible local mode
+    emulate -L zsh
+
+    # Auto ls
+    ls
+
+    # If in tmux, force redraw status line
+    if [[ -n "$TMUX" ]]; then
+        tmux refresh-client -S
+    fi
+
+}
+if [[ ${chpwd_functions[(r)change_dir_auto]} != "change_dir_auto" ]]; then
+  chpwd_functions+=("change_dir_auto")
+fi
+
+# }}}
 # LLZBIN {{{
 
 # dir to hold executables
@@ -399,7 +399,7 @@ if [[ -d $homebrewbinloc ]]; then
 fi
 
 # Add exe from cfg
-for exefile in $LLZEXE/*; do
+for exefile in "$LLZHOME/cfg/exe"/*; do
     chmod 755 $exefile
     linkfile "$exefile" "$LLZBIN/$(basename $exefile)"
 done
