@@ -5,32 +5,38 @@
 # Overall home
 export LLZHOME="$HOME/llz"
 # dir to hold dotfiles
-export LLZCFG="$LLZHOME/cfg/dotfile"
+export LLZCFG="$LLZHOME/cfg/dot"
+
+# Dotfile src -> dst pairs
+LLZDOTPAIRS=(
+    $LLZCFG/vimrc         $HOME/.vim/vimrc
+    $LLZCFG/nvim.vimrc    $HOME/.config/nvim/vimrc
+    $LLZCFG/nvim.init.lua $HOME/.config/nvim/init.lua
+    $LLZCFG/coc.json      $HOME/.vim/coc-settings.json
+    $LLZCFG/coc.json      $HOME/.config/nvim/coc-settings.json
+    $LLZCFG/gitconfig     $HOME/.gitconfig
+    $LLZCFG/zshrc         $HOME/.zshrc
+    $LLZCFG/p10k.zsh      $HOME/.p10k.zsh
+    $LLZCFG/tmux.conf     $HOME/.tmux.conf
+    $LLZCFG/ssh-config    $HOME/.ssh/config
+    $LLZCFG/hgrc          $HOME/.hgrc
+)
 
 # Symlink a dotfile to their default location
 linkfile() {
-    local src="$1"
-    local dst="$2"
+    local src="$1" dst="$2"
     mkdir -p "$(dirname "$dst")"
     if [[ -f $src && ! -f $dst ]]; then
         ln -s "$src" "$dst"
     fi
 }
 
-# Various dotfiles
-linkfile "$LLZCFG/vimrc"         "$HOME/.vim/vimrc"
-linkfile "$LLZCFG/nvim.vimrc"    "$HOME/.config/nvim/vimrc"
-linkfile "$LLZCFG/nvim.init.lua" "$HOME/.config/nvim/init.lua"
-linkfile "$LLZCFG/coc.json"      "$HOME/.vim/coc-settings.json"
-linkfile "$LLZCFG/coc.json"      "$HOME/.config/nvim/coc-settings.json"
-linkfile "$LLZCFG/gitconfig"     "$HOME/.gitconfig"
-linkfile "$LLZCFG/zshrc"         "$HOME/.zshrc"
-linkfile "$LLZCFG/p10k.zsh"      "$HOME/.p10k.zsh"
-linkfile "$LLZCFG/tmux.conf"     "$HOME/.tmux.conf"
-linkfile "$LLZCFG/ssh-config"    "$HOME/.ssh/config"
-linkfile "$LLZCFG/hgrc"          "$HOME/.hgrc"
+# Symlink all dotfile pairs
+for ((i=1; i<=${#LLZDOTPAIRS[@]}; i+=2)); do
+    linkfile "${LLZDOTPAIRS[$i]}" "${LLZDOTPAIRS[$((i+1))]}"
+done
 
-# Rime dotfiles
+# Symlink Rime dotfiles
 if [[ -d "$HOME/Library/Rime" ]]; then
     rimeloc="$HOME/Library/Rime"
 elif [[ -d "$HOME/.config/ibus/rime/" ]]; then
@@ -79,6 +85,19 @@ rc() {
         cd ${dirs[$1]}
     else
         echo "No config for $1!"
+    fi
+}
+
+# Clear link
+cleardotlinks() {
+    for ((i=2; i<=${#LLZDOTPAIRS[@]}; i+=2)); do
+        [[ -L ${LLZDOTPAIRS[$i]} ]] && rm ${LLZDOTPAIRS[$i]}
+    done
+    if [[ -n $rimeloc ]]; then
+        for f in "$LLZCFG/rime"/*; do
+            local target="$rimeloc/$(basename $f)"
+            [[ -L $target ]] && rm $target
+        done
     fi
 }
 
