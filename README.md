@@ -1,8 +1,4 @@
-<!-- Only use `code` style for commands, hotkeys, and filenames. -->
-
 # dotfiles
-
-cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 ## Installing on macOS
 
@@ -29,7 +25,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   rm ~/.ssh/config
   ```
 
-- In Finder, add `~/cterdam` to the side bar.
+- Add `~/cterdam` to the Finder side bar and Dock.
 
 - Set up terminal appearance by importing `hbpro.terminal` to terminal profiles.
 
@@ -41,8 +37,6 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 ### 2. Development Environment
 
 - Install [Conda](https://docs.anaconda.com/miniconda/miniconda-install/).
-
-- Install [Java](https://www.oracle.com/java/technologies/downloads/).
 
 - Install [Golang](https://go.dev/dl/).
 
@@ -116,27 +110,28 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
     ```
 
-  - Restart shell, then restart again. Now type `Prefix` `Shift + I` to install tmux
-    plugins.
+  - Restart shell, then restart again. Now type `Prefix` `Shift + I` to install
+    tmux plugins.
 
     - `Prefix` is the tmux prefix, by default `Ctrl+b`.
 
   - Ensure ownership of vim and COC folders:
 
     ```zsh
+    mkdir -p $HOME/.vim $HOME/.config
     sudo chown -R `whoami` $HOME/.vim
     sudo chown -R $(whoami) $HOME/.config
     ```
 
-  - Now run `sudo nvim` and it will auto install all plugins, including COC plugins.
+  - Now run `sudo nvim` and it will auto install all plugins, including COC
+    plugins.
 
 ### 5. Other Packages
 
 - Install [Docker](https://docs.docker.com/desktop/install/mac-install/).
 
-- Install [JupyterLab Desktop](https://github.com/jupyterlab/jupyterlab-desktop).
-
-- Install [Jekyll](https://jekyllrb.com/docs/installation/macos/) for GitHub pages.
+- Install [Jekyll](https://jekyllrb.com/docs/installation/macos/) for GitHub
+  pages.
 
   - The link basically says run these:
 
@@ -147,14 +142,15 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     sudo gem install jekyll
     ```
 
-- Install [Liberation Fonts](https://github.com/liberationfonts/liberation-fonts).
+- Install [Liberation
+  Fonts](https://github.com/liberationfonts/liberation-fonts).
 
   - To install, simply download the TTF file from the latest release.
 
   - This is for the English resume.
 
-- Install [MacTeX](https://tug.org/mactex/), the recommended LaTeX distribution for
-  macOS.
+- Install [MacTeX](https://tug.org/mactex/), the recommended LaTeX distribution
+  for macOS.
 
   - Test `latexmk` and `latexindent`. If `latexindent` does not work, install the
     following packages:
@@ -165,8 +161,8 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 
 - Install [Rime](https://rime.im/) for Chinese input.
 
-  - Rime needs to be used with its [plum](https://github.com/rime/plum) package manager,
-    which is already incorporated as a submodule.
+  - Rime needs to be used with its [plum](https://github.com/rime/plum) package
+    manager, which is already incorporated as a submodule.
 
   - Install all default Rime packages:
 
@@ -195,6 +191,11 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
   - `xquartz` is needed for clipboard forwarding with SSH remote.
 
 #### Optional Packages
+
+- Install [Java](https://www.oracle.com/java/technologies/downloads/).
+
+- Install [JupyterLab
+  Desktop](https://github.com/jupyterlab/jupyterlab-desktop).
 
 - Install [Octave](https://octave.org/index.html) with `brew install octave`.
 
@@ -230,17 +231,7 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
 - Select all files, and press `Command + Option + I`. Select MacVim in the "Open
   with" menu, and click on "Change All...".
 
-### 7. Profile
-
-- Files related to personal information are stored in another private repo
-  [`cterdam/profile`](https://github.com/cterdam/profile), incorporated as a submodule
-  in the `utility` directory.
-
-- Drag the `utility` folder to the macOS Dock.
-
 ## Installing on a Linux remote
-
-### Remote access
 
 - To use an SSH key to connect to remote:
 
@@ -248,160 +239,16 @@ cterdam's personal computing environment setup for Unix-like (Mac) systems.
     start with `#`.
 
     ```zsh
-    nvim ~/.ssh/authorized_keys
+    vim ~/.ssh/authorized_keys
     ```
 
   - Locally, register an entry in `~/.ssh/config`.
-
-    - Use `ForwardAgent yes` so the remote can use the local's ssh-agent for
-      things like GitHub, without needing its separate key.
-
-  - Optionally, make a local executable for connection in `$CTERDAMRC/exe`.
-
-- Optionally, use X11 to forward clipboard content from remote to local:
-
-  - Ensure that remote `/etc/ssh/sshd_config` contains this line:
-
-    ```zsh
-    X11Forwarding yes
-    ```
-
-  - Ensure `xauth` is installed on server.
-
-  - If connecting through local macOS, ensure that local connections are made from
-    XQuartz, and that `$DISPLAY` is set.
-
-  - Either use `ssh -Y -C` each session, or add these to local `ssh` config:
-
-    ```zsh
-    ForwardX11 yes
-    ForwardX11Timeout 0
-    Compression yes
-    ```
-
-### Environment setup
+    - Ensure `xauth` is installed on server.
 
 - Change the default shell to `zsh`:
 
   ```zsh
   chsh -s $(which zsh)
-  ```
-
-- Clone this repo over SSH:
-
-  ```zsh
-  git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
-  ```
-
-- Install [Oh My Zsh](https://ohmyz.sh/).
-
-  - After Oh My Zsh is installed and launched, install [ZSH theme and
-    plugins](#zsh-theme-and-plugins).
-
-- Install [Conda](https://docs.anaconda.com/miniconda/miniconda-install/).
-
-  - Retrieve the installer with `wget` and run it with the default shell.
-
-  - When the installer finishes, inspect the paragraph it inserts into the
-    default shell config. Update `cterdam.zshrc` with that conda location.
-
-- Install [Tmux Plugin Manager][TPM].
-
-  [TPM]: https://github.com/tmux-plugins/tpm
-
-  - The install instruction should just amount to cloning a repo into this location:
-
-    ```zsh
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    ```
-
-  - No need to manually change `~/.tmux.conf` because this is covered in shell scripts.
-
-- Now activate shell scripts:
-
-  - Delete old `zshrc`:
-
-    ```zsh
-    rm $HOME/.zshrc
-    ```
-
-  - Link `cterdam.zshrc` to the real `zshrc` location:
-
-    ```zsh
-    ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
-    ```
-
-  - Restart shell, then restart again. Now type `Prefix` `Shift + I` to install tmux
-    plugins.
-
-    - `Prefix` is the tmux prefix, by default `Ctrl+b`.
-
-- Install additional packages if they are not already on the cluster:
-
-    ```zsh
-    conda install tmux nodejs rust go
-    npm install yarn
-    conda install -c conda-forge vim bat fzf git-delta tree tldr universal-ctags
-    pip install vim-vint black
-    cargo install --locked code-minimap
-    cargo install silicon
-    ```
-
-## Installing on a new Deep Learning EC2 instance
-
-- On local machine, register remote instance in `~/.ssh/config`:
-
-  ```config
-  Host <NICKNAME>
-      HostName ec2-12-345-67-890.compute-1.amazonaws.com
-      User ubuntu
-      IdentityFile ~/.ssh/my_key.pem
-  ```
-
-- SSH into the instance, then do all the work there.
-
-- Follow [these steps](#setting-up-a-new-ssh-key) to set up a new SSH key for this
-  device.
-
-- Now clone this repo over SSH and destroy the dummy SSH config created in the previous
-  step:
-
-  ```zsh
-  git clone --recursive git@github.com:cterdam/dotfiles.git ~/cterdam/dotfiles
-  rm ~/.ssh/config
-  ```
-
-- Run the setup script with `bash $HOME/cterdam/dotfiles/server_setup.sh`
-
-- This will automate most of what's in this README file on a Linux environment.
-
-- C family languages, Anaconda and Java should come pre-installed in Deep
-  Learning AMI. Due to being on a Linux server, this script does not install
-  .NET, Latex, and Rime.
-
-- After the script finishes, you will be taken to zsh. Manually run the following:
-
-  ```zsh
-  rm $HOME/.*.pre-oh-my-zsh* || true
-  rm $HOME/.zshrc || true
-  ln -s $HOME/cterdam/dotfiles/cterdam.zshrc $HOME/.zshrc
-  ```
-
-- Then log out and back in the remote instance. Go to `tmux` and send `Prefix` `Shift+I`
-  to install tmux plugins.
-
-- If the local instance is also running `tmux`, then these keys might need to be
-  sent twice in order to reach the remote instance. That is, press `Prefix`
-  `Prefix` `Shift+I` `Shift+I`. The default Prefix for `tmux` is `Ctrl+B`.
-
-- Launch `vim` to install vim plugins.
-
-- Init conda with `conda init zsh` and re-login.
-
-- Install other packages which couldn't be installed without re-sourcing the shell:
-
-  ```zsh
-  gem install jekyll bundler
   ```
 
 ## Setting up a new SSH key
@@ -541,22 +388,20 @@ git clone https://github.com/KellieOwczarczak/conda.plugin.zsh.git ${ZSH_CUSTOM:
 
 Use `git submodule status --recursive` to see all submodules.
 
-If submodule folders appear empty after cloning, run this to download all submodules
-(and their submodules, if any):
+If submodule folders appear empty after cloning, run this to download all:
 
 ```zsh
 git submodule update --init --recursive
 ```
 
 Note that updating the parent repo will not automatically update submodules.  To
-update submodules, since git 1.8.2 the option `--remote` was added to support
-updating to latest tips of remote branches:
+update submodules:
 
 ```zsh
 git submodule update --recursive --remote
 ```
 
-Or, if cloning this parent repo for the first time, run this to ensure you download
+Or, if cloning this parent repo for the first time, run this to download
 everything:
 
 ```zsh
