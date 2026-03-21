@@ -77,7 +77,7 @@ rc() {
         [nv]=$LLZDOT/nvim.vimrc
         [nvim]=$LLZDOT/nvim.vimrc
         [p10k]=$LLZDOT/p10k.zsh
-        [readme]=$LLZDOT/README.md
+        [readme]=$LLZHOME/cfg/README.md
         [ssh]=$LLZDOT/ssh-config
         [tmux]=$LLZDOT/tmux.conf
         [vi]=$LLZDOT/vimrc
