@@ -3,11 +3,3 @@
     url = git@github.com:rime/plum.git
     ; url = https://github.com/rime/plum.git
     branch = master
-[submodule "utility/profile"]
-	path = utility/.profile
-	url = git@github.com:cterdam/profile.git
-    branch = main
-[submodule "utility/resume"]
-	path = utility/resume
-	url = git@github.com:cterdam/resume.git
-    branch = main
