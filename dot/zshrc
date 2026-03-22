@@ -9,17 +9,18 @@ export LLZDOT="$LLZHOME/cfg/dot"
 
 # Dotfile src -> dst pairs
 LLZDOTPAIRS=(
-    $LLZDOT/vimrc         $HOME/.vim/vimrc
-    $LLZDOT/nvim.vimrc    $HOME/.config/nvim/vimrc
-    $LLZDOT/nvim.init.lua $HOME/.config/nvim/init.lua
-    $LLZDOT/coc.json      $HOME/.vim/coc-settings.json
-    $LLZDOT/coc.json      $HOME/.config/nvim/coc-settings.json
-    $LLZDOT/gitconfig     $HOME/.gitconfig
-    $LLZDOT/zshrc         $HOME/.zshrc
-    $LLZDOT/p10k.zsh      $HOME/.p10k.zsh
-    $LLZDOT/tmux.conf     $HOME/.tmux.conf
-    $LLZDOT/ssh-config    $HOME/.ssh/config
-    $LLZDOT/hgrc          $HOME/.hgrc
+    $LLZDOT/coc.json          $HOME/.config/nvim/coc-settings.json
+    $LLZDOT/coc.json          $HOME/.vim/coc-settings.json
+    $LLZDOT/gitconfig         $HOME/.gitconfig
+    $LLZDOT/gpg-agent.conf    $HOME/.gnupg/gpg-agent.conf
+    $LLZDOT/hgrc              $HOME/.hgrc
+    $LLZDOT/nvim.init.lua     $HOME/.config/nvim/init.lua
+    $LLZDOT/nvim.vimrc        $HOME/.config/nvim/vimrc
+    $LLZDOT/p10k.zsh          $HOME/.p10k.zsh
+    $LLZDOT/ssh-config        $HOME/.ssh/config
+    $LLZDOT/tmux.conf         $HOME/.tmux.conf
+    $LLZDOT/vimrc             $HOME/.vim/vimrc
+    $LLZDOT/zshrc             $HOME/.zshrc
 )
 
 # Symlink a dotfile to their default location
@@ -73,6 +74,7 @@ rc() {
     local -A files=(
         [coc]=$LLZDOT/coc.json
         [git]=$LLZDOT/gitconfig
+        [gpg]=$LLZDOT/gpg-agent.conf
         [hg]=$LLZDOT/hgrc
         [nv]=$LLZDOT/nvim.vimrc
         [nvim]=$LLZDOT/nvim.vimrc
@@ -90,7 +92,7 @@ rc() {
         [rime]="$LLZDOT/rime"
     )
     if [[ $1 == -h ]]; then
-        echo "Available configs: vi(m), nv(im), coc, exe, git, zsh, p10k, tmux, rime, readme, ssh"
+        echo "Available configs: vi(m), nv(im), coc, exe, git, zsh, p10k, tmux, rime, readme, gpg, ssh"
     elif [[ -n ${files[$1]+_} ]]; then
         $EDITOR ${files[$1]}
     elif [[ -n ${dirs[$1]+_} ]]; then

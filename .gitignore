@@ -1,1 +1,5 @@
 .DS_Store
+
+# Ignore ASCII GPG keys except public ones
+*.asc
+!*.pub.asc
