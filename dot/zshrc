@@ -47,7 +47,6 @@ elif [[ -d "$HOME/.ibus/rime/" ]]; then
 elif [[ -d "$HOME/.local/share/fcitx5/rime/" ]]; then
     rimeloc="$HOME/.local/share/fcitx5/rime/"
 else
-    echo "Warning: Rime config directory not found, skipping." >&2
     rimeloc=""
 fi
 if [[ -n $rimeloc ]]; then
@@ -197,6 +196,45 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # }}}
+# PATH {{{
+
+# Prints each dir from PATH on its own line
+# (assumes no ':' in directory names)
+alias showpath='echo $PATH | tr ":" "\n"'
+
+# Returns true iff argument in PATH
+inpath() {
+    [[ :$PATH: == *:$1:* ]]
+}
+
+# Adds something to PATH, head or tail
+addpath() {
+    case $2 in
+        head) export PATH="$1:$PATH" ;;
+        tail) export PATH="$PATH:$1" ;;
+        "")   echo "Usage: addpath TARGET [head|tail]" ;;
+        *)    echo "Unknown option: $2" ;;
+    esac
+}
+
+# Deletes something from PATH, if present
+delpath() {
+    case $2 in
+        first) export PATH=$(echo :$PATH | sed "s%:$1%%" | sed "s%^:%%g") ;;
+        all)   export PATH=$(echo :$PATH | sed "s%:$1%%g" | sed "s%^:%%g") ;;
+        "")    echo "Usage: delpath TARGET [first|all]" ;;
+        *)     echo "Unknown option: $2" ;;
+    esac
+}
+
+# Prepend pip install path
+inpath ~/.local/bin || addpath ~/.local/bin head
+
+# Add rust path
+[[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
+inpath $HOME/.cargo/bin || addpath $HOME/.cargo/bin head
+
+# }}}
 # GENERAL {{{
 
 # Get current system name
@@ -286,45 +324,6 @@ else
     addpath $HOME/gems/bin tail
 
 fi
-
-# }}}
-# PATH {{{
-
-# Prints each dir from PATH on its own line
-# (assumes no ':' in directory names)
-alias showpath='echo $PATH | tr ":" "\n"'
-
-# Returns true iff argument in PATH
-inpath() {
-    [[ :$PATH: == *:$1:* ]]
-}
-
-# Adds something to PATH, head or tail
-addpath() {
-    case $2 in
-        head) export PATH="$1:$PATH" ;;
-        tail) export PATH="$PATH:$1" ;;
-        "")   echo "Usage: addpath TARGET [head|tail]" ;;
-        *)    echo "Unknown option: $2" ;;
-    esac
-}
-
-# Deletes something from PATH, if present
-delpath() {
-    case $2 in
-        first) export PATH=$(echo :$PATH | sed "s%:$1%%" | sed "s%^:%%g") ;;
-        all)   export PATH=$(echo :$PATH | sed "s%:$1%%g" | sed "s%^:%%g") ;;
-        "")    echo "Usage: delpath TARGET [first|all]" ;;
-        *)     echo "Unknown option: $2" ;;
-    esac
-}
-
-# Prepend pip install path
-inpath ~/.local/bin || addpath ~/.local/bin head
-
-# Add rust path
-[[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
-inpath $HOME/.cargo/bin || addpath $HOME/.cargo/bin head
 
 # }}}
 # CONDA {{{
