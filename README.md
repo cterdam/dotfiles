@@ -129,16 +129,10 @@
 ### 5. Secrets
 
 - Obtain `.xyz.asc` from another machine, and put it in `$LLZDOT`
-- Import the key to the local GPG agent: `gpg --import $LLZDOT/.xyz.asc`
+- Import the key into the local GPG agent: `gpg --import $LLZDOT/.xyz.asc`
   - Importing the public key should be unnecessary.
-- Find the Key ID of the key with `gpg --list-keys`
-  - The key ID should print after the keyword `pub`
+- Find the Key ID of the public key with `gpg --list-keys`
 - Give the key the highest trust: `gpg --edit-key <KEY_ID>`
-- Use the key ID to initialize gopass: `gopass init <KEY_ID>`
-- Clone the secrets repo: `gopass clone git@github.com:cterdam/xyz.git xyz`
-
-- New secrets can be inserted with `gopass insert xyz/test/hello`
-- Secrets can be retrieved with `gopass show xyz/test/hello`
 
 ### 6. Other Packages
 
@@ -196,7 +190,7 @@
 - Install other UNIX tools:
 
   ```zsh
-  brew install gpg gopass bat fzf git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace coreutils
+  brew install gpg bat fzf git-delta git-lfs less tree tldr shellcheck jq reattach-to-user-namespace coreutils
   brew install xquartz --cask
   pip install vim-vint ipython black isort
   ```
