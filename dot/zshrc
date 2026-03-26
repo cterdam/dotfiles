@@ -257,12 +257,6 @@ sysname() {
     esac
 }
 
-# Add this device key to ssh-agent so it can be forwarded to remotes
-ssh-add ~/.ssh/llz &> /dev/null
-
-# Make SSH ctrl path dir
-mkdir -p ~/.ssh/ctrl
-
 # Use conda python and pip instead of any system-installed versions
 alias python3="python"
 alias pip3="pip"
@@ -427,6 +421,25 @@ done
 # Fix issue where bat goes by batcat on some Linux systems
 if [[ ! "$(command -v bat)" && "$(command -v batcat)" ]]; then
     linkfile "$(which batcat)" "$LLZBIN/bat"
+fi
+
+# }}}
+# SSH {{{
+
+# Add this device key to ssh-agent so it can be forwarded to remotes
+ssh-add ~/.ssh/llz &> /dev/null
+
+# Make SSH ctrl path dir
+mkdir -p ~/.ssh/ctrl
+
+# If a valid SSH agent socket exists and it's not already our symlink
+if [[ -S "$SSH_AUTH_SOCK" && "$SSH_AUTH_SOCK" != "$HOME/.ssh/ssh_auth_sock" ]];
+then
+    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh_auth_sock" export
+    SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+elif [[ -e "$HOME/.ssh/ssh_auth_sock" ]];
+then
+    export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
 fi
 
 # }}}
