@@ -9,6 +9,7 @@ export LLZDOT="$LLZHOME/cfg/dot"
 
 # Dotfile src -> dst pairs
 LLZDOTPAIRS=(
+    $LLZDOT/AGENTS.md         $HOME/.config/agents/AGENTS.md
     $LLZDOT/coc.json          $HOME/.config/nvim/coc-settings.json
     $LLZDOT/coc.json          $HOME/.vim/coc-settings.json
     $LLZDOT/gitconfig         $HOME/.gitconfig
@@ -71,6 +72,8 @@ cleardotlinks() {
 # Edit dotfiles
 rc() {
     local -A files=(
+        [agent]=$LLZDOT/AGENTS.md
+        [agents]=$LLZDOT/AGENTS.md
         [coc]=$LLZDOT/coc.json
         [git]=$LLZDOT/gitconfig
         [gpg]=$LLZDOT/gpg-agent.conf
