@@ -27,7 +27,7 @@
 
 - Add `~/llz` to the Finder side bar and Dock.
 
-- Set up terminal appearance by importing `hbpro.terminal` to terminal profiles.
+- Set up terminal appearance by importing `term` to terminal profiles.
 
 - Install [Oh My Zsh](https://ohmyz.sh/).
 
