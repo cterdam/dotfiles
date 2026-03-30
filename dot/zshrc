@@ -313,7 +313,7 @@ if [[ $(sysname) == "macOS" ]]; then
     source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
 
     # Configure ruby version for Jekyll for Github Pages
-    chruby ruby-3.4.1
+    chruby ruby-3.4.1 >/dev/null 2>/dev/null
 
 else
 
@@ -349,7 +349,7 @@ if [[ -n $condahomeloc ]]; then
     condaloc=$condahomeloc/bin/conda
     __conda_setup="$($condaloc 'shell.zsh' 'hook' 2> /dev/null)"
     if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
+        eval "$__conda_setup" 2> /dev/null
     else
         if [ -f "$condahomeloc/etc/profile.d/conda.sh" ]; then
             . "$condahomeloc/etc/profile.d/conda.sh"
