@@ -435,26 +435,6 @@ ssh-add ~/.ssh/llz &> /dev/null
 # Make SSH ctrl path dir
 mkdir -p ~/.ssh/ctrl
 
-# --- Robust SSH_AUTH_SOCK Fix for tmux ---
-export SSH_AUTH_SOCK_SYMLINK="$HOME/.ssh/ssh_auth_sock"
-
-# 1. If the current socket is valid, AND it's not our symlink, update the symlink
-if [[ -S "$SSH_AUTH_SOCK" && "$SSH_AUTH_SOCK" != "$SSH_AUTH_SOCK_SYMLINK" ]]; then
-    ln -sf "$SSH_AUTH_SOCK" "$SSH_AUTH_SOCK_SYMLINK"
-fi
-
-# 2. If the symlink is dead or missing (e.g., the old agent crashed)
-if [[ ! -S "$SSH_AUTH_SOCK_SYMLINK" ]]; then
-    # Auto-discover the newest active ssh-agent socket in /tmp
-    _LATEST_SOCK=$(find /tmp -maxdepth 2 -type s -user $(id -u) -name "agent.*" -printf '%T@ %p\n' 2>/dev/null | sort -n | tail -1 | cut -d' ' -f2)
-    if [[ -n "$_LATEST_SOCK" ]]; then
-        ln -sf "$_LATEST_SOCK" "$SSH_AUTH_SOCK_SYMLINK"
-    fi
-fi
-
-# 3. Always point the shell to the symlink
-export SSH_AUTH_SOCK="$SSH_AUTH_SOCK_SYMLINK"
-
 # }}}
 # TMUX {{{
 
