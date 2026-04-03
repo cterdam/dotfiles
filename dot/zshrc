@@ -313,7 +313,7 @@ if [[ $(sysname) == "macOS" ]]; then
     source $(brew --prefix)/opt/chruby/share/chruby/auto.sh
 
     # Configure ruby version for Jekyll for Github Pages
-    chruby ruby-3.4.1 >/dev/null 2>/dev/null
+    chruby ruby-3.4.1
 
 else
 
