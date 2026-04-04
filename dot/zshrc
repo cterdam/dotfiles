@@ -62,8 +62,8 @@ cleardotlinks() {
         [[ -L ${LLZDOTPAIRS[$i]} ]] && rm ${LLZDOTPAIRS[$i]}
     done
     if [[ -n $rimeloc ]]; then
-        for f in "$LLZDOT/rime"/*; do
-            local target="$rimeloc/$(basename $f)"
+        for oc_zsh in "$LLZDOT/rime"/*; do
+            local target="$rimeloc/$(basename $oc_zsh)"
             [[ -L $target ]] && rm $target
         done
     fi
@@ -321,6 +321,10 @@ else
     addpath $HOME/gems/bin tail
 
 fi
+
+# OpenClaw Completion
+local oc_zsh="$HOME/.openclaw/completions/openclaw.zsh"
+[[ -f "$oc_zsh" ]] && source "$oc_zsh"
 
 # }}}
 # CONDA {{{
