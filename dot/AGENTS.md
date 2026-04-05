@@ -10,3 +10,8 @@
   - Child, granular README instructions override parental, global ones.
   - If the README refers you to other resources to better understand the code,
     read them too.
+
+## Commit messages
+
+- Each commit message should look like this: `[tag] short one-liner`. For
+  example: `[chess] support hexagonal board`. There could be multiple tags.
